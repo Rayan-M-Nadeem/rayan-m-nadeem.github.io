@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rayan-m-nadeem.github.io/sitemap.xml
