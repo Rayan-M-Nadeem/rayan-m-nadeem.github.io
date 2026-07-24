@@ -28,7 +28,7 @@
   --c-metabolic:    #A75B17;
   --c-infectious:   #2C6435;
   --c-criticalcare: #1B5A78;
-  --c-transplant:   #146964;
+  --c-transplant:   #2C7A45;
   --c-longevity:    #8E6410;
   --c-editing:      #303C86;
 }
@@ -49,7 +49,7 @@
   --c-metabolic:    #E0964A;
   --c-infectious:   #63B96D;
   --c-criticalcare: #52A6CE;
-  --c-transplant:   #35BDB6;
+  --c-transplant:   #46C88A;
   --c-longevity:    #DBA53E;
   --c-editing:      #6F7FE0;
 }
@@ -404,11 +404,15 @@ html[data-motion="off"] { scroll-behavior: auto; }
 }
 
 /* extra colour tokens for the new interactives */
-:root { --c-exposure: #7A3E9E; --c-resistance: #1D6E5A; }
-[data-theme="dark"] { --c-exposure: #B98BE0; --c-resistance: #3FBE9B; }
+:root { --c-exposure: #7A4E2E; --c-resistance: #1D6E5A; }
+[data-theme="dark"] { --c-exposure: #C88A5A; --c-resistance: #3FBE9B; }
 
 html[data-underline="on"] .prose a,
 html[data-underline="on"] .block .go,
 html[data-underline="on"] .dd-item .nm { text-decoration: underline; text-underline-offset: 3px; }
 
 
+
+/* emoji-traced lungs: match the monoline diagram style */
+.diagram .emoji-lung path { fill:#FFF6E8; fill-opacity:0.2; stroke:#FFF6E8; stroke-width:1.1; stroke-linejoin:round; stroke-linecap:round; vector-effect:non-scaling-stroke; }
+.block.on .diagram .emoji-lung path, .article-head .diagram .emoji-lung path { fill-opacity:0.2; }
