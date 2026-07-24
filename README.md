@@ -16,7 +16,9 @@ Each topic is written for someone with no medical background, but the science is
 
 | Page | Subject |
 |------|---------|
-| Three Ways to Change a Gene | An interactive explainer applying CRISPR-Cas9, base editing, and prime editing to the same DNA sequence |
+| Three Ways to Change a Gene | Apply CRISPR-Cas9, base editing, and prime editing to the same DNA sequence |
+| The Arithmetic of a Lifetime | Two sliders showing why cumulative LDL exposure makes early lowering matter far more than late |
+| Watch Resistance Happen | A bacterial colony given repeated antibiotic courses until the drug stops working |
 
 **Chronic disease**
 
@@ -51,14 +53,17 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies. 
 - Typography: Fraunces for display, IBM Plex Sans for body, IBM Plex Mono for labels
 - Original inline SVG diagrams drawn for each topic: a heart, a brain, dividing cells, a glucose molecule, a bacterium, lungs, a kidney, and DNA
 - Light and dark themes following the visitor's system setting, with a manual toggle that remembers the choice
-- An interactive gene editing simulator built in vanilla JavaScript
+- Three interactive explainers built in vanilla JavaScript, with no libraries
+- A settings menu offering theme, text size, reduced motion, and link underlining, all persisted between visits
 - Responsive down to small phone screens, and respects `prefers-reduced-motion`
 
 ## Structure
 
 ```
 index.html          Homepage and topic index
-editing.html        Interactive gene editing explainer
+editing.html        Interactive: gene editing explainer
+exposure.html       Interactive: cumulative LDL exposure
+resistance.html     Interactive: antibiotic resistance simulation
 cardiology.html     Chronic disease
 neurology.html      Chronic disease
 oncology.html       Chronic disease

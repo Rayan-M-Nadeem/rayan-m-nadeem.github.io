@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Resistance Happen &middot; Plainly Medicine</title>
+  <meta name="description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem('theme') || 'system';
+        var d = t === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
+        document.documentElement.setAttribute('data-theme', d);
+        var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
+        var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
+        var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+    })();
+  </script>
+  <link rel="canonical" href="https://rayan-m-nadeem.github.io/resistance.html">
+  <meta name="author" content="Rayan Nadeem">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Plainly Medicine">
+  <meta property="og:title" content="Watch Resistance Happen">
+  <meta property="og:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
+  <meta property="og:url" content="https://rayan-m-nadeem.github.io/resistance.html">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Watch Resistance Happen">
+  <meta name="twitter:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Watch Resistance Happen",
+  "description": "An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.",
+  "url": "https://rayan-m-nadeem.github.io/resistance.html",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://rayan-m-nadeem.github.io/resistance.html"},
+  "articleSection": "Interactive",
+  "inLanguage": "en",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "author": {"@type": "Person", "name": "Rayan Nadeem",
+    "description": "Independent student researcher. Not a licensed medical professional; all clinical claims are cited to primary sources.",
+    "url": "https://rayan-m-nadeem.github.io/#about"},
+  "publisher": {"@type": "Person", "name": "Rayan Nadeem"},
+  "isAccessibleForFree": true,
+  "isPartOf": {"@type": "WebSite", "name": "Plainly Medicine", "url": "https://rayan-m-nadeem.github.io/"}
+}
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lab { padding-block: clamp(2rem, 5vw, 3.5rem); }
+    .sim { border: 2px solid var(--ink); background: var(--paper-2); padding: clamp(1.25rem, 3vw, 2rem); }
+    .sim-head { display: flex; gap: 2.5rem; flex-wrap: wrap; padding-bottom: 1.25rem; border-bottom: 2px solid var(--ink); margin-bottom: 1.5rem; }
+    .sim-head .lb { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .sim-head strong { font-family: var(--display); font-weight: 900; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; letter-spacing: -0.03em; }
+    .dish {
+      display: grid; grid-template-columns: repeat(20, 1fr); gap: 4px;
+      padding: 1rem; border: 2px solid var(--ink); background: var(--paper); min-height: 220px;
+      align-content: start;
+    }
+    .cell { width: 100%; aspect-ratio: 1; border-radius: 50%; transition: background 0.4s var(--ease), opacity 0.5s var(--ease), transform 0.4s var(--ease); }
+    .cell.s { background: var(--muted); opacity: 0.5; }
+    .cell.r { background: var(--c); opacity: 1; }
+    .cell.dead { opacity: 0; transform: scale(0.2); }
+    .sim-tools { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .readout { margin-top: 1.5rem; border: 2px solid var(--ink); background: var(--paper); padding: 1.4rem 1.5rem; min-height: 120px; }
+    .readout h4 { font-family: var(--display); font-weight: 900; font-size: 1.35rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .readout p { font-size: 0.95rem; }
+    .legend { display: flex; gap: 1.5rem; margin-top: 1.25rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .legend .sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 0.45rem; vertical-align: middle; }
+    .legend .susceptible { background: var(--muted); opacity: 0.5; }
+    .legend .resistant { background: var(--c); }
+    @media (max-width: 620px) { .dish { grid-template-columns: repeat(14, 1fr); } .sim-head { gap: 1.5rem; } }
+  </style>
+</head>
+<body data-topic="resistance" style="--c: var(--c-resistance)">
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
+      <nav class="nav-links" aria-label="Primary">
+        <div class="has-menu">
+          <button class="menu-trigger" data-menu="sections" aria-expanded="false" aria-haspopup="true">
+            All Sections
+            <svg class="chev" width="10" height="7" viewBox="0 0 10 7" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 1.5L5 5.5L9 1.5"/></svg>
+          </button>
+          <div class="dropdown" id="menu-sections" data-open="false" role="menu">
+            <div class="dd-head">Interactive</div>
+          <a class="dd-item" href="editing.html" style="--c: var(--c-editing)"><span class="swatch"></span><span class="nm">Three Ways to Change a Gene</span><span class="no">00</span></a>
+          <a class="dd-item" href="exposure.html" style="--c: var(--c-exposure)"><span class="swatch"></span><span class="nm">The Arithmetic of a Lifetime</span><span class="no">01</span></a>
+          <a class="dd-item" href="resistance.html" style="--c: var(--c-resistance)"><span class="swatch"></span><span class="nm">Watch Resistance Happen</span><span class="no">02</span></a>
+          <div class="dd-head">Topics</div>
+          <a class="dd-item" href="cardiology.html" style="--c: var(--c-cardiology)"><span class="swatch"></span><span class="nm">Cardiology</span><span class="no">03</span></a>
+          <a class="dd-item" href="neurology.html" style="--c: var(--c-neurology)"><span class="swatch"></span><span class="nm">Neurology</span><span class="no">04</span></a>
+          <a class="dd-item" href="oncology.html" style="--c: var(--c-oncology)"><span class="swatch"></span><span class="nm">Oncology</span><span class="no">05</span></a>
+          <a class="dd-item" href="metabolic.html" style="--c: var(--c-metabolic)"><span class="swatch"></span><span class="nm">Metabolic Health</span><span class="no">06</span></a>
+          <a class="dd-item" href="infectious.html" style="--c: var(--c-infectious)"><span class="swatch"></span><span class="nm">Infectious Disease</span><span class="no">07</span></a>
+          <a class="dd-item" href="criticalcare.html" style="--c: var(--c-criticalcare)"><span class="swatch"></span><span class="nm">Critical Care</span><span class="no">08</span></a>
+          <a class="dd-item" href="transplant.html" style="--c: var(--c-transplant)"><span class="swatch"></span><span class="nm">Transplant and Regeneration</span><span class="no">09</span></a>
+          <a class="dd-item" href="longevity.html" style="--c: var(--c-longevity)"><span class="swatch"></span><span class="nm">Longevity and Gene Editing</span><span class="no">10</span></a>
+          </div>
+        </div>
+        <a href="index.html#about">About</a>
+      </nav>
+      <div class="nav-tools">
+        <div class="has-menu">
+          <button class="menu-trigger settings-btn" data-menu="settings" aria-expanded="false" aria-haspopup="true" aria-label="Settings">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.2"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </button>
+          <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-row">
+              <span class="lb">Appearance</span>
+              <div class="seg" data-set="theme">
+                <button data-val="light" aria-pressed="false">Light</button>
+                <button data-val="dark" aria-pressed="false">Dark</button>
+                <button data-val="system" aria-pressed="true">System</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Text size</span>
+              <div class="seg" data-set="size">
+                <button data-val="s" aria-pressed="false">Small</button>
+                <button data-val="m" aria-pressed="true">Default</button>
+                <button data-val="l" aria-pressed="false">Large</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Reduce motion</span>
+                <button class="switch" data-set="motion" aria-pressed="false" aria-label="Reduce motion"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Underline links</span>
+                <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button class="menu-btn" aria-label="Menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="backbar">
+    <div class="wrap">
+      <a class="back-btn" href="index.html"><span aria-hidden="true">&larr;</span> All sections</a>
+      <span class="where">Interactive</span>
+    </div>
+  </div>
+
+  <header class="article-head" style="--c: var(--c-resistance)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>02</span><span>Interactive</span></div>
+        <h1>Watch Resistance Happen</h1>
+        <p class="summary">Give a colony of bacteria one course of antibiotics at a time, and watch a drug stop working.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="A bacterium">
+  <path class="fl" d="M48,50 L92,50 A20,20 0 0 1 92,90 L48,90 A20,20 0 0 1 48,50 Z"/>
+  <path class="ln" d="M48,50 L92,50 A20,20 0 0 1 92,90 L48,90 A20,20 0 0 1 48,50 Z"/>
+  <circle class="ln" cx="62" cy="70" r="6"/>
+  <circle class="ln" cx="80" cy="66" r="4"/>
+  <path class="ln" d="M28,70 C18,62 14,80 4,72"/>
+  <path class="ln" d="M112,70 C122,78 126,60 136,68"/>
+  <path class="ln" d="M28,70 L48,70 M92,70 L112,70"/>
+        </svg>
+        <figcaption>A bacterium</figcaption>
+      </figure>
+    </div>
+  </header>
+
+
+  <section class="lab wrap narrow">
+    <div class="sim">
+      <div class="sim-head">
+        <div>
+          <span class="lb">Population</span>
+          <strong id="pop">200</strong>
+        </div>
+        <div>
+          <span class="lb">Resistant</span>
+          <strong id="res">2%</strong>
+        </div>
+        <div>
+          <span class="lb">Courses given</span>
+          <strong id="rounds">0</strong>
+        </div>
+      </div>
+
+      <div class="dish" id="dish" role="img" aria-label="A colony of bacteria. Most are susceptible; a small number are resistant."></div>
+
+      <div class="sim-tools">
+        <button class="btn" id="dose">Give a course of antibiotics</button>
+        <button class="btn ghost" id="reset">Reset the colony</button>
+      </div>
+
+      <div class="readout" id="readout">
+        <h4>A normal colony</h4>
+        <p>Almost every bacterium here is killed by the antibiotic. A very small number carry a mutation that lets them survive. Give a course and watch what happens to the ones that are left.</p>
+      </div>
+
+      <div class="legend">
+        <span><i class="sw susceptible"></i> Susceptible</span>
+        <span><i class="sw resistant"></i> Resistant</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article wrap narrow">
+    <div class="prose">
+      <p class="reveal">The simulation above is the whole problem of antibiotic resistance in miniature. Nothing in it is unusual or malicious. No bacterium is trying to become resistant. All that happens is that a drug kills the organisms it can kill, and whatever survives goes on to reproduce. Run it three or four times and the colony that comes back is one the drug can no longer touch.</p>
+
+      <h2 class="reveal">The drug does not create resistance</h2>
+      <p class="reveal">This is the point people most often get backwards. The antibiotic does not cause the mutation. The resistant bacteria were already there, in tiny numbers, before the first dose. What the drug does is remove their competition. Every susceptible bacterium it kills is one less organism competing for space and nutrients, which leaves the survivors free to multiply into the gap.</p>
+      <p class="reveal">That is why the resistant fraction climbs so steeply in the simulation while the total population barely changes. You are not creating anything new. You are steadily editing out everything else.</p>
+
+      <blockquote class="pullquote reveal">Every dose is a filter, and the things that pass through it are exactly the things you did not want.</blockquote>
+
+      <h2 class="reveal">Why this makes antibiotics unlike other drugs</h2>
+      <p class="reveal">A blood pressure drug works about as well on its ten millionth prescription as its first. Antibiotics are the exception. Every course given anywhere in the world, to anyone, applies a small amount of this pressure to the bacterial population at large. The effectiveness of the drug is a shared resource that each use draws down slightly.</p>
+      <p class="reveal">This is why prescribing an antibiotic for a viral infection is not merely useless. It is a course of selection applied for no benefit at all. It is also why finishing a prescribed course matters in cases where stopping early would leave a partially selected population behind, and why hospitals hold certain drugs in reserve, using them only when nothing else will work.</p>
+
+      <h2 class="reveal">What actually helps</h2>
+      <p class="reveal">New antibiotics buy time, and several genuinely new classes have reached approval recently. But the simulation shows why new drugs alone cannot solve this: the same process will run again on whatever replaces the current drug. What changes the slope of the curve is using antibiotics less often and more precisely, which means rapid diagnostics that tell you whether an infection is bacterial at all, better infection control so fewer courses are needed, and surveillance that catches resistant strains before they spread.</p>
+
+      <div class="callout reveal">
+        <span class="label">Key Takeaways</span>
+        <ul>
+          <li>Antibiotics do not create resistance. Resistant bacteria already exist in small numbers, and the drug removes their competition.</li>
+          <li>Each course acts as a filter, so the surviving population is steadily enriched for resistance.</li>
+          <li>This makes antibiotic effectiveness a shared resource that every use depletes slightly.</li>
+          <li>New drugs delay the problem, but reducing unnecessary use is what changes its trajectory.</li>
+        </ul>
+      </div>
+
+      <div class="refs reveal">
+        <span class="label">Further Reading &amp; References</span>
+        <ol>
+          <li>Murray CJL, et al. Global burden of bacterial antimicrobial resistance in 2019: a systematic analysis. The Lancet. 2022.</li>
+          <li>World Health Organization. WHO Bacterial Priority Pathogens List. 2024.</li>
+          <li>Baym M, et al. Spatiotemporal microbial evolution on antibiotic landscapes. Science. 2016.</li>
+        </ol>
+      </div>
+
+      <p class="reveal" style="margin-top:2.5rem"><a href="infectious.html">Read the full piece on infectious disease and the antibiotic pipeline</a>.</p>
+    </div>
+  </article>
+
+
+  <footer class="footer">
+    <div class="wrap">
+      <h2>The honest word in all of this is "yet."</h2>
+      <p class="sub">Read the topics in any order. Each stands alone, and together they explain why longer, healthier lives are a realistic hope rather than a fantasy.</p>
+      <div class="footer-meta">
+        <span>&copy; 2026 Plainly Medicine</span>
+        <a href="mailto:plainlymedicine@gmail.com">plainlymedicine@gmail.com</a>
+      </div>
+      <p class="disclaimer">This site is for educational purposes only and does not constitute medical advice. Consult a qualified healthcare professional for any medical concerns.</p>
+    </div>
+  </footer>
+
+  <script src="app.js"></script>
+  <script>
+  (function () {
+    var TOTAL = 200;
+    var dish = document.getElementById('dish');
+    var popEl = document.getElementById('pop'), resEl = document.getElementById('res'), roundEl = document.getElementById('rounds');
+    var readout = document.getElementById('readout');
+    var cells = [], rounds = 0;
+
+    function build() {
+      dish.innerHTML = ''; cells = []; rounds = 0;
+      for (var i = 0; i < TOTAL; i++) {
+        var d = document.createElement('div');
+        var resistant = Math.random() < 0.02;
+        d.className = 'cell ' + (resistant ? 'r' : 's');
+        d.dataset.r = resistant ? '1' : '0';
+        dish.appendChild(d); cells.push(d);
+      }
+      sync();
+      say('A normal colony',
+        'Almost every bacterium here is killed by the antibiotic. A very small number carry a mutation that lets them survive. Give a course and watch what happens to the ones that are left.');
+    }
+
+    function sync() {
+      var alive = cells.filter(function (c) { return !c.classList.contains('dead'); });
+      var r = alive.filter(function (c) { return c.dataset.r === '1'; }).length;
+      popEl.textContent = alive.length;
+      resEl.textContent = alive.length ? Math.round((r / alive.length) * 100) + '%' : '0%';
+      roundEl.textContent = rounds;
+      return { alive: alive.length, r: r };
+    }
+
+    function say(t, b) { readout.innerHTML = '<h4>' + t + '</h4><p>' + b + '</p>'; }
+
+    function dose() {
+      rounds++;
+      // the drug kills susceptible bacteria
+      cells.forEach(function (c) {
+        if (c.dataset.r === '0' && !c.classList.contains('dead')) {
+          if (Math.random() < 0.94) c.classList.add('dead');
+        }
+      });
+      var after = sync();
+      say('The drug kills what it can',
+        'Susceptible bacteria die. The resistant ones are untouched, so they now make up a far larger share of what is left.');
+
+      // survivors repopulate the empty space
+      setTimeout(function () {
+        var alive = cells.filter(function (c) { return !c.classList.contains('dead'); });
+        var resistantShare = alive.length ? alive.filter(function (c) { return c.dataset.r === '1'; }).length / alive.length : 1;
+        cells.forEach(function (c) {
+          if (c.classList.contains('dead')) {
+            var becomesResistant = Math.random() < resistantShare;
+            c.dataset.r = becomesResistant ? '1' : '0';
+            c.className = 'cell ' + (becomesResistant ? 'r' : 's');
+          }
+        });
+        var s = sync();
+        var pct = Math.round((s.r / s.alive) * 100);
+        var msg;
+        if (pct >= 95) msg = 'The colony is now almost entirely resistant. This antibiotic no longer works here, and no bacterium ever "tried" to make that happen.';
+        else if (pct >= 50) msg = 'Resistant bacteria are now the majority. Each further course will push this further, and faster, because there is less and less left for the drug to kill.';
+        else if (pct >= 15) msg = 'The resistant fraction has grown sharply. Notice the total population recovered to roughly where it started, but its composition has changed.';
+        else msg = 'The colony has grown back to full size. It looks the same as before, but a larger share of it now survives the drug.';
+        say('The colony grows back, changed', msg);
+      }, 900);
+    }
+
+    document.getElementById('dose').addEventListener('click', dose);
+    document.getElementById('reset').addEventListener('click', build);
+    build();
+  })();
+  </script>
+</body>
+</html>
