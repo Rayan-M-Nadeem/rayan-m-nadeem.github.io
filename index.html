@@ -51,6 +51,7 @@
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+  <div class="progress" aria-hidden="true"></div>
 
   <header class="nav">
     <div class="wrap nav-inner">
@@ -77,9 +78,13 @@
     <h1>What modern medicine can already do, and what it cannot do yet.</h1>
     <p class="lede">A student's field guide to the science that is quietly extending human life.</p>
     <p class="intro">This site collects four connected topics in modern medicine: the heart, the brain, cancer, and the wider project of extending healthy human life. Each page is written for a general reader, but it takes the science seriously. The aim is neither the despair that says nothing can be done nor the hype that promises we will defeat death soon. It is the harder middle position, which is to show what the tools actually do today, where the limits are, and what would have to change for the next few decades to look different from the last.</p>
-    <svg class="signal" viewBox="0 0 1200 60" preserveAspectRatio="none" aria-hidden="true">
-      <path class="draw" d="M0,30 L360,30 L380,30 L392,10 L404,50 L416,18 L428,42 L440,30 L820,30 L840,30 L852,6 L864,54 L876,22 L888,30 L1200,30"/>
-    </svg>
+    <div class="monitor">
+      <div class="monitor-meta"><span>Lead II</span><span>25 mm/s</span><span><b>&#9679;</b> Live</span></div>
+      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" role="img" aria-label="A simulated electrocardiogram tracing">
+        <path class="base-trace" d="M0,60 L180,60 L200,60 L208,44 L216,60 L228,60 L236,18 L244,96 L252,52 L262,60 L300,60 L420,60 L440,60 L448,44 L456,60 L468,60 L476,18 L484,96 L492,52 L502,60 L560,60 L680,60 L700,60 L708,44 L716,60 L728,60 L736,18 L744,96 L752,52 L762,60 L820,60 L1000,60 L1020,60 L1028,44 L1036,60 L1048,60 L1056,18 L1064,96 L1072,52 L1082,60 L1200,60"/>
+        <path class="live-trace" d="M0,60 L180,60 L200,60 L208,44 L216,60 L228,60 L236,18 L244,96 L252,52 L262,60 L300,60 L420,60 L440,60 L448,44 L456,60 L468,60 L476,18 L484,96 L492,52 L502,60 L560,60 L680,60 L700,60 L708,44 L716,60 L728,60 L736,18 L744,96 L752,52 L762,60 L820,60 L1000,60 L1020,60 L1028,44 L1036,60 L1048,60 L1056,18 L1064,96 L1072,52 L1082,60 L1200,60"/>
+      </svg>
+    </div>
   </section>
 
   <section class="section wrap" id="topics">
@@ -181,7 +186,19 @@
         <p>I am a high school student who writes independent research papers to understand large questions from the ground up. This project grew out of a survey I wrote on life-extending medicine, and the three shorter pages here are the pillars that survey rests on. Cardiovascular disease, neurodegeneration, and cancer are the failure modes that decide how long most people live.</p>
         <p>I built this site to practice something medicine actually requires, which is explaining hard science to the people it affects without either frightening them or making it smaller than it is. If a page here makes a difficult idea clearer without misleading you, it has done its job.</p>
       </div>
-      <div class="figure-slot reveal">[[ Optional: add a portrait or a figure here. Replace this box with an &lt;img&gt; when ready. ]]</div>
+      <figure class="artwork reveal">
+        <svg viewBox="0 0 400 220" role="img" aria-label="The eight topic traces layered into one composition">
+          <path class="layer" d="M0,150 L60,150 L68,150 L74,132 L82,170 L90,140 L98,158 L106,150 L200,150 L400,150" style="opacity:0.95;stroke-width:2.0"/>
+          <path class="layer" d="M0,130 Q20,110 40,130 T80,130 Q95,116 110,130 Q122,144 136,130 Q152,108 168,130 T210,130 Q228,116 246,130 T400,130" style="opacity:0.75;stroke-width:1.6"/>
+          <path class="layer" d="M0,190 L100,188 L160,184 L215,176 L255,162 L290,142 L320,122 L350,104 L400,88" style="opacity:0.6;stroke-width:1.6"/>
+          <path class="layer" d="M0,110 L50,108 L85,66 L120,58 L160,72 L205,94 L250,104 L300,108 L400,109" style="opacity:0.5;stroke-width:1.4"/>
+          <path class="layer" d="M0,205 L50,205 L50,193 L110,193 L110,178 L175,178 L175,163 L245,163 L245,148 L400,148" style="opacity:0.42;stroke-width:1.3"/>
+          <path class="layer" d="M0,88 L28,88 L34,44 L92,44 L98,88 L140,88 L146,44 L204,44 L210,88 L255,88 L261,44 L318,44 L324,88 L400,88" style="opacity:0.32;stroke-width:1.2"/>
+          <path class="layer" d="M0,168 Q30,168 44,148 Q58,128 80,148 Q94,168 122,168 Q152,168 166,148 Q180,128 202,148 Q216,168 244,168 Q276,168 290,148 Q304,128 326,148 Q340,168 400,168" style="opacity:0.26;stroke-width:1.2"/>
+          <path class="layer" d="M0,40 L66,40 L66,58 L124,58 L124,80 L174,80 L174,96 L224,96 L224,118 L276,118 L276,140 L400,140" style="opacity:0.2;stroke-width:1.1"/>
+        </svg>
+        <figcaption>Every topic on this site carries its own readout: an electrocardiogram, an EEG, a growth curve, a glucose curve, a resistance climb, a ventilator waveform, a perfusion pulse, and a survival curve. Layered together, they are the shape of the whole project.</figcaption>
+      </figure>
     </div>
   </section>
 
