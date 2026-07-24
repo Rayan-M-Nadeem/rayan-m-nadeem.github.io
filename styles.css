@@ -411,21 +411,4 @@ html[data-underline="on"] .prose a,
 html[data-underline="on"] .block .go,
 html[data-underline="on"] .dd-item .nm { text-decoration: underline; text-underline-offset: 3px; }
 
-/* contents list: name plus the subject it covers */
-.dropdown a.dd-item .nm { display: flex; flex-direction: column; line-height: 1.3; }
-.dropdown a.dd-item .nm em {
-  font-style: normal; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.12em;
-  text-transform: uppercase; color: var(--muted); margin-top: 0.2rem;
-}
-.dropdown a.dd-item .no { white-space: nowrap; font-size: 0.62rem; letter-spacing: 0.1em; text-transform: uppercase; }
-.dropdown { min-width: 340px; }
 
-/* block number: keeps the display numeral but states what it counts */
-.block-num { display: flex; align-items: baseline; gap: 0.5rem; flex-wrap: wrap; }
-.block-num em {
-  flex: 0 0 100%; font-style: normal; font-family: var(--mono); font-weight: 500;
-  font-size: 0.66rem; letter-spacing: 0.22em; text-transform: uppercase;
-  opacity: 0.85; margin-bottom: 0.35rem;
-}
-.block-num small { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; opacity: 0.7; }
-.sim-head .unit { display: block; font-family: var(--mono); font-size: 0.62rem; color: var(--muted); letter-spacing: 0.08em; }
