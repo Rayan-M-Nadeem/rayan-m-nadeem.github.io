@@ -9,9 +9,9 @@
     (function () {
       try {
         var t = localStorage.getItem('theme');
-        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', t);
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/transplant.html">
@@ -60,10 +60,10 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body data-topic="transplant">
   <div class="progress" aria-hidden="true"></div>
 
   <header class="nav">
@@ -86,7 +86,9 @@
     </div>
   </header>
 
-  <section class="page-head wrap narrow">
+  <section class="page-hero">
+    <span class="numeral" aria-hidden="true">07</span>
+    <div class="wrap narrow page-hero-inner">
     <span class="eyebrow">07 · TRANS</span>
     <h1>The Supply Problem</h1>
     <p class="summary">Transplantation works. There are simply not enough organs, which is why so much effort goes into making more.</p>
@@ -96,6 +98,7 @@
       <span>Updated July 2026</span>
     </div>
     <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Machine perfusion: a pulse maintained outside the body"><path d="M0,20 Q8,20 12,12 Q16,4 22,12 Q26,20 34,20 Q42,20 46,12 Q50,4 56,12 Q60,20 68,20 Q76,20 80,12 Q84,4 90,12 Q94,20 100,20"/></svg>
+    </div>
   </section>
 
   <article class="article wrap narrow">

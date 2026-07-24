@@ -3,15 +3,15 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Plainly Medicine · What modern medicine can already do, and what it cannot do yet</title>
+  <title>Plainly Medicine &middot; What modern medicine can already do, and what it cannot do yet</title>
   <meta name="description" content="A medical awareness site explaining modern medicine to a general reader: the heart, the brain, cancer, and the science of extending healthy human life.">
   <script>
     (function () {
       try {
         var t = localStorage.getItem('theme');
-        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', t);
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/">
@@ -24,7 +24,7 @@
   <meta property="og:locale" content="en_US">
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Plainly Medicine">
-  <meta name="twitter:description" content="A medical awareness site explaining modern medicine to a general reader: the heart, the brain, cancer, and the science of extending healthy human life.">
+  <meta name="twitter:description" content="A medical awareness site explaining modern medicine to a general reader.">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -39,15 +39,12 @@
     "description": "Independent student researcher writing on medicine, physics, and philosophy.",
     "email": "plainlymedicine@gmail.com"
   },
-  "publisher": {
-    "@type": "Person",
-    "name": "Rayan Nadeem"
-  }
+  "publisher": {"@type": "Person", "name": "Rayan Nadeem"}
 }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -57,9 +54,10 @@
     <div class="wrap nav-inner">
       <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="index.html#topics">Topics</a>
+        <a href="#topics">Topics</a>
+        <a href="editing.html">Interactive</a>
         <a href="longevity.html">Longevity</a>
-        <a href="index.html#about">About</a>
+        <a href="#about">About</a>
       </nav>
       <div class="nav-tools">
         <button class="theme-toggle" aria-label="Switch color theme">
@@ -73,132 +71,137 @@
     </div>
   </header>
 
-  <section class="hero wrap">
-    <span class="eyebrow">Public Health · Research Communication</span>
-    <h1>What modern medicine can already do, and what it cannot do yet.</h1>
-    <p class="lede">A student's field guide to the science that is quietly extending human life.</p>
-    <p class="intro">This site collects four connected topics in modern medicine: the heart, the brain, cancer, and the wider project of extending healthy human life. Each page is written for a general reader, but it takes the science seriously. The aim is neither the despair that says nothing can be done nor the hype that promises we will defeat death soon. It is the harder middle position, which is to show what the tools actually do today, where the limits are, and what would have to change for the next few decades to look different from the last.</p>
-    <div class="monitor">
-      <div class="monitor-meta"><span>Lead II</span><span>25 mm/s</span><span><b>&#9679;</b> Live</span></div>
-      <svg viewBox="0 0 1200 120" preserveAspectRatio="none" role="img" aria-label="A simulated electrocardiogram tracing">
-        <path class="base-trace" d="M0,60 L180,60 L200,60 L208,44 L216,60 L228,60 L236,18 L244,96 L252,52 L262,60 L300,60 L420,60 L440,60 L448,44 L456,60 L468,60 L476,18 L484,96 L492,52 L502,60 L560,60 L680,60 L700,60 L708,44 L716,60 L728,60 L736,18 L744,96 L752,52 L762,60 L820,60 L1000,60 L1020,60 L1028,44 L1036,60 L1048,60 L1056,18 L1064,96 L1072,52 L1082,60 L1200,60"/>
-        <path class="live-trace" d="M0,60 L180,60 L200,60 L208,44 L216,60 L228,60 L236,18 L244,96 L252,52 L262,60 L300,60 L420,60 L440,60 L448,44 L456,60 L468,60 L476,18 L484,96 L492,52 L502,60 L560,60 L680,60 L700,60 L708,44 L716,60 L728,60 L736,18 L744,96 L752,52 L762,60 L820,60 L1000,60 L1020,60 L1028,44 L1036,60 L1048,60 L1056,18 L1064,96 L1072,52 L1082,60 L1200,60"/>
-      </svg>
-    </div>
-  </section>
-
-  <section class="section wrap" id="topics">
-    <div class="section-label"><span class="eyebrow">Index of Topics</span></div>
-
-    <p class="group-label">Interactive</p>
-    <div class="index">
-      <a class="index-row" href="editing.html">
-        <div class="marker">
-          <span class="code">TOOL</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,8 Q12,8 18,17 Q24,26 30,26 Q36,26 42,17 Q48,8 54,8 Q60,8 66,17 Q72,26 78,26 Q84,26 90,17 Q96,8 100,8 M0,26 Q12,26 18,17 Q24,8 30,8 Q36,8 42,17 Q48,26 54,26 Q60,26 66,17 Q72,8 78,8 Q84,8 90,17 Q96,26 100,26"/></svg>
-        </div>
-        <div class="body"><h3>Three Ways to Change a Gene</h3><p>Interactive: apply CRISPR, base editing, and prime editing to the same DNA and watch exactly how the three differ.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-
-    <p class="group-label">Chronic Disease</p>
-    <div class="index">
-      <a class="index-row" href="cardiology.html">
-        <div class="marker">
-          <span class="code">01 &middot; CARDIO</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 L28,17 L34,17 L38,7 L44,27 L50,12 L56,21 L62,17 L100,17"/></svg>
-        </div>
-        <div class="body"><h3>Cardiology</h3><p>Why the slow, cumulative damage to your arteries is one of the most preventable causes of death, and how prevention became durable.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-      <a class="index-row" href="neurology.html">
-        <div class="marker">
-          <span class="code">02 &middot; NEURO</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 Q6,7 12,17 T24,17 Q29,9 34,17 Q38,24 43,17 Q49,6 55,17 T68,17 Q74,10 80,17 T100,17"/></svg>
-        </div>
-        <div class="body"><h3>Neurology</h3><p>The brain sets the ceiling on a long life. Here are the first treatments that touch the disease itself rather than only the symptoms.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-      <a class="index-row" href="oncology.html">
-        <div class="marker">
-          <span class="code">03 &middot; ONCO</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,31 L30,30 L48,28 L62,24 L74,17 L84,9 L92,3 L100,1"/></svg>
-        </div>
-        <div class="body"><h3>Oncology</h3><p>Cancer is the central obstacle to almost every dream of a longer life, and the immune system is now being taught to fight it.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-      <a class="index-row" href="metabolic.html">
-        <div class="marker">
-          <span class="code">04 &middot; METAB</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,26 L14,25 L24,8 L34,5 L46,10 L58,18 L70,23 L82,25 L100,25"/></svg>
-        </div>
-        <div class="body"><h3>Metabolic Health</h3><p>GLP-1 drugs began as diabetes treatments and became something larger. What they actually do, and what the evidence shows beyond weight.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-
-    <p class="group-label">Acute and Infectious</p>
-    <div class="index">
-      <a class="index-row" href="infectious.html">
-        <div class="marker">
-          <span class="code">05 &middot; INFECT</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 L14,30 L14,24 L30,24 L30,18 L48,18 L48,12 L68,12 L68,6 L100,6"/></svg>
-        </div>
-        <div class="body"><h3>Infectious Disease</h3><p>Antibiotics are the only drugs that grow weaker the more we use them, and the pipeline thinned for reasons that are economic, not scientific.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-      <a class="index-row" href="criticalcare.html">
-        <div class="marker">
-          <span class="code">06 &middot; CRIT</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,28 L8,28 L10,6 L26,6 L28,28 L40,28 L42,6 L58,6 L60,28 L72,28 L74,6 L90,6 L92,28 L100,28"/></svg>
-        </div>
-        <div class="body"><h3>Critical Care</h3><p>Intensive care rarely cures anything. It substitutes for failing organs long enough for something else to work.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-
-    <p class="group-label">Replacement and Repair</p>
-    <div class="index">
-      <a class="index-row" href="transplant.html">
-        <div class="marker">
-          <span class="code">07 &middot; TRANS</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 Q8,20 12,12 Q16,4 22,12 Q26,20 34,20 Q42,20 46,12 Q50,4 56,12 Q60,20 68,20 Q76,20 80,12 Q84,4 90,12 Q94,20 100,20"/></svg>
-        </div>
-        <div class="body"><h3>Transplant &amp; Regenerative Medicine</h3><p>Transplantation works. There are not enough organs, which is why so much effort goes into making more.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-      <a class="index-row capstone" href="longevity.html">
-        <div class="marker">
-          <span class="code">08 &middot; LONGEV</span>
-          <svg class="trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,3 L18,3 L18,7 L34,7 L34,13 L48,13 L48,17 L62,17 L62,23 L76,23 L76,29 L100,29"/></svg>
-        </div>
-        <div class="body"><h3>Longevity &amp; Gene Editing<span class="tag">Capstone</span></h3><p>The flagship survey: gene editing, regenerative medicine, and the honest question of how far the frontier of death can move.</p></div>
-        <span class="arrow" aria-hidden="true">&rarr;</span>
-      </a>
-    </div>
-  </section>
-
-  <section class="section wrap" id="about">
-    <div class="section-label"><span class="eyebrow">About This Project</span></div>
-    <div class="about-grid">
-      <div class="prose reveal">
-        <p>I am a high school student who writes independent research papers to understand large questions from the ground up. This project grew out of a survey I wrote on life-extending medicine, and the three shorter pages here are the pillars that survey rests on. Cardiovascular disease, neurodegeneration, and cancer are the failure modes that decide how long most people live.</p>
-        <p>I built this site to practice something medicine actually requires, which is explaining hard science to the people it affects without either frightening them or making it smaller than it is. If a page here makes a difficult idea clearer without misleading you, it has done its job.</p>
+  <section class="hero">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-glow" aria-hidden="true"></div>
+    <div class="wrap hero-inner">
+      <span class="eyebrow">Public Health &middot; Research Communication</span>
+      <h1>What modern medicine can already do, and what it cannot do <em>yet</em>.</h1>
+      <p class="lede">A student's field guide to the science that is quietly extending human life. Nine pieces on the heart, the brain, cancer, and the frontier beyond them.</p>
+      <div class="cta">
+        <a class="btn" href="#topics">Start reading</a>
+        <a class="btn ghost" href="editing.html">Try the gene editor</a>
       </div>
-      <figure class="artwork reveal">
-        <svg viewBox="0 0 400 220" role="img" aria-label="The eight topic traces layered into one composition">
-          <path class="layer" d="M0,150 L60,150 L68,150 L74,132 L82,170 L90,140 L98,158 L106,150 L200,150 L400,150" style="opacity:0.95;stroke-width:2.0"/>
-          <path class="layer" d="M0,130 Q20,110 40,130 T80,130 Q95,116 110,130 Q122,144 136,130 Q152,108 168,130 T210,130 Q228,116 246,130 T400,130" style="opacity:0.75;stroke-width:1.6"/>
-          <path class="layer" d="M0,190 L100,188 L160,184 L215,176 L255,162 L290,142 L320,122 L350,104 L400,88" style="opacity:0.6;stroke-width:1.6"/>
-          <path class="layer" d="M0,110 L50,108 L85,66 L120,58 L160,72 L205,94 L250,104 L300,108 L400,109" style="opacity:0.5;stroke-width:1.4"/>
-          <path class="layer" d="M0,205 L50,205 L50,193 L110,193 L110,178 L175,178 L175,163 L245,163 L245,148 L400,148" style="opacity:0.42;stroke-width:1.3"/>
-          <path class="layer" d="M0,88 L28,88 L34,44 L92,44 L98,88 L140,88 L146,44 L204,44 L210,88 L255,88 L261,44 L318,44 L324,88 L400,88" style="opacity:0.32;stroke-width:1.2"/>
-          <path class="layer" d="M0,168 Q30,168 44,148 Q58,128 80,148 Q94,168 122,168 Q152,168 166,148 Q180,128 202,148 Q216,168 244,168 Q276,168 290,148 Q304,128 326,148 Q340,168 400,168" style="opacity:0.26;stroke-width:1.2"/>
-          <path class="layer" d="M0,40 L66,40 L66,58 L124,58 L124,80 L174,80 L174,96 L224,96 L224,118 L276,118 L276,140 L400,140" style="opacity:0.2;stroke-width:1.1"/>
+      <div class="monitor">
+        <div class="monitor-meta"><span>Lead II</span><span>25 mm/s</span><span><b>&#9679;</b> Live</span></div>
+        <svg viewBox="0 0 1200 120" preserveAspectRatio="none" role="img" aria-label="A simulated electrocardiogram tracing">
+          <path class="base-trace" d="M0,60 L180,60 L200,60 L208,44 L216,60 L228,60 L236,18 L244,96 L252,52 L262,60 L300,60 L420,60 L440,60 L448,44 L456,60 L468,60 L476,18 L484,96 L492,52 L502,60 L560,60 L680,60 L700,60 L708,44 L716,60 L728,60 L736,18 L744,96 L752,52 L762,60 L820,60 L1000,60 L1020,60 L1028,44 L1036,60 L1048,60 L1056,18 L1064,96 L1072,52 L1082,60 L1200,60"/>
+          <path class="live-trace" d="M0,60 L180,60 L200,60 L208,44 L216,60 L228,60 L236,18 L244,96 L252,52 L262,60 L300,60 L420,60 L440,60 L448,44 L456,60 L468,60 L476,18 L484,96 L492,52 L502,60 L560,60 L680,60 L700,60 L708,44 L716,60 L728,60 L736,18 L744,96 L752,52 L762,60 L820,60 L1000,60 L1020,60 L1028,44 L1036,60 L1048,60 L1056,18 L1064,96 L1072,52 L1082,60 L1200,60"/>
         </svg>
-        <figcaption>Every topic on this site carries its own readout: an electrocardiogram, an EEG, a growth curve, a glucose curve, a resistance climb, a ventilator waveform, a perfusion pulse, and a survival curve. Layered together, they are the shape of the whole project.</figcaption>
-      </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="topics">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Index of Topics</h2>
+        <span class="count">Nine pieces</span>
+      </div>
+      <p class="group-label">Interactive</p>
+      <div class="cards">
+        <a class="card wide" data-topic="editing" href="editing.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,8 Q12,8 18,17 Q24,26 30,26 Q36,26 42,17 Q48,8 54,8 Q60,8 66,17 Q72,26 78,26 Q84,26 90,17 Q96,8 100,8 M0,26 Q12,26 18,17 Q24,8 30,8 Q36,8 42,17 Q48,26 54,26 Q60,26 66,17 Q72,8 78,8 Q84,8 90,17 Q96,26 100,26"/></svg>
+          <span class="code">TOOL</span>
+          <h3>Three Ways to Change a Gene</h3>
+          <p>Apply CRISPR, base editing, and prime editing to the same strand of DNA and watch exactly how the three differ.</p>
+          <span class="go">Open the tool <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      </div>
+
+      <p class="group-label">Chronic Disease</p>
+      <div class="cards">
+        <a class="card" data-topic="cardiology" href="cardiology.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 L28,17 L34,17 L38,7 L44,27 L50,12 L56,21 L62,17 L100,17"/></svg>
+          <span class="code">01 / CARDIO</span>
+          <h3>Cardiology</h3>
+          <p>Why the slow, cumulative damage to your arteries is one of the most preventable causes of death.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        <a class="card" data-topic="neurology" href="neurology.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 Q6,7 12,17 T24,17 Q29,9 34,17 Q38,24 43,17 Q49,6 55,17 T68,17 Q74,10 80,17 T100,17"/></svg>
+          <span class="code">02 / NEURO</span>
+          <h3>Neurology</h3>
+          <p>The brain sets the ceiling on a long life. The first treatments that touch the disease itself, not only the symptoms.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        <a class="card" data-topic="oncology" href="oncology.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,31 L30,30 L48,28 L62,24 L74,17 L84,9 L92,3 L100,1"/></svg>
+          <span class="code">03 / ONCO</span>
+          <h3>Oncology</h3>
+          <p>Cancer is the central obstacle to almost every dream of a longer life, and the immune system is being taught to fight it.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        <a class="card" data-topic="metabolic" href="metabolic.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,26 L14,25 L24,8 L34,5 L46,10 L58,18 L70,23 L82,25 L100,25"/></svg>
+          <span class="code">04 / METAB</span>
+          <h3>Metabolic Health</h3>
+          <p>GLP-1 drugs began as diabetes treatments and became something larger. What they do, and what the evidence shows beyond weight.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      </div>
+
+      <p class="group-label">Acute and Infectious</p>
+      <div class="cards">
+        <a class="card" data-topic="infectious" href="infectious.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 L14,30 L14,24 L30,24 L30,18 L48,18 L48,12 L68,12 L68,6 L100,6"/></svg>
+          <span class="code">05 / INFECT</span>
+          <h3>Infectious Disease</h3>
+          <p>Antibiotics are the only drugs that grow weaker the more we use them, and the pipeline thinned for economic reasons.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        <a class="card" data-topic="criticalcare" href="criticalcare.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,28 L8,28 L10,6 L26,6 L28,28 L40,28 L42,6 L58,6 L60,28 L72,28 L74,6 L90,6 L92,28 L100,28"/></svg>
+          <span class="code">06 / CRIT</span>
+          <h3>Critical Care</h3>
+          <p>Intensive care rarely cures anything. It substitutes for failing organs long enough for something else to work.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      </div>
+
+      <p class="group-label">Replacement and Repair</p>
+      <div class="cards">
+        <a class="card" data-topic="transplant" href="transplant.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 Q8,20 12,12 Q16,4 22,12 Q26,20 34,20 Q42,20 46,12 Q50,4 56,12 Q60,20 68,20 Q76,20 80,12 Q84,4 90,12 Q94,20 100,20"/></svg>
+          <span class="code">07 / TRANS</span>
+          <h3>Transplant &amp; Regenerative Medicine</h3>
+          <p>Transplantation works. There are not enough organs, which is why so much effort goes into making more.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+        <a class="card" data-topic="longevity" href="longevity.html">
+          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,3 L18,3 L18,7 L34,7 L34,13 L48,13 L48,17 L62,17 L62,23 L76,23 L76,29 L100,29"/></svg>
+          <span class="code">08 / LONGEV</span>
+          <h3>Longevity &amp; Gene Editing<span class="tag">Capstone</span></h3>
+          <p>Gene editing, regenerative medicine, and the honest question of how far the frontier of death can move.</p>
+          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="wrap">
+      <div class="section-head"><h2>About This Project</h2></div>
+      <div class="about-grid">
+        <div class="prose reveal">
+          <p>I am a high school student who writes independent research papers to understand large questions from the ground up. This project grew out of a survey I wrote on life-extending medicine, and the pieces here are the pillars that survey rests on. Cardiovascular disease, neurodegeneration, and cancer are the failure modes that decide how long most people live.</p>
+          <p>I built this site to practice something medicine actually requires, which is explaining hard science to the people it affects without either frightening them or making it smaller than it is. If a page here makes a difficult idea clearer without misleading you, it has done its job.</p>
+          <p>Every clinical claim is cited to a primary source. I am not a licensed medical professional, and nothing here is medical advice.</p>
+        </div>
+        <figure class="artwork reveal">
+          <svg viewBox="0 0 400 220" role="img" aria-label="The eight topic traces layered into one composition">
+            <path class="layer" d="M0,150 L60,150 L68,150 L74,132 L82,170 L90,140 L98,158 L106,150 L200,150 L400,150" style="opacity:0.95;stroke-width:2.0"/>
+            <path class="layer" d="M0,130 Q20,110 40,130 T80,130 Q95,116 110,130 Q122,144 136,130 Q152,108 168,130 T210,130 Q228,116 246,130 T400,130" style="opacity:0.72;stroke-width:1.6"/>
+            <path class="layer" d="M0,190 L100,188 L160,184 L215,176 L255,162 L290,142 L320,122 L350,104 L400,88" style="opacity:0.58;stroke-width:1.6"/>
+            <path class="layer" d="M0,110 L50,108 L85,66 L120,58 L160,72 L205,94 L250,104 L300,108 L400,109" style="opacity:0.48;stroke-width:1.4"/>
+            <path class="layer" d="M0,205 L50,205 L50,193 L110,193 L110,178 L175,178 L175,163 L245,163 L245,148 L400,148" style="opacity:0.4;stroke-width:1.3"/>
+            <path class="layer" d="M0,88 L28,88 L34,44 L92,44 L98,88 L140,88 L146,44 L204,44 L210,88 L255,88 L261,44 L318,44 L324,88 L400,88" style="opacity:0.3;stroke-width:1.2"/>
+            <path class="layer" d="M0,168 Q30,168 44,148 Q58,128 80,148 Q94,168 122,168 Q152,168 166,148 Q180,128 202,148 Q216,168 244,168 Q276,168 290,148 Q304,128 326,148 Q340,168 400,168" style="opacity:0.24;stroke-width:1.2"/>
+            <path class="layer" d="M0,40 L66,40 L66,58 L124,58 L124,80 L174,80 L174,96 L224,96 L224,118 L276,118 L276,140 L400,140" style="opacity:0.18;stroke-width:1.1"/>
+          </svg>
+          <figcaption>Every topic on this site carries its own readout: an electrocardiogram, an EEG, a growth curve, a glucose curve, a resistance climb, a ventilator waveform, a perfusion pulse, and a survival curve. Layered together, they are the shape of the whole project.</figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -206,10 +209,10 @@
     <div class="wrap">
       <div class="footer-cta reveal">
         <h2>The honest word in all of this is "yet."</h2>
-        <p>Read the four topics in any order. Each one stands alone, and together they explain why longer, healthier lives are a realistic hope rather than a fantasy.</p>
+        <p>Read the topics in any order. Each stands alone, and together they explain why longer, healthier lives are a realistic hope rather than a fantasy.</p>
       </div>
       <div class="footer-meta">
-        <span>© 2026 Plainly Medicine</span>
+        <span>&copy; 2026 Plainly Medicine</span>
         <a href="mailto:plainlymedicine@gmail.com">plainlymedicine@gmail.com</a>
       </div>
       <p class="disclaimer">This site is for educational purposes only and does not constitute medical advice. Consult a qualified healthcare professional for any medical concerns.</p>

@@ -9,9 +9,9 @@
     (function () {
       try {
         var t = localStorage.getItem('theme');
-        if (!t) t = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+        if (!t) t = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
         document.documentElement.setAttribute('data-theme', t);
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+      } catch (e) { document.documentElement.setAttribute('data-theme', 'dark'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/editing.html">
@@ -50,7 +50,7 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
     /* ---------- editor ---------- */
@@ -126,7 +126,7 @@
     }
   </style>
 </head>
-<body>
+<body data-topic="editing">
   <div class="progress" aria-hidden="true"></div>
 
   <header class="nav">
@@ -149,7 +149,9 @@
     </div>
   </header>
 
-  <section class="page-head wrap narrow">
+  <section class="page-hero">
+    <span class="numeral" aria-hidden="true">09</span>
+    <div class="wrap narrow page-hero-inner">
     <span class="eyebrow">Interactive &middot; Genetics</span>
     <h1>Three Ways to Change a Gene</h1>
     <p class="summary">The same stretch of DNA, edited three ways. The differences between these tools are the whole story of why some therapies are close and others are not.</p>
@@ -157,6 +159,7 @@
       <span class="author">By Rayan Nadeem</span>
       <span>Independent research</span>
       <span>Updated July 2026</span>
+    </div>
     </div>
   </section>
 

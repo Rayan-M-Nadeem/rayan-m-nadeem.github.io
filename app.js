@@ -60,7 +60,7 @@
 
 // ---- index traces draw when scrolled into view ----
 (function () {
-  var rows = document.querySelectorAll('.index-row');
+  var rows = document.querySelectorAll('.card');
   if (!rows.length) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
     rows.forEach(function (r) { r.classList.add('seen'); });
