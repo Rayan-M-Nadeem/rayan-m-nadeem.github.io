@@ -77,3 +77,51 @@
   }, { threshold: 0.3 });
   rows.forEach(function (r) { obs.observe(r); });
 })();
+
+// ---- panels: activate on view, sync the rail ----
+(function () {
+  var panels = Array.prototype.slice.call(document.querySelectorAll('.panel'));
+  var railLinks = Array.prototype.slice.call(document.querySelectorAll('.rail a'));
+  var rail = document.querySelector('.rail');
+  if (!panels.length) return;
+
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce) {
+    panels.forEach(function (p) { p.classList.add('on'); });
+    return;
+  }
+
+  var ticking = false;
+  function update() {
+    var vh = window.innerHeight;
+    var mid = vh / 2;
+    var best = null, bestDist = Infinity;
+
+    panels.forEach(function (p) {
+      var r = p.getBoundingClientRect();
+      // activate once any meaningful part has entered the viewport
+      if (r.top < vh * 0.88) p.classList.add('on');
+      // nearest panel to viewport centre drives the rail
+      var c = r.top + r.height / 2;
+      var d = Math.abs(c - mid);
+      if (r.bottom > 0 && r.top < vh && d < bestDist) { bestDist = d; best = p; }
+    });
+
+    if (best && railLinks.length) {
+      var id = '#' + best.id;
+      railLinks.forEach(function (x) { x.classList.toggle('on', x.getAttribute('href') === id); });
+      if (rail) {
+        var hue = getComputedStyle(best).getPropertyValue('--hue').trim();
+        if (hue) rail.style.setProperty('--rail-hue', hue);
+      }
+    }
+    ticking = false;
+  }
+
+  function onScroll() {
+    if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll);
+  update();
+})();

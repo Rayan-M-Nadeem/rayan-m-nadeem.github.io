@@ -288,3 +288,143 @@ body[data-topic="editing"]      { --hue: #5B8DEF; --hue-soft: rgba(91,141,239,0.
   .compare td { border: 0; padding: 0.2rem 0; }
   .compare td:first-child { font-size: 1.05rem; margin-bottom: 0.4rem; }
 }
+
+/* ============================================================
+   FORMAT OVERHAUL: full-height panels, fixed rail, gradients
+   ============================================================ */
+
+.hero h1 em { font-style: normal; color: inherit; }
+
+/* ---- fixed section rail ---- */
+.rail {
+  position: fixed; right: clamp(0.9rem, 2.5vw, 2rem); top: 50%; transform: translateY(-50%);
+  z-index: 90; display: flex; flex-direction: column; gap: 0.65rem;
+}
+.rail a {
+  display: flex; align-items: center; gap: 0.65rem; justify-content: flex-end;
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.14em; color: var(--faint);
+  transition: color 0.3s, gap 0.3s var(--ease);
+}
+.rail a .bar {
+  display: block; width: 16px; height: 1.5px; background: currentColor;
+  transition: width 0.4s var(--ease), background 0.3s;
+}
+.rail a .lbl { opacity: 0; transform: translateX(6px); transition: opacity 0.3s, transform 0.3s var(--ease); white-space: nowrap; }
+.rail a:hover .lbl, .rail a.on .lbl { opacity: 1; transform: none; }
+.rail a:hover { color: var(--ink); }
+.rail a.on { color: var(--rail-hue, var(--accent)); }
+.rail a.on .bar { width: 34px; }
+
+/* ---- full-height panels ---- */
+.panel {
+  position: relative; min-height: 100vh; display: flex; align-items: center;
+  padding-block: clamp(4rem, 10vh, 8rem); overflow: hidden;
+  border-top: 1px solid var(--line);
+}
+.panel::before {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 90% 70% at 12% 22%, var(--hue-glow, transparent) 0%, transparent 62%),
+    linear-gradient(160deg, var(--hue-wash, transparent) 0%, transparent 55%);
+}
+.panel::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: 0.4;
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: linear-gradient(to bottom, #000, transparent 65%);
+  -webkit-mask-image: linear-gradient(to bottom, #000, transparent 65%);
+}
+.panel-inner { position: relative; z-index: 3; width: 100%; }
+.panel-num {
+  position: absolute; left: 0; bottom: -4vh; font-family: var(--display);
+  font-size: clamp(9rem, 26vw, 24rem); line-height: 0.8; color: var(--hue);
+  opacity: 0.09; pointer-events: none; user-select: none; z-index: 1;
+}
+.panel-body { max-width: 34rem; }
+.panel .kicker {
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--hue); display: flex; align-items: center; gap: 0.8rem;
+}
+.panel .kicker::after { content: ""; width: 44px; height: 1px; background: var(--hue); opacity: 0.5; }
+.panel h2 {
+  font-size: clamp(2.6rem, 7vw, 5.4rem); margin-top: 1.4rem; letter-spacing: -0.03em; line-height: 0.98;
+}
+.panel .blurb { color: var(--muted); font-size: clamp(1rem, 1.6vw, 1.18rem); margin-top: 1.5rem; max-width: 40ch; }
+.panel .go {
+  display: inline-flex; align-items: center; gap: 0.7rem; margin-top: 2.25rem;
+  font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase;
+  color: var(--hue); padding-bottom: 0.5rem; border-bottom: 1px solid color-mix(in srgb, var(--hue) 40%, transparent);
+  transition: gap 0.3s var(--ease), border-color 0.3s;
+}
+.panel .go:hover { gap: 1.2rem; border-color: var(--hue); }
+.panel .tag {
+  display: inline-block; font-family: var(--mono); font-size: 0.56rem; letter-spacing: 0.18em;
+  text-transform: uppercase; color: var(--hue); border: 1px solid var(--hue);
+  padding: 4px 10px; border-radius: 100px; margin-left: 0.9rem; vertical-align: middle;
+}
+.panel-trace {
+  position: absolute; right: -4%; top: 50%; transform: translateY(-50%);
+  width: 62%; height: 46vh; opacity: 0.55; pointer-events: none; z-index: 2; overflow: visible;
+}
+.panel-trace path {
+  fill: none; stroke: var(--hue); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round;
+  stroke-dasharray: 700; stroke-dashoffset: 700; transition: stroke-dashoffset 1.8s var(--ease);
+  filter: drop-shadow(0 0 14px var(--hue));
+}
+.panel.on .panel-trace path { stroke-dashoffset: 0; }
+
+/* panel hue washes */
+.panel[data-topic="cardiology"]   { --hue: #E2585E; --hue-glow: rgba(226,88,94,0.16);  --hue-wash: rgba(226,88,94,0.06); }
+.panel[data-topic="neurology"]    { --hue: #9B7BE8; --hue-glow: rgba(155,123,232,0.16); --hue-wash: rgba(155,123,232,0.06); }
+.panel[data-topic="oncology"]     { --hue: #E0629C; --hue-glow: rgba(224,98,156,0.16);  --hue-wash: rgba(224,98,156,0.06); }
+.panel[data-topic="metabolic"]    { --hue: #E29A4C; --hue-glow: rgba(226,154,76,0.16);  --hue-wash: rgba(226,154,76,0.06); }
+.panel[data-topic="infectious"]   { --hue: #6FBF6A; --hue-glow: rgba(111,191,106,0.16); --hue-wash: rgba(111,191,106,0.06); }
+.panel[data-topic="criticalcare"] { --hue: #4FA8D8; --hue-glow: rgba(79,168,216,0.16);  --hue-wash: rgba(79,168,216,0.06); }
+.panel[data-topic="transplant"]   { --hue: #35C8C0; --hue-glow: rgba(53,200,192,0.16);  --hue-wash: rgba(53,200,192,0.06); }
+.panel[data-topic="longevity"]    { --hue: #E0A15A; --hue-glow: rgba(224,161,90,0.18);  --hue-wash: rgba(224,161,90,0.07); }
+.panel[data-topic="editing"]      { --hue: #5B8DEF; --hue-glow: rgba(91,141,239,0.16);  --hue-wash: rgba(91,141,239,0.06); }
+
+[data-theme="light"] .panel[data-topic="cardiology"]   { --hue: #B3353B; --hue-glow: rgba(179,53,59,0.10);  --hue-wash: rgba(179,53,59,0.05); }
+[data-theme="light"] .panel[data-topic="neurology"]    { --hue: #6A4BB8; --hue-glow: rgba(106,75,184,0.10); --hue-wash: rgba(106,75,184,0.05); }
+[data-theme="light"] .panel[data-topic="oncology"]     { --hue: #B33A72; --hue-glow: rgba(179,58,114,0.10); --hue-wash: rgba(179,58,114,0.05); }
+[data-theme="light"] .panel[data-topic="metabolic"]    { --hue: #A2621B; --hue-glow: rgba(162,98,27,0.10);  --hue-wash: rgba(162,98,27,0.05); }
+[data-theme="light"] .panel[data-topic="infectious"]   { --hue: #3D8438; --hue-glow: rgba(61,132,56,0.10);  --hue-wash: rgba(61,132,56,0.05); }
+[data-theme="light"] .panel[data-topic="criticalcare"] { --hue: #1F6E9C; --hue-glow: rgba(31,110,156,0.10); --hue-wash: rgba(31,110,156,0.05); }
+[data-theme="light"] .panel[data-topic="transplant"]   { --hue: #0C6B68; --hue-glow: rgba(12,107,104,0.10); --hue-wash: rgba(12,107,104,0.05); }
+[data-theme="light"] .panel[data-topic="longevity"]    { --hue: #A2621B; --hue-glow: rgba(162,98,27,0.11);  --hue-wash: rgba(162,98,27,0.06); }
+[data-theme="light"] .panel[data-topic="editing"]      { --hue: #33569E; --hue-glow: rgba(51,86,158,0.10);  --hue-wash: rgba(51,86,158,0.05); }
+
+/* hero recomposed: meta top, headline anchored low */
+.hero { justify-content: flex-end; min-height: 100vh; }
+.hero-meta {
+  position: absolute; top: clamp(5.5rem, 12vh, 8rem); left: 0; right: 0; z-index: 3;
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.2em; text-transform: uppercase;
+  color: var(--faint);
+}
+.hero-meta .row { display: flex; justify-content: space-between; gap: 1.5rem; flex-wrap: wrap; border-bottom: 1px solid var(--line); padding-bottom: 1rem; }
+.hero-glow { background: radial-gradient(circle, rgba(53,200,192,0.13) 0%, transparent 60%); }
+[data-theme="light"] .hero-glow { background: radial-gradient(circle, rgba(12,107,104,0.09) 0%, transparent 60%); }
+
+/* article pages: tinted gradient ground instead of flat */
+body[data-topic] { position: relative; }
+body[data-topic]::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 50% at 85% 0%, var(--hue-soft) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 40% at 0% 100%, var(--hue-soft) 0%, transparent 65%);
+  opacity: 0.75;
+}
+body[data-topic] > * { position: relative; z-index: 1; }
+.page-hero { background: transparent; }
+
+@media (max-width: 860px) {
+  .rail { display: none; }
+  .panel { min-height: auto; padding-block: 4.5rem; }
+  .panel-trace { position: relative; width: 100%; height: 130px; right: auto; top: auto; transform: none; margin-top: 2.5rem; opacity: 0.7; }
+  .panel-num { font-size: 8rem; bottom: auto; top: -1rem; opacity: 0.07; }
+  .panel-inner { display: flex; flex-direction: column; }
+  .hero { min-height: auto; padding-block: 7rem 3rem; }
+  .hero-meta { position: static; margin-bottom: 2rem; }
+}

@@ -54,7 +54,7 @@
     <div class="wrap nav-inner">
       <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
       <nav class="nav-links" aria-label="Primary">
-        <a href="#topics">Topics</a>
+        <a href="#p-editing">Topics</a>
         <a href="editing.html">Interactive</a>
         <a href="longevity.html">Longevity</a>
         <a href="#about">About</a>
@@ -74,12 +74,20 @@
   <section class="hero">
     <div class="hero-grid" aria-hidden="true"></div>
     <div class="hero-glow" aria-hidden="true"></div>
+    <div class="hero-meta">
+      <div class="wrap"><div class="row">
+        <span>Plainly Medicine</span>
+        <span>Nine pieces</span>
+        <span>Independent research</span>
+        <span>Updated July 2026</span>
+      </div></div>
+    </div>
     <div class="wrap hero-inner">
       <span class="eyebrow">Public Health &middot; Research Communication</span>
-      <h1>What modern medicine can already do, and what it cannot do <em>yet</em>.</h1>
-      <p class="lede">A student's field guide to the science that is quietly extending human life. Nine pieces on the heart, the brain, cancer, and the frontier beyond them.</p>
+      <h1>What modern medicine can already do, and what it cannot do yet.</h1>
+      <p class="lede">A student's field guide to the science that is quietly extending human life.</p>
       <div class="cta">
-        <a class="btn" href="#topics">Start reading</a>
+        <a class="btn" href="#p-editing">Start reading</a>
         <a class="btn ghost" href="editing.html">Try the gene editor</a>
       </div>
       <div class="monitor">
@@ -92,89 +100,131 @@
     </div>
   </section>
 
-  <section class="section alt" id="topics">
-    <div class="wrap">
-      <div class="section-head">
-        <h2>Index of Topics</h2>
-        <span class="count">Nine pieces</span>
-      </div>
-      <p class="group-label">Interactive</p>
-      <div class="cards">
-        <a class="card wide" data-topic="editing" href="editing.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,8 Q12,8 18,17 Q24,26 30,26 Q36,26 42,17 Q48,8 54,8 Q60,8 66,17 Q72,26 78,26 Q84,26 90,17 Q96,8 100,8 M0,26 Q12,26 18,17 Q24,8 30,8 Q36,8 42,17 Q48,26 54,26 Q60,26 66,17 Q72,8 78,8 Q84,8 90,17 Q96,26 100,26"/></svg>
-          <span class="code">TOOL</span>
-          <h3>Three Ways to Change a Gene</h3>
-          <p>Apply CRISPR, base editing, and prime editing to the same strand of DNA and watch exactly how the three differ.</p>
-          <span class="go">Open the tool <span aria-hidden="true">&rarr;</span></span>
-        </a>
-      </div>
+  <nav class="rail" aria-label="Sections">
+    <a href="#p-editing" data-topic="editing"><span class="lbl">Interactive</span><span class="bar"></span></a>
+    <a href="#p-cardiology" data-topic="cardiology"><span class="lbl">Cardiology</span><span class="bar"></span></a>
+    <a href="#p-neurology" data-topic="neurology"><span class="lbl">Neurology</span><span class="bar"></span></a>
+    <a href="#p-oncology" data-topic="oncology"><span class="lbl">Oncology</span><span class="bar"></span></a>
+    <a href="#p-metabolic" data-topic="metabolic"><span class="lbl">Metabolic Health</span><span class="bar"></span></a>
+    <a href="#p-infectious" data-topic="infectious"><span class="lbl">Infectious Disease</span><span class="bar"></span></a>
+    <a href="#p-criticalcare" data-topic="criticalcare"><span class="lbl">Critical Care</span><span class="bar"></span></a>
+    <a href="#p-transplant" data-topic="transplant"><span class="lbl">Transplant and Regeneration</span><span class="bar"></span></a>
+    <a href="#p-longevity" data-topic="longevity"><span class="lbl">Longevity and Gene Editing</span><span class="bar"></span></a>
+  </nav>
 
-      <p class="group-label">Chronic Disease</p>
-      <div class="cards">
-        <a class="card" data-topic="cardiology" href="cardiology.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 L28,17 L34,17 L38,7 L44,27 L50,12 L56,21 L62,17 L100,17"/></svg>
-          <span class="code">01 / CARDIO</span>
-          <h3>Cardiology</h3>
-          <p>Why the slow, cumulative damage to your arteries is one of the most preventable causes of death.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
-        <a class="card" data-topic="neurology" href="neurology.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 Q6,7 12,17 T24,17 Q29,9 34,17 Q38,24 43,17 Q49,6 55,17 T68,17 Q74,10 80,17 T100,17"/></svg>
-          <span class="code">02 / NEURO</span>
-          <h3>Neurology</h3>
-          <p>The brain sets the ceiling on a long life. The first treatments that touch the disease itself, not only the symptoms.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
-        <a class="card" data-topic="oncology" href="oncology.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,31 L30,30 L48,28 L62,24 L74,17 L84,9 L92,3 L100,1"/></svg>
-          <span class="code">03 / ONCO</span>
-          <h3>Oncology</h3>
-          <p>Cancer is the central obstacle to almost every dream of a longer life, and the immune system is being taught to fight it.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
-        <a class="card" data-topic="metabolic" href="metabolic.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,26 L14,25 L24,8 L34,5 L46,10 L58,18 L70,23 L82,25 L100,25"/></svg>
-          <span class="code">04 / METAB</span>
-          <h3>Metabolic Health</h3>
-          <p>GLP-1 drugs began as diabetes treatments and became something larger. What they do, and what the evidence shows beyond weight.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
+  <section class="panel" data-topic="editing" id="p-editing">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,8 Q12,8 18,17 Q24,26 30,26 Q36,26 42,17 Q48,8 54,8 Q60,8 66,17 Q72,26 78,26 Q84,26 90,17 Q96,8 100,8 M0,26 Q12,26 18,17 Q24,8 30,8 Q36,8 42,17 Q48,26 54,26 Q60,26 66,17 Q72,8 78,8 Q84,8 90,17 Q96,26 100,26"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">00</span>
+      <div class="panel-body">
+        <span class="kicker">Interactive</span>
+        <h2>Three Ways to Change a Gene</h2>
+        <p class="blurb">Apply CRISPR, base editing, and prime editing to the same strand of DNA and watch exactly how the three differ.</p>
+        <a class="go" href="editing.html">Open the tool <span aria-hidden="true">&rarr;</span></a>
       </div>
+    </div>
+  </section>
 
-      <p class="group-label">Acute and Infectious</p>
-      <div class="cards">
-        <a class="card" data-topic="infectious" href="infectious.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 L14,30 L14,24 L30,24 L30,18 L48,18 L48,12 L68,12 L68,6 L100,6"/></svg>
-          <span class="code">05 / INFECT</span>
-          <h3>Infectious Disease</h3>
-          <p>Antibiotics are the only drugs that grow weaker the more we use them, and the pipeline thinned for economic reasons.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
-        <a class="card" data-topic="criticalcare" href="criticalcare.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,28 L8,28 L10,6 L26,6 L28,28 L40,28 L42,6 L58,6 L60,28 L72,28 L74,6 L90,6 L92,28 L100,28"/></svg>
-          <span class="code">06 / CRIT</span>
-          <h3>Critical Care</h3>
-          <p>Intensive care rarely cures anything. It substitutes for failing organs long enough for something else to work.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
+  <section class="panel" data-topic="cardiology" id="p-cardiology">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 L28,17 L34,17 L38,7 L44,27 L50,12 L56,21 L62,17 L100,17"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">01</span>
+      <div class="panel-body">
+        <span class="kicker">Cardiology</span>
+        <h2>The Slowest Emergency</h2>
+        <p class="blurb">Atherosclerosis is damage that adds up over decades, which is exactly why it is one of the most preventable causes of death.</p>
+        <a class="go" href="cardiology.html">Read <span aria-hidden="true">&rarr;</span></a>
       </div>
+    </div>
+  </section>
 
-      <p class="group-label">Replacement and Repair</p>
-      <div class="cards">
-        <a class="card" data-topic="transplant" href="transplant.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 Q8,20 12,12 Q16,4 22,12 Q26,20 34,20 Q42,20 46,12 Q50,4 56,12 Q60,20 68,20 Q76,20 80,12 Q84,4 90,12 Q94,20 100,20"/></svg>
-          <span class="code">07 / TRANS</span>
-          <h3>Transplant &amp; Regenerative Medicine</h3>
-          <p>Transplantation works. There are not enough organs, which is why so much effort goes into making more.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
-        <a class="card" data-topic="longevity" href="longevity.html">
-          <svg class="card-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,3 L18,3 L18,7 L34,7 L34,13 L48,13 L48,17 L62,17 L62,23 L76,23 L76,29 L100,29"/></svg>
-          <span class="code">08 / LONGEV</span>
-          <h3>Longevity &amp; Gene Editing<span class="tag">Capstone</span></h3>
-          <p>Gene editing, regenerative medicine, and the honest question of how far the frontier of death can move.</p>
-          <span class="go">Read <span aria-hidden="true">&rarr;</span></span>
-        </a>
+  <section class="panel" data-topic="neurology" id="p-neurology">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,17 Q6,7 12,17 T24,17 Q29,9 34,17 Q38,24 43,17 Q49,6 55,17 T68,17 Q74,10 80,17 T100,17"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">02</span>
+      <div class="panel-body">
+        <span class="kicker">Neurology</span>
+        <h2>The Organ That Sets the Ceiling</h2>
+        <p class="blurb">A long life is only as good as the brain that lives it. The first drugs that touch the disease itself, not only the symptoms.</p>
+        <a class="go" href="neurology.html">Read <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-topic="oncology" id="p-oncology">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,31 L30,30 L48,28 L62,24 L74,17 L84,9 L92,3 L100,1"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">03</span>
+      <div class="panel-body">
+        <span class="kicker">Oncology</span>
+        <h2>The Central Obstacle</h2>
+        <p class="blurb">Cancer is the reason so many dreams of a longer life run into a wall, and where medicine has changed most in a decade.</p>
+        <a class="go" href="oncology.html">Read <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-topic="metabolic" id="p-metabolic">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,26 L14,25 L24,8 L34,5 L46,10 L58,18 L70,23 L82,25 L100,25"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">04</span>
+      <div class="panel-body">
+        <span class="kicker">Metabolic Health</span>
+        <h2>The Drugs That Changed the Conversation</h2>
+        <p class="blurb">GLP-1 medicines began as diabetes treatments and became something much larger. The mechanism is more elegant than the headlines.</p>
+        <a class="go" href="metabolic.html">Read <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-topic="infectious" id="p-infectious">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,30 L14,30 L14,24 L30,24 L30,18 L48,18 L48,12 L68,12 L68,6 L100,6"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">05</span>
+      <div class="panel-body">
+        <span class="kicker">Infectious Disease</span>
+        <h2>The Clock Running Against Us</h2>
+        <p class="blurb">Antibiotics are the only class of drug that becomes less effective the more we use it.</p>
+        <a class="go" href="infectious.html">Read <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-topic="criticalcare" id="p-criticalcare">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,28 L8,28 L10,6 L26,6 L28,28 L40,28 L42,6 L58,6 L60,28 L72,28 L74,6 L90,6 L92,28 L100,28"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">06</span>
+      <div class="panel-body">
+        <span class="kicker">Critical Care</span>
+        <h2>Buying Time</h2>
+        <p class="blurb">Intensive care rarely cures anything. It keeps a person alive long enough for something else to work.</p>
+        <a class="go" href="criticalcare.html">Read <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-topic="transplant" id="p-transplant">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,20 Q8,20 12,12 Q16,4 22,12 Q26,20 34,20 Q42,20 46,12 Q50,4 56,12 Q60,20 68,20 Q76,20 80,12 Q84,4 90,12 Q94,20 100,20"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">07</span>
+      <div class="panel-body">
+        <span class="kicker">Transplant and Regeneration</span>
+        <h2>The Supply Problem</h2>
+        <p class="blurb">Transplantation works. There are simply not enough organs, which is why so much effort goes into making more.</p>
+        <a class="go" href="transplant.html">Read <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <section class="panel" data-topic="longevity" id="p-longevity">
+    <svg class="panel-trace" viewBox="0 0 100 34" preserveAspectRatio="none" aria-hidden="true"><path d="M0,3 L18,3 L18,7 L34,7 L34,13 L48,13 L48,17 L62,17 L62,23 L76,23 L76,29 L100,29"/></svg>
+    <div class="wrap panel-inner">
+      <span class="panel-num" aria-hidden="true">08</span>
+      <div class="panel-body">
+        <span class="kicker">Longevity and Gene Editing</span>
+        <h2>Rewriting the Lifespan<span class="tag">Capstone</span></h2>
+        <p class="blurb">Gene editing, regenerative medicine, and the honest question of how far the boundary of death can move.</p>
+        <a class="go" href="longevity.html">Read <span aria-hidden="true">&rarr;</span></a>
       </div>
     </div>
   </section>
