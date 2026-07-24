@@ -47,12 +47,12 @@ The longevity page is adapted from an independent research paper I wrote, *Rewri
 
 Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies. Every page opens on its own.
 
-- Light and dark themes that follow the visitor's system setting, with a manual toggle that remembers the choice
-- Responsive down to small phone screens
-- Scroll animations that respect `prefers-reduced-motion`
-- Typography: Spectral for headings, IBM Plex Sans and Mono for body and labels
-- Each topic carries its own instrument trace drawn as inline SVG: an electrocardiogram for cardiology, an EEG for neurology, a survival curve for longevity, and so on
-- An interactive gene editing simulator built in vanilla JavaScript, with no libraries
+- Bold editorial design on a cream ground, with each topic given its own saturated colour block
+- Typography: Fraunces for display, IBM Plex Sans for body, IBM Plex Mono for labels
+- Original inline SVG diagrams drawn for each topic: a heart, a brain, dividing cells, a glucose molecule, a bacterium, lungs, a kidney, and DNA
+- Light and dark themes following the visitor's system setting, with a manual toggle that remembers the choice
+- An interactive gene editing simulator built in vanilla JavaScript
+- Responsive down to small phone screens, and respects `prefers-reduced-motion`
 
 ## Structure
 

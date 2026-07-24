@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="longevity">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="longevity" style="--c: var(--c-longevity)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics">Topics</a>
         <a href="longevity.html" aria-current="page">Longevity</a>
@@ -86,20 +85,30 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">08</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">04 · LONGEV · Capstone</span>
-    <h1>Rewriting the Lifespan</h1>
-    <p class="summary">Gene editing, regenerative medicine, and the honest question of how far the boundary of death can move.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-longevity)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>08</span><span>Longevity and Gene Editing</span></div>
+        <h1>Rewriting the Lifespan</h1>
+        <p class="summary">Gene editing, regenerative medicine, and the honest question of how far the boundary of death can move.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="DNA">
+  <path class="ln" d="M24,20 C58,38 58,54 24,72 C-10,90 -10,106 24,124"/>
+  <path class="ln" d="M116,20 C82,38 82,54 116,72 C150,90 150,106 116,124"/>
+  <path class="ln" d="M32,32 L108,32 M46,48 L94,48 M46,62 L94,62 M32,80 L108,80 M46,96 L94,96 M46,110 L94,110"/>
+  <circle class="fl" cx="70" cy="48" r="5"/>
+  <circle class="fl" cx="70" cy="96" r="5"/>
+        </svg>
+        <figcaption>DNA</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Survival curve: the shape medicine is trying to bend"><path d="M0,3 L18,3 L18,7 L34,7 L34,13 L48,13 L48,17 L62,17 L62,23 L76,23 L76,29 L100,29"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -133,7 +142,7 @@
       <p class="reveal">The hardest questions are not only technical. Cancer is the central barrier to reversing aging, because the same growth programs that could rejuvenate tissue can also feed tumors, so any credible plan has to solve cancer surveillance at the same time. There is the question of the mind, since a maintained body without preserved memory and personality is not the longevity most people want, which puts the brain at the center again. There is fairness, because a one-time therapy that compresses decades of prevention into a single treatment would raise urgent questions about who can afford it. And there is humility, because "durable" can never be allowed to mean an irreversible mistake.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>Indefinite lifespan extension is not possible today, but lifespan and healthspan are already extendable, and progress is steep in several areas.</li>
           <li>No single therapy will "solve aging." Gains come from stacking many partial wins across gene editing, prevention, organ replacement, and critical care.</li>
@@ -143,7 +152,7 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>López-Otín C, Blasco MA, Partridge L, Serrano M, Kroemer G. The Hallmarks of Aging. Cell. 2013.</li>
           <li>U.S. Food and Drug Administration. FDA Approves First Gene Therapies to Treat Patients with Sickle Cell Disease. 2023.</li>
@@ -152,7 +161,7 @@
           <li>Massachusetts General Hospital. World's First Genetically-Edited Pig Kidney Transplant into a Living Recipient. 2024.</li>
           <li>Ad Hoc Committee of the Harvard Medical School. A Definition of Irreversible Coma. JAMA. 1968.</li>
         </ol>
-        <span class="eyebrow">Recent Developments · 2025 to 2026</span>
+        <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
           <li><a href="https://nyulangone.org/news/first-gene-edited-pig-kidney-transplant-clinical-trial-begins-nyu-langone-health" target="_blank" rel="noopener">Xenotransplantation moves from one-off cases to the first regulated clinical trials: the first EXPAND trial transplant of a gene-edited pig kidney is performed at NYU Langone. 2025.</a></li>
           <li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2601283" target="_blank" rel="noopener">A single-infusion base-editing therapy durably lowers cholesterol in an early trial, an example of the one-time gene edits this survey describes. New England Journal of Medicine. 2026.</a></li>

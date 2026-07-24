@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="oncology">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="oncology" style="--c: var(--c-oncology)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics" aria-current="page">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -86,20 +85,35 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">03</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">03 · ONCO</span>
-    <h1>The Central Obstacle</h1>
-    <p class="summary">Cancer is the reason so many dreams of a longer life run into a wall, and also where medicine has changed most in a decade.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-oncology)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>03</span><span>Oncology</span></div>
+        <h1>The Central Obstacle</h1>
+        <p class="summary">Cancer is the reason so many dreams of a longer life run into a wall, and also where medicine has changed most in a decade.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="Dividing cells">
+  <circle class="fl" cx="54" cy="70" r="30"/>
+  <circle class="ln" cx="54" cy="70" r="30"/>
+  <circle class="ln" cx="92" cy="70" r="30"/>
+  <circle class="fl" cx="92" cy="70" r="30"/>
+  <circle class="ln" cx="54" cy="70" r="9"/>
+  <circle class="ln" cx="92" cy="70" r="9"/>
+  <path class="ln" d="M63,70 L83,70"/>
+  <path class="ln" d="M60,54 L86,54 M60,86 L86,86"/>
+  <circle class="ln" cx="30" cy="34" r="7"/>
+  <circle class="ln" cx="116" cy="106" r="7"/>
+        </svg>
+        <figcaption>Dividing cells</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Exponential growth: unchecked cell division"><path d="M0,31 L30,30 L48,28 L62,24 L74,17 L84,9 L92,3 L100,1"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -123,7 +137,7 @@
       <p class="reveal">This is why cancer sits at the heart of the longevity question. Until we can keep the body's growth and repair systems switched on without also inviting cancer, the more radical forms of rejuvenation stay out of reach. Progress against cancer is, in a real sense, a precondition for everything else on this site.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>Cancer starts when a cell mutates past the body's growth controls and then hides from the immune system.</li>
           <li>Checkpoint inhibitors and CAR-T cell therapy work by restoring or re-engineering the immune response, and have transformed outcomes in melanoma, lung cancer, and several blood cancers.</li>
@@ -132,13 +146,13 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>Larkin J, et al. Five-Year Survival with Combined Nivolumab and Ipilimumab in Advanced Melanoma. New England Journal of Medicine. 2019.</li>
           <li>June CH, Sadelain M. Chimeric Antigen Receptor Therapy. New England Journal of Medicine. 2018.</li>
           <li>Weber JS, et al. Individualised neoantigen therapy mRNA-4157 (V940) plus pembrolizumab in resected melanoma (KEYNOTE-942). The Lancet. 2024.</li>
         </ol>
-        <span class="eyebrow">Recent Developments · 2025 to 2026</span>
+        <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
           <li><a href="https://www.nbcnews.com/health/cancer/personalized-vaccine-melanoma-cut-risk-cancer-returning-five-years-rcna347424" target="_blank" rel="noopener">Five-year data show a personalized mRNA melanoma vaccine plus a checkpoint inhibitor roughly halves the risk of the cancer returning. Presented at ASCO, 2026.</a></li>
           <li><a href="https://www.mskcc.org/news/can-mrna-vaccines-fight-pancreatic-cancer-msk-clinical-researchers-are-trying-find-out" target="_blank" rel="noopener">A personalized mRNA vaccine for pancreatic cancer, one of the deadliest cancers, shows lasting immune responses years after treatment in early trial follow-up. Memorial Sloan Kettering. 2026.</a></li>

@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="metabolic">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="metabolic" style="--c: var(--c-metabolic)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics" aria-current="page">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -86,20 +85,32 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">04</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">04 · METAB</span>
-    <h1>The Drugs That Changed the Conversation</h1>
-    <p class="summary">GLP-1 medicines began as diabetes treatments and became something much larger, which is why the science is worth understanding properly.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-metabolic)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>04</span><span>Metabolic Health</span></div>
+        <h1>The Drugs That Changed the Conversation</h1>
+        <p class="summary">GLP-1 medicines began as diabetes treatments and became something much larger, which is why the science is worth understanding properly.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="A glucose molecule">
+  <path class="fl" d="M70,26 L104,46 L104,86 L70,106 L36,86 L36,46 Z"/>
+  <path class="ln" d="M70,26 L104,46 L104,86 L70,106 L36,86 L36,46 Z"/>
+  <path class="ln" d="M70,26 L70,10 M104,46 L120,36 M104,86 L120,96 M36,86 L20,96 M36,46 L20,36"/>
+  <circle class="ln" cx="70" cy="10" r="5"/>
+  <circle class="ln" cx="120" cy="36" r="5"/>
+  <circle class="ln" cx="20" cy="36" r="5"/>
+  <path class="ln" d="M56,58 L84,58 M56,74 L84,74"/>
+        </svg>
+        <figcaption>A glucose molecule</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Postprandial glucose: the curve GLP-1 flattens"><path d="M0,26 L14,25 L24,8 L34,5 L46,10 L58,18 L70,23 L82,25 L100,25"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -126,7 +137,7 @@
       <p class="reveal">Gastrointestinal side effects are common and are the usual reason people stop. Cost and insurance coverage remain significant barriers. Weight tends to return when treatment stops, which reframes these as long-term treatments for a chronic condition rather than a course with an endpoint. And because widespread use is recent, the longest-term safety picture is still being assembled. None of this undoes the results. It just means the honest version is more complicated than either the enthusiasm or the backlash suggests.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>GLP-1 drugs extend a hormone signal the body already makes, which is why appetite, blood sugar, and digestion all respond together.</li>
           <li>Each additional receptor a drug targets has raised the effect, from GLP-1 alone to GLP-1 plus GIP and now to triple-receptor candidates.</li>
@@ -136,13 +147,13 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>Wilding JPH, et al. Once-Weekly Semaglutide in Adults with Overweight or Obesity (STEP 1). New England Journal of Medicine. 2021.</li>
           <li>Jastreboff AM, et al. Tirzepatide Once Weekly for the Treatment of Obesity (SURMOUNT-1). New England Journal of Medicine. 2022.</li>
           <li>Lincoff AM, et al. Semaglutide and Cardiovascular Outcomes in Obesity without Diabetes (SELECT). New England Journal of Medicine. 2023.</li>
         </ol>
-        <span class="eyebrow">Recent Developments · 2025 to 2026</span>
+        <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
           <li><a href="https://www.novonordisk.com/content/nncorp/global/en/news-and-media/news-and-ir-materials/news-details.html?id=916472" target="_blank" rel="noopener">The FDA approves the first oral GLP-1 for weight management, based on the OASIS and SELECT trial programmes. December 2025.</a></li>
           <li><a href="https://www.drugdiscoverynews.com/glp-1-agonist-clinical-pipeline-2026-semaglutide-tirzepatide-and-what-s-in-phase-2-17286" target="_blank" rel="noopener">Orforglipron becomes the first oral non-peptide GLP-1 approved for weight management, and triple-receptor candidates advance in trials. 2026.</a></li>

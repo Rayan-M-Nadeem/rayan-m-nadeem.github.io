@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="transplant">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="transplant" style="--c: var(--c-transplant)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics" aria-current="page">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -86,20 +85,30 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">07</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">07 · TRANS</span>
-    <h1>The Supply Problem</h1>
-    <p class="summary">Transplantation works. There are simply not enough organs, which is why so much effort goes into making more.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-transplant)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>07</span><span>Transplant and Regeneration</span></div>
+        <h1>The Supply Problem</h1>
+        <p class="summary">Transplantation works. There are simply not enough organs, which is why so much effort goes into making more.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="A kidney">
+  <path class="fl" d="M84,26 C104,30 116,48 116,68 C116,90 100,106 82,106 C68,106 58,97 56,86 C54,77 49,72 42,70 C32,67 30,56 37,47 C46,34 66,22 84,26 Z"/>
+  <path class="ln" d="M84,26 C104,30 116,48 116,68 C116,90 100,106 82,106 C68,106 58,97 56,86 C54,77 49,72 42,70 C32,67 30,56 37,47 C46,34 66,22 84,26 Z"/>
+  <path class="ln" d="M56,66 L30,66"/>
+  <path class="ln" d="M30,66 C22,60 14,72 6,66"/>
+  <path class="ln" d="M76,50 C84,58 84,74 76,84"/>
+        </svg>
+        <figcaption>A kidney</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Machine perfusion: a pulse maintained outside the body"><path d="M0,20 Q8,20 12,12 Q16,4 22,12 Q26,20 34,20 Q42,20 46,12 Q50,4 56,12 Q60,20 68,20 Q76,20 80,12 Q84,4 90,12 Q94,20 100,20"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -123,7 +132,7 @@
       <p class="reveal">If organ failure becomes a manageable condition rather than a terminal one, it will not be because of a single invention. It will be because better preservation reduced waste, expanded donor pathways added supply, gene-edited animal organs filled part of the gap, and engineered tissue handled repairs. Each of those has real momentum. None of them is sufficient alone.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>Transplantation is limited by organ supply rather than by surgical technique.</li>
           <li>Machine perfusion keeps organs functioning outside the body, which allows testing, recovery, and the use of organs that would once have been discarded.</li>
@@ -133,13 +142,13 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>Nasralla D, et al. A randomized trial of normothermic preservation in liver transplantation. Nature. 2018.</li>
           <li>Cypel M, et al. Normothermic ex vivo lung perfusion in clinical lung transplantation. New England Journal of Medicine. 2011.</li>
           <li>Massachusetts General Hospital. World's First Genetically-Edited Pig Kidney Transplant into a Living Recipient. 2024.</li>
         </ol>
-        <span class="eyebrow">Recent Developments · 2025 to 2026</span>
+        <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
           <li><a href="https://nyulangone.org/news/first-gene-edited-pig-kidney-transplant-clinical-trial-begins-nyu-langone-health" target="_blank" rel="noopener">The first transplant in the EXPAND study, the first regulated multi-patient clinical trial of a gene-edited pig kidney, is performed at NYU Langone. November 2025.</a></li>
           <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12728669/" target="_blank" rel="noopener">A review of the EXPAND study and the state of renal xenotransplantation, including the longest reported pig kidney survival to date at 271 days. 2026.</a></li>

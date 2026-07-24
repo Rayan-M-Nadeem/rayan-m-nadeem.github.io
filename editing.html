@@ -50,14 +50,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <style>
     /* ---------- editor ---------- */
     .lab { padding-block: clamp(2rem, 5vw, 3.5rem); }
     .strand-wrap {
-      border: 1px solid var(--line); border-radius: var(--radius);
-      background: var(--surface); padding: clamp(1.25rem, 3vw, 2rem); overflow: hidden;
+      border: 2px solid var(--ink); border-radius: 0px;
+      background: var(--paper-2); padding: clamp(1.25rem, 3vw, 2rem); overflow: hidden;
     }
     .strand-label {
       font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em;
@@ -66,17 +66,17 @@
     }
     .strand { display: flex; gap: 3px; justify-content: center; flex-wrap: nowrap; overflow-x: auto; padding-bottom: 4px; }
     .base {
-      flex: 0 0 auto; width: 26px; height: 40px; border-radius: 3px;
+      flex: 0 0 auto; width: 26px; height: 40px; border-radius: 0;
       display: grid; place-items: center;
       font-family: var(--mono); font-size: 0.9rem; font-weight: 500;
-      background: var(--bg); border: 1px solid var(--line); color: var(--muted);
+      background: var(--paper); border: 2px solid var(--ink); color: var(--muted);
       transition: transform 0.35s var(--ease), background 0.35s, color 0.35s, border-color 0.35s, opacity 0.35s;
     }
-    .base.target { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
-    .base.changed { background: var(--accent); color: #fff; border-color: var(--accent); transform: translateY(-5px); }
+    .base.target { border-color: var(--c); color: var(--c); background: color-mix(in srgb, var(--c) 10%, transparent); }
+    .base.changed { background: var(--c); color: #fff; border-color: var(--c); transform: translateY(-5px); }
     .base.cut { opacity: 0.25; transform: scale(0.8); }
-    .base.inserted { background: var(--signal); color: #fff; border-color: var(--signal); transform: translateY(-5px); }
-    .base.scrambled { background: var(--signal-soft); color: var(--signal); border-color: var(--signal); }
+    .base.inserted { background: var(--c-longevity); color: #fff; border-color: var(--c-longevity); transform: translateY(-5px); }
+    .base.scrambled { background: color-mix(in srgb, var(--c-longevity) 14%, transparent); color: var(--c-longevity); border-color: var(--c-longevity); }
     .strand.severed .base.left-of-cut { transform: translateX(-14px); }
     .strand.severed .base.right-of-cut { transform: translateX(14px); }
 
@@ -85,40 +85,40 @@
 
     .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 0.75rem; margin-top: 1.75rem; }
     .tool {
-      text-align: left; padding: 1rem 1.1rem; border-radius: var(--radius); cursor: pointer;
-      border: 1px solid var(--line); background: var(--bg); color: var(--ink);
+      text-align: left; padding: 1rem 1.1rem; border-radius: 0px; cursor: pointer;
+      border: 2px solid var(--ink); background: var(--paper); color: var(--ink);
       font-family: var(--sans); transition: border-color 0.2s, transform 0.2s var(--ease), background 0.2s;
     }
-    .tool:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .tool[aria-pressed="true"] { border-color: var(--accent); background: var(--accent-soft); }
+    .tool:hover { border-color: var(--c); transform: translateY(-2px); }
+    .tool[aria-pressed="true"] { border-color: var(--c); background: color-mix(in srgb, var(--c) 10%, transparent); }
     .tool strong { display: block; font-weight: 600; font-size: 0.98rem; }
     .tool span { display: block; font-family: var(--mono); font-size: 0.7rem; color: var(--faint); margin-top: 0.3rem; letter-spacing: 0.04em; }
-    .tool:focus-visible, .reset:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .tool:focus-visible, .reset:focus-visible { outline: 2px solid var(--c); outline-offset: 2px; }
 
     .readout {
-      margin-top: 1.5rem; padding: 1.4rem 1.6rem; border-radius: var(--radius);
-      background: var(--accent-soft); border: 1px solid color-mix(in srgb, var(--accent) 28%, transparent);
+      margin-top: 1.5rem; padding: 1.4rem 1.6rem; border-radius: 0px;
+      background: color-mix(in srgb, var(--c) 10%, transparent); border: 1px solid color-mix(in srgb, var(--c) 28%, transparent);
       min-height: 118px;
     }
     .readout h4 { font-family: var(--sans); font-size: 1rem; font-weight: 600; margin-bottom: 0.5rem; }
     .readout p { font-size: 0.95rem; color: var(--ink); }
     .readout .risk { font-family: var(--mono); font-size: 0.75rem; color: var(--muted); margin-top: 0.85rem; display: block; }
-    .readout.idle { background: transparent; border-style: dashed; border-color: var(--line); }
+    .readout.idle { background: transparent; border-style: dashed; border-color: var(--rule); }
     .readout.idle p { color: var(--muted); }
 
     .reset {
       margin-top: 1.1rem; background: none; border: 0; cursor: pointer;
-      font-family: var(--mono); font-size: 0.75rem; color: var(--accent);
+      font-family: var(--mono); font-size: 0.75rem; color: var(--c);
       text-decoration: underline; text-underline-offset: 3px; padding: 0.35rem 0;
     }
     .compare { width: 100%; border-collapse: collapse; margin: 2.5rem 0 0; font-size: 0.92rem; }
-    .compare th, .compare td { text-align: left; padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--line); vertical-align: top; }
+    .compare th, .compare td { text-align: left; padding: 0.85rem 0.9rem; border-bottom: 1px solid var(--rule); vertical-align: top; }
     .compare th { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--faint); font-weight: 500; }
     .compare td:first-child { font-weight: 600; white-space: nowrap; }
     @media (max-width: 620px) {
       .compare, .compare tbody, .compare tr, .compare td { display: block; width: 100%; }
       .compare thead { display: none; }
-      .compare tr { border-bottom: 1px solid var(--line); padding: 0.9rem 0; }
+      .compare tr { border-bottom: 1px solid var(--rule); padding: 0.9rem 0; }
       .compare td { border: 0; padding: 0.2rem 0; }
       .compare td:first-child { font-size: 1rem; margin-bottom: 0.3rem; }
       .base { width: 22px; height: 34px; font-size: 0.8rem; }
@@ -126,12 +126,11 @@
     }
   </style>
 </head>
-<body data-topic="editing">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="editing" style="--c: var(--c-editing)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -149,19 +148,31 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">09</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">Interactive &middot; Genetics</span>
-    <h1>Three Ways to Change a Gene</h1>
-    <p class="summary">The same stretch of DNA, edited three ways. The differences between these tools are the whole story of why some therapies are close and others are not.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-editing)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>00</span><span>Interactive</span></div>
+        <h1>Three Ways to Change a Gene</h1>
+        <p class="summary">The same stretch of DNA, edited three ways. The differences between these tools are the whole story of why some therapies are close and others are not.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="An edited base pair">
+  <path class="ln" d="M24,20 C58,38 58,54 24,72 C-10,90 -10,106 24,124"/>
+  <path class="ln" d="M116,20 C82,38 82,54 116,72 C150,90 150,106 116,124"/>
+  <path class="ln" d="M32,32 L108,32 M46,48 L94,48 M32,80 L108,80 M46,96 L94,96 M46,110 L94,110"/>
+  <path class="ln" d="M46,62 L62,62 M78,62 L94,62"/>
+  <circle class="fl" cx="70" cy="62" r="9"/>
+  <circle class="ln" cx="70" cy="62" r="9"/>
+        </svg>
+        <figcaption>An edited base pair</figcaption>
+      </figure>
     </div>
-    </div>
-  </section>
+  </header>
 
   <section class="lab wrap narrow">
     <div class="strand-wrap">
@@ -246,7 +257,7 @@
       </table>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>CRISPR-Cas9 cuts DNA but does not repair it, and the cell's own emergency repair is what introduces changes.</li>
           <li>Base editing converts one letter into another without severing the helix, which is why it reached patients quickly for suitable targets.</li>
@@ -256,14 +267,14 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>Jinek M, et al. A Programmable Dual-RNA-Guided DNA Endonuclease in Adaptive Bacterial Immunity. Science. 2012.</li>
           <li>Komor AC, et al. Programmable editing of a target base in genomic DNA without double-stranded DNA cleavage. Nature. 2016.</li>
           <li>Anzalone AV, et al. Search-and-replace genome editing without double-strand breaks or donor DNA. Nature. 2019.</li>
           <li>Frangoul H, et al. Exagamglogene Autotemcel for Severe Sickle Cell Disease. New England Journal of Medicine. 2024.</li>
         </ol>
-        <span class="eyebrow">Recent Developments &middot; 2025 to 2026</span>
+        <span class="label">Recent Developments &middot; 2025 to 2026</span>
         <ol>
           <li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2601283" target="_blank" rel="noopener">In Vivo Base Editing of PCSK9 with VERVE-102 for Hypercholesterolemia. New England Journal of Medicine. 2026.</a> The base-editing trial that used the gene modelled in the tool above.</li>
         </ol>

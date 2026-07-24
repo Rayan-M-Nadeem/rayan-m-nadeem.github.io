@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="cardiology">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="cardiology" style="--c: var(--c-cardiology)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics" aria-current="page">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -86,20 +85,28 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">01</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">01 · CARDIO</span>
-    <h1>The Slowest Emergency</h1>
-    <p class="summary">Atherosclerosis is damage that adds up over decades, which is exactly why it is so preventable.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-cardiology)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>01</span><span>Cardiology</span></div>
+        <h1>The Slowest Emergency</h1>
+        <p class="summary">Atherosclerosis is damage that adds up over decades, which is exactly why it is so preventable.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="The heart">
+  <path class="fl" d="M70,116 C42,96 22,76 22,56 C22,40 34,30 47,30 C57,30 65,36 70,45 C75,36 83,30 93,30 C106,30 118,40 118,56 C118,76 98,96 70,116 Z"/>
+  <path class="ln" d="M70,116 C42,96 22,76 22,56 C22,40 34,30 47,30 C57,30 65,36 70,45 C75,36 83,30 93,30 C106,30 118,40 118,56 C118,76 98,96 70,116 Z"/>
+  <path class="ln" d="M44,58 L58,58 L64,44 L74,76 L80,58 L96,58"/>
+        </svg>
+        <figcaption>The heart</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Electrocardiogram: the heart's electrical cycle"><path d="M0,17 L28,17 L34,17 L38,7 L44,27 L50,12 L56,21 L62,17 L100,17"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -119,7 +126,7 @@
       <p class="reveal">The most ambitious version of this idea is gene editing. Base editing can change a single letter of DNA, and early trials have used it to switch off PCSK9 in the liver, producing large LDL reductions from a single treatment. This is genuinely early work, and it has already run into real safety questions, which is a reminder that "durable" must never come to mean an irreversible mistake. But the concept is no longer science fiction. A one-time intervention that compresses decades of daily prevention into a single step is now something researchers are actively testing.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>Most heart attacks and strokes are the slow result of atherosclerosis, plaque building inside artery walls over many years.</li>
           <li>LDL cholesterol matters as a lifetime dose, not just a single reading, so lowering it early pays off for decades.</li>
@@ -128,13 +135,13 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>Ference BA, et al. Low-density lipoproteins cause atherosclerotic cardiovascular disease: evidence from genetic, epidemiologic, and clinical studies. European Heart Journal. 2017.</li>
           <li>Ray KK, et al. Two Phase 3 Trials of Inclisiran in Patients with Elevated LDL Cholesterol. New England Journal of Medicine. 2020.</li>
           <li>Verve Therapeutics. Interim data for VERVE-101, an investigational in vivo base-editing therapy targeting PCSK9. 2023.</li>
         </ol>
-        <span class="eyebrow">Recent Developments · 2025 to 2026</span>
+        <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
           <li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2601283" target="_blank" rel="noopener">In Vivo Base Editing of PCSK9 with VERVE-102 for Hypercholesterolemia (Heart-2 trial). New England Journal of Medicine. 2026.</a> A single infusion lowered LDL by up to 62 percent, with the effect holding for at least a year and none of the safety problems that paused the earlier version.</li>
         </ol>

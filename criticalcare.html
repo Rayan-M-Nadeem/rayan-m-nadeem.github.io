@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="criticalcare">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="criticalcare" style="--c: var(--c-criticalcare)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics" aria-current="page">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -86,20 +85,32 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">06</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">06 · CRIT</span>
-    <h1>Buying Time</h1>
-    <p class="summary">Intensive care rarely cures anything. It keeps a person alive long enough for something else to work.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-criticalcare)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>06</span><span>Critical Care</span></div>
+        <h1>Buying Time</h1>
+        <p class="summary">Intensive care rarely cures anything. It keeps a person alive long enough for something else to work.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="The lungs">
+  <path class="ln" d="M70,16 L70,46"/>
+  <path class="ln" d="M70,46 L50,60 M70,46 L90,60"/>
+  <path class="ln" d="M56,14 L84,14"/>
+  <path class="fl" d="M50,60 C32,68 26,92 34,110 C40,122 58,120 60,106 C63,88 58,70 50,60 Z"/>
+  <path class="ln" d="M50,60 C32,68 26,92 34,110 C40,122 58,120 60,106 C63,88 58,70 50,60 Z"/>
+  <path class="fl" d="M90,60 C108,68 114,92 106,110 C100,122 82,120 80,106 C77,88 82,70 90,60 Z"/>
+  <path class="ln" d="M90,60 C108,68 114,92 106,110 C100,122 82,120 80,106 C77,88 82,70 90,60 Z"/>
+        </svg>
+        <figcaption>The lungs</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Ventilator pressure: mechanical breaths"><path d="M0,28 L8,28 L10,6 L26,6 L28,28 L40,28 L42,6 L58,6 L60,28 L72,28 L74,6 L90,6 L92,28 L100,28"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -122,7 +133,7 @@
       <p class="reveal">Bridges lead somewhere or they do not. If there is no reversible cause underneath, life support can extend a dying process rather than a life, and this is one of the hardest situations in medicine for families and clinicians alike. Prolonged critical care also carries its own harms, from infection to muscle wasting to lasting cognitive effects. Knowing when a bridge is worth building, and when to stop, is as much a part of the discipline as the machinery itself.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>Critical care substitutes for failing organs rather than curing disease, which buys time for treatment or healing.</li>
           <li>ECMO is the most complete substitution available, doing the work of both heart and lungs.</li>
@@ -132,7 +143,7 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>Suverein MM, et al. Early Extracorporeal CPR for Refractory Out-of-Hospital Cardiac Arrest (INCEPTION). New England Journal of Medicine. 2023.</li>
           <li>Tonna JE, et al. Extracorporeal Cardiopulmonary Resuscitation. Critical Care Medicine. 2024.</li>

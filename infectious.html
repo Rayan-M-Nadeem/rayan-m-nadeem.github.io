@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="infectious">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="infectious" style="--c: var(--c-infectious)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics" aria-current="page">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -86,20 +85,32 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">05</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">05 · INFECT</span>
-    <h1>The Clock Running Against Us</h1>
-    <p class="summary">Antibiotics are the only class of drug that becomes less effective the more we use it.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-infectious)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>05</span><span>Infectious Disease</span></div>
+        <h1>The Clock Running Against Us</h1>
+        <p class="summary">Antibiotics are the only class of drug that becomes less effective the more we use it.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="A bacterium">
+  <path class="fl" d="M48,50 L92,50 A20,20 0 0 1 92,90 L48,90 A20,20 0 0 1 48,50 Z"/>
+  <path class="ln" d="M48,50 L92,50 A20,20 0 0 1 92,90 L48,90 A20,20 0 0 1 48,50 Z"/>
+  <circle class="ln" cx="62" cy="70" r="6"/>
+  <circle class="ln" cx="80" cy="66" r="4"/>
+  <path class="ln" d="M28,70 C18,62 14,80 4,72"/>
+  <path class="ln" d="M112,70 C122,78 126,60 136,68"/>
+  <path class="ln" d="M28,70 L48,70 M92,70 L112,70"/>
+        </svg>
+        <figcaption>A bacterium</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Stepwise resistance: each drug loses ground"><path d="M0,30 L14,30 L14,24 L30,24 L30,18 L48,18 L48,12 L68,12 L68,6 L100,6"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -122,7 +133,7 @@
       <p class="reveal">A review of the antibiotics approved between 2017 and 2025 found that resistance mechanisms had already emerged against them, frequently by repurposing genetic pathways bacteria already possessed. This is the pattern rather than the exception. New drugs extend the timeline; they do not end the problem. That is why stewardship, rapid diagnostics that avoid unnecessary prescriptions, infection control, and surveillance are not secondary to drug discovery. They are what determines how long each new drug lasts.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>Bacteria share resistance genes sideways between species on mobile DNA, so resistance spreads far faster than ordinary inheritance would allow.</li>
           <li>The pipeline thinned for economic reasons: the most valuable new antibiotic is the one used most sparingly.</li>
@@ -132,13 +143,13 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>Murray CJL, et al. Global burden of bacterial antimicrobial resistance in 2019: a systematic analysis. The Lancet. 2022.</li>
           <li>World Health Organization. WHO Bacterial Priority Pathogens List. 2024.</li>
           <li>O'Neill J. Tackling Drug-Resistant Infections Globally: Final Report and Recommendations. Review on Antimicrobial Resistance. 2016.</li>
         </ol>
-        <span class="eyebrow">Recent Developments · 2025 to 2026</span>
+        <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
           <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12835396/" target="_blank" rel="noopener">Sartori M, Toppo S, Lavezzo E. Molecular resistance mechanisms to newly approved antibiotics (2017 to 2025) in WHO priority pathogens. Frontiers in Microbiology. 2026.</a> A systematic look at how quickly bacteria have adapted to the newest drugs.</li>
           <li><a href="https://theconversation.com/new-antibiotic-zosurabalpin-shows-promise-against-drug-resistant-bacteria-an-expert-explains-how-it-works-220564" target="_blank" rel="noopener">Zosurabalpin, an entirely new class of antibiotic, shows activity against carbapenem-resistant Acinetobacter baumannii, a WHO priority 1 pathogen.</a></li>

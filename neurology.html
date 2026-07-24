@@ -60,15 +60,14 @@
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body data-topic="neurology">
-  <div class="progress" aria-hidden="true"></div>
+<body data-topic="neurology" style="--c: var(--c-neurology)">
 
   <header class="nav">
     <div class="wrap nav-inner">
-      <a class="wordmark" href="index.html"><span class="dot"></span>PLAINLY MEDICINE</a>
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
       <nav class="nav-links" aria-label="Primary">
         <a href="index.html#topics" aria-current="page">Topics</a>
         <a href="longevity.html">Longevity</a>
@@ -86,20 +85,31 @@
     </div>
   </header>
 
-  <section class="page-hero">
-    <span class="numeral" aria-hidden="true">02</span>
-    <div class="wrap narrow page-hero-inner">
-    <span class="eyebrow">02 · NEURO</span>
-    <h1>The Organ That Sets the Ceiling</h1>
-    <p class="summary">A long life is only as good as the brain that lives it, which makes neurology the hardest and most important frontier.</p>
-    <div class="byline">
-      <span class="author">By Rayan Nadeem</span>
-      <span>Independent research</span>
-      <span>Updated July 2026</span>
+  <header class="article-head" style="--c: var(--c-neurology)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>02</span><span>Neurology</span></div>
+        <h1>The Organ That Sets the Ceiling</h1>
+        <p class="summary">A long life is only as good as the brain that lives it, which makes neurology the hardest and most important frontier.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 140 140" role="img" aria-label="The brain">
+  <path class="fl" d="M46,42 C46,28 60,20 74,24 C86,17 102,24 104,38 C116,44 116,62 104,68 C106,82 94,94 80,90 C70,100 52,96 48,84 C34,80 32,56 46,42 Z"/>
+  <path class="ln" d="M46,42 C46,28 60,20 74,24 C86,17 102,24 104,38 C116,44 116,62 104,68 C106,82 94,94 80,90 C70,100 52,96 48,84 C34,80 32,56 46,42 Z"/>
+  <path class="ln" d="M62,34 C70,42 62,52 70,60 C78,68 70,78 76,86"/>
+  <path class="ln" d="M86,30 C92,40 84,48 92,58 C98,66 90,74 94,84"/>
+  <path class="ln" d="M52,58 C62,60 64,68 74,70"/>
+  <path class="ln" d="M74,24 L74,90"/>
+        </svg>
+        <figcaption>The brain</figcaption>
+      </figure>
     </div>
-    <svg class="page-trace" viewBox="0 0 100 34" preserveAspectRatio="none" role="img" aria-label="Electroencephalogram: cortical activity"><path d="M0,17 Q6,7 12,17 T24,17 Q29,9 34,17 Q38,24 43,17 Q49,6 55,17 T68,17 Q74,10 80,17 T100,17"/></svg>
-    </div>
-  </section>
+  </header>
 
   <article class="article wrap narrow">
     <div class="prose">
@@ -121,7 +131,7 @@
       <p class="reveal">Not all brain injury is slow. Stroke is the sudden version, a blood vessel in the brain blocked or burst, and here the story of the last two decades is one of real success. Clot-busting drugs and, more dramatically, mechanical thrombectomy, in which a clot is physically pulled out of a brain artery, have turned some strokes that once caused severe disability into events people recover from, provided treatment comes fast enough. Time is the currency. The faster blood flow is restored, the more brain is saved.</p>
 
       <div class="callout reveal">
-        <span class="eyebrow">Key Takeaways</span>
+        <span class="label">Key Takeaways</span>
         <ul>
           <li>The brain sets the upper limit on a long life. Without a working mind, longevity has little value.</li>
           <li>The first drugs that target Alzheimer's biology, not just its symptoms, now exist, but they slow the disease modestly rather than stopping or reversing it.</li>
@@ -130,13 +140,13 @@
       </div>
 
       <div class="refs reveal">
-        <span class="eyebrow">Further Reading &amp; References</span>
+        <span class="label">Further Reading &amp; References</span>
         <ol>
           <li>van Dyck CH, et al. Lecanemab in Early Alzheimer's Disease. New England Journal of Medicine. 2023.</li>
           <li>Sims JR, et al. Donanemab in Early Symptomatic Alzheimer Disease (TRAILBLAZER-ALZ 2). JAMA. 2023.</li>
           <li>Goyal M, et al. Endovascular thrombectomy after large-vessel ischaemic stroke: a meta-analysis (HERMES collaboration). The Lancet. 2016.</li>
         </ol>
-        <span class="eyebrow">Recent Developments · 2025 to 2026</span>
+        <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
           <li><a href="https://www.roche.com/media/releases/med-cor-2025-07-28" target="_blank" rel="noopener">A next-generation anti-amyloid antibody, trontinemab, clears amyloid in most treated patients with a much lower rate of the brain-swelling side effect, and has entered Phase 3 trials. Roche. 2025.</a></li>
           <li><a href="https://www.pharmacytimes.com/view/fda-approves-subcutaneous-lecanemab-injection-for-maintenance-dosing-in-early-alzheimer-disease" target="_blank" rel="noopener">The FDA approves a subcutaneous, at-home injection form of lecanemab for maintenance dosing, replacing hospital infusions for many patients. 2025.</a></li>
