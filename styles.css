@@ -182,15 +182,7 @@ img, svg { display: block; max-width: 100%; }
 /* diagram */
 .diagram { width: 100%; max-width: 380px; margin-inline: auto; }
 .diagram svg { width: 100%; height: auto; overflow: visible; }
-.diagram .ln {
-  fill: none; stroke: #FFF6E8; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round;
-  stroke-dasharray: 900; stroke-dashoffset: 900;
-  transition: stroke-dashoffset 1.8s var(--ease);
-}
-.diagram .fl { fill: #FFF6E8; opacity: 0; transition: opacity 0.9s var(--ease) 0.7s; }
-.block.on .diagram .ln { stroke-dashoffset: 0; }
-.block.on .diagram .fl { opacity: 0.22; }
-.diagram figcaption {
+.block.on .block.on .diagram figcaption {
   font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
   text-align: center; margin-top: 1.5rem; opacity: 0.65;
 }
@@ -206,9 +198,7 @@ img, svg { display: block; max-width: 100%; }
   display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; opacity: 0.8;
 }
 .article-head .diagram { max-width: 240px; margin: 2.5rem 0 0; }
-.article-head .diagram .ln { stroke-dashoffset: 0; }
-.article-head .diagram .fl { opacity: 0.22; }
-.article-head-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: center; }
+.article-head .article-head .article-head-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: center; }
 
 .article { padding-block: clamp(3rem, 6vw, 5rem); }
 .prose { max-width: var(--measure); }
@@ -413,6 +403,7 @@ html[data-underline="on"] .dd-item .nm { text-decoration: underline; text-underl
 
 
 
-/* emoji-traced lungs: match the monoline diagram style */
-.diagram .emoji-lung path { fill:#FFF6E8; fill-opacity:0.2; stroke:#FFF6E8; stroke-width:1.1; stroke-linejoin:round; stroke-linecap:round; vector-effect:non-scaling-stroke; }
-.block.on .diagram .emoji-lung path, .article-head .diagram .emoji-lung path { fill-opacity:0.2; }
+
+/* illustration set: every mark is currentColor, so each takes the cream of its block */
+.diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
+.diagram svg [stroke-linecap] { stroke-linecap: round; }

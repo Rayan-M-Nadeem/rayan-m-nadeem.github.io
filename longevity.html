@@ -161,17 +161,22 @@
         </div>
       </div>
       <figure class="diagram">
-        <svg viewBox="0 0 140 140" role="img" aria-label="A chromosome, capped by telomeres">
-  <path class="ln" style="stroke-width:7" d="M50,30 C44,46 46,58 62,68"/>
-  <path class="ln" style="stroke-width:7" d="M90,30 C96,46 94,58 78,68"/>
-  <path class="ln" style="stroke-width:7" d="M50,110 C44,94 46,82 62,72"/>
-  <path class="ln" style="stroke-width:7" d="M90,110 C96,94 94,82 78,72"/>
-  <circle class="ln" cx="70" cy="70" r="6"/>
-  <circle class="fl" cx="50" cy="28" r="8"/><circle class="ln" cx="50" cy="28" r="8"/>
-  <circle class="fl" cx="90" cy="28" r="8"/><circle class="ln" cx="90" cy="28" r="8"/>
-  <circle class="fl" cx="50" cy="112" r="8"/><circle class="ln" cx="50" cy="112" r="8"/>
-  <circle class="fl" cx="90" cy="112" r="8"/><circle class="ln" cx="90" cy="112" r="8"/>
-        </svg>
+        <svg viewBox="0 0 200 200" role="img" aria-label="A chromosome, capped by telomeres" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+<mask id="pm-chr-bands" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+  <rect width="200" height="200" fill="#fff"/>
+  <line x1="46" y1="54" x2="154" y2="54" stroke="#000" stroke-width="4.5"/><line x1="46" y1="70" x2="154" y2="70" stroke="#000" stroke-width="4.5"/><line x1="46" y1="124" x2="154" y2="124" stroke="#000" stroke-width="4.5"/><line x1="46" y1="142" x2="154" y2="142" stroke="#000" stroke-width="4.5"/><line x1="46" y1="158" x2="154" y2="158" stroke="#000" stroke-width="4.5"/>
+</mask>
+<g mask="url(#pm-chr-bands)">
+  <path d="M 68 40 C 60 70 84 88 100 104 C 116 120 128 148 122 170" stroke-width="13" opacity=".92"/>
+  <path d="M 132 40 C 140 70 116 88 100 104 C 84 120 72 148 78 170" stroke-width="13" opacity=".92"/>
+</g>
+<circle cx="100" cy="104" r="10" stroke-width="3.4" fill="currentColor" fill-opacity=".22"/>
+<circle cx="68" cy="40" r="14" stroke-width="2.6" opacity=".5"/><circle cx="132" cy="40" r="14" stroke-width="2.6" opacity=".5"/><circle cx="78" cy="170" r="14" stroke-width="2.6" opacity=".5"/><circle cx="122" cy="170" r="14" stroke-width="2.6" opacity=".5"/>
+<g stroke-width="5" opacity=".95">
+  <path d="M 68 40 L 68 41"/><path d="M 132 40 L 132 41"/>
+  <path d="M 78 170 L 78 171"/><path d="M 122 170 L 122 171"/>
+</g>
+</svg>
         <figcaption>A chromosome, capped by telomeres</figcaption>
       </figure>
     </div>
