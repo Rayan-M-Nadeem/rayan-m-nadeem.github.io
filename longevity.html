@@ -14,6 +14,12 @@
         var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
         var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
         var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
+        var w = localStorage.getItem('width') || 'default'; document.documentElement.setAttribute('data-width', w);
+        var l = localStorage.getItem('leading') || 'default'; document.documentElement.setAttribute('data-leading', l);
+        var f = localStorage.getItem('articlefont') || 'sans'; document.documentElement.setAttribute('data-articlefont', f);
+        var c = localStorage.getItem('contrast') || 'off'; document.documentElement.setAttribute('data-contrast', c);
+        var p = localStorage.getItem('progress') || 'off'; document.documentElement.setAttribute('data-progress', p);
+        var q = localStorage.getItem('toc') || 'off'; document.documentElement.setAttribute('data-toc', q);
       } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
     })();
   </script>
@@ -25,9 +31,14 @@
   <meta property="og:description" content="A survey of life-extending medicine: CRISPR-era gene editing, the delivery bottleneck, xenotransplantation, and why the medical definition of death has repeatedly moved.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/longevity.html">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Rewriting the Lifespan: Gene Editing, Regenerative Medicine, and the Moving Frontier of Death">
   <meta name="twitter:description" content="A survey of life-extending medicine: CRISPR-era gene editing, the delivery bottleneck, xenotransplantation, and why the medical definition of death has repeatedly moved.">
+  <meta property="og:image" content="https://rayan-m-nadeem.github.io/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: What medicine can already do, and what it cannot do yet.">
+  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/og-image.png">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -35,30 +46,15 @@
   "headline": "Rewriting the Lifespan: Gene Editing, Regenerative Medicine, and the Moving Frontier of Death",
   "description": "A survey of life-extending medicine: CRISPR-era gene editing, the delivery bottleneck, xenotransplantation, and why the medical definition of death has repeatedly moved.",
   "url": "https://rayan-m-nadeem.github.io/longevity.html",
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": "https://rayan-m-nadeem.github.io/longevity.html"
-  },
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://rayan-m-nadeem.github.io/longevity.html"},
   "articleSection": "Longevity and Gene Editing",
   "inLanguage": "en",
   "datePublished": "2026-07-23",
   "dateModified": "2026-07-23",
-  "author": {
-    "@type": "Person",
-    "name": "Rayan Nadeem",
-    "description": "Independent student researcher. Not a licensed medical professional; all clinical claims are cited to primary sources.",
-    "url": "https://rayan-m-nadeem.github.io/#about"
-  },
-  "publisher": {
-    "@type": "Person",
-    "name": "Rayan Nadeem"
-  },
+  "author": {"@type": "Person", "name": "Rayan Nadeem", "description": "Independent student researcher. Not a licensed medical professional; all clinical claims are cited to primary sources.", "url": "https://rayan-m-nadeem.github.io/#about"},
+  "publisher": {"@type": "Person", "name": "Rayan Nadeem"},
   "isAccessibleForFree": true,
-  "isPartOf": {
-    "@type": "WebSite",
-    "name": "Plainly Medicine",
-    "url": "https://rayan-m-nadeem.github.io/"
-  }
+  "isPartOf": {"@type": "WebSite", "name": "Plainly Medicine", "url": "https://rayan-m-nadeem.github.io/"}
 }
   </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -121,6 +117,35 @@
               </div>
             </div>
             <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="compact" aria-pressed="false">Compact</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="relaxed" aria-pressed="false">Relaxed</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article font</span>
+              <div class="seg" data-set="articlefont">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Use higher contrast"></button>
+              </div>
+            </div>
+            <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
                 <button class="switch" data-set="motion" aria-pressed="false" aria-label="Reduce motion"></button>
@@ -130,6 +155,18 @@
               <div class="set-toggle">
                 <span class="nm">Underline links</span>
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Reading progress</span>
+                <button class="switch" data-set="progress" aria-pressed="false" aria-label="Show reading progress"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Sticky contents</span>
+                <button class="switch" data-set="toc" aria-pressed="false" aria-label="Show article contents"></button>
               </div>
             </div>
           </div>
@@ -154,14 +191,10 @@
         <div class="kicker label"><span>10</span><span>Longevity and Gene Editing</span></div>
         <h1>Rewriting the Lifespan</h1>
         <p class="summary">Gene editing, regenerative medicine, and the honest question of how far the boundary of death can move.</p>
-        <div class="byline">
-          <span>By Rayan Nadeem</span>
-          <span>Independent research</span>
-          <span>Updated July 2026</span>
-        </div>
+        <div class="byline"><span>By Rayan Nadeem</span><span>Independent research</span><span>Updated July 2026</span></div>
       </div>
       <figure class="diagram">
-        <svg viewBox="0 0 200 200" role="img" aria-label="A chromosome, capped by telomeres"><g transform="translate(58.42,8.00) scale(0.18400)" fill="currentColor" stroke="none"><g transform="translate(0.000000,1000.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M650 9909 c-171 -28 -313 -118 -428 -271 -53 -70 -120 -228 -123 -290 -1 -33 -1 -199 0 -223 6 -81 76 -211 160 -294 l75 -74 2 -341 c1 -200 6 -368 13 -406 6 -36 18 -103 25 -150 19 -108 32 -175 45 -225 5 -22 16 -67 25 -100 32 -128 101 -322 162 -453 19 -39 33 -73 32 -75 -2 -1 14 -31 34 -67 19 -36 51 -94 69 -130 18 -36 48 -86 66 -111 18 -26 33 -49 33 -53 0 -12 147 -223 223 -319 159 -203 205 -253 439 -488 176 -176 176 -176 147 -220 -104 -158 -112 -380 -19 -529 40 -63 39 -69 -9 -120 -44 -45 -185 -214 -231 -276 -14 -19 -53 -71 -87 -116 -35 -46 -76 -102 -93 -125 -33 -45 -160 -242 -160 -249 0 -2 -16 -26 -34 -52 -61 -84 -253 -453 -319 -612 -74 -176 -141 -359 -161 -435 -2 -5 -6 -17 -9 -25 -4 -8 -11 -33 -16 -55 -6 -22 -17 -65 -26 -95 -33 -114 -80 -361 -106 -555 -5 -44 -15 -102 -20 -130 -27 -139 -41 -841 -19 -956 31 -165 139 -278 317 -333 57 -18 188 -22 198 -6 3 6 16 10 29 10 70 0 209 108 255 198 41 80 44 114 48 527 4 375 14 611 28 680 4 17 13 77 21 135 7 58 22 148 33 200 11 52 27 131 35 175 9 44 20 87 25 96 5 9 13 34 17 55 3 22 10 44 14 49 4 6 13 37 20 70 7 33 15 65 19 70 4 6 13 30 20 55 7 25 19 61 27 80 30 68 58 140 60 150 0 3 6 19 14 35 7 17 29 68 49 114 28 66 318 651 420 846 71 138 160 336 165 370 1 5 4 15 8 20 13 22 18 73 9 96 -6 15 -32 36 -74 57 -174 88 -241 300 -149 478 29 57 133 151 181 164 72 19 81 56 40 170 -32 86 -150 333 -186 386 -10 16 -24 38 -30 49 -60 103 -131 221 -163 274 -22 34 -40 65 -40 68 0 2 -16 32 -36 66 -85 144 -224 404 -224 418 0 4 -18 46 -40 93 -22 47 -40 92 -40 99 0 7 -4 17 -9 23 -5 5 -14 27 -20 49 -7 22 -16 49 -21 60 -18 40 -60 178 -60 194 0 10 -3 21 -7 25 -8 7 -35 124 -58 246 -7 41 -16 82 -19 90 -12 29 -25 216 -25 346 0 72 -5 142 -10 157 -7 17 -6 57 1 122 8 69 8 102 0 118 -6 12 -16 47 -22 77 -6 34 -22 71 -43 97 -17 23 -39 53 -48 66 -48 67 -235 136 -335 122 -155 -21 -282 -104 -345 -227 -34 -68 -44 -75 -70 -52 -23 21 -24 36 -4 75 15 28 15 31 -14 67 -100 124 -124 327 -58 490 64 155 191 275 358 333 75 27 264 32 334 10 241 -78 385 -264 385 -496 0 -68 -5 -99 -23 -170 -14 -53 -35 -98 -64 -137 -37 -52 -38 -78 -6 -142 15 -28 15 -28 44 5 54 64 95 134 125 214 42 116 42 342 0 448 -116 295 -409 451 -746 396z m-7 -1188 c66 -28 69 -40 69 -230 -1 -270 13 -338 66 -305 15 10 18 36 22 230 6 255 11 272 88 306 44 20 48 20 98 4 28 -9 57 -22 62 -29 9 -11 18 -216 20 -489 1 -37 5 -75 11 -85 5 -10 16 -74 24 -143 16 -134 35 -225 81 -385 1 -5 8 -30 15 -55 15 -56 55 -175 71 -215 7 -16 16 -39 21 -50 104 -255 294 -622 445 -860 27 -44 81 -136 118 -205 38 -69 77 -136 86 -150 48 -70 123 -246 115 -269 -3 -9 -28 -32 -56 -51 -29 -19 -61 -47 -72 -62 -28 -38 -31 -37 -122 43 -465 412 -848 896 -1046 1319 -103 221 -113 242 -115 255 0 6 -4 17 -7 25 -3 8 -11 33 -17 55 -6 22 -15 49 -20 60 -9 21 -30 88 -53 170 -20 68 -62 294 -83 439 -17 125 -26 590 -11 632 8 23 85 62 124 63 12 1 42 -8 66 -18z m1163 -3155 c18 -14 18 -16 1 -83 -21 -83 -22 -201 -2 -268 15 -49 15 -49 -14 -79 -43 -43 -68 -19 -97 90 -29 111 -12 225 46 319 24 38 36 42 66 21z m201 -612 c44 -24 44 -29 13 -104 -43 -106 -49 -119 -126 -275 -70 -140 -119 -237 -255 -495 -50 -94 -219 -462 -219 -476 0 -7 -69 -173 -85 -204 -7 -14 -16 -43 -20 -65 -4 -22 -10 -44 -13 -50 -4 -5 -7 -12 -7 -15 -1 -5 -51 -167 -67 -215 -10 -31 -35 -132 -42 -175 -3 -14 -12 -56 -21 -95 -9 -38 -22 -108 -30 -155 -8 -47 -18 -112 -24 -145 -6 -32 -14 -107 -17 -165 -4 -58 -11 -111 -16 -117 -6 -8 -12 -177 -16 -418 -6 -473 3 -440 -113 -440 -63 0 -71 2 -99 31 -46 45 -50 81 -49 376 1 146 -2 271 -5 277 -13 21 -55 13 -60 -11 -18 -84 -26 -194 -27 -375 -1 -234 -3 -248 -42 -277 -38 -28 -149 -30 -189 -3 -25 17 -26 23 -34 135 -8 131 9 525 30 697 26 206 55 410 65 445 6 19 20 80 32 135 11 55 27 118 34 140 7 22 16 57 20 78 4 20 11 40 16 43 5 3 7 9 4 13 -4 7 19 74 80 236 12 33 30 80 39 105 37 99 174 385 242 502 26 46 59 103 72 128 13 25 36 63 51 85 15 22 30 47 33 55 13 30 218 326 295 423 123 158 251 305 343 394 l84 83 46 -44 c25 -24 59 -52 77 -62z"/> <path d="M769 7925 c-16 -16 -11 -52 31 -228 13 -55 40 -76 64 -51 20 19 20 35 2 79 -8 19 -20 69 -26 112 -13 99 -34 125 -71 88z"/> <path d="M902 7383 c-11 -19 -7 -31 67 -195 12 -26 21 -51 21 -56 0 -18 29 -34 50 -27 13 4 20 15 20 31 0 25 -69 200 -96 242 -17 26 -49 29 -62 5z"/> <path d="M1144 6865 c-9 -22 15 -71 83 -173 48 -72 59 -83 82 -80 41 5 36 26 -37 148 -57 96 -73 116 -95 118 -18 2 -29 -2 -33 -13z"/> <path d="M1456 6391 c-21 -23 -24 -17 72 -143 77 -101 104 -121 129 -95 26 26 18 39 -147 235 -23 27 -32 28 -54 3z"/> <path d="M1595 4515 c-22 -36 -43 -65 -46 -65 -14 0 -60 -83 -57 -103 9 -63 70 -13 178 147 33 49 33 49 10 68 -34 27 -41 23 -85 -47z"/> <path d="M1342 4102 c-11 -9 -33 -42 -48 -72 -16 -30 -39 -71 -52 -90 -30 -45 -26 -84 9 -88 18 -2 29 3 37 20 6 13 26 48 43 78 76 130 80 143 50 160 -15 7 -24 5 -39 -8z"/> <path d="M1074 3573 c-70 -164 -77 -182 -71 -198 9 -21 36 -30 55 -18 9 5 26 38 38 74 12 35 32 87 44 116 20 43 21 54 11 67 -27 32 -51 19 -77 -41z"/> <path d="M924 3112 c-21 -15 -65 -168 -68 -242 -1 -32 1 -35 27 -35 33 0 43 22 67 136 7 35 17 68 21 74 30 33 -11 92 -47 67z"/> <path d="M792 2553 c-13 -32 -32 -167 -32 -223 0 -43 31 -65 55 -39 14 16 47 252 38 274 -9 26 -49 18 -61 -12z"/> <path d="M3660 9908 c-132 -19 -325 -135 -395 -239 -16 -24 -35 -49 -41 -55 -19 -21 -63 -117 -81 -179 -28 -93 -25 -299 6 -384 27 -78 56 -136 79 -159 9 -10 26 -30 37 -45 25 -34 33 -34 41 0 4 15 13 38 20 52 12 23 -5 70 -47 127 -43 57 -59 256 -30 366 47 176 218 357 363 385 18 3 39 10 46 16 16 13 257 14 274 1 7 -6 33 -17 58 -24 131 -40 281 -194 317 -325 33 -123 34 -138 19 -229 -24 -146 -32 -167 -89 -239 -30 -39 -30 -39 -11 -85 26 -63 47 -62 99 8 192 256 147 658 -97 862 -155 130 -342 179 -568 146z"/> <path d="M668 9290 c-99 -12 -219 -72 -285 -143 -55 -58 -59 -69 -43 -112 17 -45 37 -42 98 17 110 106 178 132 337 132 109 0 111 0 195 -41 47 -23 104 -60 128 -83 48 -45 59 -48 78 -22 62 81 -111 224 -304 252 -75 11 -108 11 -204 0z"/> <path d="M3665 9290 c-199 -30 -379 -199 -295 -275 20 -18 22 -18 83 43 95 94 172 125 307 125 162 0 240 -30 355 -137 49 -47 49 -47 67 -24 34 44 24 81 -38 138 -125 114 -290 159 -479 130z"/> <path d="M3690 9086 c-125 -27 -227 -97 -278 -193 -49 -93 -54 -128 -62 -440 -4 -160 -10 -296 -14 -301 -3 -5 -14 -87 -26 -181 -11 -95 -22 -177 -25 -181 -3 -5 -11 -39 -19 -77 -18 -85 -35 -152 -46 -178 -9 -20 -43 -134 -44 -147 -1 -3 -4 -10 -8 -14 -5 -4 -8 -14 -8 -21 0 -8 -16 -54 -36 -101 -20 -48 -45 -109 -56 -137 -32 -76 -43 -98 -222 -430 -12 -22 -43 -72 -69 -111 -26 -39 -47 -75 -47 -79 0 -4 -13 -24 -28 -44 -15 -20 -55 -81 -87 -136 -33 -55 -64 -107 -70 -117 -96 -158 -205 -401 -205 -459 0 -23 10 -31 76 -64 82 -41 129 -93 176 -191 72 -154 -18 -373 -185 -449 -78 -36 -95 -75 -62 -139 8 -15 15 -33 15 -38 0 -31 110 -265 247 -528 237 -453 280 -541 378 -775 21 -49 43 -103 50 -120 46 -108 124 -349 141 -435 4 -23 41 -177 59 -250 9 -36 21 -103 28 -150 7 -47 16 -91 20 -97 4 -7 8 -32 8 -55 -1 -24 3 -81 8 -128 19 -175 32 -579 25 -790 -7 -227 -5 -247 43 -350 100 -217 387 -305 599 -186 69 39 88 53 98 71 6 11 23 36 37 55 69 94 85 237 74 675 -6 268 -11 364 -29 540 -6 68 -31 224 -50 315 -9 41 -23 115 -31 165 -9 49 -20 94 -24 100 -5 5 -9 17 -9 25 -2 26 -29 133 -49 195 -12 33 -31 92 -43 130 -12 39 -27 84 -34 100 -7 17 -23 57 -36 90 -63 168 -276 589 -325 645 -8 8 -19 26 -25 40 -12 29 -60 102 -143 222 -114 164 -170 238 -247 328 -31 36 -67 81 -81 100 -15 19 -68 79 -119 132 -92 98 -92 98 -71 130 114 180 116 429 5 575 -25 33 -25 33 -2 50 85 66 548 556 548 580 0 7 3 13 8 13 4 1 25 26 47 56 22 31 50 67 61 82 123 155 375 601 422 747 12 36 30 78 53 126 4 9 13 36 20 60 15 53 14 50 21 69 6 16 36 117 62 210 14 50 32 134 42 200 20 125 26 167 35 245 19 161 17 660 -4 728 -46 156 -181 276 -325 292 -31 3 -68 7 -82 9 -14 2 -50 -2 -80 -8z m-25 -367 c67 -33 70 -46 69 -300 -1 -229 -1 -229 23 -235 48 -13 56 24 71 338 6 134 9 149 30 171 51 54 141 56 198 5 60 -54 25 -649 -59 -1008 -45 -189 -67 -258 -143 -445 -13 -33 -24 -64 -24 -68 0 -10 -126 -261 -164 -327 -14 -25 -32 -57 -41 -72 -62 -109 -219 -333 -307 -438 -32 -37 -58 -72 -58 -78 0 -34 -588 -602 -624 -602 -7 0 -25 13 -41 30 -16 16 -47 42 -69 57 -49 34 -58 45 -46 57 6 6 10 16 10 24 0 20 112 242 151 299 63 93 69 102 69 110 0 7 24 44 80 128 118 173 304 510 381 690 17 39 36 84 44 100 36 81 76 193 105 295 12 41 26 86 31 100 25 71 68 305 89 490 6 52 15 122 21 155 5 33 10 152 11 265 0 113 5 213 10 222 26 50 118 68 183 37z m-887 -3166 c79 -115 74 -317 -12 -428 -15 -20 -15 -20 -42 7 -27 27 -27 27 -13 85 18 74 18 214 0 275 -13 46 -13 48 10 68 31 25 34 25 57 -7z m-52 -585 c49 -51 114 -122 144 -157 30 -36 76 -88 102 -117 50 -56 256 -327 322 -423 35 -51 86 -132 173 -274 48 -79 106 -189 173 -327 34 -69 70 -142 80 -162 11 -20 20 -42 20 -48 0 -7 6 -26 14 -43 34 -81 77 -200 101 -282 15 -49 33 -108 41 -130 7 -22 16 -60 20 -85 4 -25 10 -52 15 -61 4 -9 13 -47 19 -85 6 -38 17 -98 25 -134 24 -117 45 -244 51 -315 3 -38 8 -83 11 -100 13 -77 22 -285 22 -543 1 -283 1 -283 -25 -307 -53 -49 -169 -44 -208 8 -20 27 -21 45 -28 323 -5 261 -8 298 -24 315 -9 10 -23 19 -29 19 -34 0 -37 -27 -39 -323 -2 -264 -4 -297 -20 -321 -25 -39 -79 -59 -143 -54 -95 8 -89 -16 -96 421 -3 210 -10 409 -16 442 -5 33 -15 123 -21 200 -7 77 -16 154 -21 170 -4 17 -15 71 -23 120 -14 85 -22 122 -61 275 -9 36 -16 73 -16 82 0 10 -4 20 -10 23 -5 4 -9 16 -9 27 0 17 -54 189 -87 278 -4 8 -7 20 -8 25 -2 14 -68 177 -110 270 -78 176 -147 316 -248 510 -230 440 -347 688 -347 733 0 15 39 51 55 52 6 0 31 20 55 45 24 25 47 45 50 45 4 0 47 -42 96 -92z"/> <path d="M3708 7923 c-9 -10 -18 -31 -21 -48 -3 -16 -13 -61 -22 -100 -29 -120 -29 -122 -5 -135 24 -13 48 1 54 31 2 8 6 21 9 29 7 16 37 163 40 194 3 30 -36 51 -55 29z"/> <path d="M3564 7388 c-6 -7 -27 -53 -48 -103 -21 -49 -42 -98 -47 -107 -12 -24 -11 -52 3 -66 23 -23 43 -12 65 36 89 199 100 244 57 250 -11 2 -25 -3 -30 -10z"/> <path d="M3307 6848 c-10 -18 -40 -71 -67 -117 -54 -89 -58 -121 -16 -121 17 0 35 19 77 83 72 110 80 127 77 157 -5 41 -49 40 -71 -2z"/> <path d="M2977 6343 c-119 -150 -129 -168 -108 -187 22 -20 61 -14 61 9 0 8 9 20 19 27 28 20 131 154 131 171 0 14 -30 47 -43 47 -3 0 -30 -30 -60 -67z"/> <path d="M2836 4568 c-22 -31 -20 -40 13 -81 15 -20 48 -66 71 -102 47 -69 79 -84 100 -46 11 22 -13 64 -107 184 -61 77 -57 74 -77 45z"/> <path d="M3132 4108 c-20 -20 -14 -47 22 -107 19 -31 45 -78 57 -104 21 -43 26 -48 54 -45 46 5 41 30 -28 153 -61 108 -81 127 -105 103z"/> <path d="M3361 3617 c-10 -12 14 -96 37 -132 4 -5 16 -37 27 -70 19 -55 23 -60 50 -60 24 0 31 5 33 23 3 23 -69 213 -90 240 -14 16 -43 15 -57 -1z"/> <path d="M3540 3105 c-9 -10 -9 -22 -1 -47 6 -18 22 -76 35 -128 24 -94 24 -95 56 -98 32 -3 32 -3 27 45 -6 58 -33 166 -53 211 -15 35 -43 42 -64 17z"/> <path d="M3665 2573 c-12 -12 -15 -25 -10 -47 3 -17 10 -71 16 -121 11 -103 34 -144 65 -113 15 14 15 29 4 140 -15 146 -34 183 -75 141z"/> <path d="M240 1199 c-33 -41 -109 -176 -117 -208 -3 -14 -10 -28 -14 -31 -25 -17 -34 -328 -11 -365 4 -5 7 -14 7 -20 1 -20 28 -90 51 -129 12 -23 32 -57 43 -77 22 -40 137 -159 153 -159 6 0 27 -13 47 -29 87 -69 319 -124 436 -103 33 6 80 14 105 17 25 4 90 28 145 55 108 52 214 143 255 218 11 20 24 44 29 52 112 191 97 527 -31 691 -15 20 -28 40 -28 45 0 10 -51 64 -60 64 -4 0 -15 -24 -25 -54 -18 -54 -18 -54 12 -102 85 -134 113 -268 88 -416 -22 -129 -61 -204 -157 -301 -42 -42 -82 -77 -89 -77 -7 0 -20 -6 -28 -14 -72 -62 -337 -83 -472 -37 -113 37 -200 104 -285 218 -26 35 -73 126 -77 150 -1 10 -7 25 -12 33 -14 22 -12 247 3 262 7 7 12 19 12 29 0 26 41 120 68 157 25 32 25 34 10 94 -17 73 -25 78 -58 37z"/> <path d="M4230 1210 c0 -6 -9 -30 -20 -52 -11 -23 -20 -43 -20 -44 0 0 14 -19 31 -40 91 -115 130 -273 104 -425 -9 -50 -20 -98 -24 -107 -59 -120 -72 -139 -140 -203 -40 -38 -78 -69 -84 -69 -6 0 -18 -6 -26 -14 -28 -24 -143 -56 -231 -65 -190 -17 -377 59 -490 201 -73 92 -130 248 -130 357 0 83 50 251 97 323 15 24 16 32 5 60 -8 18 -14 39 -16 46 -15 81 -124 -72 -171 -243 -36 -128 -21 -378 26 -429 5 -6 9 -17 9 -26 0 -8 9 -31 20 -50 11 -19 27 -50 36 -68 19 -37 169 -182 189 -182 7 0 18 -7 25 -14 6 -8 28 -20 48 -26 20 -7 51 -18 67 -25 43 -19 230 -48 274 -42 303 40 507 181 582 402 7 22 16 45 20 50 15 22 33 134 33 205 -1 133 -19 207 -82 340 -37 77 -132 178 -132 140z"/> <path d="M337 1013 c-10 -19 -11 -38 -6 -59 11 -39 103 -127 161 -153 116 -52 123 -54 238 -59 185 -7 305 32 407 131 60 58 72 93 48 131 -23 34 -35 33 -76 -10 -91 -96 -194 -138 -344 -138 -147 -1 -264 46 -360 144 -46 47 -50 48 -68 13z"/> <path d="M4092 987 c-92 -93 -195 -133 -343 -131 -136 2 -225 36 -330 126 -31 26 -59 48 -62 48 -4 0 -11 -17 -18 -39 -20 -68 20 -123 136 -185 27 -14 55 -26 61 -26 6 0 25 -7 41 -15 75 -37 307 -28 409 16 48 21 157 98 181 129 25 31 12 130 -17 130 -3 0 -29 -24 -58 -53z"/> </g></g></svg>
+        <svg viewBox="0 0 282 301" role="img" aria-label="A chromosome, capped by telomeres" preserveAspectRatio="xMidYMid meet"><path d="M 103.0,250.0 97.0,254.0 90.0,254.0 88.0,252.0 86.0,252.0 85.0,253.0 85.0,257.0 87.0,259.0 89.0,259.0 92.0,261.0 95.0,261.0 96.0,260.0 101.0,259.0 105.0,255.0 Z M 108.0,250.0 106.0,248.0 105.0,249.0 109.0,255.0 110.0,260.0 108.0,263.0 108.0,265.0 101.0,272.0 99.0,272.0 98.0,273.0 90.0,273.0 89.0,272.0 87.0,272.0 81.0,266.0 80.0,264.0 80.0,260.0 79.0,260.0 79.0,265.0 80.0,267.0 85.0,272.0 90.0,274.0 98.0,274.0 99.0,273.0 102.0,273.0 107.0,269.0 109.0,266.0 109.0,264.0 111.0,260.0 111.0,257.0 Z M 83.0,248.0 80.0,251.0 79.0,256.0 80.0,256.0 83.0,250.0 Z M 140.0,155.0 140.0,157.0 143.0,160.0 141.0,162.0 136.0,158.0 136.0,161.0 153.0,188.0 161.0,213.0 162.0,245.0 156.0,251.0 154.0,257.0 156.0,267.0 161.0,272.0 166.0,274.0 175.0,274.0 180.0,272.0 186.0,264.0 187.0,257.0 185.0,251.0 183.0,249.0 185.0,255.0 185.0,263.0 177.0,272.0 174.0,273.0 164.0,272.0 158.0,267.0 156.0,263.0 156.0,254.0 162.0,247.0 165.0,250.0 164.0,252.0 161.0,253.0 161.0,257.0 163.0,259.0 171.0,261.0 177.0,259.0 181.0,255.0 181.0,253.0 179.0,251.0 178.0,252.0 176.0,251.0 180.0,247.0 181.0,243.0 180.0,222.0 176.0,202.0 168.0,184.0 161.0,174.0 143.0,156.0 Z M 167.0,252.0 168.0,251.0 173.0,251.0 174.0,253.0 170.0,255.0 168.0,254.0 Z M 171.0,221.0 173.0,222.0 173.0,227.0 174.0,228.0 174.0,236.0 173.0,237.0 171.0,236.0 171.0,228.0 170.0,227.0 170.0,222.0 Z M 168.0,204.0 169.0,204.0 171.0,207.0 171.0,210.0 170.0,211.0 168.0,210.0 168.0,207.0 167.0,206.0 Z M 164.0,197.0 166.0,196.0 168.0,198.0 166.0,199.0 Z M 162.0,191.0 163.0,190.0 165.0,191.0 164.0,192.0 Z M 154.0,178.0 156.0,177.0 157.0,179.0 156.0,180.0 Z M 144.0,163.0 145.0,163.0 151.0,169.0 153.0,172.0 153.0,174.0 152.0,175.0 144.0,167.0 143.0,165.0 Z M 123.0,155.0 120.0,156.0 105.0,171.0 94.0,188.0 93.0,192.0 91.0,195.0 91.0,197.0 89.0,200.0 87.0,210.0 86.0,211.0 86.0,217.0 85.0,218.0 84.0,242.0 85.0,243.0 85.0,247.0 90.0,251.0 96.0,251.0 100.0,249.0 103.0,245.0 104.0,241.0 103.0,240.0 103.0,235.0 102.0,234.0 102.0,222.0 103.0,221.0 103.0,217.0 104.0,216.0 104.0,208.0 105.0,207.0 105.0,204.0 106.0,203.0 110.0,189.0 114.0,184.0 114.0,182.0 128.0,161.0 128.0,159.0 127.0,158.0 123.0,161.0 122.0,160.0 124.0,157.0 Z M 93.0,212.0 95.0,213.0 95.0,217.0 94.0,218.0 92.0,217.0 92.0,213.0 Z M 93.0,210.0 94.0,209.0 96.0,210.0 95.0,211.0 Z M 95.0,201.0 97.0,198.0 99.0,199.0 97.0,202.0 Z M 99.0,192.0 100.0,191.0 101.0,192.0 100.0,193.0 Z M 106.0,181.0 107.0,183.0 104.0,186.0 102.0,184.0 Z M 121.0,161.0 122.0,163.0 119.0,167.0 115.0,170.0 114.0,168.0 Z M 147.0,143.0 144.0,146.0 144.0,151.0 146.0,153.0 146.0,155.0 148.0,156.0 148.0,154.0 149.0,153.0 149.0,145.0 148.0,143.0 Z M 118.0,142.0 117.0,142.0 115.0,145.0 115.0,153.0 116.0,155.0 117.0,155.0 116.0,146.0 118.0,144.0 Z M 161.0,53.0 161.0,56.0 162.0,57.0 168.0,53.0 173.0,53.0 175.0,55.0 177.0,55.0 178.0,56.0 180.0,56.0 181.0,55.0 180.0,52.0 174.0,48.0 168.0,48.0 164.0,50.0 Z M 91.0,48.0 84.0,52.0 84.0,54.0 86.0,57.0 86.0,59.0 85.0,60.0 85.0,65.0 84.0,66.0 84.0,80.0 85.0,81.0 85.0,88.0 87.0,92.0 88.0,100.0 95.0,114.0 102.0,122.0 102.0,123.0 121.0,142.0 123.0,142.0 124.0,140.0 122.0,137.0 124.0,136.0 127.0,139.0 128.0,138.0 128.0,136.0 112.0,113.0 104.0,94.0 104.0,89.0 103.0,88.0 103.0,84.0 102.0,83.0 103.0,62.0 100.0,59.0 96.0,57.0 92.0,57.0 91.0,58.0 88.0,58.0 87.0,57.0 92.0,53.0 96.0,53.0 101.0,57.0 103.0,57.0 104.0,56.0 104.0,53.0 101.0,50.0 97.0,48.0 Z M 119.0,133.0 120.0,132.0 121.0,133.0 120.0,134.0 Z M 110.0,123.0 111.0,122.0 120.0,131.0 120.0,132.0 118.0,133.0 112.0,127.0 Z M 104.0,116.0 105.0,115.0 107.0,117.0 105.0,118.0 Z M 96.0,102.0 97.0,101.0 99.0,102.0 98.0,103.0 Z M 93.0,94.0 95.0,93.0 96.0,95.0 94.0,96.0 Z M 92.0,89.0 94.0,88.0 95.0,89.0 95.0,91.0 93.0,92.0 92.0,91.0 Z M 174.0,34.0 166.0,34.0 161.0,36.0 155.0,43.0 154.0,52.0 156.0,57.0 162.0,64.0 162.0,87.0 155.0,108.0 138.0,132.0 138.0,135.0 135.0,137.0 137.0,139.0 141.0,135.0 143.0,137.0 141.0,141.0 143.0,141.0 150.0,135.0 168.0,115.0 175.0,102.0 178.0,93.0 179.0,84.0 180.0,83.0 180.0,76.0 181.0,75.0 180.0,62.0 176.0,58.0 172.0,56.0 165.0,58.0 161.0,61.0 156.0,54.0 156.0,45.0 158.0,43.0 158.0,41.0 167.0,35.0 173.0,35.0 180.0,39.0 185.0,46.0 185.0,54.0 182.0,58.0 183.0,60.0 187.0,52.0 186.0,44.0 179.0,36.0 Z M 157.0,117.0 159.0,119.0 152.0,126.0 152.0,127.0 145.0,134.0 144.0,134.0 143.0,132.0 146.0,128.0 Z M 162.0,110.0 163.0,111.0 163.0,113.0 161.0,114.0 160.0,112.0 Z M 164.0,104.0 166.0,103.0 167.0,105.0 165.0,106.0 Z M 167.0,98.0 169.0,95.0 171.0,96.0 169.0,99.0 Z M 173.0,69.0 174.0,70.0 174.0,81.0 173.0,82.0 173.0,86.0 171.0,87.0 170.0,86.0 170.0,82.0 171.0,81.0 171.0,70.0 Z M 80.0,42.0 80.0,44.0 79.0,45.0 79.0,55.0 81.0,59.0 82.0,59.0 82.0,56.0 80.0,54.0 80.0,46.0 81.0,45.0 81.0,43.0 87.0,37.0 89.0,37.0 92.0,35.0 97.0,35.0 98.0,36.0 100.0,36.0 107.0,42.0 109.0,45.0 109.0,54.0 105.0,60.0 109.0,57.0 109.0,55.0 111.0,51.0 110.0,45.0 108.0,41.0 103.0,36.0 99.0,34.0 90.0,34.0 86.0,36.0 Z M 0.0,0.0 0.0,300.0 281.0,300.0 281.0,0.0 Z M 3.0,1.0 272.0,0.0 281.0,3.0 281.0,296.0 278.0,299.0 1.0,297.0 Z" fill="currentColor" fill-rule="evenodd"/></svg>
         <figcaption>A chromosome, capped by telomeres</figcaption>
       </figure>
     </div>
@@ -186,46 +219,21 @@
       <h2 class="reveal">The moving frontier of death</h2>
       <p class="reveal">One of the more surprising ideas in this survey is that death has never been a fixed biological line. It is a determination made using the best available medical standards, and those standards have shifted as medicine changed. The absence of breathing and heartbeat once meant death because it could not be reversed. As resuscitation improved, the line moved. Intensive care created situations where a heart could beat while the brain had permanently failed, which forced new criteria built around the brain. Experiments that restart limited activity in cells hours after death do not reverse death and do not bring back the mind, but they suggest the border between reversible and irreversible is not as sharp as once assumed. That is not a loophole for immortality. It is one more reason the word "yet" keeps earning its place.</p>
 
-      <div class="timeline reveal">
-        <div class="step"><span class="when">1968</span><div class="what"><h4>The definition of death shifts to the brain</h4><p>A Harvard committee proposes brain-based criteria as life support makes the old signs less final.</p></div></div>
-        <div class="step"><span class="when">2020</span><div class="what"><h4>Partial reprogramming restores vision in mice</h4><p>Evidence that some features of aging can be reset at the epigenetic level, at least in animals.</p></div></div>
-        <div class="step"><span class="when">2021</span><div class="what"><h4>First in-body CRISPR edit in patients</h4><p>A single infusion lowers a disease-causing protein made in the liver.</p></div></div>
-        <div class="step"><span class="when">2023</span><div class="what"><h4>First gene-editing therapy approved</h4><p>An editing treatment for sickle cell disease reaches patients.</p></div></div>
-        <div class="step"><span class="when">2024</span><div class="what"><h4>A gene-edited pig kidney in a living person</h4><p>Gene editing is used to attack organ scarcity directly.</p></div></div>
-        <div class="step"><span class="when">Now</span><div class="what"><h4>The pieces exist, separately</h4><p>The task is making them safe, deliverable, and combinable. That is what "yet" means.</p></div></div>
-      </div>
+      <div class="timeline reveal"><div class="step"><span class="when">1968</span><div class="what"><h4>The definition of death shifts to the brain</h4><p>A Harvard committee proposes brain-based criteria as life support makes the old signs less final.</p></div></div><div class="step"><span class="when">2020</span><div class="what"><h4>Partial reprogramming restores vision in mice</h4><p>Evidence that some features of aging can be reset at the epigenetic level, at least in animals.</p></div></div><div class="step"><span class="when">2021</span><div class="what"><h4>First in-body CRISPR edit in patients</h4><p>A single infusion lowers a disease-causing protein made in the liver.</p></div></div><div class="step"><span class="when">2023</span><div class="what"><h4>First gene-editing therapy approved</h4><p>An editing treatment for sickle cell disease reaches patients.</p></div></div><div class="step"><span class="when">2024</span><div class="what"><h4>A gene-edited pig kidney in a living person</h4><p>Gene editing is used to attack organ scarcity directly.</p></div></div><div class="step"><span class="when">Now</span><div class="what"><h4>The pieces exist, separately</h4><p>The task is making them safe, deliverable, and combinable. That is what "yet" means.</p></div></div></div>
 
       <h2 class="reveal">Ethics and the honest questions</h2>
       <p class="reveal">The hardest questions are not only technical. Cancer is the central barrier to reversing aging, because the same growth programs that could rejuvenate tissue can also feed tumors, so any credible plan has to solve cancer surveillance at the same time. There is the question of the mind, since a maintained body without preserved memory and personality is not the longevity most people want, which puts the brain at the center again. There is fairness, because a one-time therapy that compresses decades of prevention into a single treatment would raise urgent questions about who can afford it. And there is humility, because "durable" can never be allowed to mean an irreversible mistake.</p>
 
-      <div class="callout reveal">
-        <span class="label">Key Takeaways</span>
-        <ul>
-          <li>Indefinite lifespan extension is not possible today, but lifespan and healthspan are already extendable, and progress is steep in several areas.</li>
-          <li>No single therapy will "solve aging." Gains come from stacking many partial wins across gene editing, prevention, organ replacement, and critical care.</li>
-          <li>The medical definition of death has repeatedly moved as technology changed what can be reversed.</li>
-          <li>Cancer, brain protection, and safe delivery are the main obstacles between today's tools and any real reversal of aging.</li>
-        </ul>
-      </div>
+      <div class="callout reveal"><span class="label">Key Takeaways</span><ul><li>Indefinite lifespan extension is not possible today, but lifespan and healthspan are already extendable, and progress is steep in several areas.</li><li>No single therapy will "solve aging." Gains come from stacking many partial wins across gene editing, prevention, organ replacement, and critical care.</li><li>The medical definition of death has repeatedly moved as technology changed what can be reversed.</li><li>Cancer, brain protection, and safe delivery are the main obstacles between today's tools and any real reversal of aging.</li></ul></div>
 
-      <div class="refs reveal">
-        <span class="label">Further Reading &amp; References</span>
-        <ol>
-          <li>López-Otín C, Blasco MA, Partridge L, Serrano M, Kroemer G. The Hallmarks of Aging. Cell. 2013.</li>
-          <li>U.S. Food and Drug Administration. FDA Approves First Gene Therapies to Treat Patients with Sickle Cell Disease. 2023.</li>
-          <li>Gillmore JD, et al. CRISPR-Cas9 In Vivo Gene Editing for Transthyretin Amyloidosis. New England Journal of Medicine. 2021.</li>
-          <li>Lu Y, et al. Reprogramming to recover youthful epigenetic information and restore vision. Nature. 2020.</li>
-          <li>Massachusetts General Hospital. World's First Genetically-Edited Pig Kidney Transplant into a Living Recipient. 2024.</li>
-          <li>Ad Hoc Committee of the Harvard Medical School. A Definition of Irreversible Coma. JAMA. 1968.</li>
-        </ol>
-        <span class="label">Recent Developments · 2025 to 2026</span>
-        <ol>
-          <li><a href="https://nyulangone.org/news/first-gene-edited-pig-kidney-transplant-clinical-trial-begins-nyu-langone-health" target="_blank" rel="noopener">Xenotransplantation moves from one-off cases to the first regulated clinical trials: the first EXPAND trial transplant of a gene-edited pig kidney is performed at NYU Langone. 2025.</a></li>
-          <li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2601283" target="_blank" rel="noopener">A single-infusion base-editing therapy durably lowers cholesterol in an early trial, an example of the one-time gene edits this survey describes. New England Journal of Medicine. 2026.</a></li>
-        </ol>
-      </div>
+      <div class="refs reveal"><span class="label">Further Reading &amp; References</span><ol><li>López-Otín C, Blasco MA, Partridge L, Serrano M, Kroemer G. The Hallmarks of Aging. Cell. 2013.</li><li>U.S. Food and Drug Administration. FDA Approves First Gene Therapies to Treat Patients with Sickle Cell Disease. 2023.</li><li>Gillmore JD, et al. CRISPR-Cas9 In Vivo Gene Editing for Transthyretin Amyloidosis. New England Journal of Medicine. 2021.</li><li>Lu Y, et al. Reprogramming to recover youthful epigenetic information and restore vision. Nature. 2020.</li><li>Massachusetts General Hospital. World's First Genetically-Edited Pig Kidney Transplant into a Living Recipient. 2024.</li><li>Ad Hoc Committee of the Harvard Medical School. A Definition of Irreversible Coma. JAMA. 1968.</li></ol><span class="label">Recent Developments · 2025 to 2026</span><ol><li><a href="https://nyulangone.org/news/first-gene-edited-pig-kidney-transplant-clinical-trial-begins-nyu-langone-health" target="_blank" rel="noopener">Xenotransplantation moves from one-off cases to the first regulated clinical trials: the first EXPAND trial transplant of a gene-edited pig kidney is performed at NYU Langone. 2025.</a></li><li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2601283" target="_blank" rel="noopener">A single-infusion base-editing therapy durably lowers cholesterol in an early trial, an example of the one-time gene edits this survey describes. New England Journal of Medicine. 2026.</a></li></ol></div>
     </div>
-  </article>
+  
+      <nav class="article-nav reveal" aria-label="Continue reading">
+        <a class="article-nav-link prev" href="transplant.html"><span class="label">&larr; Previous</span><strong>The Supply Problem</strong></a>
+        <a class="article-nav-link next" href="index.html#topics"><span class="label">Next &rarr;</span><strong>All sections</strong></a>
+      </nav>
+</article>
 
   <footer class="footer">
     <div class="wrap">
