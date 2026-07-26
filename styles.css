@@ -43,15 +43,15 @@
   --rule:    #2C2720;
   --rule-2:  #3D372E;
 
-  --c-cardiology:   #DE5F66;
-  --c-neurology:    #8478E6;
-  --c-oncology:     #DD6A9B;
-  --c-metabolic:    #D68A3E;
-  --c-infectious:   #5CBB72;
-  --c-criticalcare: #5AA4D4;
-  --c-transplant:   #42C388;
-  --c-longevity:    #D19A22;
-  --c-editing:      #6C73DF;
+  --c-cardiology:   #B8262F;
+  --c-neurology:    #4937DA;
+  --c-oncology:     #B02862;
+  --c-metabolic:    #8A531D;
+  --c-infectious:   #2E6C3C;
+  --c-criticalcare: #266590;
+  --c-transplant:   #226C4B;
+  --c-longevity:    #7C5B15;
+  --c-editing:      #3740D4;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,8 +394,8 @@ html[data-motion="off"] { scroll-behavior: auto; }
 }
 
 /* extra colour tokens for the new interactives */
-:root { --c-exposure: #9C6334; --c-resistance: #257E67; }
-[data-theme="dark"] { --c-exposure: #C4834F; --c-resistance: #35B694; }
+:root { --c-exposure: #86552D; --c-resistance: #206C59; }
+[data-theme="dark"] { --c-exposure: #86552D; --c-resistance: #206C59; }
 
 html[data-underline="on"] .prose a,
 html[data-underline="on"] .block .go,
@@ -408,8 +408,3 @@ html[data-underline="on"] .dd-item .nm { text-decoration: underline; text-underl
 .diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
 .diagram svg [stroke-linecap] { stroke-linecap: round; }
 
-/* dark blocks carry ink text: in dark mode the colour blocks are light, so
-   cream copy on them would be unreadable. currentColor carries the change
-   through the illustrations, rules and buttons too. */
-[data-theme="dark"] .block,
-[data-theme="dark"] .article-head { color: #14110D; }
