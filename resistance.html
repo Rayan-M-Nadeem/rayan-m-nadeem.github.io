@@ -14,12 +14,6 @@
         var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
         var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
         var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
-        var w = localStorage.getItem('width') || 'default'; document.documentElement.setAttribute('data-width', w);
-        var l = localStorage.getItem('leading') || 'default'; document.documentElement.setAttribute('data-leading', l);
-        var f = localStorage.getItem('articlefont') || 'sans'; document.documentElement.setAttribute('data-articlefont', f);
-        var c = localStorage.getItem('contrast') || 'off'; document.documentElement.setAttribute('data-contrast', c);
-        var p = localStorage.getItem('progress') || 'off'; document.documentElement.setAttribute('data-progress', p);
-        var q = localStorage.getItem('toc') || 'off'; document.documentElement.setAttribute('data-toc', q);
       } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
     })();
   </script>
@@ -30,14 +24,9 @@
   <meta property="og:title" content="Watch Resistance Happen">
   <meta property="og:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/resistance.html">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Watch Resistance Happen">
   <meta name="twitter:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
-  <meta property="og:image" content="https://rayan-m-nadeem.github.io/og-image.png">
-  <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
-  <meta property="og:image:alt" content="Plainly Medicine: What medicine can already do, and what it cannot do yet.">
-  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/og-image.png">
   <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -143,35 +132,6 @@
               </div>
             </div>
             <div class="set-row">
-              <span class="lb">Reading width</span>
-              <div class="seg" data-set="width">
-                <button data-val="narrow" aria-pressed="false">Narrow</button>
-                <button data-val="default" aria-pressed="true">Default</button>
-                <button data-val="wide" aria-pressed="false">Wide</button>
-              </div>
-            </div>
-            <div class="set-row">
-              <span class="lb">Line spacing</span>
-              <div class="seg" data-set="leading">
-                <button data-val="compact" aria-pressed="false">Compact</button>
-                <button data-val="default" aria-pressed="true">Default</button>
-                <button data-val="relaxed" aria-pressed="false">Relaxed</button>
-              </div>
-            </div>
-            <div class="set-row">
-              <span class="lb">Article font</span>
-              <div class="seg" data-set="articlefont">
-                <button data-val="sans" aria-pressed="true">Sans</button>
-                <button data-val="serif" aria-pressed="false">Serif</button>
-              </div>
-            </div>
-            <div class="set-row">
-              <div class="set-toggle">
-                <span class="nm">Higher contrast</span>
-                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Use higher contrast"></button>
-              </div>
-            </div>
-            <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
                 <button class="switch" data-set="motion" aria-pressed="false" aria-label="Reduce motion"></button>
@@ -181,18 +141,6 @@
               <div class="set-toggle">
                 <span class="nm">Underline links</span>
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
-              </div>
-            </div>
-            <div class="set-row">
-              <div class="set-toggle">
-                <span class="nm">Reading progress</span>
-                <button class="switch" data-set="progress" aria-pressed="false" aria-label="Show reading progress"></button>
-              </div>
-            </div>
-            <div class="set-row">
-              <div class="set-toggle">
-                <span class="nm">Sticky contents</span>
-                <button class="switch" data-set="toc" aria-pressed="false" aria-label="Show article contents"></button>
               </div>
             </div>
           </div>
@@ -224,7 +172,7 @@
         </div>
       </div>
       <figure class="diagram">
-        <svg viewBox="0 0 200 200" role="img" aria-label="An antibiotic capsule" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><g transform="translate(10.00,57.02) scale(0.25281)" fill="currentColor" stroke="none"><g transform="translate(0.000000,340.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M1360 3140 c-8 -16 -21 -20 -60 -20 -39 0 -52 -4 -60 -20 -7 -13 -21 -20 -40 -20 -19 0 -33 -7 -40 -20 -8 -16 -21 -20 -58 -20 -42 0 -51 -4 -82 -40 -25 -28 -43 -40 -62 -40 -17 0 -31 -8 -38 -20 -6 -12 -21 -20 -35 -20 -34 0 -365 -329 -365 -362 0 -14 -16 -37 -40 -58 -28 -25 -40 -43 -40 -62 0 -17 -8 -31 -20 -38 -13 -7 -20 -21 -20 -40 0 -19 -7 -33 -20 -40 -13 -7 -20 -21 -20 -40 0 -19 -7 -33 -20 -40 -13 -7 -20 -21 -20 -40 0 -19 -7 -33 -20 -40 -18 -9 -20 -21 -20 -100 0 -79 -2 -91 -20 -100 -31 -17 -31 -463 0 -480 18 -9 20 -21 20 -100 0 -79 2 -91 20 -100 16 -8 20 -21 20 -60 0 -39 4 -52 20 -60 16 -8 20 -21 20 -58 0 -42 4 -51 40 -82 28 -25 40 -43 40 -62 0 -17 8 -31 20 -38 12 -6 20 -21 20 -36 0 -19 17 -43 60 -84 37 -35 60 -66 60 -79 0 -29 132 -161 161 -161 13 0 44 -23 79 -60 41 -43 65 -60 84 -60 15 0 30 -8 36 -20 7 -13 21 -20 40 -20 19 0 33 -7 40 -20 7 -13 21 -20 40 -20 19 0 33 -7 40 -20 8 -16 21 -20 60 -20 39 0 52 -4 60 -20 8 -16 21 -20 60 -20 39 0 52 -4 60 -20 8 -16 21 -20 60 -20 39 0 52 -4 60 -20 17 -32 4103 -32 4120 0 10 18 21 20 120 20 99 0 110 2 120 20 8 16 21 20 60 20 39 0 52 4 60 20 7 13 21 20 40 20 19 0 33 7 40 20 7 13 21 20 40 20 19 0 33 7 40 20 7 12 21 20 38 20 19 0 37 12 62 40 21 24 44 40 58 40 32 0 362 330 362 362 0 14 16 37 40 58 26 23 40 44 40 60 0 16 14 37 40 60 36 31 40 40 40 82 0 37 4 50 20 58 13 7 20 21 20 40 0 19 7 33 20 40 18 9 20 21 20 100 0 79 2 91 20 100 31 17 31 463 0 480 -18 9 -20 21 -20 100 0 79 -2 91 -20 100 -16 8 -20 21 -20 60 0 39 -4 52 -20 60 -13 7 -20 21 -20 40 0 19 -7 33 -20 40 -13 7 -20 21 -20 40 0 19 -7 33 -20 40 -12 6 -20 21 -20 36 0 19 -17 43 -60 84 -36 35 -60 66 -60 79 0 30 -252 281 -282 281 -14 0 -37 16 -58 40 -25 28 -43 40 -62 40 -17 0 -31 8 -38 20 -7 13 -21 20 -40 20 -19 0 -33 7 -40 20 -7 13 -21 20 -40 20 -19 0 -33 7 -40 20 -8 16 -21 20 -60 20 -39 0 -52 4 -60 20 -7 13 -21 20 -40 20 -19 0 -33 7 -40 20 -11 20 -21 20 -2220 20 -2199 0 -2209 0 -2220 -20z m2155 -1420 l0 -1275 -1092 -3 c-1084 -2 -1092 -2 -1103 18 -7 13 -21 20 -40 20 -19 0 -33 7 -40 20 -7 13 -21 20 -40 20 -19 0 -33 7 -40 20 -7 13 -21 20 -40 20 -19 0 -33 7 -40 20 -6 12 -21 20 -36 20 -19 0 -47 21 -104 80 -49 51 -86 80 -100 80 -28 0 -120 92 -120 121 0 13 -23 43 -60 79 -43 41 -60 65 -60 84 0 15 -8 30 -20 36 -13 7 -20 21 -20 40 0 19 -7 33 -20 40 -16 8 -20 21 -20 60 0 39 -4 52 -20 60 -13 7 -20 21 -20 40 0 19 -7 33 -20 40 -18 10 -20 21 -20 120 0 99 -2 110 -20 120 -30 16 -30 184 0 200 18 10 20 21 20 120 0 99 2 110 20 120 16 8 20 21 20 60 0 39 4 52 20 60 13 7 20 21 20 40 0 19 7 33 20 40 12 7 20 21 20 38 0 19 12 37 40 62 28 25 40 43 40 62 0 17 8 31 20 38 12 6 20 21 20 36 0 33 209 244 242 244 14 0 37 16 58 40 25 28 43 40 62 40 17 0 31 8 38 20 7 13 21 20 40 20 19 0 33 7 40 20 7 13 21 20 40 20 19 0 33 7 40 20 8 16 21 20 60 20 39 0 52 4 60 20 9 18 21 20 100 20 79 0 91 2 100 20 11 20 19 20 983 18 l972 -3 0 -1275z m2045 1260 c10 -18 21 -20 120 -20 99 0 110 -2 120 -20 8 -16 21 -20 60 -20 39 0 52 -4 60 -20 7 -13 21 -20 40 -20 19 0 33 -7 40 -20 7 -12 21 -20 38 -20 19 0 37 -12 62 -40 21 -24 44 -40 58 -40 33 0 362 -331 362 -365 0 -14 8 -29 20 -35 12 -7 20 -21 20 -38 0 -19 12 -37 40 -62 36 -31 40 -40 40 -82 0 -37 4 -50 20 -58 13 -7 20 -21 20 -40 0 -19 7 -33 20 -40 18 -10 20 -21 20 -120 0 -99 2 -110 20 -120 17 -9 20 -21 20 -80 0 -59 -3 -71 -20 -80 -18 -10 -20 -21 -20 -120 0 -99 -2 -110 -20 -120 -16 -8 -20 -21 -20 -60 0 -39 -4 -52 -20 -60 -16 -8 -20 -21 -20 -58 0 -42 -4 -51 -40 -82 -35 -31 -40 -40 -40 -78 0 -41 -4 -48 -80 -122 -51 -49 -80 -86 -80 -100 0 -28 -92 -120 -121 -120 -13 0 -43 -23 -79 -60 -41 -43 -65 -60 -84 -60 -15 0 -30 -8 -36 -20 -7 -13 -21 -20 -40 -20 -19 0 -33 -7 -40 -20 -7 -13 -21 -20 -40 -20 -19 0 -33 -7 -40 -20 -9 -17 -21 -20 -80 -20 -59 0 -71 -3 -80 -20 -11 -20 -19 -20 -1023 -18 l-1012 3 -3 1265 c-1 696 0 1271 3 1278 3 9 196 12 914 12 900 0 910 0 921 -20z"/> <path d="M1480 2580 c-7 -13 -21 -20 -40 -20 -19 0 -33 -7 -40 -20 -8 -16 -21 -20 -60 -20 -39 0 -52 -4 -60 -20 -7 -12 -21 -20 -38 -20 -19 0 -37 -12 -62 -40 -22 -25 -44 -40 -58 -40 -30 0 -122 -91 -122 -121 0 -13 -23 -43 -60 -79 -56 -54 -60 -61 -60 -104 0 -35 -4 -48 -20 -56 -16 -8 -20 -21 -20 -60 0 -39 -4 -51 -20 -60 -19 -10 -20 -19 -18 -143 l3 -132 75 0 75 0 3 112 c2 100 5 114 22 123 16 8 20 21 20 58 0 42 4 51 40 82 24 21 40 44 40 58 0 33 211 242 244 242 15 0 30 8 36 20 7 13 21 20 40 20 19 0 33 7 40 20 9 17 21 20 80 20 59 0 71 3 80 20 9 17 21 20 76 20 72 0 124 33 124 80 0 12 -13 35 -29 51 -29 29 -30 29 -155 29 -115 0 -126 -2 -136 -20z"/> <path d="M4947 2489 c-68 -69 -68 -69 -65 -137 3 -67 3 -67 38 -72 31 -4 36 -9 40 -40 5 -35 5 -35 73 -38 67 -3 67 -3 117 47 50 50 50 50 50 131 0 77 -2 83 -29 111 -17 17 -40 29 -55 29 -15 0 -30 8 -36 20 -21 39 -59 24 -133 -51z"/> <path d="M5728 2150 c-48 -49 -48 -49 -48 -130 0 -77 2 -83 30 -111 29 -29 31 -30 117 -27 88 3 88 3 91 35 2 20 11 37 23 43 16 9 19 22 19 76 0 65 0 65 -50 114 -70 71 -114 70 -182 0z"/> <path d="M4328 1830 c-47 -48 -48 -51 -48 -110 0 -60 1 -62 50 -110 44 -45 53 -50 94 -50 35 0 48 5 56 19 6 12 23 21 43 23 28 3 32 7 35 35 2 20 11 37 23 43 14 8 19 21 19 56 0 41 -5 50 -50 94 -49 50 -50 50 -112 49 -62 0 -64 -1 -110 -49z"/> <path d="M5088 1590 c-47 -48 -48 -51 -48 -110 0 -60 1 -62 50 -110 49 -50 49 -50 114 -50 54 0 67 3 76 19 6 12 23 21 43 23 28 3 32 7 35 35 2 20 11 37 23 43 14 8 19 21 19 56 0 41 -5 50 -50 94 -49 50 -49 50 -132 49 -83 0 -83 0 -130 -49z"/> <path d="M6000 1420 c-6 -12 -21 -20 -36 -20 -49 0 -84 -50 -84 -120 0 -60 1 -62 50 -110 48 -49 50 -50 110 -50 60 0 62 1 110 50 76 75 73 108 -20 200 -74 75 -110 88 -130 50z"/> <path d="M4528 1030 c-73 -75 -70 -109 22 -200 74 -75 110 -88 130 -50 6 12 21 20 36 20 15 0 38 12 55 29 27 28 29 34 29 111 0 77 -2 83 -29 111 -28 28 -34 29 -113 28 -83 0 -83 0 -130 -49z"/> <path d="M5360 1020 c-6 -12 -21 -20 -36 -20 -49 0 -84 -50 -84 -120 0 -60 1 -62 50 -110 44 -45 53 -50 94 -50 35 0 48 5 56 20 6 12 21 20 36 20 66 0 119 131 65 160 -12 6 -21 23 -23 43 -3 28 -7 32 -35 35 -20 2 -37 11 -43 23 -15 26 -66 26 -80 -1z"/> </g></g></svg>
+        <svg viewBox="0 0 200 200" role="img" aria-label="An antibiotic capsule"><g transform="translate(8.00,57.18) scale(0.18418)" fill="currentColor" stroke="none"><g transform="translate(0.000000,465.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M2218 4555 c-3 -3 -57 -10 -119 -15 -101 -9 -310 -43 -328 -55 -4 -2 -18 -6 -32 -8 -30 -6 -144 -44 -184 -61 -16 -8 -52 -22 -80 -32 -137 -50 -406 -208 -538 -316 -102 -84 -241 -225 -328 -333 -129 -160 -110 -132 -235 -350 -48 -85 -111 -231 -150 -348 -20 -62 -39 -119 -42 -127 -3 -8 -7 -24 -9 -35 -2 -11 -8 -31 -13 -45 -21 -52 -60 -386 -62 -520 -1 -65 11 -217 22 -275 5 -27 14 -86 20 -130 6 -44 15 -91 20 -105 6 -14 11 -34 13 -45 2 -11 6 -27 9 -35 3 -8 20 -60 38 -115 33 -104 42 -124 109 -265 147 -309 368 -583 646 -801 219 -173 532 -323 810 -390 248 -60 105 -58 3205 -58 3013 -1 3003 -1 3200 49 68 18 155 43 175 50 11 4 45 15 75 25 166 55 466 218 570 309 14 12 36 29 50 38 40 24 270 250 317 309 83 107 141 185 157 214 9 17 25 44 36 60 92 145 250 511 250 580 0 9 4 23 9 33 5 9 16 51 24 92 8 41 20 102 27 135 24 121 25 504 1 655 -23 146 -41 229 -52 245 -4 6 -10 30 -14 55 -4 25 -12 51 -19 59 -6 8 -10 16 -8 18 4 4 -52 153 -78 208 -10 22 -28 60 -40 85 -157 341 -469 693 -786 890 -145 89 -248 143 -369 190 -33 13 -64 27 -70 32 -5 4 -17 8 -27 8 -10 0 -26 4 -36 9 -63 34 -280 83 -452 103 -108 12 -5700 25 -5712 13z m2676 -311 c15 -6 16 -184 16 -1925 l0 -1919 -1403 0 c-1367 0 -1501 3 -1612 31 -422 110 -704 276 -993 585 -219 234 -403 590 -467 899 -9 44 -20 96 -25 115 -14 54 -25 195 -24 295 3 201 50 473 105 600 4 11 25 62 44 113 146 374 440 724 787 935 85 52 282 145 353 166 22 7 49 16 60 21 70 28 207 55 359 70 55 6 102 12 104 15 8 7 2677 6 2696 -1z m3031 -12 c233 -30 394 -77 614 -179 90 -42 287 -170 356 -232 23 -20 60 -52 83 -71 186 -153 417 -499 515 -772 47 -129 52 -149 76 -268 12 -58 26 -127 32 -155 12 -59 6 -439 -9 -535 -5 -36 -19 -101 -30 -145 -12 -44 -24 -91 -27 -105 -4 -14 -10 -34 -14 -45 -5 -11 -23 -58 -41 -105 -171 -448 -536 -842 -970 -1048 -141 -67 -169 -79 -210 -87 -19 -4 -39 -11 -45 -15 -5 -4 -21 -10 -35 -13 -14 -3 -65 -16 -115 -28 -90 -23 -90 -23 -1492 -26 l-1403 -4 0 1920 c0 1920 0 1920 23 1924 48 10 2614 -1 2692 -11z"/> <path d="M2120 3720 c-41 -4 -95 -13 -120 -20 -25 -6 -63 -16 -85 -22 -22 -6 -49 -14 -60 -19 -11 -5 -49 -19 -85 -32 -171 -63 -330 -166 -465 -302 -55 -55 -107 -109 -115 -120 -97 -131 -151 -221 -195 -327 -105 -256 -152 -517 -106 -591 77 -125 268 -64 270 87 1 27 5 65 10 85 5 20 17 68 27 106 79 325 307 604 614 754 42 21 85 40 96 44 83 25 134 39 164 43 19 3 46 9 60 14 14 4 51 11 84 14 114 10 169 112 116 216 -33 65 -86 82 -210 70z"/> <path d="M7052 3554 c-96 -48 -152 -151 -138 -257 33 -247 378 -293 477 -64 29 68 22 168 -15 232 -61 103 -212 145 -324 89z"/> <path d="M8133 3019 c-53 -16 -139 -102 -152 -153 -45 -178 45 -313 215 -324 95 -6 150 15 208 79 48 53 56 79 56 178 0 162 -159 269 -327 220z"/> <path d="M6144 2549 c-45 -13 -130 -107 -144 -160 -50 -184 96 -339 289 -308 200 31 268 278 116 418 -67 60 -162 79 -261 50z"/> <path d="M7274 2250 c-131 -41 -205 -229 -140 -358 31 -62 43 -71 148 -123 58 -29 193 8 250 68 118 125 87 322 -62 397 -41 21 -151 30 -196 16z"/> <path d="M8460 1895 c-61 -31 -116 -91 -129 -140 -49 -179 56 -325 233 -325 262 0 340 339 105 461 -63 34 -150 35 -209 4z"/> <path d="M6480 1434 c-42 -8 -122 -75 -147 -125 -75 -144 -15 -293 139 -350 64 -23 75 -23 142 -4 157 46 227 226 144 365 -54 90 -163 134 -278 114z"/> <path d="M7607 1353 c-142 -24 -239 -214 -178 -348 40 -90 112 -135 221 -142 70 -4 79 -2 128 27 129 75 166 223 89 350 -49 81 -162 130 -260 113z"/> </g></g></svg>
         <figcaption>An antibiotic capsule</figcaption>
       </figure>
     </div>
@@ -305,12 +253,7 @@
 
       <p class="reveal" style="margin-top:2.5rem"><a href="infectious.html">Read the full piece on infectious disease and the antibiotic pipeline</a>.</p>
     </div>
-  
-      <nav class="article-nav reveal" aria-label="Continue reading">
-        <a class="article-nav-link prev" href="exposure.html"><span class="label">&larr; Previous</span><strong>The Arithmetic of a Lifetime</strong></a>
-        <a class="article-nav-link next" href="cardiology.html"><span class="label">Next &rarr;</span><strong>The Slowest Emergency</strong></a>
-      </nav>
-</article>
+  </article>
 
 
   <footer class="footer">
