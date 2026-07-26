@@ -22,15 +22,15 @@
   --pad: clamp(1.25rem, 5vw, 4.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --c-cardiology:   #A32A31;
-  --c-neurology:    #573C99;
-  --c-oncology:     #A32B60;
-  --c-metabolic:    #A75B17;
-  --c-infectious:   #2C6435;
-  --c-criticalcare: #1B5A78;
-  --c-transplant:   #2C7A45;
-  --c-longevity:    #8E6410;
-  --c-editing:      #303C86;
+  --c-cardiology:   #D42E38;
+  --c-neurology:    #6B5CE1;
+  --c-oncology:     #CD2F72;
+  --c-metabolic:    #A16122;
+  --c-infectious:   #357E46;
+  --c-criticalcare: #2C76A7;
+  --c-transplant:   #287E57;
+  --c-longevity:    #906A18;
+  --c-editing:      #5B62DC;
 }
 
 [data-theme="dark"] {
@@ -43,15 +43,15 @@
   --rule:    #2C2720;
   --rule-2:  #3D372E;
 
-  --c-cardiology:   #E4646A;
-  --c-neurology:    #9B82E8;
-  --c-oncology:     #E36A9C;
-  --c-metabolic:    #E0964A;
-  --c-infectious:   #63B96D;
-  --c-criticalcare: #52A6CE;
-  --c-transplant:   #46C88A;
-  --c-longevity:    #DBA53E;
-  --c-editing:      #6F7FE0;
+  --c-cardiology:   #DE5F66;
+  --c-neurology:    #8478E6;
+  --c-oncology:     #DD6A9B;
+  --c-metabolic:    #D68A3E;
+  --c-infectious:   #5CBB72;
+  --c-criticalcare: #5AA4D4;
+  --c-transplant:   #42C388;
+  --c-longevity:    #D19A22;
+  --c-editing:      #6C73DF;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -394,8 +394,8 @@ html[data-motion="off"] { scroll-behavior: auto; }
 }
 
 /* extra colour tokens for the new interactives */
-:root { --c-exposure: #7A4E2E; --c-resistance: #1D6E5A; }
-[data-theme="dark"] { --c-exposure: #C88A5A; --c-resistance: #3FBE9B; }
+:root { --c-exposure: #9C6334; --c-resistance: #257E67; }
+[data-theme="dark"] { --c-exposure: #C4834F; --c-resistance: #35B694; }
 
 html[data-underline="on"] .prose a,
 html[data-underline="on"] .block .go,
@@ -407,3 +407,9 @@ html[data-underline="on"] .dd-item .nm { text-decoration: underline; text-underl
 /* illustration set: every mark is currentColor, so each takes the cream of its block */
 .diagram svg { width: 100%; height: auto; display: block; overflow: visible; }
 .diagram svg [stroke-linecap] { stroke-linecap: round; }
+
+/* dark blocks carry ink text: in dark mode the colour blocks are light, so
+   cream copy on them would be unreadable. currentColor carries the change
+   through the illustrations, rules and buttons too. */
+[data-theme="dark"] .block,
+[data-theme="dark"] .article-head { color: #14110D; }
