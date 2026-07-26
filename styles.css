@@ -22,15 +22,15 @@
   --pad: clamp(1.25rem, 5vw, 4.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --c-cardiology:   #D42E38;
-  --c-neurology:    #6B5CE1;
-  --c-oncology:     #CD2F72;
-  --c-metabolic:    #A16122;
-  --c-infectious:   #357E46;
-  --c-criticalcare: #2C76A7;
-  --c-transplant:   #287E57;
-  --c-longevity:    #906A18;
-  --c-editing:      #5B62DC;
+  --c-cardiology:   #A32A31;
+  --c-neurology:    #573C99;
+  --c-oncology:     #A32B60;
+  --c-metabolic:    #A75B17;
+  --c-infectious:   #2C6435;
+  --c-criticalcare: #1B5A78;
+  --c-transplant:   #2C7A45;
+  --c-longevity:    #8E6410;
+  --c-editing:      #303C86;
 }
 
 [data-theme="dark"] {
@@ -43,15 +43,15 @@
   --rule:    #2C2720;
   --rule-2:  #3D372E;
 
-  --c-cardiology:   #B8262F;
-  --c-neurology:    #4937DA;
-  --c-oncology:     #B02862;
-  --c-metabolic:    #8A531D;
-  --c-infectious:   #2E6C3C;
-  --c-criticalcare: #266590;
-  --c-transplant:   #226C4B;
-  --c-longevity:    #7C5B15;
-  --c-editing:      #3740D4;
+  --c-cardiology:   #E4646A;
+  --c-neurology:    #9B82E8;
+  --c-oncology:     #E36A9C;
+  --c-metabolic:    #E0964A;
+  --c-infectious:   #63B96D;
+  --c-criticalcare: #52A6CE;
+  --c-transplant:   #46C88A;
+  --c-longevity:    #DBA53E;
+  --c-editing:      #6F7FE0;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -182,9 +182,9 @@ img, svg { display: block; max-width: 100%; }
 /* diagram */
 .diagram { width: 100%; max-width: 380px; margin-inline: auto; }
 .diagram svg { width: 100%; height: auto; overflow: visible; }
-.block.on .block.on .diagram figcaption {
-  font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.14em; text-transform: uppercase;
-  text-align: center; margin-top: 1.5rem; opacity: 0.65;
+.diagram figcaption {
+  font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase;
+  text-align: center; margin-top: 1.25rem; opacity: 0.55;
 }
 
 /* ---------------- article pages ---------------- */
@@ -197,8 +197,8 @@ img, svg { display: block; max-width: 100%; }
   margin-top: 2.5rem; padding-top: 1.25rem; border-top: 1px solid currentColor;
   display: flex; flex-wrap: wrap; gap: 0.5rem 2rem; opacity: 0.8;
 }
-.article-head .diagram { max-width: 240px; margin: 2.5rem 0 0; }
-.article-head .article-head .article-head-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: center; }
+.article-head .diagram { max-width: 240px; margin: 2.5rem auto 0; }
+.article-head-grid { display: grid; grid-template-columns: 1.3fr 0.7fr; gap: 3rem; align-items: center; }
 
 .article { padding-block: clamp(3rem, 6vw, 5rem); }
 .prose { max-width: var(--measure); }
@@ -394,8 +394,8 @@ html[data-motion="off"] { scroll-behavior: auto; }
 }
 
 /* extra colour tokens for the new interactives */
-:root { --c-exposure: #86552D; --c-resistance: #206C59; }
-[data-theme="dark"] { --c-exposure: #86552D; --c-resistance: #206C59; }
+:root { --c-exposure: #7A4E2E; --c-resistance: #1D6E5A; }
+[data-theme="dark"] { --c-exposure: #C88A5A; --c-resistance: #3FBE9B; }
 
 html[data-underline="on"] .prose a,
 html[data-underline="on"] .block .go,
