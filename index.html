@@ -7,14 +7,19 @@
   <meta name="description" content="A medical awareness site explaining modern medicine to a general reader: the heart, the brain, cancer, and the science of extending healthy human life.">
   <script>
     (function () {
+      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
       try {
-        var t = localStorage.getItem('theme') || 'system';
-        var d = t === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
-        document.documentElement.setAttribute('data-theme', d);
-        var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
-        var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
-        var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+        var t = g('theme') || 'system';
+        r.setAttribute('data-theme', t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t);
+        var s = g('size'); if (s && s !== 'm') r.setAttribute('data-size', s);
+        var w = g('width'); if (w && w !== 'default') r.setAttribute('data-width', w);
+        var l = g('leading'); if (l && l !== 'default') r.setAttribute('data-leading', l);
+        var f = g('font'); if (f && f !== 'sans') r.setAttribute('data-font', f);
+        if (g('contrast') === 'on') r.setAttribute('data-contrast', 'on');
+        if (g('motion') === 'on') r.setAttribute('data-motion', 'off');
+        if (g('underline') === 'on') r.setAttribute('data-underline', 'on');
+      } catch (e) { r.setAttribute('data-theme', 'light'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/">
@@ -25,7 +30,7 @@
   <meta property="og:description" content="A medical awareness site explaining modern medicine to a general reader: the heart, the brain, cancer, and the science of extending healthy human life.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Plainly Medicine">
   <meta name="twitter:description" content="A medical awareness site explaining modern medicine to a general reader.">
   <script type="application/ld+json">
@@ -36,6 +41,7 @@
   "url": "https://rayan-m-nadeem.github.io/",
   "description": "A medical awareness site explaining modern medicine to a general reader: the heart, the brain, cancer, and the science of extending healthy human life.",
   "inLanguage": "en",
+  "image": "https://rayan-m-nadeem.github.io/share-card.png",
   "author": {
     "@type": "Person",
     "name": "Rayan Nadeem",
@@ -45,12 +51,22 @@
   "publisher": {"@type": "Person", "name": "Rayan Nadeem"}
 }
   </script>
+  <meta property="og:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: eight articles and three interactive tools on modern medicine">
+  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
 
   <header class="nav">
     <div class="wrap nav-inner">
@@ -88,14 +104,24 @@
             </svg>
           </button>
           <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-group-label">Appearance</div>
             <div class="set-row">
-              <span class="lb">Appearance</span>
+              <span class="lb">Theme</span>
               <div class="seg" data-set="theme">
                 <button data-val="light" aria-pressed="false">Light</button>
                 <button data-val="dark" aria-pressed="false">Dark</button>
                 <button data-val="system" aria-pressed="true">System</button>
               </div>
             </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Higher contrast"></button>
+              </div>
+              <span class="hint">Darkens muted text and strengthens rules.</span>
+            </div>
+
+            <div class="set-group-label">Reading</div>
             <div class="set-row">
               <span class="lb">Text size</span>
               <div class="seg" data-set="size">
@@ -104,6 +130,32 @@
                 <button data-val="l" aria-pressed="false">Large</button>
               </div>
             </div>
+            <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="tight" aria-pressed="false">Tight</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="loose" aria-pressed="false">Loose</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article typeface</span>
+              <div class="seg" data-set="font">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+                <button data-val="mono" aria-pressed="false">Mono</button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Behaviour</div>
             <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
@@ -116,6 +168,7 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+            <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
         <button class="menu-btn" aria-label="Menu" aria-expanded="false">
@@ -326,14 +379,15 @@
       <h2>About this project</h2>
       <div class="about-grid">
         <div class="reveal">
-          <p>I am a high school student who writes independent research papers to understand large questions from the ground up. This project grew out of a survey I wrote on life-extending medicine, and the pieces here are the pillars that survey rests on. Cardiovascular disease, neurodegeneration, and cancer are the failure modes that decide how long most people live.</p>
-          <p>I built this site to practice something medicine actually requires, which is explaining hard science to the people it affects without either frightening them or making it smaller than it is. If a page here makes a difficult idea clearer without misleading you, it has done its job.</p>
-          <p>Every clinical claim is cited to a primary source. I am not a licensed medical professional, and nothing here is medical advice.</p>
+          <p>Plainly Medicine explains what modern medicine can and cannot do, in language a reader with no medical background can follow. It exists because most writing about medicine fails in one of two directions: it promises breakthroughs that have not arrived, or it waves away real progress as hype. Both leave you less able to understand your own health.</p>
+          <p>I am a high school student in Pennsylvania, and I write independent research papers to work through large questions from the ground up. This site grew out of one of them, a survey of life-extending medicine, and the pieces here are the pillars that survey rests on. Cardiovascular disease, neurodegeneration, and cancer are the failure modes that decide how long most people live, so those come first. The interactive tools exist because some ideas, like why lowering cholesterol early beats lowering it late, are far easier to understand by moving a slider than by reading a paragraph.</p>
+          <p>The standard I hold myself to is simple. Every clinical claim is cited to a primary source, usually the trial itself rather than the press release about it. Where the evidence is strong I say so, and where it is early or contested I label it that way rather than rounding up. Technical terms stay in, because you deserve the real vocabulary, but each one is explained the first time it appears.</p>
+          <p>I am not a doctor and nothing here is medical advice. If a page makes a difficult idea clearer without misleading you, it has done its job. If you find something wrong or out of date, please tell me.</p>
         </div>
         <div class="contact-card reveal">
           <div class="label">Get in touch</div>
           <div class="big"><a href="mailto:plainlymedicine@gmail.com">plainlymedicine@gmail.com</a></div>
-          <p>Corrections are welcome. If something here is wrong, out of date, or unclear, I would rather know.</p>
+          <p>Corrections are welcome and taken seriously. If something here is wrong, out of date, or unclear, I would rather know than not.</p>
         </div>
       </div>
     </div>
@@ -350,6 +404,10 @@
       <p class="disclaimer">This site is for educational purposes only and does not constitute medical advice. Consult a qualified healthcare professional for any medical concerns.</p>
     </div>
   </footer>
+
+  <button class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
 
   <script src="app.js"></script>
 </body>

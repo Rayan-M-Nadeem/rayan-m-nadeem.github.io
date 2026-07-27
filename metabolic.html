@@ -7,14 +7,19 @@
   <meta name="description" content="GLP-1 drugs explained: how they mimic a natural gut hormone, why each added receptor target raises the effect, and what the evidence shows beyond weight, including cardiovascular risk and the new oral versions.">
   <script>
     (function () {
+      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
       try {
-        var t = localStorage.getItem('theme') || 'system';
-        var d = t === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
-        document.documentElement.setAttribute('data-theme', d);
-        var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
-        var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
-        var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+        var t = g('theme') || 'system';
+        r.setAttribute('data-theme', t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t);
+        var s = g('size'); if (s && s !== 'm') r.setAttribute('data-size', s);
+        var w = g('width'); if (w && w !== 'default') r.setAttribute('data-width', w);
+        var l = g('leading'); if (l && l !== 'default') r.setAttribute('data-leading', l);
+        var f = g('font'); if (f && f !== 'sans') r.setAttribute('data-font', f);
+        if (g('contrast') === 'on') r.setAttribute('data-contrast', 'on');
+        if (g('motion') === 'on') r.setAttribute('data-motion', 'off');
+        if (g('underline') === 'on') r.setAttribute('data-underline', 'on');
+      } catch (e) { r.setAttribute('data-theme', 'light'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/metabolic.html">
@@ -25,7 +30,7 @@
   <meta property="og:description" content="GLP-1 drugs explained: how they mimic a natural gut hormone, why each added receptor target raises the effect, and what the evidence shows beyond weight, including cardiovascular risk and the new oral versions.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/metabolic.html">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Drugs That Changed the Conversation: How GLP-1 Medicines Actually Work">
   <meta name="twitter:description" content="GLP-1 drugs explained: how they mimic a natural gut hormone, why each added receptor target raises the effect, and what the evidence shows beyond weight, including cardiovascular risk and the new oral versions.">
   <script type="application/ld+json">
@@ -53,6 +58,7 @@
     "@type": "Person",
     "name": "Rayan Nadeem"
   },
+  "image": "https://rayan-m-nadeem.github.io/share-card.png",
   "isAccessibleForFree": true,
   "isPartOf": {
     "@type": "WebSite",
@@ -61,12 +67,22 @@
   }
 }
   </script>
+  <meta property="og:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: eight articles and three interactive tools on modern medicine">
+  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-topic="metabolic" style="--c: var(--c-metabolic)">
+
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
 
   <header class="nav">
     <div class="wrap nav-inner">
@@ -86,7 +102,7 @@
           <a class="dd-item" href="cardiology.html" style="--c: var(--c-cardiology)"><span class="swatch"></span><span class="nm">Cardiology</span><span class="no">03</span></a>
           <a class="dd-item" href="neurology.html" style="--c: var(--c-neurology)"><span class="swatch"></span><span class="nm">Neurology</span><span class="no">04</span></a>
           <a class="dd-item" href="oncology.html" style="--c: var(--c-oncology)"><span class="swatch"></span><span class="nm">Oncology</span><span class="no">05</span></a>
-          <a class="dd-item" href="metabolic.html" style="--c: var(--c-metabolic)"><span class="swatch"></span><span class="nm">Metabolic Health</span><span class="no">06</span></a>
+          <a class="dd-item" href="metabolic.html" style="--c: var(--c-metabolic)" aria-current="page"><span class="swatch"></span><span class="nm">Metabolic Health</span><span class="no">06</span></a>
           <a class="dd-item" href="infectious.html" style="--c: var(--c-infectious)"><span class="swatch"></span><span class="nm">Infectious Disease</span><span class="no">07</span></a>
           <a class="dd-item" href="criticalcare.html" style="--c: var(--c-criticalcare)"><span class="swatch"></span><span class="nm">Critical Care</span><span class="no">08</span></a>
           <a class="dd-item" href="transplant.html" style="--c: var(--c-transplant)"><span class="swatch"></span><span class="nm">Transplant and Regeneration</span><span class="no">09</span></a>
@@ -104,14 +120,24 @@
             </svg>
           </button>
           <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-group-label">Appearance</div>
             <div class="set-row">
-              <span class="lb">Appearance</span>
+              <span class="lb">Theme</span>
               <div class="seg" data-set="theme">
                 <button data-val="light" aria-pressed="false">Light</button>
                 <button data-val="dark" aria-pressed="false">Dark</button>
                 <button data-val="system" aria-pressed="true">System</button>
               </div>
             </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Higher contrast"></button>
+              </div>
+              <span class="hint">Darkens muted text and strengthens rules.</span>
+            </div>
+
+            <div class="set-group-label">Reading</div>
             <div class="set-row">
               <span class="lb">Text size</span>
               <div class="seg" data-set="size">
@@ -120,6 +146,32 @@
                 <button data-val="l" aria-pressed="false">Large</button>
               </div>
             </div>
+            <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="tight" aria-pressed="false">Tight</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="loose" aria-pressed="false">Loose</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article typeface</span>
+              <div class="seg" data-set="font">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+                <button data-val="mono" aria-pressed="false">Mono</button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Behaviour</div>
             <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
@@ -132,6 +184,7 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+            <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
         <button class="menu-btn" aria-label="Menu" aria-expanded="false">
@@ -159,6 +212,9 @@
           <span>Independent research</span>
           <span>Updated July 2026</span>
         </div>
+        <div class="share">
+          <button id="copy-link" type="button"><span>Copy link</span></button>
+        </div>
       </div>
       <figure class="diagram">
         <svg viewBox="0 0 200 200" role="img" aria-label="A glucose molecule"><g transform="translate(8.00,12.14) scale(0.18400)" fill="currentColor" stroke="none"><g transform="translate(0.000000,955.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M4885 9444 c-16 -3 -39 -9 -50 -13 -11 -5 -49 -19 -84 -32 -132 -47 -276 -183 -337 -319 -9 -19 -22 -48 -29 -65 -72 -158 -38 -429 70 -571 14 -18 25 -36 25 -41 0 -11 106 -112 145 -139 53 -36 149 -82 185 -89 19 -4 50 -12 68 -18 32 -11 32 -11 30 -766 -3 -754 -3 -754 -39 -775 -20 -12 -132 -81 -250 -154 -118 -74 -223 -139 -234 -145 -11 -7 -44 -28 -75 -47 -30 -19 -66 -40 -80 -48 -34 -17 -57 -31 -110 -68 -25 -17 -76 -48 -114 -70 -38 -21 -79 -46 -91 -54 -13 -8 -49 -31 -81 -50 -33 -19 -63 -38 -69 -42 -19 -16 -86 -58 -91 -58 -3 0 -20 -10 -37 -23 -18 -12 -41 -27 -52 -34 -33 -20 -206 -127 -231 -143 -37 -25 -163 -104 -199 -125 -19 -11 -64 -39 -102 -63 -37 -23 -77 -48 -88 -55 -11 -6 -31 -19 -45 -28 -14 -9 -41 -25 -60 -36 -19 -10 -74 -45 -122 -76 -48 -31 -90 -57 -94 -57 -3 0 -20 -10 -37 -23 -36 -25 -50 -34 -127 -78 -30 -18 -76 -47 -103 -66 -46 -33 -84 -41 -103 -24 -5 5 -40 26 -79 46 -38 21 -77 44 -86 51 -8 8 -19 14 -22 14 -4 0 -37 19 -74 42 -38 22 -81 49 -98 58 -16 10 -88 52 -158 94 -71 42 -131 76 -134 76 -3 0 -21 11 -39 25 -18 14 -35 25 -39 25 -3 0 -22 11 -43 24 -20 14 -62 38 -92 55 -55 30 -55 30 -52 118 3 99 -14 251 -30 270 -6 7 -7 13 -4 13 18 0 -84 169 -132 222 -70 76 -131 115 -281 182 -35 16 -336 15 -352 -1 -7 -7 -20 -13 -28 -13 -31 0 -162 -73 -212 -118 -54 -48 -149 -167 -149 -186 0 -6 -6 -23 -14 -37 -73 -140 -70 -361 7 -529 55 -121 207 -264 322 -305 28 -9 61 -22 74 -29 15 -7 81 -11 170 -11 166 0 234 19 350 96 67 45 157 139 174 182 9 24 27 21 83 -15 27 -18 65 -41 84 -51 81 -44 398 -233 425 -254 6 -5 32 -19 57 -33 111 -59 304 -173 310 -184 9 -13 11 -2924 2 -2977 -5 -28 -16 -42 -53 -66 -118 -79 -371 -243 -375 -243 -2 0 -30 -18 -62 -40 -69 -48 -79 -54 -204 -135 -226 -147 -367 -239 -392 -256 -15 -11 -30 -19 -34 -19 -3 0 -23 -12 -43 -28 -20 -15 -44 -31 -53 -37 -50 -30 -224 -151 -231 -160 -29 -40 -12 -107 34 -130 40 -21 58 -18 104 14 22 16 77 53 123 83 46 29 145 94 221 143 210 138 335 219 346 225 6 3 82 52 170 110 89 58 168 110 177 115 10 6 57 37 105 70 48 33 92 62 98 64 5 2 35 21 65 41 92 62 95 63 132 40 18 -11 49 -29 68 -40 58 -34 213 -130 333 -206 96 -61 272 -170 577 -357 101 -62 457 -279 479 -292 9 -5 31 -20 48 -32 17 -13 34 -23 37 -23 3 0 55 -31 117 -70 61 -38 113 -70 116 -70 3 0 19 -10 36 -22 18 -13 48 -31 67 -42 19 -10 58 -33 85 -51 44 -28 96 -60 147 -90 9 -5 54 -32 99 -60 46 -27 94 -57 108 -65 156 -93 202 -120 206 -120 2 0 24 -13 48 -30 60 -40 109 -40 179 0 62 36 51 29 201 122 64 40 134 83 155 94 20 12 66 40 102 62 36 23 81 49 100 59 19 9 37 20 40 23 3 4 24 18 46 31 23 13 100 60 170 103 71 43 158 96 194 118 36 21 164 100 285 175 296 183 477 293 481 293 2 0 25 15 51 34 27 18 68 45 93 58 90 50 110 63 110 71 0 4 6 7 13 7 8 0 39 18 71 40 31 22 59 40 62 40 2 0 42 25 89 55 46 30 99 62 117 71 18 9 35 20 38 23 7 9 42 30 68 41 12 5 39 21 60 35 51 35 55 34 181 -50 61 -41 114 -75 118 -75 3 0 22 -13 42 -29 20 -15 41 -30 46 -32 10 -4 55 -34 384 -251 90 -59 165 -108 167 -108 2 0 53 -34 115 -75 61 -41 113 -75 116 -75 2 0 25 -15 51 -32 26 -18 51 -35 57 -38 16 -8 125 -79 175 -113 76 -54 147 -36 166 40 7 25 -22 93 -39 93 -7 0 -195 121 -405 261 -40 27 -74 49 -77 49 -2 0 -47 29 -100 65 -52 36 -98 65 -100 65 -3 0 -37 23 -76 51 -39 28 -79 53 -88 57 -9 4 -49 30 -89 57 -40 28 -80 55 -90 60 -10 6 -33 21 -52 35 -38 27 -51 36 -100 63 -18 10 -63 41 -101 68 -38 27 -71 49 -74 49 -3 0 -23 11 -45 25 l-40 25 0 1504 c0 1443 1 1504 18 1519 10 10 22 17 26 17 4 0 22 11 40 25 18 14 36 25 39 25 4 0 80 44 169 97 90 53 181 106 203 118 88 48 142 80 192 112 29 18 63 38 75 43 13 6 58 32 101 60 43 27 83 50 88 50 5 0 20 -17 33 -37 55 -86 214 -210 294 -229 15 -4 33 -12 41 -18 25 -20 307 -14 365 7 226 82 383 252 428 462 21 102 12 275 -19 345 -3 8 -7 17 -8 20 -1 3 -7 18 -13 33 -7 16 -12 33 -12 38 0 5 -4 9 -10 9 -5 0 -10 5 -10 11 0 53 -216 241 -309 269 -20 6 -47 17 -60 23 -40 20 -306 16 -365 -6 -127 -46 -197 -92 -281 -186 -57 -63 -135 -210 -135 -255 0 -13 -5 -28 -11 -32 -7 -4 -10 -54 -8 -147 3 -155 11 -143 -141 -229 -158 -91 -306 -176 -375 -218 -170 -102 -336 -200 -340 -200 -3 0 -23 -11 -45 -25 -55 -34 -68 -32 -157 26 -43 28 -87 55 -98 60 -11 5 -65 38 -120 73 -55 36 -143 90 -195 122 -52 31 -124 76 -160 99 -36 23 -100 64 -143 91 -43 27 -93 58 -111 69 -32 20 -134 82 -164 100 -10 6 -31 19 -47 30 -17 11 -39 25 -50 32 -47 28 -208 129 -300 189 -55 35 -111 69 -125 76 -14 7 -27 15 -30 18 -10 10 -90 60 -96 60 -4 0 -22 11 -40 25 -18 14 -36 25 -39 25 -6 0 -48 26 -175 109 -30 19 -64 41 -75 47 -11 6 -36 21 -55 33 -19 12 -43 24 -52 27 -10 4 -18 10 -18 14 0 4 -8 11 -17 14 -21 7 -30 13 -145 89 -48 31 -89 57 -92 57 -3 0 -37 20 -76 45 l-70 45 0 753 0 754 43 12 c134 40 236 94 312 168 44 42 115 134 115 149 0 3 9 18 19 33 11 15 25 50 31 77 7 27 17 60 23 73 22 45 14 257 -12 331 -76 215 -231 368 -441 435 -54 18 -237 29 -305 19z m241 -190 c170 -56 276 -156 331 -313 24 -68 33 -224 14 -235 -4 -3 -11 -25 -15 -48 -15 -95 -141 -238 -256 -291 -175 -81 -421 -36 -540 99 -101 115 -125 180 -125 339 1 130 1 130 37 197 20 37 47 81 60 99 42 57 184 148 233 149 11 0 27 5 35 10 24 16 171 12 226 -6z m-77 -2796 c41 -26 50 -32 117 -72 27 -16 99 -61 161 -100 62 -39 121 -75 133 -81 11 -5 20 -13 20 -17 0 -5 4 -8 9 -8 9 0 78 -40 225 -132 37 -24 76 -48 85 -53 9 -6 34 -22 56 -36 22 -14 187 -118 367 -230 181 -112 362 -225 404 -251 41 -27 77 -48 80 -48 2 0 30 -17 61 -37 32 -21 66 -42 75 -48 25 -15 274 -167 306 -187 15 -10 43 -27 62 -38 19 -11 69 -43 110 -70 41 -27 81 -53 89 -56 8 -4 37 -22 65 -41 28 -18 54 -33 59 -33 4 0 21 -10 37 -22 30 -22 30 -22 30 -1528 l0 -1507 -82 -49 c-45 -27 -87 -51 -93 -53 -5 -2 -30 -18 -55 -36 -25 -17 -52 -35 -60 -39 -8 -3 -31 -16 -50 -28 -19 -11 -44 -26 -55 -32 -11 -7 -51 -32 -90 -57 -38 -25 -103 -65 -144 -90 -96 -58 -80 -48 -284 -174 -98 -60 -186 -114 -195 -120 -27 -16 -301 -185 -367 -226 -33 -21 -129 -80 -213 -131 -85 -51 -184 -112 -220 -135 -37 -23 -78 -48 -92 -56 -14 -8 -81 -48 -150 -91 -69 -42 -134 -82 -145 -89 -11 -7 -34 -22 -52 -34 -17 -13 -34 -23 -37 -23 -6 0 -106 -61 -148 -91 -54 -38 -75 -34 -193 35 -60 35 -117 70 -125 78 -8 7 -26 19 -40 26 -14 7 -38 21 -55 32 -16 11 -37 23 -45 26 -8 4 -44 25 -80 48 -36 23 -74 47 -85 53 -11 6 -81 49 -155 95 -74 45 -146 90 -160 98 -61 36 -144 86 -168 102 -15 10 -38 23 -52 30 -14 7 -59 35 -100 63 -41 28 -86 56 -100 63 -14 7 -38 21 -55 32 -16 11 -46 29 -65 40 -19 12 -76 47 -127 78 -347 215 -410 254 -427 265 -11 7 -76 47 -144 89 -68 43 -125 78 -128 78 -2 0 -30 17 -61 37 -32 21 -66 42 -75 48 -9 5 -50 30 -90 55 -40 25 -77 47 -83 50 -5 3 -20 12 -32 20 -23 15 -23 15 -23 1521 0 1507 0 1507 25 1523 13 9 46 28 72 43 26 14 86 51 133 82 47 31 96 62 110 68 14 7 34 18 45 25 11 7 45 29 75 48 30 20 64 41 75 47 20 12 136 85 180 113 12 8 63 39 111 68 49 30 109 67 134 83 25 16 54 33 65 39 11 6 40 24 65 40 25 16 68 43 95 60 70 43 79 49 170 106 75 48 215 134 260 161 11 7 28 16 38 19 9 3 17 9 17 13 0 3 15 12 33 20 17 8 34 17 37 21 5 7 73 51 121 80 22 12 298 182 363 223 11 7 63 39 115 71 53 33 118 73 146 90 120 75 116 74 164 44z m-4164 -281 c114 -40 188 -106 255 -228 35 -64 35 -65 35 -189 0 -122 -1 -127 -34 -195 -57 -118 -144 -194 -278 -242 -55 -20 -217 -24 -255 -6 -12 6 -53 24 -89 41 -101 47 -166 124 -223 266 -21 51 -21 196 0 256 49 145 148 255 259 289 22 7 49 16 60 21 54 25 181 18 270 -13z m8541 3 c196 -75 306 -229 306 -425 0 -159 -103 -331 -234 -393 -121 -57 -119 -56 -225 -56 -67 0 -107 4 -115 12 -7 7 -20 12 -29 12 -62 0 -214 130 -258 220 -45 93 -59 232 -33 326 32 113 169 270 258 294 27 7 54 17 59 21 31 24 199 17 271 -11z"/> <path d="M5029 5839 c-63 -67 -26 -122 139 -208 15 -8 63 -37 107 -66 150 -96 180 -115 229 -141 27 -14 75 -42 105 -62 258 -165 275 -175 311 -194 14 -7 60 -36 102 -65 43 -29 81 -53 84 -53 4 0 37 -19 73 -42 75 -49 80 -51 176 -109 39 -23 100 -61 137 -85 37 -24 72 -44 77 -44 5 0 11 -3 13 -8 2 -4 36 -28 77 -52 40 -25 81 -49 90 -55 9 -5 43 -25 75 -44 33 -19 82 -50 110 -68 58 -38 114 -44 138 -15 55 65 36 122 -56 172 -33 18 -68 39 -76 46 -17 14 -134 86 -300 186 -63 38 -132 81 -154 96 -21 14 -47 31 -57 37 -35 19 -334 203 -467 286 -73 46 -143 91 -156 99 -13 8 -51 30 -83 49 -32 18 -83 50 -113 70 -30 20 -62 41 -71 46 -10 6 -59 35 -109 65 -50 30 -100 60 -111 66 -10 6 -27 18 -37 27 -10 10 -23 17 -28 17 -5 0 -36 18 -69 40 -76 51 -115 53 -156 9z"/> <path d="M2866 4507 c-33 -33 -38 -219 -34 -1327 4 -966 1 -925 55 -949 36 -16 59 -13 88 12 25 22 25 22 25 1128 0 609 -3 1114 -6 1124 -15 39 -94 46 -128 12z"/> <path d="M6945 2214 c-22 -13 -52 -30 -68 -39 -15 -9 -65 -40 -110 -69 -45 -29 -89 -56 -97 -60 -21 -10 -39 -21 -170 -102 -131 -81 -405 -249 -456 -279 -19 -11 -88 -54 -154 -95 -66 -41 -135 -83 -153 -93 -17 -10 -44 -25 -58 -35 -15 -9 -87 -54 -160 -100 -74 -46 -206 -128 -294 -183 -88 -55 -168 -102 -177 -105 -20 -7 -48 -57 -48 -85 0 -32 34 -78 62 -84 39 -9 58 -1 168 69 54 33 113 70 132 81 40 24 62 38 156 95 40 25 81 50 91 55 10 6 36 23 57 37 52 35 255 158 261 158 3 0 19 10 36 23 17 12 39 27 49 32 18 11 261 159 302 185 38 24 155 94 184 110 15 8 48 30 74 48 26 17 49 32 52 32 3 0 48 27 101 60 53 33 98 60 101 60 3 0 20 11 37 24 18 13 48 33 68 44 20 11 47 26 60 34 77 43 99 68 99 114 0 86 -64 116 -145 68z"/> </g></g></svg>
@@ -167,8 +223,15 @@
     </div>
   </header>
 
-  <article class="article wrap narrow">
+  <article class="article wrap" id="main">
+    <div class="article-grid">
     <div class="prose">
+      <div class="ev-key reveal">
+        <span class="lb">Evidence status</span>
+        <span class="ev ev-approved">Approved</span>
+        <span class="ev ev-trials">In trials</span>
+        <span class="ev ev-early">Early research</span>
+      </div>
       <p class="reveal">Few areas of medicine have moved as quickly, or been discussed as loudly, as the drugs known as GLP-1 receptor agonists, which is a technical way of saying they switch on the same docking point in the body that the natural hormone uses. They began as treatments for type 2 diabetes and have become some of the most widely prescribed medicines in the world. The volume of the conversation has made the underlying science harder to see, which is a shame, because the mechanism is genuinely elegant and explains most of what people find surprising about these drugs.</p>
 
       <h2 class="reveal">What GLP-1 actually is</h2>
@@ -178,11 +241,11 @@
       <blockquote class="pullquote reveal">Each additional receptor the drug touches has lifted the ceiling of what the class can do.</blockquote>
 
       <h2 class="reveal">A staircase of effect</h2>
-      <p class="reveal">The clearest way to read the field is as a series of steps. Semaglutide, which targets the GLP-1 receptor alone, established average weight reduction around fifteen percent in its major obesity trials. Tirzepatide, which also targets the receptor for a second gut hormone called GIP, raised that to roughly twenty-one percent. Drugs that target a third receptor have reported higher figures still, and are in late-stage trials.</p>
+      <p class="reveal">The clearest way to read the field is as a series of steps. Semaglutide, which targets the GLP-1 receptor alone, established average weight reduction around fifteen percent in its major obesity trials.<a class="cite" href="#ref-1" aria-label="Reference 1">1</a> Tirzepatide, which also targets the receptor for a second gut hormone called GIP, raised that to roughly twenty-one percent. <span class="ev ev-approved">Approved</span><a class="cite" href="#ref-2" aria-label="Reference 2">2</a> Drugs that target a third receptor have reported higher figures still, and are in late-stage trials. <span class="ev ev-trials">In trials</span></p>
       <p class="reveal">This pattern is why so much development effort has moved toward adding receptors and improving convenience rather than refining the original mechanism. The single-receptor approach appears to have found its limit.</p>
 
       <h2 class="reveal">Not only about weight</h2>
-      <p class="reveal">The most important results may be the ones that have nothing to do with the scale. A large cardiovascular outcomes trial found that semaglutide reduced major cardiovascular events in people with existing heart disease, and approvals have since expanded to cover reducing heart attack and stroke risk, sleep apnea, and a form of fatty liver disease now called MASH. Trials are underway in kidney disease and, more unexpectedly, in addiction.</p>
+      <p class="reveal">The most important results may be the ones that have nothing to do with the scale. A large cardiovascular outcomes trial found that semaglutide reduced major cardiovascular events in people with existing heart disease<a class="cite" href="#ref-3" aria-label="Reference 3">3</a>, and approvals have since expanded to cover reducing heart attack and stroke risk, sleep apnea, and a form of fatty liver disease now called MASH. Trials are underway in kidney disease and, more unexpectedly, in addiction.</p>
       <p class="reveal">Taken together, this suggests the class is better understood as metabolic medicine than as weight medicine. That distinction matters for how the drugs are studied, prescribed, and paid for.</p>
 
       <h3 class="reveal">The move to pills</h3>
@@ -204,17 +267,23 @@
       <div class="refs reveal">
         <span class="label">Further Reading &amp; References</span>
         <ol>
-          <li>Wilding JPH, et al. Once-Weekly Semaglutide in Adults with Overweight or Obesity (STEP 1). New England Journal of Medicine. 2021.</li>
-          <li>Jastreboff AM, et al. Tirzepatide Once Weekly for the Treatment of Obesity (SURMOUNT-1). New England Journal of Medicine. 2022.</li>
-          <li>Lincoff AM, et al. Semaglutide and Cardiovascular Outcomes in Obesity without Diabetes (SELECT). New England Journal of Medicine. 2023.</li>
+          <li id="ref-1">Wilding JPH, et al. Once-Weekly Semaglutide in Adults with Overweight or Obesity (STEP 1). New England Journal of Medicine. 2021.</li>
+          <li id="ref-2">Jastreboff AM, et al. Tirzepatide Once Weekly for the Treatment of Obesity (SURMOUNT-1). New England Journal of Medicine. 2022.</li>
+          <li id="ref-3">Lincoff AM, et al. Semaglutide and Cardiovascular Outcomes in Obesity without Diabetes (SELECT). New England Journal of Medicine. 2023.</li>
         </ol>
         <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
-          <li><a href="https://www.novonordisk.com/content/nncorp/global/en/news-and-media/news-and-ir-materials/news-details.html?id=916472" target="_blank" rel="noopener">The FDA approves the first oral GLP-1 for weight management, based on the OASIS and SELECT trial programmes. December 2025.</a></li>
-          <li><a href="https://www.drugdiscoverynews.com/glp-1-agonist-clinical-pipeline-2026-semaglutide-tirzepatide-and-what-s-in-phase-2-17286" target="_blank" rel="noopener">Orforglipron becomes the first oral non-peptide GLP-1 approved for weight management, and triple-receptor candidates advance in trials. 2026.</a></li>
+          <li id="ref-4"><a href="https://www.novonordisk.com/content/nncorp/global/en/news-and-media/news-and-ir-materials/news-details.html?id=916472" target="_blank" rel="noopener">The FDA approves the first oral GLP-1 for weight management, based on the OASIS and SELECT trial programmes. December 2025.</a></li>
+          <li id="ref-5"><a href="https://www.drugdiscoverynews.com/glp-1-agonist-clinical-pipeline-2026-semaglutide-tirzepatide-and-what-s-in-phase-2-17286" target="_blank" rel="noopener">Orforglipron becomes the first oral non-peptide GLP-1 approved for weight management, and triple-receptor candidates advance in trials. 2026.</a></li>
         </ol>
       </div>
     </div>
+    <aside class="toc" aria-label="Contents"></aside>
+    </div>
+    <nav class="pager" aria-label="More pieces">
+      <a class="" href="oncology.html" rel="prev"><span class="dir">Previous</span><span class="ttl">The Central Obstacle</span></a>
+      <a class="" href="infectious.html" rel="next"><span class="dir">Next</span><span class="ttl">The Clock Running Against Us</span></a>
+    </nav>
   </article>
 
   <footer class="footer">
@@ -228,6 +297,11 @@
     </div>
   </footer>
 
+  <button class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="glossary.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

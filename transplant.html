@@ -7,14 +7,19 @@
   <meta name="description" content="Why organ transplantation is limited by arithmetic rather than technique, and how machine perfusion, gene-edited pig organs, and engineered tissue are each trying to expand the supply.">
   <script>
     (function () {
+      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
       try {
-        var t = localStorage.getItem('theme') || 'system';
-        var d = t === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
-        document.documentElement.setAttribute('data-theme', d);
-        var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
-        var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
-        var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+        var t = g('theme') || 'system';
+        r.setAttribute('data-theme', t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t);
+        var s = g('size'); if (s && s !== 'm') r.setAttribute('data-size', s);
+        var w = g('width'); if (w && w !== 'default') r.setAttribute('data-width', w);
+        var l = g('leading'); if (l && l !== 'default') r.setAttribute('data-leading', l);
+        var f = g('font'); if (f && f !== 'sans') r.setAttribute('data-font', f);
+        if (g('contrast') === 'on') r.setAttribute('data-contrast', 'on');
+        if (g('motion') === 'on') r.setAttribute('data-motion', 'off');
+        if (g('underline') === 'on') r.setAttribute('data-underline', 'on');
+      } catch (e) { r.setAttribute('data-theme', 'light'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/transplant.html">
@@ -25,7 +30,7 @@
   <meta property="og:description" content="Why organ transplantation is limited by arithmetic rather than technique, and how machine perfusion, gene-edited pig organs, and engineered tissue are each trying to expand the supply.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/transplant.html">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Supply Problem: How Medicine Is Trying to Make More Organs">
   <meta name="twitter:description" content="Why organ transplantation is limited by arithmetic rather than technique, and how machine perfusion, gene-edited pig organs, and engineered tissue are each trying to expand the supply.">
   <script type="application/ld+json">
@@ -53,6 +58,7 @@
     "@type": "Person",
     "name": "Rayan Nadeem"
   },
+  "image": "https://rayan-m-nadeem.github.io/share-card.png",
   "isAccessibleForFree": true,
   "isPartOf": {
     "@type": "WebSite",
@@ -61,12 +67,22 @@
   }
 }
   </script>
+  <meta property="og:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: eight articles and three interactive tools on modern medicine">
+  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body data-topic="transplant" style="--c: var(--c-transplant)">
+
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
 
   <header class="nav">
     <div class="wrap nav-inner">
@@ -89,7 +105,7 @@
           <a class="dd-item" href="metabolic.html" style="--c: var(--c-metabolic)"><span class="swatch"></span><span class="nm">Metabolic Health</span><span class="no">06</span></a>
           <a class="dd-item" href="infectious.html" style="--c: var(--c-infectious)"><span class="swatch"></span><span class="nm">Infectious Disease</span><span class="no">07</span></a>
           <a class="dd-item" href="criticalcare.html" style="--c: var(--c-criticalcare)"><span class="swatch"></span><span class="nm">Critical Care</span><span class="no">08</span></a>
-          <a class="dd-item" href="transplant.html" style="--c: var(--c-transplant)"><span class="swatch"></span><span class="nm">Transplant and Regeneration</span><span class="no">09</span></a>
+          <a class="dd-item" href="transplant.html" style="--c: var(--c-transplant)" aria-current="page"><span class="swatch"></span><span class="nm">Transplant and Regeneration</span><span class="no">09</span></a>
           <a class="dd-item" href="longevity.html" style="--c: var(--c-longevity)"><span class="swatch"></span><span class="nm">Longevity and Gene Editing</span><span class="no">10</span></a>
           </div>
         </div>
@@ -104,14 +120,24 @@
             </svg>
           </button>
           <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-group-label">Appearance</div>
             <div class="set-row">
-              <span class="lb">Appearance</span>
+              <span class="lb">Theme</span>
               <div class="seg" data-set="theme">
                 <button data-val="light" aria-pressed="false">Light</button>
                 <button data-val="dark" aria-pressed="false">Dark</button>
                 <button data-val="system" aria-pressed="true">System</button>
               </div>
             </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Higher contrast"></button>
+              </div>
+              <span class="hint">Darkens muted text and strengthens rules.</span>
+            </div>
+
+            <div class="set-group-label">Reading</div>
             <div class="set-row">
               <span class="lb">Text size</span>
               <div class="seg" data-set="size">
@@ -120,6 +146,32 @@
                 <button data-val="l" aria-pressed="false">Large</button>
               </div>
             </div>
+            <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="tight" aria-pressed="false">Tight</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="loose" aria-pressed="false">Loose</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article typeface</span>
+              <div class="seg" data-set="font">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+                <button data-val="mono" aria-pressed="false">Mono</button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Behaviour</div>
             <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
@@ -132,6 +184,7 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+            <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
         <button class="menu-btn" aria-label="Menu" aria-expanded="false">
@@ -159,6 +212,9 @@
           <span>Independent research</span>
           <span>Updated July 2026</span>
         </div>
+        <div class="share">
+          <button id="copy-link" type="button"><span>Copy link</span></button>
+        </div>
       </div>
       <figure class="diagram">
         <svg viewBox="0 0 200 200" role="img" aria-label="A kidney"><g transform="translate(42.50,8.00) scale(0.18400)" fill="currentColor" stroke="none"><g transform="translate(0.000000,1000.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M2915 9905 c-55 -8 -116 -19 -135 -24 -19 -6 -75 -20 -123 -31 -197 -45 -436 -146 -630 -267 -394 -244 -699 -626 -862 -1078 -31 -86 -44 -132 -70 -250 -35 -155 -42 -483 -14 -604 6 -25 13 -55 14 -66 53 -344 317 -743 610 -921 112 -68 255 -128 330 -139 88 -13 95 -19 95 -69 0 -55 -10 -62 -125 -87 -540 -118 -999 -434 -1312 -904 -178 -267 -348 -641 -418 -915 -10 -36 -19 -72 -22 -80 -4 -8 -7 -20 -9 -27 -1 -6 -7 -27 -12 -45 -6 -18 -16 -60 -22 -93 -6 -33 -14 -67 -17 -75 -8 -21 -9 -27 -38 -190 -70 -390 -67 -307 -71 -2195 -3 -1364 -2 -1705 9 -1725 27 -54 94 -63 137 -20 20 20 20 40 20 1548 0 1444 6 1858 30 2032 5 41 17 127 25 190 16 125 59 336 100 495 28 106 132 423 145 440 4 6 16 35 28 65 81 221 264 522 438 722 203 233 507 444 754 522 30 10 62 20 70 23 8 4 17 7 20 8 3 1 12 5 20 8 13 6 151 39 214 52 72 15 223 58 230 66 6 5 16 9 24 9 24 0 174 74 242 120 95 64 267 240 332 340 64 97 138 242 198 386 23 54 55 127 71 160 16 34 29 64 29 67 0 4 13 35 29 69 16 35 57 124 91 198 91 200 299 586 372 692 63 92 -49 202 -123 121 -64 -70 -328 -546 -421 -759 -61 -139 -70 -156 -78 -148 -5 5 -31 55 -59 110 -62 126 -128 220 -262 368 -130 145 -173 164 -229 104 -44 -47 -30 -87 73 -200 240 -268 321 -419 334 -618 5 -82 4 -88 -37 -190 -110 -277 -291 -489 -511 -600 -92 -47 -95 -45 -97 58 -2 83 -4 88 -32 115 -33 29 -45 32 -84 17 -15 -5 -37 -6 -53 -1 -15 5 -55 15 -88 22 -86 18 -157 51 -265 124 -264 177 -440 457 -516 818 -24 113 -26 136 -21 307 3 128 10 206 22 255 121 485 350 842 715 1116 292 219 584 335 990 395 19 3 112 8 207 11 624 19 1190 -224 1668 -718 363 -375 658 -903 867 -1549 70 -216 153 -537 173 -663 2 -15 6 -31 9 -35 4 -7 34 -190 51 -317 72 -521 72 -1021 -1 -1625 -19 -158 -46 -339 -53 -360 -5 -14 -10 -32 -10 -40 0 -8 -11 -67 -25 -130 -163 -761 -440 -1374 -827 -1829 -323 -380 -655 -593 -1129 -725 -170 -48 -519 -60 -747 -26 -73 10 -140 23 -150 28 -10 5 -43 15 -73 22 -116 27 -297 108 -440 197 -296 184 -520 487 -592 803 -24 107 -36 333 -19 390 5 19 17 64 26 100 55 216 152 384 320 555 72 74 180 155 205 155 6 0 10 -24 10 -54 0 -47 4 -57 26 -75 69 -54 154 5 154 106 0 22 12 113 28 204 65 390 17 625 -165 807 -111 111 -228 165 -371 170 -173 7 -287 -29 -449 -140 -221 -151 -484 -510 -599 -815 -13 -35 -28 -71 -34 -80 -44 -78 -146 -399 -195 -618 -68 -299 -85 -401 -110 -630 -31 -296 -34 -333 -45 -520 -5 -104 -13 -233 -16 -285 -8 -122 -8 -124 -23 -525 -6 -187 -13 -577 -14 -867 -2 -527 -2 -527 21 -550 30 -31 92 -31 125 0 24 23 24 23 31 545 7 595 23 1218 36 1417 34 538 68 875 115 1121 8 46 18 95 20 109 169 908 665 1664 1090 1663 202 -1 365 -140 423 -363 12 -43 7 -313 -6 -357 -10 -34 -19 -44 -47 -53 -45 -15 -217 -130 -298 -200 -176 -153 -358 -456 -412 -689 -129 -552 141 -1144 675 -1483 207 -132 519 -244 773 -278 189 -25 526 -10 717 31 895 193 1583 928 1976 2109 50 151 81 260 149 530 139 547 201 1512 135 2085 -15 126 -48 348 -59 396 -6 24 -22 103 -35 174 -22 114 -70 312 -125 515 -27 96 -133 398 -187 530 -25 63 -55 136 -65 163 -11 26 -23 55 -29 65 -5 9 -44 87 -86 172 -77 155 -104 203 -201 353 -29 44 -53 82 -53 83 0 2 -34 48 -76 101 -41 54 -94 123 -117 153 -23 30 -109 123 -192 205 -358 358 -745 576 -1205 679 -63 14 -155 30 -205 36 -124 14 -479 11 -600 -5z"/> <path d="M4465 7416 c-525 -175 -834 -404 -1165 -863 -201 -279 -201 -266 25 -448 126 -101 242 -177 356 -232 105 -51 114 -63 55 -75 -36 -8 -179 -56 -240 -81 -166 -68 -376 -198 -402 -250 -15 -28 -15 -92 -1 -142 3 -11 15 -53 27 -93 11 -40 24 -80 29 -90 5 -9 30 -60 56 -113 25 -52 64 -119 86 -147 48 -64 49 -82 18 -352 -21 -181 -22 -465 -3 -568 6 -33 6 -33 -28 -27 -53 10 -98 -31 -98 -89 0 -42 3 -45 95 -125 146 -127 203 -207 396 -556 50 -91 100 -172 112 -180 55 -38 137 -2 137 62 0 24 -48 128 -105 223 -246 416 -293 516 -324 690 -49 270 -49 262 -16 483 12 81 23 121 32 124 8 3 76 -25 151 -62 76 -37 173 -83 217 -102 44 -19 108 -48 143 -64 34 -16 64 -29 67 -29 2 0 138 -65 301 -145 162 -80 308 -145 323 -145 57 0 95 93 58 143 -15 22 -310 174 -527 273 -91 41 -178 81 -195 89 -16 8 -73 34 -125 58 -251 116 -446 301 -560 531 -68 138 -106 261 -88 283 65 79 441 222 743 283 137 28 194 32 497 38 322 7 328 7 350 30 28 27 29 93 3 122 -17 18 -36 20 -349 23 -416 4 -491 17 -721 126 -136 65 -397 243 -428 292 -27 44 304 440 493 591 180 145 452 283 711 362 114 34 139 54 139 112 0 96 -51 105 -245 40z"/> </g></g></svg>
@@ -167,23 +223,30 @@
     </div>
   </header>
 
-  <article class="article wrap narrow">
+  <article class="article wrap" id="main">
+    <div class="article-grid">
     <div class="prose">
+      <div class="ev-key reveal">
+        <span class="lb">Evidence status</span>
+        <span class="ev ev-approved">Approved</span>
+        <span class="ev ev-trials">In trials</span>
+        <span class="ev ev-early">Early research</span>
+      </div>
       <p class="reveal">Organ transplantation is one of the clearest successes in modern medicine. A failing organ is removed and a working one takes its place, and people who would have died live for decades. The limiting factor is not really surgical skill or immunology any more. It is arithmetic. There are far more people who need organs than there are organs, and a large number of people die waiting. Almost everything interesting happening in this field is an attempt to change that number.</p>
 
       <h2 class="reveal">Keeping organs alive outside the body</h2>
       <p class="reveal">For decades a donated organ was packed in ice and raced to the recipient. Cold slows decay, but it does nothing to repair damage and it offers no way to check whether the organ actually works. That changed with machine perfusion, which keeps an organ working outside the body. The organ is hooked up to a pump that pushes an oxygen-rich fluid through it, sometimes kept at body temperature, so it carries on functioning.</p>
-      <p class="reveal">This does two things at once. It allows clinicians to test an organ before committing a patient to it, and it gives the organ a chance to recover from injury. A randomized trial in liver transplantation showed advantages over cold storage, and for lungs, which are especially fragile, ex vivo lung perfusion, meaning perfusion carried out outside the body, has let surgeons test, repair, and successfully transplant organs that would once have been rejected as too risky.</p>
+      <p class="reveal">This does two things at once. It allows clinicians to test an organ before committing a patient to it, and it gives the organ a chance to recover from injury. A randomized trial in liver transplantation showed advantages over cold storage<a class="cite" href="#ref-1" aria-label="Reference 1">1</a>, and for lungs, which are especially fragile, ex vivo lung perfusion, meaning perfusion carried out outside the body, has let surgeons test, repair, and successfully transplant organs that would once have been rejected as too risky <span class="ev ev-approved">Approved</span><a class="cite" href="#ref-2" aria-label="Reference 2">2</a>.</p>
 
       <blockquote class="pullquote reveal">The fastest way to add organs may be to stop discarding the ones we already have.</blockquote>
 
       <h2 class="reveal">Organs from another species</h2>
       <p class="reveal">If the shortage cannot be solved with human donors, the alternative is to look elsewhere. Pig organs are close to the right size and physiology, and the historical obstacle was immediate, violent rejection. Gene editing changed the calculation by allowing many edits at once, removing pig genes that trigger human rejection and adding human genes that calm it.</p>
-      <p class="reveal">The first gene-edited pig kidney was transplanted into a living person in March 2024. Since then the field has moved from individual compassionate-use cases into regulated clinical trials, with the first transplant in a formal multi-patient study performed in November 2025. The results so far are genuinely early and mixed. Several grafts have been lost to rejection or complications, and the longest reported survival with a pig kidney is under a year. It would be dishonest to describe this as solved. It is equally dishonest to call it science fiction, because it is now happening in trials with regulatory oversight.</p>
+      <p class="reveal">The first gene-edited pig kidney was transplanted into a living person in March 2024. Since then the field has moved from individual compassionate-use cases into regulated clinical trials, with the first transplant in a formal multi-patient study performed in November 2025 <span class="ev ev-trials">In trials</span><a class="cite" href="#ref-3" aria-label="Reference 3">3</a><a class="cite" href="#ref-4" aria-label="Reference 4">4</a>. The results so far are genuinely early and mixed. Several grafts have been lost to rejection or complications, and the longest reported survival with a pig kidney is under a year. It would be dishonest to describe this as solved. It is equally dishonest to call it science fiction, because it is now happening in trials with regulatory oversight.</p>
 
       <h2 class="reveal">Growing tissue rather than borrowing it</h2>
       <p class="reveal">The most ambitious approach is to build organs outright. Three lines of work are underway. Organoids are small clumps of tissue grown from stem cells that reproduce part of an organ's structure, and they are already valuable for studying disease and testing drugs. Decellularized scaffolds take an existing organ, wash away all of its cells, and leave the empty framework behind to be filled with new ones. Bioprinting builds tissue layer by layer.</p>
-      <p class="reveal">None of these currently produce a transplantable whole organ, and the reason is almost always the same: blood supply. A working organ needs a dense, branching network of blood vessels reaching every single cell. Building that network, a problem called vascularization, is still the central unsolved obstacle. Partial repairs and engineered patches are far closer than whole organs.</p>
+      <p class="reveal">None of these currently produce a transplantable whole organ, and the reason is almost always the same: blood supply. A working organ needs a dense, branching network of blood vessels reaching every single cell. Building that network, a problem called vascularization, is still the central unsolved obstacle. <span class="ev ev-early">Early research</span> Partial repairs and engineered patches are far closer than whole organs.</p>
 
       <h2 class="reveal">A pipeline rather than a breakthrough</h2>
       <p class="reveal">If organ failure becomes a manageable condition rather than a terminal one, it will not be because of a single invention. It will be because better preservation reduced waste, expanded donor pathways added supply, gene-edited animal organs filled part of the gap, and engineered tissue handled repairs. Each of those has real momentum. None of them is sufficient alone.</p>
@@ -201,17 +264,23 @@
       <div class="refs reveal">
         <span class="label">Further Reading &amp; References</span>
         <ol>
-          <li>Nasralla D, et al. A randomized trial of normothermic preservation in liver transplantation. Nature. 2018.</li>
-          <li>Cypel M, et al. Normothermic ex vivo lung perfusion in clinical lung transplantation. New England Journal of Medicine. 2011.</li>
-          <li>Massachusetts General Hospital. World's First Genetically-Edited Pig Kidney Transplant into a Living Recipient. 2024.</li>
+          <li id="ref-1">Nasralla D, et al. A randomized trial of normothermic preservation in liver transplantation. Nature. 2018.</li>
+          <li id="ref-2">Cypel M, et al. Normothermic ex vivo lung perfusion in clinical lung transplantation. New England Journal of Medicine. 2011.</li>
+          <li id="ref-3">Massachusetts General Hospital. World's First Genetically-Edited Pig Kidney Transplant into a Living Recipient. 2024.</li>
         </ol>
         <span class="label">Recent Developments · 2025 to 2026</span>
         <ol>
-          <li><a href="https://nyulangone.org/news/first-gene-edited-pig-kidney-transplant-clinical-trial-begins-nyu-langone-health" target="_blank" rel="noopener">The first transplant in the EXPAND study, the first regulated multi-patient clinical trial of a gene-edited pig kidney, is performed at NYU Langone. November 2025.</a></li>
-          <li><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12728669/" target="_blank" rel="noopener">A review of the EXPAND study and the state of renal xenotransplantation, including the longest reported pig kidney survival to date at 271 days. 2026.</a></li>
+          <li id="ref-4"><a href="https://nyulangone.org/news/first-gene-edited-pig-kidney-transplant-clinical-trial-begins-nyu-langone-health" target="_blank" rel="noopener">The first transplant in the EXPAND study, the first regulated multi-patient clinical trial of a gene-edited pig kidney, is performed at NYU Langone. November 2025.</a></li>
+          <li id="ref-5"><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC12728669/" target="_blank" rel="noopener">A review of the EXPAND study and the state of renal xenotransplantation, including the longest reported pig kidney survival to date at 271 days. 2026.</a></li>
         </ol>
       </div>
     </div>
+    <aside class="toc" aria-label="Contents"></aside>
+    </div>
+    <nav class="pager" aria-label="More pieces">
+      <a class="" href="criticalcare.html" rel="prev"><span class="dir">Previous</span><span class="ttl">Buying Time</span></a>
+      <a class="" href="longevity.html" rel="next"><span class="dir">Next</span><span class="ttl">Rewriting the Lifespan</span></a>
+    </nav>
   </article>
 
   <footer class="footer">
@@ -225,6 +294,11 @@
     </div>
   </footer>
 
+  <button class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="glossary.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

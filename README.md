@@ -57,10 +57,25 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies. 
 - A settings menu offering theme, text size, reduced motion, and link underlining, all persisted between visits
 - Responsive down to small phone screens, and respects `prefers-reduced-motion`
 
+
+## Reader features
+
+- **Settings menu** (gear icon) with theme, higher contrast, text size, reading width, line spacing, article typeface, reduced motion and always-underlined links. Every choice is stored in the browser and applied before the page paints, so there is no flash of the wrong setting on the next visit.
+- **Contents rail** built from each article's own headings, sticky on desktop and collapsible on mobile, with the section you are reading highlighted and an estimated reading time.
+- **Reading progress bar** tied to the article body rather than the whole page.
+- **Inline citations** that jump to the matching reference and highlight it.
+- **Evidence status labels** marking each claim as approved, in trials, or early research.
+- **Glossary definitions** on the first appearance of a technical term, shown on hover, tap or keyboard focus.
+- **Previous and next** links between pieces, and a back-to-top button.
+- **Keyboard support** throughout: a skip link, visible focus rings, and arrow, Home, End and Escape keys inside both menus.
+- **Print stylesheet** that drops the interface and expands link URLs.
+
 ## Structure
 
 ```
 index.html          Homepage and topic index
+glossary.js         Plain-language definitions surfaced inline
+share-card.png      Social preview image (1200x630)
 editing.html        Interactive: gene editing explainer
 exposure.html       Interactive: cumulative LDL exposure
 resistance.html     Interactive: antibiotic resistance simulation

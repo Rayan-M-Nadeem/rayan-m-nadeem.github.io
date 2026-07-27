@@ -7,14 +7,19 @@
   <meta name="description" content="An interactive explainer: apply CRISPR-Cas9, base editing, and prime editing to the same stretch of DNA and see exactly how the three tools differ in what they change and what they risk.">
   <script>
     (function () {
+      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
       try {
-        var t = localStorage.getItem('theme') || 'system';
-        var d = t === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
-        document.documentElement.setAttribute('data-theme', d);
-        var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
-        var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
-        var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+        var t = g('theme') || 'system';
+        r.setAttribute('data-theme', t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t);
+        var s = g('size'); if (s && s !== 'm') r.setAttribute('data-size', s);
+        var w = g('width'); if (w && w !== 'default') r.setAttribute('data-width', w);
+        var l = g('leading'); if (l && l !== 'default') r.setAttribute('data-leading', l);
+        var f = g('font'); if (f && f !== 'sans') r.setAttribute('data-font', f);
+        if (g('contrast') === 'on') r.setAttribute('data-contrast', 'on');
+        if (g('motion') === 'on') r.setAttribute('data-motion', 'off');
+        if (g('underline') === 'on') r.setAttribute('data-underline', 'on');
+      } catch (e) { r.setAttribute('data-theme', 'light'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/editing.html">
@@ -25,7 +30,7 @@
   <meta property="og:description" content="An interactive explainer: apply each editing tool to the same stretch of DNA and see exactly how they differ.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/editing.html">
   <meta property="og:locale" content="en_US">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="How Gene Editing Works: CRISPR, Base Editing, and Prime Editing Compared">
   <meta name="twitter:description" content="Apply each editing tool to the same stretch of DNA and see exactly how they differ.">
   <script type="application/ld+json">
@@ -47,10 +52,18 @@
     "url": "https://rayan-m-nadeem.github.io/#about"
   },
   "publisher": {"@type": "Person", "name": "Rayan Nadeem"},
+  "image": "https://rayan-m-nadeem.github.io/share-card.png",
   "isAccessibleForFree": true,
   "isPartOf": {"@type": "WebSite", "name": "Plainly Medicine", "url": "https://rayan-m-nadeem.github.io/"}
 }
   </script>
+  <meta property="og:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: eight articles and three interactive tools on modern medicine">
+  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -131,6 +144,9 @@
 </head>
 <body data-topic="editing" style="--c: var(--c-editing)">
 
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
+
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="wordmark" href="index.html">Plainly Medicine</a>
@@ -142,7 +158,7 @@
           </button>
           <div class="dropdown" id="menu-sections" data-open="false" role="menu">
             <div class="dd-head">Interactive</div>
-          <a class="dd-item" href="editing.html" style="--c: var(--c-editing)"><span class="swatch"></span><span class="nm">Three Ways to Change a Gene</span><span class="no">00</span></a>
+          <a class="dd-item" href="editing.html" style="--c: var(--c-editing)" aria-current="page"><span class="swatch"></span><span class="nm">Three Ways to Change a Gene</span><span class="no">00</span></a>
           <a class="dd-item" href="exposure.html" style="--c: var(--c-exposure)"><span class="swatch"></span><span class="nm">The Arithmetic of a Lifetime</span><span class="no">01</span></a>
           <a class="dd-item" href="resistance.html" style="--c: var(--c-resistance)"><span class="swatch"></span><span class="nm">Watch Resistance Happen</span><span class="no">02</span></a>
           <div class="dd-head">Topics</div>
@@ -167,14 +183,24 @@
             </svg>
           </button>
           <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-group-label">Appearance</div>
             <div class="set-row">
-              <span class="lb">Appearance</span>
+              <span class="lb">Theme</span>
               <div class="seg" data-set="theme">
                 <button data-val="light" aria-pressed="false">Light</button>
                 <button data-val="dark" aria-pressed="false">Dark</button>
                 <button data-val="system" aria-pressed="true">System</button>
               </div>
             </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Higher contrast"></button>
+              </div>
+              <span class="hint">Darkens muted text and strengthens rules.</span>
+            </div>
+
+            <div class="set-group-label">Reading</div>
             <div class="set-row">
               <span class="lb">Text size</span>
               <div class="seg" data-set="size">
@@ -183,6 +209,32 @@
                 <button data-val="l" aria-pressed="false">Large</button>
               </div>
             </div>
+            <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="tight" aria-pressed="false">Tight</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="loose" aria-pressed="false">Loose</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article typeface</span>
+              <div class="seg" data-set="font">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+                <button data-val="mono" aria-pressed="false">Mono</button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Behaviour</div>
             <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
@@ -195,6 +247,7 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+            <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
         <button class="menu-btn" aria-label="Menu" aria-expanded="false">
@@ -221,6 +274,9 @@
           <span>By Rayan Nadeem</span>
           <span>Independent research</span>
           <span>Updated July 2026</span>
+        </div>
+        <div class="share">
+          <button id="copy-link" type="button"><span>Copy link</span></button>
         </div>
       </div>
       <figure class="diagram">
@@ -265,23 +321,30 @@
     </div>
   </section>
 
-  <article class="article wrap narrow">
+  <article class="article wrap" id="main">
+    <div class="article-grid">
     <div class="prose">
+      <div class="ev-key reveal">
+        <span class="lb">Evidence status</span>
+        <span class="ev ev-approved">Approved</span>
+        <span class="ev ev-trials">In trials</span>
+        <span class="ev ev-early">Early research</span>
+      </div>
       <p class="reveal">The word "CRISPR" gets used as though it named one thing. It does not. There are now several distinct ways to change a gene, and the differences between them are not academic. They determine which diseases are treatable, how safe a therapy is, and how close it is to reaching patients. The tool above uses a fragment of PCSK9, a real gene that controls how much cholesterol the liver clears from the blood, and a real target of therapies in trials today.</p>
 
       <h2 class="reveal">Cutting is not the same as fixing</h2>
-      <p class="reveal">The original CRISPR-Cas9 system is best understood as molecular scissors guided to a specific address. It finds a chosen sequence and cuts straight through both strands of the double helix. What it does not do is repair anything. The cell notices the break and rushes to reseal it, and that emergency repair is usually sloppy, frequently deleting or inserting a few letters at the join.</p>
-      <p class="reveal">For many therapies that sloppiness is the point. If the goal is to switch a gene off, a scrambled repair does the job perfectly well. This is roughly the strategy behind the approved sickle cell therapies, which disable a regulatory element so the body produces more fetal hemoglobin. But if the goal is to correct a specific misspelling rather than break something, a double-strand cut is a blunt instrument, and every break carries some risk of rearrangement at the wrong site.</p>
+      <p class="reveal">The original CRISPR-Cas9 system is best understood as molecular scissors guided to a specific address. It finds a chosen sequence and cuts straight through both strands of the double helix.<a class="cite" href="#ref-1" aria-label="Reference 1">1</a> What it does not do is repair anything. The cell notices the break and rushes to reseal it, and that emergency repair is usually sloppy, frequently deleting or inserting a few letters at the join.</p>
+      <p class="reveal">For many therapies that sloppiness is the point. If the goal is to switch a gene off, a scrambled repair does the job perfectly well. This is roughly the strategy behind the approved sickle cell therapies <span class="ev ev-approved">Approved</span>, which disable a regulatory element so the body produces more fetal hemoglobin. But if the goal is to correct a specific misspelling rather than break something, a double-strand cut is a blunt instrument, and every break carries some risk of rearrangement at the wrong site.</p>
 
       <blockquote class="pullquote reveal">Most disease-causing mutations are single wrong letters. Cutting the page in half is a strange way to fix a typo.</blockquote>
 
       <h2 class="reveal">Editing a single letter</h2>
-      <p class="reveal">Base editing solves that problem by not cutting at all. A base editor attaches a chemical enzyme to a deactivated version of the Cas protein. The Cas part still finds the right address, but instead of cutting, the chemical tool converts one DNA letter into another, most often A into G or C into T. The backbone of the helix is never severed.</p>
-      <p class="reveal">This is a much gentler operation, and it is why base editing reached the clinic quickly for targets that need exactly this kind of change. The trial that switched off PCSK9 in the liver, lowering cholesterol substantially after a single infusion, used a base editor. The limitation is in the name: it changes letters. It cannot insert missing sequence or remove extra sequence, and it can only make certain letter swaps.</p>
+      <p class="reveal">Base editing solves that problem by not cutting at all. A base editor attaches a chemical enzyme to a deactivated version of the Cas protein. The Cas part still finds the right address, but instead of cutting, the chemical tool converts one DNA letter into another, most often A into G or C into T.<a class="cite" href="#ref-2" aria-label="Reference 2">2</a> The backbone of the helix is never severed.</p>
+      <p class="reveal">This is a much gentler operation, and it is why base editing reached the clinic quickly for targets that need exactly this kind of change. The trial that switched off PCSK9 in the liver, lowering cholesterol substantially after a single infusion, used a base editor. <span class="ev ev-trials">In trials</span><a class="cite" href="#ref-5" aria-label="Reference 5">5</a> The limitation is in the name: it changes letters. It cannot insert missing sequence or remove extra sequence, and it can only make certain letter swaps.</p>
 
       <h2 class="reveal">Search and replace</h2>
-      <p class="reveal">Prime editing is the most flexible of the three. It carries its own template, a strip of genetic code spelling out the replacement, and writes that new sequence straight into the target using an enzyme called reverse transcriptase, which builds DNA from an RNA template. It nicks only one strand rather than cutting both. In principle it can perform any small substitution, insertion, or deletion, which covers the large majority of known disease-causing mutations.</p>
-      <p class="reveal">The tradeoff is complexity. A prime editing complex is a larger machine to build and to deliver into cells, and the technology is younger, so there is less human safety data. The first clinical results are only now appearing, including a reported use in chronic granulomatous disease, a rare inherited disorder in which immune cells cannot properly kill bacteria, where the patient's cells were edited outside the body and then returned.</p>
+      <p class="reveal">Prime editing is the most flexible of the three. It carries its own template, a strip of genetic code spelling out the replacement, and writes that new sequence straight into the target using an enzyme called reverse transcriptase, which builds DNA from an RNA template.<a class="cite" href="#ref-3" aria-label="Reference 3">3</a> It nicks only one strand rather than cutting both. In principle it can perform any small substitution, insertion, or deletion, which covers the large majority of known disease-causing mutations.</p>
+      <p class="reveal">The tradeoff is complexity. A prime editing complex is a larger machine to build and to deliver into cells, and the technology is younger, so there is less human safety data. The first clinical results are only now appearing, including a reported use in chronic granulomatous disease, a rare inherited disorder in which immune cells cannot properly kill bacteria, where the patient's cells were edited outside the body and then returned. <span class="ev ev-early">Early research</span></p>
 
       <h2 class="reveal">Why the differences matter</h2>
       <p class="reveal">A therapy is not chosen by which tool is newest. It is chosen by what the disease requires. Switching a gene off favors the cut. Correcting a single known misspelling favors base editing. Repairing a mutation that needs missing sequence restored requires prime editing or nothing at all. And in every case the harder problem is delivery, which is to say getting the machinery into the right cells in the right organ without provoking the immune system.</p>
@@ -325,17 +388,23 @@
       <div class="refs reveal">
         <span class="label">Further Reading &amp; References</span>
         <ol>
-          <li>Jinek M, et al. A Programmable Dual-RNA-Guided DNA Endonuclease in Adaptive Bacterial Immunity. Science. 2012.</li>
-          <li>Komor AC, et al. Programmable editing of a target base in genomic DNA without double-stranded DNA cleavage. Nature. 2016.</li>
-          <li>Anzalone AV, et al. Search-and-replace genome editing without double-strand breaks or donor DNA. Nature. 2019.</li>
-          <li>Frangoul H, et al. Exagamglogene Autotemcel for Severe Sickle Cell Disease. New England Journal of Medicine. 2024.</li>
+          <li id="ref-1">Jinek M, et al. A Programmable Dual-RNA-Guided DNA Endonuclease in Adaptive Bacterial Immunity. Science. 2012.</li>
+          <li id="ref-2">Komor AC, et al. Programmable editing of a target base in genomic DNA without double-stranded DNA cleavage. Nature. 2016.</li>
+          <li id="ref-3">Anzalone AV, et al. Search-and-replace genome editing without double-strand breaks or donor DNA. Nature. 2019.</li>
+          <li id="ref-4">Frangoul H, et al. Exagamglogene Autotemcel for Severe Sickle Cell Disease. New England Journal of Medicine. 2024.</li>
         </ol>
         <span class="label">Recent Developments &middot; 2025 to 2026</span>
         <ol>
-          <li><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2601283" target="_blank" rel="noopener">In Vivo Base Editing of PCSK9 with VERVE-102 for Hypercholesterolemia. New England Journal of Medicine. 2026.</a> The base-editing trial that used the gene modelled in the tool above.</li>
+          <li id="ref-5"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2601283" target="_blank" rel="noopener">In Vivo Base Editing of PCSK9 with VERVE-102 for Hypercholesterolemia. New England Journal of Medicine. 2026.</a> The base-editing trial that used the gene modelled in the tool above.</li>
         </ol>
       </div>
     </div>
+    <aside class="toc" aria-label="Contents"></aside>
+    </div>
+    <nav class="pager" aria-label="More pieces">
+      <span class=" none"><span class="dir">Previous</span><span class="ttl">End of the series</span></span>
+      <a class="" href="exposure.html" rel="next"><span class="dir">Next</span><span class="ttl">The Arithmetic of a Lifetime</span></a>
+    </nav>
   </article>
 
   <footer class="footer">
@@ -349,6 +418,11 @@
     </div>
   </footer>
 
+  <button class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="glossary.js"></script>
   <script src="app.js"></script>
   <script>
   (function () {

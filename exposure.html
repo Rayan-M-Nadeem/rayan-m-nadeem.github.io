@@ -7,14 +7,19 @@
   <meta name="description" content="An interactive illustration of cumulative LDL exposure: see why lowering cholesterol early matters far more than lowering it late.">
   <script>
     (function () {
+      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
       try {
-        var t = localStorage.getItem('theme') || 'system';
-        var d = t === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
-        document.documentElement.setAttribute('data-theme', d);
-        var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
-        var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
-        var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+        var t = g('theme') || 'system';
+        r.setAttribute('data-theme', t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t);
+        var s = g('size'); if (s && s !== 'm') r.setAttribute('data-size', s);
+        var w = g('width'); if (w && w !== 'default') r.setAttribute('data-width', w);
+        var l = g('leading'); if (l && l !== 'default') r.setAttribute('data-leading', l);
+        var f = g('font'); if (f && f !== 'sans') r.setAttribute('data-font', f);
+        if (g('contrast') === 'on') r.setAttribute('data-contrast', 'on');
+        if (g('motion') === 'on') r.setAttribute('data-motion', 'off');
+        if (g('underline') === 'on') r.setAttribute('data-underline', 'on');
+      } catch (e) { r.setAttribute('data-theme', 'light'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/exposure.html">
@@ -24,7 +29,7 @@
   <meta property="og:title" content="The Arithmetic of a Lifetime">
   <meta property="og:description" content="An interactive illustration of cumulative LDL exposure: see why lowering cholesterol early matters far more than lowering it late.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/exposure.html">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="The Arithmetic of a Lifetime">
   <meta name="twitter:description" content="An interactive illustration of cumulative LDL exposure: see why lowering cholesterol early matters far more than lowering it late.">
   <script type="application/ld+json">
@@ -43,10 +48,18 @@
     "description": "Independent student researcher. Not a licensed medical professional; all clinical claims are cited to primary sources.",
     "url": "https://rayan-m-nadeem.github.io/#about"},
   "publisher": {"@type": "Person", "name": "Rayan Nadeem"},
+  "image": "https://rayan-m-nadeem.github.io/share-card.png",
   "isAccessibleForFree": true,
   "isPartOf": {"@type": "WebSite", "name": "Plainly Medicine", "url": "https://rayan-m-nadeem.github.io/"}
 }
   </script>
+  <meta property="og:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: eight articles and three interactive tools on modern medicine">
+  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -79,6 +92,9 @@
 </head>
 <body data-topic="exposure" style="--c: var(--c-exposure)">
 
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
+
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="wordmark" href="index.html">Plainly Medicine</a>
@@ -91,7 +107,7 @@
           <div class="dropdown" id="menu-sections" data-open="false" role="menu">
             <div class="dd-head">Interactive</div>
           <a class="dd-item" href="editing.html" style="--c: var(--c-editing)"><span class="swatch"></span><span class="nm">Three Ways to Change a Gene</span><span class="no">00</span></a>
-          <a class="dd-item" href="exposure.html" style="--c: var(--c-exposure)"><span class="swatch"></span><span class="nm">The Arithmetic of a Lifetime</span><span class="no">01</span></a>
+          <a class="dd-item" href="exposure.html" style="--c: var(--c-exposure)" aria-current="page"><span class="swatch"></span><span class="nm">The Arithmetic of a Lifetime</span><span class="no">01</span></a>
           <a class="dd-item" href="resistance.html" style="--c: var(--c-resistance)"><span class="swatch"></span><span class="nm">Watch Resistance Happen</span><span class="no">02</span></a>
           <div class="dd-head">Topics</div>
           <a class="dd-item" href="cardiology.html" style="--c: var(--c-cardiology)"><span class="swatch"></span><span class="nm">Cardiology</span><span class="no">03</span></a>
@@ -115,14 +131,24 @@
             </svg>
           </button>
           <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-group-label">Appearance</div>
             <div class="set-row">
-              <span class="lb">Appearance</span>
+              <span class="lb">Theme</span>
               <div class="seg" data-set="theme">
                 <button data-val="light" aria-pressed="false">Light</button>
                 <button data-val="dark" aria-pressed="false">Dark</button>
                 <button data-val="system" aria-pressed="true">System</button>
               </div>
             </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Higher contrast"></button>
+              </div>
+              <span class="hint">Darkens muted text and strengthens rules.</span>
+            </div>
+
+            <div class="set-group-label">Reading</div>
             <div class="set-row">
               <span class="lb">Text size</span>
               <div class="seg" data-set="size">
@@ -131,6 +157,32 @@
                 <button data-val="l" aria-pressed="false">Large</button>
               </div>
             </div>
+            <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="tight" aria-pressed="false">Tight</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="loose" aria-pressed="false">Loose</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article typeface</span>
+              <div class="seg" data-set="font">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+                <button data-val="mono" aria-pressed="false">Mono</button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Behaviour</div>
             <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
@@ -143,6 +195,7 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+            <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
         <button class="menu-btn" aria-label="Menu" aria-expanded="false">
@@ -169,6 +222,9 @@
           <span>By Rayan Nadeem</span>
           <span>Independent research</span>
           <span>Updated July 2026</span>
+        </div>
+        <div class="share">
+          <button id="copy-link" type="button"><span>Copy link</span></button>
         </div>
       </div>
       <figure class="diagram">
@@ -218,9 +274,16 @@
     </div>
   </section>
 
-  <article class="article wrap narrow">
+  <article class="article wrap" id="main">
+    <div class="article-grid">
     <div class="prose">
-      <p class="reveal">Cholesterol numbers are usually discussed as though they were a snapshot: a figure from your last blood test, either fine or not fine. That framing hides the thing that actually matters. Atherosclerosis is cumulative. Arteries do not respond to the level you have today; they respond to the total quantity of LDL they have been exposed to across your whole life. The unit that matters is closer to an area than a number.</p>
+      <div class="ev-key reveal">
+        <span class="lb">Evidence status</span>
+        <span class="ev ev-approved">Approved</span>
+        <span class="ev ev-trials">In trials</span>
+        <span class="ev ev-early">Early research</span>
+      </div>
+      <p class="reveal">Cholesterol numbers are usually discussed as though they were a snapshot: a figure from your last blood test, either fine or not fine. That framing hides the thing that actually matters. Atherosclerosis is cumulative. Arteries do not respond to the level you have today; they respond to the total quantity of LDL they have been exposed to across your whole life.<a class="cite" href="#ref-1" aria-label="Reference 1">1</a> The unit that matters is closer to an area than a number.</p>
 
       <h2 class="reveal">Why the shape of the curve matters</h2>
       <p class="reveal">Move the second slider in the tool above and watch what happens. Lowering LDL at sixty barely changes the total, because four decades of exposure have already accumulated and cannot be undone. Lowering the same amount at twenty changes the total enormously. The intervention is identical. Only its position in time is different.</p>
@@ -229,11 +292,11 @@
       <blockquote class="pullquote reveal">Arteries keep a running total, and they never reset it.</blockquote>
 
       <h2 class="reveal">What the evidence actually shows</h2>
-      <p class="reveal">This is not a metaphor invented for a website. Genetic studies point the same way. People born with variants that give them naturally low LDL for their entire lives have far lower rates of coronary disease than the size of their LDL difference alone would predict from drug trials. The reason is duration. A drug trial lowers LDL for five years. A gene lowers it for fifty.</p>
+      <p class="reveal">This is not a metaphor invented for a website. Genetic studies point the same way. People born with variants that give them naturally low LDL for their entire lives have far lower rates of coronary disease than the size of their LDL difference alone would predict from drug trials.<a class="cite" href="#ref-2" aria-label="Reference 2">2</a><a class="cite" href="#ref-3" aria-label="Reference 3">3</a> The reason is duration. A drug trial lowers LDL for five years. A gene lowers it for fifty.</p>
       <p class="reveal">That observation is what makes durable, long-acting treatments so interesting, and why researchers have pursued one-time gene edits that lower LDL permanently rather than daily pills taken for decades. It is also why the same tools carry a heavier burden of proof, because a permanent intervention has to be right the first time.</p>
 
       <h2 class="reveal">What this does not tell you</h2>
-      <p class="reveal">The model above is deliberately simple, and it would be dishonest not to say what it leaves out. Cardiovascular risk is not LDL alone. Blood pressure, smoking, diabetes, inflammation, family history, and a dozen other factors all matter, and some of them matter a great deal. Plaque already formed does not disappear when the number comes down, though lowering LDL does slow and can partly stabilise it. Nobody should read a number off this chart and conclude anything about their own health. What the chart is good for is the shape of the idea: that time is a multiplier, and that early matters more than intuition suggests.</p>
+      <p class="reveal">The model above is deliberately simple, and it would be dishonest not to say what it leaves out. Cardiovascular risk is not LDL alone. Blood pressure, smoking, diabetes, inflammation, family history, and a dozen other factors all matter, and some of them matter a great deal. Plaque already formed does not disappear when the number comes down, though lowering LDL does slow and can partly stabilise it <span class="ev ev-approved">Approved</span>. Nobody should read a number off this chart and conclude anything about their own health. What the chart is good for is the shape of the idea: that time is a multiplier, and that early matters more than intuition suggests.</p>
 
       <div class="callout reveal">
         <span class="label">Key Takeaways</span>
@@ -248,14 +311,20 @@
       <div class="refs reveal">
         <span class="label">Further Reading &amp; References</span>
         <ol>
-          <li>Ference BA, et al. Low-density lipoproteins cause atherosclerotic cardiovascular disease: evidence from genetic, epidemiologic, and clinical studies. European Heart Journal. 2017.</li>
-          <li>Ference BA, et al. Effect of long-term exposure to lower LDL cholesterol beginning early in life. Journal of the American College of Cardiology. 2012.</li>
-          <li>Cohen JC, et al. Sequence variations in PCSK9, low LDL, and protection against coronary heart disease. New England Journal of Medicine. 2006.</li>
+          <li id="ref-1">Ference BA, et al. Low-density lipoproteins cause atherosclerotic cardiovascular disease: evidence from genetic, epidemiologic, and clinical studies. European Heart Journal. 2017.</li>
+          <li id="ref-2">Ference BA, et al. Effect of long-term exposure to lower LDL cholesterol beginning early in life. Journal of the American College of Cardiology. 2012.</li>
+          <li id="ref-3">Cohen JC, et al. Sequence variations in PCSK9, low LDL, and protection against coronary heart disease. New England Journal of Medicine. 2006.</li>
         </ol>
       </div>
 
       <p class="reveal" style="margin-top:2.5rem"><a href="cardiology.html">Read the full piece on cardiology and how prevention became durable</a>.</p>
     </div>
+    <aside class="toc" aria-label="Contents"></aside>
+    </div>
+    <nav class="pager" aria-label="More pieces">
+      <a class="" href="editing.html" rel="prev"><span class="dir">Previous</span><span class="ttl">Three Ways to Change a Gene</span></a>
+      <a class="" href="resistance.html" rel="next"><span class="dir">Next</span><span class="ttl">Watch Resistance Happen</span></a>
+    </nav>
   </article>
 
 
@@ -271,6 +340,11 @@
     </div>
   </footer>
 
+  <button class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="glossary.js"></script>
   <script src="app.js"></script>
   <script>
   (function () {

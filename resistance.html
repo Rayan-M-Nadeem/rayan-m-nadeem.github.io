@@ -7,14 +7,19 @@
   <meta name="description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
   <script>
     (function () {
+      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
       try {
-        var t = localStorage.getItem('theme') || 'system';
-        var d = t === 'system' ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t;
-        document.documentElement.setAttribute('data-theme', d);
-        var s = localStorage.getItem('size'); if (s) document.documentElement.setAttribute('data-size', s);
-        var m = localStorage.getItem('motion'); if (m === 'off') document.documentElement.setAttribute('data-motion', 'off');
-        var u = localStorage.getItem('underline'); if (u === 'on') document.documentElement.setAttribute('data-underline', 'on');
-      } catch (e) { document.documentElement.setAttribute('data-theme', 'light'); }
+        var t = g('theme') || 'system';
+        r.setAttribute('data-theme', t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t);
+        var s = g('size'); if (s && s !== 'm') r.setAttribute('data-size', s);
+        var w = g('width'); if (w && w !== 'default') r.setAttribute('data-width', w);
+        var l = g('leading'); if (l && l !== 'default') r.setAttribute('data-leading', l);
+        var f = g('font'); if (f && f !== 'sans') r.setAttribute('data-font', f);
+        if (g('contrast') === 'on') r.setAttribute('data-contrast', 'on');
+        if (g('motion') === 'on') r.setAttribute('data-motion', 'off');
+        if (g('underline') === 'on') r.setAttribute('data-underline', 'on');
+      } catch (e) { r.setAttribute('data-theme', 'light'); }
     })();
   </script>
   <link rel="canonical" href="https://rayan-m-nadeem.github.io/resistance.html">
@@ -24,7 +29,7 @@
   <meta property="og:title" content="Watch Resistance Happen">
   <meta property="og:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
   <meta property="og:url" content="https://rayan-m-nadeem.github.io/resistance.html">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Watch Resistance Happen">
   <meta name="twitter:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
   <script type="application/ld+json">
@@ -43,10 +48,18 @@
     "description": "Independent student researcher. Not a licensed medical professional; all clinical claims are cited to primary sources.",
     "url": "https://rayan-m-nadeem.github.io/#about"},
   "publisher": {"@type": "Person", "name": "Rayan Nadeem"},
+  "image": "https://rayan-m-nadeem.github.io/share-card.png",
   "isAccessibleForFree": true,
   "isPartOf": {"@type": "WebSite", "name": "Plainly Medicine", "url": "https://rayan-m-nadeem.github.io/"}
 }
   </script>
+  <meta property="og:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: eight articles and three interactive tools on modern medicine">
+  <meta name="twitter:image" content="https://rayan-m-nadeem.github.io/share-card.png">
+  <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -79,6 +92,9 @@
 </head>
 <body data-topic="resistance" style="--c: var(--c-resistance)">
 
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
+
   <header class="nav">
     <div class="wrap nav-inner">
       <a class="wordmark" href="index.html">Plainly Medicine</a>
@@ -92,7 +108,7 @@
             <div class="dd-head">Interactive</div>
           <a class="dd-item" href="editing.html" style="--c: var(--c-editing)"><span class="swatch"></span><span class="nm">Three Ways to Change a Gene</span><span class="no">00</span></a>
           <a class="dd-item" href="exposure.html" style="--c: var(--c-exposure)"><span class="swatch"></span><span class="nm">The Arithmetic of a Lifetime</span><span class="no">01</span></a>
-          <a class="dd-item" href="resistance.html" style="--c: var(--c-resistance)"><span class="swatch"></span><span class="nm">Watch Resistance Happen</span><span class="no">02</span></a>
+          <a class="dd-item" href="resistance.html" style="--c: var(--c-resistance)" aria-current="page"><span class="swatch"></span><span class="nm">Watch Resistance Happen</span><span class="no">02</span></a>
           <div class="dd-head">Topics</div>
           <a class="dd-item" href="cardiology.html" style="--c: var(--c-cardiology)"><span class="swatch"></span><span class="nm">Cardiology</span><span class="no">03</span></a>
           <a class="dd-item" href="neurology.html" style="--c: var(--c-neurology)"><span class="swatch"></span><span class="nm">Neurology</span><span class="no">04</span></a>
@@ -115,14 +131,24 @@
             </svg>
           </button>
           <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-group-label">Appearance</div>
             <div class="set-row">
-              <span class="lb">Appearance</span>
+              <span class="lb">Theme</span>
               <div class="seg" data-set="theme">
                 <button data-val="light" aria-pressed="false">Light</button>
                 <button data-val="dark" aria-pressed="false">Dark</button>
                 <button data-val="system" aria-pressed="true">System</button>
               </div>
             </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Higher contrast"></button>
+              </div>
+              <span class="hint">Darkens muted text and strengthens rules.</span>
+            </div>
+
+            <div class="set-group-label">Reading</div>
             <div class="set-row">
               <span class="lb">Text size</span>
               <div class="seg" data-set="size">
@@ -131,6 +157,32 @@
                 <button data-val="l" aria-pressed="false">Large</button>
               </div>
             </div>
+            <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="tight" aria-pressed="false">Tight</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="loose" aria-pressed="false">Loose</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article typeface</span>
+              <div class="seg" data-set="font">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+                <button data-val="mono" aria-pressed="false">Mono</button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Behaviour</div>
             <div class="set-row">
               <div class="set-toggle">
                 <span class="nm">Reduce motion</span>
@@ -143,6 +195,7 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+            <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
         <button class="menu-btn" aria-label="Menu" aria-expanded="false">
@@ -169,6 +222,9 @@
           <span>By Rayan Nadeem</span>
           <span>Independent research</span>
           <span>Updated July 2026</span>
+        </div>
+        <div class="share">
+          <button id="copy-link" type="button"><span>Copy link</span></button>
         </div>
       </div>
       <figure class="diagram">
@@ -215,22 +271,29 @@
     </div>
   </section>
 
-  <article class="article wrap narrow">
+  <article class="article wrap" id="main">
+    <div class="article-grid">
     <div class="prose">
+      <div class="ev-key reveal">
+        <span class="lb">Evidence status</span>
+        <span class="ev ev-approved">Approved</span>
+        <span class="ev ev-trials">In trials</span>
+        <span class="ev ev-early">Early research</span>
+      </div>
       <p class="reveal">The simulation above is the whole problem of antibiotic resistance in miniature. Nothing in it is unusual or malicious. No bacterium is trying to become resistant. All that happens is that a drug kills the organisms it can kill, and whatever survives goes on to reproduce. Run it three or four times and the colony that comes back is one the drug can no longer touch.</p>
 
       <h2 class="reveal">The drug does not create resistance</h2>
-      <p class="reveal">This is the point people most often get backwards. The antibiotic does not cause the mutation. The resistant bacteria were already there, in tiny numbers, before the first dose. What the drug does is remove their competition. Every susceptible bacterium it kills is one less organism competing for space and nutrients, which leaves the survivors free to multiply into the gap.</p>
+      <p class="reveal">This is the point people most often get backwards. The antibiotic does not cause the mutation. The resistant bacteria were already there, in tiny numbers, before the first dose. What the drug does is remove their competition.<a class="cite" href="#ref-3" aria-label="Reference 3">3</a> Every susceptible bacterium it kills is one less organism competing for space and nutrients, which leaves the survivors free to multiply into the gap.</p>
       <p class="reveal">That is why the resistant fraction climbs so steeply in the simulation while the total population barely changes. You are not creating anything new. You are steadily editing out everything else.</p>
 
       <blockquote class="pullquote reveal">Every dose is a filter, and the things that pass through it are exactly the things you did not want.</blockquote>
 
       <h2 class="reveal">Why this makes antibiotics unlike other drugs</h2>
-      <p class="reveal">A blood pressure drug works about as well on its ten millionth prescription as its first. Antibiotics are the exception. Every course given anywhere in the world, to anyone, applies a small amount of this pressure to the bacterial population at large. The effectiveness of the drug is a shared resource that each use draws down slightly.</p>
+      <p class="reveal">A blood pressure drug works about as well on its ten millionth prescription as its first. Antibiotics are the exception. Every course given anywhere in the world, to anyone, applies a small amount of this pressure to the bacterial population at large. The effectiveness of the drug is a shared resource that each use draws down slightly.<a class="cite" href="#ref-1" aria-label="Reference 1">1</a><a class="cite" href="#ref-2" aria-label="Reference 2">2</a></p>
       <p class="reveal">This is why prescribing an antibiotic for a viral infection is not merely useless. It is a course of selection applied for no benefit at all. It is also why finishing a prescribed course matters in cases where stopping early would leave a partially selected population behind, and why hospitals hold certain drugs in reserve, using them only when nothing else will work.</p>
 
       <h2 class="reveal">What actually helps</h2>
-      <p class="reveal">New antibiotics buy time, and several genuinely new classes have reached approval recently. But the simulation shows why new drugs alone cannot solve this: the same process will run again on whatever replaces the current drug. What changes the slope of the curve is using antibiotics less often and more precisely, which means rapid diagnostics that tell you whether an infection is bacterial at all, better infection control so fewer courses are needed, and surveillance that catches resistant strains before they spread.</p>
+      <p class="reveal">New antibiotics buy time, and several genuinely new classes have reached approval recently <span class="ev ev-approved">Approved</span>. But the simulation shows why new drugs alone cannot solve this: the same process will run again on whatever replaces the current drug. What changes the slope of the curve is using antibiotics less often and more precisely, which means rapid diagnostics that tell you whether an infection is bacterial at all, better infection control so fewer courses are needed, and surveillance that catches resistant strains before they spread.</p>
 
       <div class="callout reveal">
         <span class="label">Key Takeaways</span>
@@ -245,14 +308,20 @@
       <div class="refs reveal">
         <span class="label">Further Reading &amp; References</span>
         <ol>
-          <li>Murray CJL, et al. Global burden of bacterial antimicrobial resistance in 2019: a systematic analysis. The Lancet. 2022.</li>
-          <li>World Health Organization. WHO Bacterial Priority Pathogens List. 2024.</li>
-          <li>Baym M, et al. Spatiotemporal microbial evolution on antibiotic landscapes. Science. 2016.</li>
+          <li id="ref-1">Murray CJL, et al. Global burden of bacterial antimicrobial resistance in 2019: a systematic analysis. The Lancet. 2022.</li>
+          <li id="ref-2">World Health Organization. WHO Bacterial Priority Pathogens List. 2024.</li>
+          <li id="ref-3">Baym M, et al. Spatiotemporal microbial evolution on antibiotic landscapes. Science. 2016.</li>
         </ol>
       </div>
 
       <p class="reveal" style="margin-top:2.5rem"><a href="infectious.html">Read the full piece on infectious disease and the antibiotic pipeline</a>.</p>
     </div>
+    <aside class="toc" aria-label="Contents"></aside>
+    </div>
+    <nav class="pager" aria-label="More pieces">
+      <a class="" href="exposure.html" rel="prev"><span class="dir">Previous</span><span class="ttl">The Arithmetic of a Lifetime</span></a>
+      <a class="" href="cardiology.html" rel="next"><span class="dir">Next</span><span class="ttl">The Slowest Emergency</span></a>
+    </nav>
   </article>
 
 
@@ -268,6 +337,11 @@
     </div>
   </footer>
 
+  <button class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="glossary.js"></script>
   <script src="app.js"></script>
   <script>
   (function () {
