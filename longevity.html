@@ -184,6 +184,35 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+
+            <div class="set-group-label">Article extras</div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Glossary underlines</span>
+                <button class="switch" data-set="gloss" aria-pressed="true" aria-label="Show glossary underlines"></button>
+              </div>
+              <span class="hint">Definitions stay available on tap either way.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Evidence labels</span>
+                <button class="switch" data-set="evidence" aria-pressed="true" aria-label="Show evidence status labels"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Remember my place</span>
+                <button class="switch" data-set="resume" aria-pressed="true" aria-label="Remember reading position"></button>
+              </div>
+              <span class="hint">Offers to pick up where you stopped.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Mark pieces as read</span>
+                <button class="switch" data-set="track" aria-pressed="true" aria-label="Mark pieces as read"></button>
+              </div>
+              <span class="hint">Ticks them off in the contents menu.</span>
+            </div>
             <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
@@ -232,6 +261,8 @@
         <span class="ev ev-trials">In trials</span>
         <span class="ev ev-early">Early research</span>
       </div>
+      <div class="figure-box reveal" data-figure="longevity"></div>
+
       <blockquote class="pullquote reveal">Technical immortality is not a single invention. If it ever arrives, it will be assembled from many partial victories, not handed to us in one.</blockquote>
 
       <p class="reveal">Public conversation about living forever tends to collapse into one of two moods: the defeatism that says none of this is possible, or the swagger that says we will defeat death soon. Both are easy, and both mislead. The honest position is harder to hold. We can already extend life in measurable ways, cure some genetic diseases at their source, replace failing organs, and restart circulation after the heart stops in selected settings. At the same time, aging is not one problem with one solution. So the serious word, the one that belongs in every claim on this page, is "yet."</p>
@@ -291,8 +322,16 @@
     <aside class="toc" aria-label="Contents"></aside>
     </div>
     <nav class="pager" aria-label="More pieces">
-      <a class="" href="transplant.html" rel="prev"><span class="dir">Previous</span><span class="ttl">The Supply Problem</span></a>
-      <span class=" none"><span class="dir">Next</span><span class="ttl">End of the series</span></span>
+      <a href="transplant.html" style="--to: var(--c-transplant)" rel="prev">
+        <span class="dir"><span class="arw" aria-hidden="true">&larr;</span> Previous</span>
+        <span class="ttl">The Supply Problem</span>
+        <span class="kind">Article</span>
+      </a>
+      <a href="editing.html" style="--to: var(--c-editing)" rel="next">
+        <span class="dir"><span class="arw" aria-hidden="true">&rarr;</span> Next</span>
+        <span class="ttl">Three Ways to Change a Gene</span>
+        <span class="kind">Interactive tool</span>
+      </a>
     </nav>
   </article>
 
@@ -313,5 +352,6 @@
 
   <script src="glossary.js"></script>
   <script src="app.js"></script>
+  <script src="figures.js"></script>
 </body>
 </html>

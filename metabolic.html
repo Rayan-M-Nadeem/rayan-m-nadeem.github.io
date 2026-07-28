@@ -184,6 +184,35 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+
+            <div class="set-group-label">Article extras</div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Glossary underlines</span>
+                <button class="switch" data-set="gloss" aria-pressed="true" aria-label="Show glossary underlines"></button>
+              </div>
+              <span class="hint">Definitions stay available on tap either way.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Evidence labels</span>
+                <button class="switch" data-set="evidence" aria-pressed="true" aria-label="Show evidence status labels"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Remember my place</span>
+                <button class="switch" data-set="resume" aria-pressed="true" aria-label="Remember reading position"></button>
+              </div>
+              <span class="hint">Offers to pick up where you stopped.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Mark pieces as read</span>
+                <button class="switch" data-set="track" aria-pressed="true" aria-label="Mark pieces as read"></button>
+              </div>
+              <span class="hint">Ticks them off in the contents menu.</span>
+            </div>
             <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
@@ -238,6 +267,8 @@
       <p class="reveal">GLP-1 is a hormone your gut releases after you eat. It does several things at once: it signals the pancreas to release insulin when blood sugar is high, it slows the rate at which the stomach empties, and it acts on regions of the brain involved in appetite and fullness. Natural GLP-1 breaks down within minutes. The drugs are engineered versions that resist that breakdown and last for days.</p>
       <p class="reveal">This is the key point that headlines usually miss. These are not stimulants and they do not burn anything. They work by extending a signal the body already produces, which is why the effects on appetite, blood sugar, and digestion arrive together rather than separately.</p>
 
+      <div class="figure-box reveal" data-figure="metabolic"></div>
+
       <blockquote class="pullquote reveal">Each additional receptor the drug touches has lifted the ceiling of what the class can do.</blockquote>
 
       <h2 class="reveal">A staircase of effect</h2>
@@ -281,8 +312,16 @@
     <aside class="toc" aria-label="Contents"></aside>
     </div>
     <nav class="pager" aria-label="More pieces">
-      <a class="" href="oncology.html" rel="prev"><span class="dir">Previous</span><span class="ttl">The Central Obstacle</span></a>
-      <a class="" href="infectious.html" rel="next"><span class="dir">Next</span><span class="ttl">The Clock Running Against Us</span></a>
+      <a href="oncology.html" style="--to: var(--c-oncology)" rel="prev">
+        <span class="dir"><span class="arw" aria-hidden="true">&larr;</span> Previous</span>
+        <span class="ttl">The Central Obstacle</span>
+        <span class="kind">Article</span>
+      </a>
+      <a href="infectious.html" style="--to: var(--c-infectious)" rel="next">
+        <span class="dir"><span class="arw" aria-hidden="true">&rarr;</span> Next</span>
+        <span class="ttl">The Clock Running Against Us</span>
+        <span class="kind">Article</span>
+      </a>
     </nav>
   </article>
 
@@ -303,5 +342,6 @@
 
   <script src="glossary.js"></script>
   <script src="app.js"></script>
+  <script src="figures.js"></script>
 </body>
 </html>

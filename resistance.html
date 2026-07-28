@@ -195,6 +195,35 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+
+            <div class="set-group-label">Article extras</div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Glossary underlines</span>
+                <button class="switch" data-set="gloss" aria-pressed="true" aria-label="Show glossary underlines"></button>
+              </div>
+              <span class="hint">Definitions stay available on tap either way.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Evidence labels</span>
+                <button class="switch" data-set="evidence" aria-pressed="true" aria-label="Show evidence status labels"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Remember my place</span>
+                <button class="switch" data-set="resume" aria-pressed="true" aria-label="Remember reading position"></button>
+              </div>
+              <span class="hint">Offers to pick up where you stopped.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Mark pieces as read</span>
+                <button class="switch" data-set="track" aria-pressed="true" aria-label="Mark pieces as read"></button>
+              </div>
+              <span class="hint">Ticks them off in the contents menu.</span>
+            </div>
             <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
@@ -256,6 +285,7 @@
 
       <div class="sim-tools">
         <button class="btn" id="dose">Give a course of antibiotics</button>
+        <button class="btn" id="continue" hidden>Continue &rarr;</button>
         <button class="btn ghost" id="reset">Reset the colony</button>
       </div>
 
@@ -319,8 +349,16 @@
     <aside class="toc" aria-label="Contents"></aside>
     </div>
     <nav class="pager" aria-label="More pieces">
-      <a class="" href="exposure.html" rel="prev"><span class="dir">Previous</span><span class="ttl">The Arithmetic of a Lifetime</span></a>
-      <a class="" href="cardiology.html" rel="next"><span class="dir">Next</span><span class="ttl">The Slowest Emergency</span></a>
+      <a href="exposure.html" style="--to: var(--c-exposure)" rel="prev">
+        <span class="dir"><span class="arw" aria-hidden="true">&larr;</span> Previous</span>
+        <span class="ttl">The Arithmetic of a Lifetime</span>
+        <span class="kind">Interactive tool</span>
+      </a>
+      <a href="cardiology.html" style="--to: var(--c-cardiology)" rel="next">
+        <span class="dir"><span class="arw" aria-hidden="true">&rarr;</span> Next</span>
+        <span class="ttl">The Slowest Emergency</span>
+        <span class="kind">Article</span>
+      </a>
     </nav>
   </article>
 
@@ -349,6 +387,7 @@
     var dish = document.getElementById('dish');
     var popEl = document.getElementById('pop'), resEl = document.getElementById('res'), roundEl = document.getElementById('rounds');
     var readout = document.getElementById('readout');
+    var doseBtn = document.getElementById('dose'), contBtn = document.getElementById('continue');
     var cells = [], rounds = 0;
 
     function build() {
@@ -361,6 +400,7 @@
         dish.appendChild(d); cells.push(d);
       }
       sync();
+      doseBtn.hidden = false; contBtn.hidden = true;
       say('A normal colony',
         'Almost every bacterium here is killed by the antibiotic. A very small number carry a mutation that lets them survive. Give a course and watch what happens to the ones that are left.');
     }
@@ -376,41 +416,46 @@
 
     function say(t, b) { readout.innerHTML = '<h4>' + t + '</h4><p>' + b + '</p>'; }
 
+    // step one: the drug kills what it can. nothing else happens until you continue.
     function dose() {
       rounds++;
-      // the drug kills susceptible bacteria
       cells.forEach(function (c) {
         if (c.dataset.r === '0' && !c.classList.contains('dead')) {
           if (Math.random() < 0.94) c.classList.add('dead');
         }
       });
-      var after = sync();
+      sync();
+      doseBtn.hidden = true; contBtn.hidden = false;
       say('The drug kills what it can',
-        'Susceptible bacteria die. The resistant ones are untouched, so they now make up a far larger share of what is left.');
-
-      // survivors repopulate the empty space
-      setTimeout(function () {
-        var alive = cells.filter(function (c) { return !c.classList.contains('dead'); });
-        var resistantShare = alive.length ? alive.filter(function (c) { return c.dataset.r === '1'; }).length / alive.length : 1;
-        cells.forEach(function (c) {
-          if (c.classList.contains('dead')) {
-            var becomesResistant = Math.random() < resistantShare;
-            c.dataset.r = becomesResistant ? '1' : '0';
-            c.className = 'cell ' + (becomesResistant ? 'r' : 's');
-          }
-        });
-        var s = sync();
-        var pct = Math.round((s.r / s.alive) * 100);
-        var msg;
-        if (pct >= 95) msg = 'The colony is now almost entirely resistant. This antibiotic no longer works here, and no bacterium ever "tried" to make that happen.';
-        else if (pct >= 50) msg = 'Resistant bacteria are now the majority. Each further course will push this further, and faster, because there is less and less left for the drug to kill.';
-        else if (pct >= 15) msg = 'The resistant fraction has grown sharply. Notice the total population recovered to roughly where it started, but its composition has changed.';
-        else msg = 'The colony has grown back to full size. It looks the same as before, but a larger share of it now survives the drug.';
-        say('The colony grows back, changed', msg);
-      }, 900);
+        'Susceptible bacteria die. The resistant ones are untouched, so they now make up a far larger share of what is left. Nothing has regrown yet. Press continue when you are ready to let the survivors multiply.');
+      contBtn.focus();
     }
 
-    document.getElementById('dose').addEventListener('click', dose);
+    // step two: survivors repopulate the space the drug cleared
+    function grow() {
+      var alive = cells.filter(function (c) { return !c.classList.contains('dead'); });
+      var share = alive.length ? alive.filter(function (c) { return c.dataset.r === '1'; }).length / alive.length : 1;
+      cells.forEach(function (c) {
+        if (c.classList.contains('dead')) {
+          var res = Math.random() < share;
+          c.dataset.r = res ? '1' : '0';
+          c.className = 'cell ' + (res ? 'r' : 's');
+        }
+      });
+      var s = sync();
+      var pct = Math.round((s.r / s.alive) * 100);
+      var msg;
+      if (pct >= 95) msg = 'The colony is now almost entirely resistant. This antibiotic no longer works here, and no bacterium ever tried to make that happen.';
+      else if (pct >= 50) msg = 'Resistant bacteria are now the majority. Each further course pushes this further and faster, because there is less and less left for the drug to kill.';
+      else if (pct >= 15) msg = 'The resistant share has grown sharply. Notice the total population came back to roughly where it started, but its composition has changed.';
+      else msg = 'The colony has grown back to full size. It looks the same as before, but a larger share of it now survives the drug.';
+      say('The colony grows back, changed', msg);
+      contBtn.hidden = true; doseBtn.hidden = false;
+      doseBtn.focus();
+    }
+
+    doseBtn.addEventListener('click', dose);
+    contBtn.addEventListener('click', grow);
     document.getElementById('reset').addEventListener('click', build);
     build();
   })();

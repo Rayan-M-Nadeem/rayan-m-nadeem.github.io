@@ -68,6 +68,9 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies. 
 - **Glossary definitions** on the first appearance of a technical term, shown on hover, tap or keyboard focus.
 - **Previous and next** links between pieces, and a back-to-top button.
 - **Keyboard support** throughout: a skip link, visible focus rings, and arrow, Home, End and Escape keys inside both menus.
+- **A working model in every article**, not just the three standalone tools: an artery closing over decades, the order Alzheimer's changes appear, the immune off switch a tumor presses, the weight-loss ceiling each added hormone target raises, the two routes a resistance gene travels, which machine substitutes for which organ, the transplant supply gap, and the difference between more years and more healthy years.
+- **Remembers your place** in a piece and offers to pick it up, and ticks off what you have read in the contents menu.
+- **Glossary underlines and evidence labels can be switched off** for readers who find them busy.
 - **Print stylesheet** that drops the interface and expands link URLs.
 
 ## Structure
@@ -75,6 +78,7 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies. 
 ```
 index.html          Homepage and topic index
 glossary.js         Plain-language definitions surfaced inline
+figures.js          One interactive model per article section
 share-card.png      Social preview image (1200x630)
 editing.html        Interactive: gene editing explainer
 exposure.html       Interactive: cumulative LDL exposure

@@ -9,14 +9,18 @@
   /* ---------- stored reader preferences ---------- */
   var DEFAULTS = {
     theme: 'system', size: 'm', width: 'default', leading: 'default',
-    font: 'sans', contrast: 'off', motion: 'off', underline: 'off'
+    font: 'sans', contrast: 'off', motion: 'off', underline: 'off',
+    gloss: 'on', evidence: 'on', resume: 'on', track: 'on'
   };
   var ATTR = {
     size: 'data-size', width: 'data-width', leading: 'data-leading',
     font: 'data-font', contrast: 'data-contrast', motion: 'data-motion',
-    underline: 'data-underline'
+    underline: 'data-underline', gloss: 'data-gloss', evidence: 'data-evidence',
+    resume: null, track: null
   };
-  var TOGGLES = { contrast: 1, motion: 1, underline: 1 };
+  var TOGGLES = { contrast: 1, motion: 1, underline: 1, gloss: 1, evidence: 1, resume: 1, track: 1 };
+  // these two read "on" as the normal state, so the attribute marks the off case
+  var INVERTED = { gloss: 1, evidence: 1 };
 
   var store = {
     get: function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } },
@@ -46,6 +50,8 @@
       if (key === 'motion') {
         if (v === 'on') root.setAttribute('data-motion', 'off');
         else root.removeAttribute('data-motion');
+      } else if (INVERTED[key]) {
+        if (v === 'off') root.setAttribute(attr, 'off'); else root.removeAttribute(attr);
       } else if (v === 'on') {
         root.setAttribute(attr, 'on');
       } else {
@@ -403,6 +409,78 @@
       if (first) first.focus({ preventScroll: true });
     });
     update();
+  })();
+
+  /* ---------- remember where you stopped ---------- */
+  (function () {
+    if (state.resume !== 'on') return;
+    var article = document.querySelector('.article');
+    if (!article) return;
+    var key = 'pm:pos:' + location.pathname.split('/').pop();
+    var saved = parseInt(store.get('pos:' + location.pathname.split('/').pop()) || '0', 10);
+
+    function save() {
+      if (state.resume !== 'on') return;
+      try {
+        if (window.scrollY > window.innerHeight * 0.8) localStorage.setItem(key, String(Math.round(window.scrollY)));
+        else localStorage.removeItem(key);
+      } catch (e) {}
+    }
+    var stored = 0;
+    try { stored = parseInt(localStorage.getItem(key) || '0', 10); } catch (e) {}
+
+    if (stored > window.innerHeight) {
+      var bar = document.createElement('div');
+      bar.className = 'resume';
+      bar.innerHTML = '<span>You stopped part way through this piece.</span>';
+      var go = document.createElement('button'); go.type = 'button'; go.textContent = 'Pick up there';
+      var no = document.createElement('button'); no.type = 'button'; no.className = 'dismiss'; no.textContent = 'Start over';
+      bar.appendChild(go); bar.appendChild(no);
+      document.body.appendChild(bar);
+      setTimeout(function () { bar.classList.add('show'); }, 400);
+      go.addEventListener('click', function () {
+        window.scrollTo({ top: stored, behavior: root.getAttribute('data-motion') === 'off' ? 'auto' : 'smooth' });
+        bar.classList.remove('show');
+      });
+      no.addEventListener('click', function () {
+        try { localStorage.removeItem(key); } catch (e) {}
+        bar.classList.remove('show');
+      });
+      setTimeout(function () { bar.classList.remove('show'); }, 12000);
+    }
+    window.addEventListener('scroll', save, { passive: true });
+    window.addEventListener('beforeunload', save);
+  })();
+
+  /* ---------- tick off pieces you have read ---------- */
+  (function () {
+    if (state.track !== 'on') return;
+    var here = location.pathname.split('/').pop().replace('.html', '');
+    var KEY = 'pm:read';
+    function list() {
+      try { return JSON.parse(localStorage.getItem(KEY) || '[]'); } catch (e) { return []; }
+    }
+    var read = list();
+    document.querySelectorAll('.dd-item').forEach(function (a) {
+      var slug = (a.getAttribute('href') || '').replace('.html', '');
+      var tick = document.createElement('span');
+      tick.className = 'tick'; tick.textContent = 'Read';
+      a.appendChild(tick);
+      if (read.indexOf(slug) > -1) a.classList.add('read');
+    });
+    if (!document.querySelector('.article') || here === 'index') return;
+    function mark() {
+      if (window.scrollY + window.innerHeight < document.body.scrollHeight * 0.75) return;
+      var r = list();
+      if (r.indexOf(here) === -1) {
+        r.push(here);
+        try { localStorage.setItem(KEY, JSON.stringify(r)); } catch (e) {}
+        var a = document.querySelector('.dd-item[href="' + here + '.html"]');
+        if (a) a.classList.add('read');
+      }
+      window.removeEventListener('scroll', mark);
+    }
+    window.addEventListener('scroll', mark, { passive: true });
   })();
 
   /* ---------- reveal on scroll ---------- */

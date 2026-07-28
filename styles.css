@@ -22,15 +22,15 @@
   --pad: clamp(1.25rem, 5vw, 4.5rem);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 
-  --c-cardiology:   #A32A31;
-  --c-neurology:    #573C99;
-  --c-oncology:     #A32B60;
-  --c-metabolic:    #A75B17;
-  --c-infectious:   #2C6435;
-  --c-criticalcare: #1B5A78;
-  --c-transplant:   #2C7A45;
-  --c-longevity:    #8E6410;
-  --c-editing:      #303C86;
+  --c-cardiology:   #D8262E;
+  --c-neurology:    #7857E0;
+  --c-oncology:     #D1276E;
+  --c-metabolic:    #A2601C;
+  --c-infectious:   #198125;
+  --c-criticalcare: #1F77A2;
+  --c-transplant:   #18804F;
+  --c-longevity:    #91691B;
+  --c-editing:      #5064DE;
 }
 
 [data-theme="dark"] {
@@ -399,7 +399,7 @@ html[data-motion="off"] { scroll-behavior: auto; }
 }
 
 /* extra colour tokens for the new interactives */
-:root { --c-exposure: #7A4E2E; --c-resistance: #1D6E5A; }
+:root { --c-exposure: #A95C20; --c-resistance: #187E62; }
 [data-theme="dark"] { --c-exposure: #C88A5A; --c-resistance: #3FBE9B; }
 
 html[data-underline="on"] .prose a,
@@ -642,3 +642,131 @@ a.cite:hover, a.cite:focus-visible { text-decoration: underline; text-underline-
   .prose a::after { content: " (" attr(href) ")"; font-size: 0.8em; word-break: break-all; }
   a.cite::after { content: none; }
 }
+
+/* --- previous / next, wearing the colour of where they go --- */
+.pager a {
+  background: var(--to); color: #FFF6E8; padding: 2rem 1.75rem;
+  border-top: 2px solid var(--ink); position: relative; overflow: hidden;
+  transition: filter 0.2s;
+}
+.pager a:hover { background: var(--to); filter: brightness(1.12); }
+.pager a + a { border-left: 2px solid var(--ink); }
+.pager .dir { display: flex; align-items: center; gap: 0.5rem; opacity: 0.85; }
+.pager a + a .dir { flex-direction: row-reverse; }
+.pager .arw { font-size: 1rem; transition: transform 0.25s var(--ease); }
+.pager a:hover .arw { transform: translateX(-5px); }
+.pager a + a:hover .arw { transform: translateX(5px); }
+.pager .ttl { margin-top: 0.5rem; }
+.pager .kind {
+  font-family: var(--mono); font-size: 0.58rem; letter-spacing: 0.18em;
+  text-transform: uppercase; opacity: 0.7; margin-top: 0.6rem;
+}
+
+/* ============================================================
+   SECTION MODELS
+   ============================================================ */
+.figure-box {
+  border: 2px solid var(--ink); background: var(--paper-2);
+  padding: clamp(1.25rem, 3vw, 1.9rem); margin: 3rem 0;
+}
+.fig-label {
+  font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--c);
+}
+.fig-title {
+  font-family: var(--display); font-weight: 900; font-size: clamp(1.2rem, 2.4vw, 1.65rem);
+  letter-spacing: -0.02em; line-height: 1.12; margin: 0.6rem 0 1.4rem;
+}
+.fig-stage { border: 2px solid var(--ink); background: var(--paper); padding: 1.1rem; }
+.fig-stage svg { width: 100%; height: auto; display: block; overflow: visible; }
+.fig-stage svg text { font-family: var(--mono); fill: var(--muted); }
+.fig-stage svg .cap { font-size: 11px; letter-spacing: 0.06em; }
+.fig-stage svg .mid { text-anchor: middle; }
+.fig-stage svg .big {
+  font-family: var(--display); font-weight: 900; font-size: 30px; fill: var(--c); letter-spacing: -0.02em;
+}
+.fig-stage svg .track { fill: var(--rule); }
+.fig-stage svg .fill { fill: var(--c); }
+.fig-stage svg .axis { stroke: var(--ink); stroke-width: 1.5; }
+.fig-stage svg .scrub { stroke: var(--c); stroke-width: 2; }
+.fig-stage svg .vessel { fill: none; stroke: var(--ink); stroke-width: 2.5; }
+.fig-stage svg .wall { fill: var(--c); opacity: 0.18; stroke: none; }
+.fig-stage svg .lumen { fill: var(--paper); stroke: var(--c); stroke-width: 2; transition: r 0.25s var(--ease); }
+.fig-stage svg .tumour { fill: var(--c); opacity: 0.22; stroke: var(--c); stroke-width: 2.5; }
+.fig-stage svg .tcell { stroke: var(--ink); stroke-width: 2; transition: cx 0.4s var(--ease), cy 0.4s var(--ease); }
+.fig-stage svg .tcell.live { fill: var(--c); }
+.fig-stage svg .tcell.off { fill: var(--rule); }
+.fig-stage svg .curve { fill: none; stroke: var(--c); stroke-width: 3; }
+.fig-stage svg .ill { fill: none; stroke: var(--muted); stroke-width: 2.2; stroke-dasharray: 6 5; }
+.fig-stage svg rect.fill { transition: width 0.3s var(--ease), opacity 0.2s; }
+
+.fig-ctrl { display: flex; flex-wrap: wrap; gap: 0.8rem 1.2rem; align-items: center; margin-top: 1.2rem; }
+.fig-slider { flex: 1 1 15rem; }
+.fig-slider label {
+  display: block; font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted); margin-bottom: 0.5rem;
+}
+.fig-slider label b { color: var(--c); font-weight: 500; }
+.fig-slider input[type=range] {
+  width: 100%; -webkit-appearance: none; appearance: none; height: 4px; background: var(--rule-2); outline: none;
+}
+.fig-slider input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; width: 20px; height: 20px; background: var(--c);
+  border: 2px solid var(--ink); cursor: pointer;
+}
+.fig-slider input[type=range]::-moz-range-thumb {
+  width: 18px; height: 18px; background: var(--c); border: 2px solid var(--ink);
+  cursor: pointer; border-radius: 0;
+}
+.fig-choices { display: flex; flex-wrap: wrap; border: 2px solid var(--ink); }
+.fig-choices button {
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase;
+  padding: 0.5rem 0.8rem; background: transparent; color: var(--ink); border: 0;
+  border-right: 1px solid var(--ink); cursor: pointer;
+}
+.fig-choices button:last-child { border-right: 0; }
+.fig-choices button[aria-pressed="true"] { background: var(--c); color: #FFF6E8; }
+.fig-step, .fig-check {
+  font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; text-transform: uppercase;
+  display: inline-flex; align-items: center; gap: 0.45rem; cursor: pointer; color: var(--ink);
+}
+.fig-step { border: 2px solid var(--ink); background: transparent; padding: 0.5rem 0.9rem; }
+.fig-step:hover { background: var(--ink); color: var(--paper); }
+.fig-check input { width: 15px; height: 15px; accent-color: var(--c); }
+.fig-out { font-size: 0.9rem; color: var(--ink-2); margin-top: 1.1rem; line-height: 1.6; }
+.fig-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 5px; }
+.fig-grid .gcell {
+  aspect-ratio: 1; background: var(--rule); border-radius: 50%;
+  transition: background 0.3s var(--ease);
+}
+.fig-grid .gcell.r { background: var(--c); }
+@media (max-width: 620px) { .fig-ctrl { gap: 0.9rem; } .fig-slider { flex: 1 1 100%; } }
+@media print { .figure-box { break-inside: avoid; } }
+
+/* --- article extras that can be switched off --- */
+html[data-gloss="off"] .gloss { border-bottom-color: transparent; }
+html[data-evidence="off"] .prose .ev, html[data-evidence="off"] .ev-key { display: none; }
+
+/* --- resume prompt --- */
+.resume {
+  position: fixed; left: 50%; transform: translateX(-50%) translateY(120%); bottom: 1.25rem; z-index: 120;
+  display: flex; align-items: center; gap: 1rem; flex-wrap: wrap;
+  background: var(--ink); color: var(--paper); border: 2px solid var(--ink);
+  padding: 0.85rem 1.1rem; font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.08em;
+  transition: transform 0.35s var(--ease); max-width: calc(100vw - 2rem);
+}
+.resume.show { transform: translateX(-50%) translateY(0); }
+.resume button {
+  font: inherit; text-transform: uppercase; letter-spacing: 0.12em; cursor: pointer;
+  border: 2px solid var(--paper); background: transparent; color: var(--paper); padding: 0.35rem 0.7rem;
+}
+.resume button:hover { background: var(--paper); color: var(--ink); }
+.resume .dismiss { border-color: transparent; opacity: 0.7; }
+
+/* --- read ticks in the contents menu --- */
+.dd-item .tick {
+  font-family: var(--mono); font-size: 0.62rem; color: var(--c); margin-left: auto;
+  padding-left: 0.6rem; opacity: 0; transition: opacity 0.2s;
+}
+.dd-item.read .tick { opacity: 1; }
+.dd-item.read .no { display: none; }

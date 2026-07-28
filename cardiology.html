@@ -184,6 +184,35 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+
+            <div class="set-group-label">Article extras</div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Glossary underlines</span>
+                <button class="switch" data-set="gloss" aria-pressed="true" aria-label="Show glossary underlines"></button>
+              </div>
+              <span class="hint">Definitions stay available on tap either way.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Evidence labels</span>
+                <button class="switch" data-set="evidence" aria-pressed="true" aria-label="Show evidence status labels"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Remember my place</span>
+                <button class="switch" data-set="resume" aria-pressed="true" aria-label="Remember reading position"></button>
+              </div>
+              <span class="hint">Offers to pick up where you stopped.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Mark pieces as read</span>
+                <button class="switch" data-set="track" aria-pressed="true" aria-label="Mark pieces as read"></button>
+              </div>
+              <span class="hint">Ticks them off in the contents menu.</span>
+            </div>
             <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
@@ -238,6 +267,8 @@
       <p class="reveal">The central player is low-density lipoprotein, or LDL, the kind usually called "bad cholesterol." It carries cholesterol through the blood, and when there is too much of it for too long, it lodges in artery walls and drives the growth of plaque. Over time a plaque can narrow an artery or rupture, triggering a clot that blocks blood flow. When that happens in the heart it is a heart attack. When it happens in the brain it is a stroke.</p>
       <p class="reveal">The key idea is exposure over time. It is not only how high your LDL is today, but how high it has been across your whole life. Doctors call this cumulative LDL burden, meaning the total dose of cholesterol your arteries have absorbed across a lifetime.<a class="cite" href="#ref-1" aria-label="Reference 1">1</a> It also explains why prevention started earlier tends to matter more than prevention started late.</p>
 
+      <div class="figure-box reveal" data-figure="cardiology"></div>
+
       <blockquote class="pullquote reveal">Lowering LDL early is one of the few interventions that behaves, in practice, like slowing aging itself.</blockquote>
 
       <h2 class="reveal">From daily pills to durable protection</h2>
@@ -272,8 +303,16 @@
     <aside class="toc" aria-label="Contents"></aside>
     </div>
     <nav class="pager" aria-label="More pieces">
-      <a class="" href="resistance.html" rel="prev"><span class="dir">Previous</span><span class="ttl">Watch Resistance Happen</span></a>
-      <a class="" href="neurology.html" rel="next"><span class="dir">Next</span><span class="ttl">The Organ That Sets the Ceiling</span></a>
+      <a href="resistance.html" style="--to: var(--c-resistance)" rel="prev">
+        <span class="dir"><span class="arw" aria-hidden="true">&larr;</span> Previous</span>
+        <span class="ttl">Watch Resistance Happen</span>
+        <span class="kind">Interactive tool</span>
+      </a>
+      <a href="neurology.html" style="--to: var(--c-neurology)" rel="next">
+        <span class="dir"><span class="arw" aria-hidden="true">&rarr;</span> Next</span>
+        <span class="ttl">The Organ That Sets the Ceiling</span>
+        <span class="kind">Article</span>
+      </a>
     </nav>
   </article>
 
@@ -294,5 +333,6 @@
 
   <script src="glossary.js"></script>
   <script src="app.js"></script>
+  <script src="figures.js"></script>
 </body>
 </html>

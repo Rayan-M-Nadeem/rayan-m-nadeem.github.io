@@ -87,6 +87,17 @@
     .readout { margin-top: 1.5rem; border: 2px solid var(--ink); background: var(--paper); padding: 1.4rem 1.5rem; min-height: 100px; }
     .readout h4 { font-family: var(--display); font-weight: 900; font-size: 1.3rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
     .readout p { font-size: 0.95rem; }
+
+    #chart .base { fill: none; stroke: var(--muted); stroke-width: 2.4; stroke-dasharray: 7 6; }
+    #chart .gap { fill: var(--c); opacity: 0.16; }
+    #chart .mark line { stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 3 4; }
+    #chart .mark text { font-family: var(--mono); font-size: 10px; fill: var(--muted); }
+    #chart text.ax { font-size: 10px; fill: var(--muted); letter-spacing: 0.08em; text-transform: uppercase; }
+    .legend-row { display: flex; flex-wrap: wrap; gap: 0.6rem 1.4rem; margin-top: 0.9rem;
+      font-family: var(--mono); font-size: 0.64rem; letter-spacing: 0.08em; color: var(--muted); }
+    .legend-row .sw { display: inline-block; width: 22px; height: 0; border-top: 3px solid var(--c); margin-right: 0.4rem; vertical-align: middle; }
+    .legend-row .dash { border-top-style: dashed; border-color: var(--muted); }
+    .legend-row .band { height: 10px; border-top: 0; background: var(--c); opacity: 0.25; }
     .caveat { font-family: var(--mono); font-size: 0.68rem; line-height: 1.7; color: var(--muted); margin-top: 1.25rem; }
   </style>
 </head>
@@ -195,6 +206,35 @@
                 <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
               </div>
             </div>
+
+            <div class="set-group-label">Article extras</div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Glossary underlines</span>
+                <button class="switch" data-set="gloss" aria-pressed="true" aria-label="Show glossary underlines"></button>
+              </div>
+              <span class="hint">Definitions stay available on tap either way.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Evidence labels</span>
+                <button class="switch" data-set="evidence" aria-pressed="true" aria-label="Show evidence status labels"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Remember my place</span>
+                <button class="switch" data-set="resume" aria-pressed="true" aria-label="Remember reading position"></button>
+              </div>
+              <span class="hint">Offers to pick up where you stopped.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Mark pieces as read</span>
+                <button class="switch" data-set="track" aria-pressed="true" aria-label="Mark pieces as read"></button>
+              </div>
+              <span class="hint">Ticks them off in the contents menu.</span>
+            </div>
             <button class="set-reset" id="set-reset">Reset all settings</button>
           </div>
         </div>
@@ -243,28 +283,36 @@
           <input type="range" id="ldl" min="60" max="190" value="100" step="5">
         </div>
         <div class="ctrl">
-          <label for="start">Starting at age <b><span id="start-v">20</span></b></label>
-          <input type="range" id="start" min="20" max="70" value="20" step="1">
+          <label for="start">Lowered from age <b><span id="start-v">20</span></b></label>
+          <input type="range" id="start" min="10" max="70" value="20" step="1">
         </div>
       </div>
 
       <div class="chart-wrap">
-        <svg id="chart" viewBox="0 0 600 260" role="img" aria-label="A chart of cumulative LDL exposure accumulating with age">
+        <svg id="chart" viewBox="0 0 620 300" role="img" aria-label="Cumulative LDL exposure from age ten to eighty, comparing a lowered level against never lowering it">
           <g id="grid"></g>
+          <path id="gap" class="gap"></path>
           <path id="area" class="area"></path>
+          <path id="base" class="base"></path>
           <path id="line" class="line"></path>
+          <g id="mark" class="mark"><line y1="20" y2="248"></line><text y="14" text-anchor="middle"></text></g>
           <g id="axis"></g>
         </svg>
+        <div class="legend-row">
+          <span><i class="sw solid"></i> Lowered from the age you choose</span>
+          <span><i class="sw dash"></i> Never lowered</span>
+          <span><i class="sw band"></i> Exposure avoided</span>
+        </div>
       </div>
 
       <div class="sim-head">
         <div>
-          <span class="lb">Accumulated by age 80</span>
+          <span class="lb">Lifetime exposure by age 80</span>
           <strong id="total">0</strong>
           <span class="unit">mg/dL &times; years</span>
         </div>
         <div>
-          <span class="lb">Share of the untreated total</span>
+          <span class="lb">Compared with never lowering it</span>
           <strong id="ratio">1.0&times;</strong>
         </div>
       </div>
@@ -322,8 +370,16 @@
     <aside class="toc" aria-label="Contents"></aside>
     </div>
     <nav class="pager" aria-label="More pieces">
-      <a class="" href="editing.html" rel="prev"><span class="dir">Previous</span><span class="ttl">Three Ways to Change a Gene</span></a>
-      <a class="" href="resistance.html" rel="next"><span class="dir">Next</span><span class="ttl">Watch Resistance Happen</span></a>
+      <a href="editing.html" style="--to: var(--c-editing)" rel="prev">
+        <span class="dir"><span class="arw" aria-hidden="true">&larr;</span> Previous</span>
+        <span class="ttl">Three Ways to Change a Gene</span>
+        <span class="kind">Interactive tool</span>
+      </a>
+      <a href="resistance.html" style="--to: var(--c-resistance)" rel="next">
+        <span class="dir"><span class="arw" aria-hidden="true">&rarr;</span> Next</span>
+        <span class="ttl">Watch Resistance Happen</span>
+        <span class="kind">Interactive tool</span>
+      </a>
     </nav>
   </article>
 
@@ -352,9 +408,9 @@
     var ldlV = document.getElementById('ldl-v'), startV = document.getElementById('start-v');
     var total = document.getElementById('total'), ratio = document.getElementById('ratio');
     var readout = document.getElementById('readout');
-    var W = 600, H = 260, PADL = 54, PADB = 34, PADT = 12, PADR = 12;
-    var AGE0 = 20, AGE1 = 80, MAXY = 9000;
-    var BASE_LDL = 145; // untreated level before any change
+    var W = 620, H = 300, PADL = 74, PADB = 52, PADT = 20, PADR = 18;
+    var AGE0 = 10, AGE1 = 80, MAXY = 11000;
+    var BASE_LDL = 145;
 
     function x(age) { return PADL + (age - AGE0) / (AGE1 - AGE0) * (W - PADL - PADR); }
     function y(v) { return H - PADB - (v / MAXY) * (H - PADB - PADT); }
@@ -362,53 +418,74 @@
     function grid() {
       var g = document.getElementById('grid'), a = document.getElementById('axis');
       g.innerHTML = ''; a.innerHTML = '';
-      [0, 3000, 6000, 9000].forEach(function (v) {
+      [0, 2500, 5000, 7500, 10000].forEach(function (v) {
         g.innerHTML += '<line class="gl" x1="' + PADL + '" y1="' + y(v) + '" x2="' + (W - PADR) + '" y2="' + y(v) + '"/>';
-        a.innerHTML += '<text x="' + (PADL - 8) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + (v / 1000) + 'k</text>';
+        a.innerHTML += '<text x="' + (PADL - 10) + '" y="' + (y(v) + 4) + '" text-anchor="end">' + (v / 1000) + 'k</text>';
       });
-      [20, 35, 50, 65, 80].forEach(function (age) {
-        a.innerHTML += '<text x="' + x(age) + '" y="' + (H - PADB + 18) + '" text-anchor="middle">' + age + '</text>';
+      [10, 20, 30, 40, 50, 60, 70, 80].forEach(function (age) {
+        a.innerHTML += '<text x="' + x(age) + '" y="' + (H - PADB + 20) + '" text-anchor="middle">' + age + '</text>';
       });
-      a.innerHTML += '<text x="' + PADL + '" y="' + (H - 4) + '" text-anchor="start">Age</text>';
+      a.innerHTML += '<text class="ax" x="' + ((PADL + W - PADR) / 2) + '" y="' + (H - 12) + '" text-anchor="middle">Age in years</text>';
+      a.innerHTML += '<text class="ax" transform="rotate(-90 16 ' + ((PADT + H - PADB) / 2) + ')" x="16" y="' + ((PADT + H - PADB) / 2) + '" text-anchor="middle">Cumulative LDL, mg/dL x years</text>';
     }
 
     function series(level, from) {
       var pts = [], acc = 0;
       for (var age = AGE0; age <= AGE1; age++) {
-        var lv = age < from ? BASE_LDL : level;
-        if (age > AGE0) acc += lv;
+        if (age > AGE0) acc += (age < from ? BASE_LDL : level);
         pts.push([age, acc]);
       }
       return pts;
+    }
+    function toPath(pts) {
+      return pts.map(function (p, i) {
+        return (i ? 'L' : 'M') + x(p[0]).toFixed(1) + ',' + y(Math.min(p[1], MAXY)).toFixed(1);
+      }).join(' ');
     }
 
     function draw() {
       var level = +ldl.value, from = +start.value;
       ldlV.textContent = level; startV.textContent = from;
 
-      var pts = series(level, from);
-      var d = pts.map(function (p, i) { return (i ? 'L' : 'M') + x(p[0]).toFixed(1) + ',' + y(Math.min(p[1], MAXY)).toFixed(1); }).join(' ');
-      document.getElementById('line').setAttribute('d', d);
-      document.getElementById('area').setAttribute('d', d + ' L' + x(AGE1) + ',' + y(0) + ' L' + x(AGE0) + ',' + y(0) + ' Z');
+      var mine = series(level, from);
+      var never = series(BASE_LDL, AGE1 + 1);
 
-      var acc = pts[pts.length - 1][1];
-      var ref = series(BASE_LDL, AGE1 + 1)[pts.length - 1][1];
+      document.getElementById('line').setAttribute('d', toPath(mine));
+      document.getElementById('base').setAttribute('d', toPath(never));
+      // the shaded band is the exposure avoided
+      document.getElementById('gap').setAttribute('d',
+        toPath(never) + ' L' + x(AGE1) + ',' + y(Math.min(mine[mine.length-1][1], MAXY)) + ' ' +
+        toPath(mine.slice().reverse()).replace('M', 'L') + ' Z');
+      document.getElementById('area').setAttribute('d',
+        toPath(mine) + ' L' + x(AGE1) + ',' + y(0) + ' L' + x(AGE0) + ',' + y(0) + ' Z');
+
+      // mark the age the change starts
+      var mk = document.getElementById('mark');
+      if (from > AGE0) {
+        mk.setAttribute('transform', 'translate(' + x(from) + ',0)');
+        mk.style.display = '';
+        mk.querySelector('text').textContent = 'age ' + from;
+      } else { mk.style.display = 'none'; }
+
+      var acc = mine[mine.length - 1][1], ref = never[never.length - 1][1];
       total.textContent = acc.toLocaleString();
       ratio.textContent = Math.round((acc / ref) * 100) + '%';
 
-      var msg, title;
-      if (from > 55 && level < BASE_LDL) {
-        title = 'Late changes move the total very little';
-        msg = 'By the time the level drops at age ' + from + ', most of the lifetime exposure has already accumulated. The curve bends, but it bends near the end.';
-      } else if (from <= 30 && level <= 90) {
-        title = 'This is roughly the genetic scenario';
-        msg = 'A low level held from early adulthood is close to what people born with protective variants experience, and it is the pattern associated with the lowest rates of coronary disease.';
-      } else if (level >= BASE_LDL) {
+      var saved = ref - acc, title, msg;
+      if (level >= BASE_LDL) {
         title = 'No change from the untreated course';
-        msg = 'At or above the untreated level, the curve is the same one the arteries would have followed anyway. Drag the level down and watch the area shrink.';
+        msg = 'At or above the untreated level the two lines sit on top of each other. Drag the level down and the shaded band between them is the exposure your arteries never see.';
+      } else if (from > 55) {
+        title = 'Lowering it this late moves very little';
+        msg = 'By age ' + from + ', about ' + Math.round(series(BASE_LDL, AGE1 + 1)[from - AGE0][1] / ref * 100) +
+              '% of a lifetime of exposure has already accumulated. The curve bends, but it bends near the end.';
+      } else if (from <= 20 && level <= 90) {
+        title = 'This is close to the genetic scenario';
+        msg = 'A low level held from adolescence resembles what people born with protective variants experience, and it is the pattern linked to the lowest rates of coronary disease.';
       } else {
-        title = 'Exposure is the area under the curve';
-        msg = 'The number on the slider matters, but so does how long it is held. Drag the second slider to see how much the same level costs when it starts later.';
+        title = 'The shaded band is what you avoid';
+        msg = 'Holding ' + level + ' mg/dL from age ' + from + ' avoids about ' + saved.toLocaleString() +
+              ' mg/dL x years of exposure, roughly ' + Math.round(saved / ref * 100) + '% of the untreated lifetime total.';
       }
       readout.innerHTML = '<h4>' + title + '</h4><p>' + msg + '</p>';
     }
