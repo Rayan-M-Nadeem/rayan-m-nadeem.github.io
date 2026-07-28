@@ -54,30 +54,47 @@
     return stage.querySelector('svg');
   }
 
+  function fit(host) {
+    var sv = host.querySelector('.fig-stage svg');
+    if (!sv || !sv.getBBox) return;
+    var b;
+    try { b = sv.getBBox(); } catch (e) { return; }
+    if (!b || !b.width) return;
+    var v = sv.viewBox.baseVal, pad = 6;
+    var x0 = Math.min(v.x, b.x - pad), y0 = Math.min(v.y, b.y - pad);
+    var x1 = Math.max(v.x + v.width, b.x + b.width + pad);
+    var y1 = Math.max(v.y + v.height, b.y + b.height + pad);
+    sv.setAttribute('viewBox', x0.toFixed(1) + ' ' + y0.toFixed(1) + ' ' +
+      (x1 - x0).toFixed(1) + ' ' + (y1 - y0).toFixed(1));
+  }
+
   var FIG = {};
 
   /* ---- cardiology: an artery closing over decades ---- */
   FIG.cardiology = function (host) {
     var s = shell(host, 'What decades at a given cholesterol level do to one artery');
-    var g = svg(s.stage, '0 0 320 200',
-      '<circle cx="100" cy="100" r="72" class="vessel"/>' +
-      '<circle cx="100" cy="100" r="60" class="wall"/>' +
-      '<circle id="lumen" cx="100" cy="100" r="58" class="lumen"/>' +
-      '<text x="210" y="72" class="big" id="pct">0%</text>' +
-      '<text x="210" y="94" class="cap">narrowed</text>' +
-      '<text x="210" y="132" class="cap" id="flow">Blood flow unaffected</text>');
-    var lumen = g.querySelector('#lumen'), pct = g.querySelector('#pct'), flow = g.querySelector('#flow');
+    var g = svg(s.stage, '0 0 340 212',
+      '<circle cx="86" cy="106" r="74" class="vessel"/>' +
+      '<circle cx="86" cy="106" r="62" class="wall"/>' +
+      '<circle id="lumen" cx="86" cy="106" r="60" class="lumen"/>' +
+      '<text x="196" y="76" class="big" id="pct">0%</text>' +
+      '<text x="196" y="97" class="cap">of the channel closed</text>' +
+      '<rect x="196" y="112" width="132" height="12" class="track"/>' +
+      '<rect id="mtr" x="196" y="112" width="0" height="12" class="fill"/>' +
+      '<text x="196" y="146" class="cap" id="flow">Flow unaffected</text>' +
+      '<text x="196" y="164" class="cap" id="sym">no symptoms</text>');
+    var lumen = g.querySelector('#lumen'), pct = g.querySelector('#pct'),
+        mtr = g.querySelector('#mtr'), flow = g.querySelector('#flow'), sym = g.querySelector('#sym');
     var level = 145, years = 0;
     function draw() {
-      // rough illustration: narrowing scales with level above roughly 70 and with time
-      var burden = Math.max(0, (level - 70)) * years / 100;
-      var narrow = Math.min(92, burden * 1.25);
-      lumen.setAttribute('r', (58 * (1 - narrow / 100)).toFixed(1));
+      var narrow = Math.min(92, Math.max(0, level - 70) * years / 100 * 1.25);
+      lumen.setAttribute('r', (60 * (1 - narrow / 100)).toFixed(1));
+      mtr.setAttribute('width', (132 * narrow / 92).toFixed(1));
       pct.textContent = Math.round(narrow) + '%';
-      if (narrow < 40) { flow.textContent = 'Blood flow unaffected'; }
-      else if (narrow < 70) { flow.textContent = 'Still no symptoms at rest'; }
-      else if (narrow < 85) { flow.textContent = 'Chest pain likely on exertion'; }
-      else { flow.textContent = 'Flow-limiting; rupture risk'; }
+      if (narrow < 40) { flow.textContent = 'Flow unaffected'; sym.textContent = 'nothing to feel'; }
+      else if (narrow < 70) { flow.textContent = 'Still fine at rest'; sym.textContent = 'nothing to feel'; }
+      else if (narrow < 85) { flow.textContent = 'Flow now limited'; sym.textContent = 'chest pain on exertion'; }
+      else { flow.textContent = 'Severely limited'; sym.textContent = 'high rupture risk'; }
       s.out.textContent = 'A plaque can grow for decades without producing a single symptom. Narrowing usually has to pass about 70 percent before it limits blood flow, which is why the first sign is so often the heart attack itself.';
     }
     slider(s.ctrl, 'LDL held at', 70, 200, 145, 5, function (v, b) { level = v; b.textContent = v + ' mg/dL'; draw(); });
@@ -126,59 +143,125 @@
 
   /* ---- oncology: the off switch a tumour presses ---- */
   FIG.oncology = function (host) {
-    var s = shell(host, 'The off switch a tumour presses, and what happens when it is blocked');
-    var g = svg(s.stage, '0 0 320 200',
-      '<circle cx="160" cy="100" r="44" class="tumour"/>' +
-      '<text x="160" y="105" class="cap mid">tumour</text>' +
-      '<g id="tcells"></g>' +
-      '<text x="160" y="188" class="cap mid" id="state"></text>');
-    var host2 = g.querySelector('#tcells');
-    var pos = [[52, 46], [268, 46], [52, 154], [268, 154]];
-    function draw(blocked) {
-      host2.innerHTML = '';
-      pos.forEach(function (p) {
-        var cx = blocked ? p[0] + (160 - p[0]) * 0.46 : p[0];
-        var cy = blocked ? p[1] + (100 - p[1]) * 0.46 : p[1];
-        host2.innerHTML += '<circle cx="' + cx + '" cy="' + cy + '" r="15" class="tcell ' + (blocked ? 'live' : 'off') + '"/>';
-      });
-      g.querySelector('#state').textContent = blocked ? 'Checkpoint blocked: T cells engage' : 'Checkpoint pressed: T cells stand down';
-      s.out.textContent = blocked
-        ? 'A checkpoint inhibitor releases the brake. The immune cells were always there and already knew where the tumour was. They were being told to stand down.'
-        : 'The tumour presses the immune system\u2019s own off switch. The T cells arrive, receive the stand-down signal, and do nothing.';
+    var s = shell(host, 'Run the same tumour forward under four different treatments');
+    var g = svg(s.stage, '0 0 340 212',
+      '<line x1="34" y1="176" x2="330" y2="176" class="axis"/>' +
+      '<line x1="34" y1="16" x2="34" y2="176" class="axis"/>' +
+      '<text x="26" y="24" class="cap" text-anchor="end">size</text>' +
+      '<text x="182" y="202" class="cap mid">months of treatment</text>' +
+      '<path id="onc-line" class="curve"/>' +
+      '<g id="onc-dots"></g>' +
+      '<text x="330" y="30" class="cap" id="onc-state" text-anchor="end"></text>');
+    var line = g.querySelector('#onc-line'), dots = g.querySelector('#onc-dots'),
+        stateT = g.querySelector('#onc-state');
+    var mode = 'none', hist = [100], responder = true, MONTHS = 36, stepBtn;
+    function px(i) { return 34 + i / MONTHS * 296; }
+    function py(v) { return 176 - Math.min(v, 130) / 130 * 156; }
+    function draw() {
+      line.setAttribute('d', hist.map(function (v, i) {
+        return (i ? 'L' : 'M') + px(i * 3).toFixed(1) + ',' + py(v).toFixed(1); }).join(' '));
+      dots.innerHTML = hist.map(function (v, i) {
+        return '<circle cx="' + px(i * 3).toFixed(1) + '" cy="' + py(v).toFixed(1) + '" r="3.4" class="fill"/>'; }).join('');
+      stateT.textContent = (hist.length - 1) * 3 + ' months';
     }
-    choices(s.ctrl, [{ label: 'Checkpoint pressed', value: false }, { label: 'Checkpoint blocked', value: true }],
-      function (v) { draw(v); });
-    draw(false);
+    function note(t) { s.out.textContent = t; }
+    var INTRO = {
+      none: 'No treatment. Advance the tumour three months at a time and watch what unchecked division actually looks like.',
+      chemo: 'Chemotherapy kills dividing cells, so the response is fast. Keep advancing and watch what the surviving cells do.',
+      checkpoint: 'A checkpoint inhibitor releases the immune brake. It does not work in everyone, so this run is one patient rather than an average. Keep advancing.',
+      cart: 'CAR-T sends in the patient\u2019s own re-engineered immune cells. Advance and watch the shape of the response.'
+    };
+    function reset(m) { mode = m; hist = [100]; responder = Math.random() < 0.45; draw(); note(INTRO[m]); }
+    function step() {
+      var n = hist.length, v = hist[n - 1], t = n * 3;
+      if (mode === 'none') v *= 1.20;
+      else if (mode === 'chemo') v = t <= 9 ? v * 0.45 : v * (1.24 + n * 0.02);
+      else if (mode === 'checkpoint') v = responder ? (t <= 12 ? v * 0.62 : v * 0.97) : v * 1.14;
+      else v = t <= 6 ? v * 0.10 : v * (Math.random() < 0.18 ? 1.5 : 1.01);
+      hist.push(Math.max(0.6, Math.min(v, 130)));
+      draw();
+      var months = (hist.length - 1) * 3;
+      if (mode === 'chemo' && months >= 12 && hist[hist.length - 1] > hist[3])
+        note('This is the pattern that makes chemotherapy hard: a real early response, then the cells that survived it repopulate. The tumour that comes back is the one the drug could not kill.');
+      else if (mode === 'checkpoint' && !responder && months >= 9)
+        note('This patient is not responding. Checkpoint inhibitors help a minority, which is why so much work goes into predicting who in advance. Reset to draw a different patient.');
+      else if (mode === 'checkpoint' && responder && months >= 18)
+        note('When a checkpoint inhibitor does work the response tends to hold, because what is doing the killing is an immune system that now recognises the tumour and keeps watching for it.');
+      else if (mode === 'cart' && months >= 12)
+        note('CAR-T can clear a tumour almost completely within weeks. The open question is durability, and relapse when the target protein disappears from the cancer.');
+      else if (mode === 'none' && months >= 12)
+        note('Nothing is holding it back. Exponential growth looks slow at first and then does not, which is the whole difficulty of catching cancer early.');
+      if (months >= MONTHS) stepBtn.disabled = true;
+    }
+    choices(s.ctrl, [{ label: 'None', value: 'none' }, { label: 'Chemo', value: 'chemo' },
+                     { label: 'Checkpoint', value: 'checkpoint' }, { label: 'CAR-T', value: 'cart' }],
+      function (v) { reset(v); stepBtn.disabled = false; });
+    stepBtn = el('button', 'fig-step', 'Advance 3 months');
+    stepBtn.type = 'button';
+    stepBtn.addEventListener('click', step);
+    s.ctrl.appendChild(stepBtn);
+    var rst = el('button', 'fig-step', 'Reset');
+    rst.type = 'button';
+    rst.addEventListener('click', function () { reset(mode); stepBtn.disabled = false; });
+    s.ctrl.appendChild(rst);
+    reset('none');
   };
 
   /* ---- metabolic: each added target raises the ceiling ---- */
   FIG.metabolic = function (host) {
-    var s = shell(host, 'What each added hormone target buys');
-    var bars = [
-      { k: 'Diet and exercise alone', v: 5, n: 'Typical average in trials of lifestyle change alone.' },
-      { k: 'GLP-1 only', v: 15, n: 'Semaglutide, which targets the GLP-1 receptor by itself.' },
-      { k: 'GLP-1 plus GIP', v: 21, n: 'Tirzepatide, which adds a second gut hormone receptor.' },
-      { k: 'Three receptors', v: 24, n: 'Investigational triple agonists, still in late-stage trials.' }
-    ];
-    var inner = '';
-    bars.forEach(function (b, i) {
-      var y = 18 + i * 44;
-      inner += '<text x="0" y="' + (y - 4) + '" class="cap">' + b.k + '</text>' +
-               '<rect x="0" y="' + y + '" width="260" height="18" class="track"/>' +
-               '<rect id="m' + i + '" x="0" y="' + y + '" width="0" height="18" class="fill"/>' +
-               '<text id="mv' + i + '" x="268" y="' + (y + 14) + '" class="cap"></text>';
+    var s = shell(host, 'Drag the point where treatment stops and watch what the weight does');
+    var g = svg(s.stage, '0 0 340 212',
+      '<line x1="36" y1="176" x2="332" y2="176" class="axis"/>' +
+      '<line x1="36" y1="14" x2="36" y2="176" class="axis"/>' +
+      '<g id="met-grid"></g>' +
+      '<path id="met-area" class="gapfill"/><path id="met-line" class="curve"/>' +
+      '<line id="met-stop" class="scrub" y1="14" y2="176"/>' +
+      '<text id="met-stopl" y="12" class="cap mid"></text>' +
+      '<text x="184" y="202" class="cap mid">weeks</text>' +
+      '<text x="28" y="20" class="cap" text-anchor="end">0%</text>' +
+      '<text x="28" y="176" class="cap" text-anchor="end">-25%</text>');
+    var grid = g.querySelector('#met-grid');
+    [0,52,104,156].forEach(function (w) {
+      grid.innerHTML += '<line class="gl" x1="' + (36 + w / 156 * 296) + '" y1="14" x2="' + (36 + w / 156 * 296) + '" y2="176"/>' +
+        '<text x="' + (36 + w / 156 * 296) + '" y="190" class="cap mid">' + w + '</text>';
     });
-    var g = svg(s.stage, '0 0 320 200', inner);
-    function draw(sel) {
-      bars.forEach(function (b, i) {
-        g.querySelector('#m' + i).setAttribute('width', (260 * b.v / 26).toFixed(1));
-        g.querySelector('#m' + i).setAttribute('opacity', sel === i ? 1 : 0.32);
-        g.querySelector('#mv' + i).textContent = b.v + '%';
-      });
-      s.out.textContent = bars[sel].n + ' Average body weight reduction. Each step adds a receptor rather than refining the original mechanism, which is why the ceiling keeps moving.';
+    var REG = { life: { p: 5, n: 'lifestyle change alone' }, glp: { p: 15, n: 'a GLP-1 drug' }, dual: { p: 21, n: 'a GLP-1 plus GIP drug' } };
+    var reg = 'glp', stop = 68;
+    function x(w) { return 36 + w / 156 * 296; }
+    function y(pc) { return 14 + pc / 25 * 162; }
+    function draw() {
+      var peak = REG[reg].p, pts = [], lowest = 0;
+      for (var w = 0; w <= 156; w += 2) {
+        var v;
+        if (w <= stop) v = peak * (1 - Math.exp(-w / 26));
+        else {
+          var atStop = peak * (1 - Math.exp(-stop / 26));
+          v = atStop - atStop * 0.68 * (1 - Math.exp(-(w - stop) / 34));
+        }
+        lowest = Math.max(lowest, v);
+        pts.push([w, v]);
+      }
+      var d = pts.map(function (q, i) { return (i ? 'L' : 'M') + x(q[0]).toFixed(1) + ',' + y(q[1]).toFixed(1); }).join(' ');
+      g.querySelector('#met-line').setAttribute('d', d);
+      g.querySelector('#met-area').setAttribute('d', d + ' L' + x(156) + ',' + y(0) + ' L' + x(0) + ',' + y(0) + ' Z');
+      g.querySelector('#met-stop').setAttribute('x1', x(stop)); g.querySelector('#met-stop').setAttribute('x2', x(stop));
+      var lbl = g.querySelector('#met-stopl');
+      lbl.setAttribute('x', Math.min(Math.max(x(stop), 52), 300)); lbl.textContent = 'stops';
+      var end = pts[pts.length - 1][1];
+      s.out.textContent = stop >= 156
+        ? 'Kept on ' + REG[reg].n + ' for the full three years, weight settles about ' + lowest.toFixed(1) +
+          ' percent down and stays there. These behave like treatments for a chronic condition, not a course with an end.'
+        : 'On ' + REG[reg].n + ' the low point is about ' + lowest.toFixed(1) + ' percent down. Stopping at week ' + stop +
+          ' gives most of it back: by three years the loss is about ' + end.toFixed(1) +
+          ' percent. The drug was not doing something permanent to the body, it was holding a signal in place.';
     }
-    choices(s.ctrl, bars.map(function (b, i) { return { label: b.k.split(' ')[0], value: i }; }), draw);
-    draw(0);
+    choices(s.ctrl, [{ label: 'Lifestyle', value: 'life' }, { label: 'GLP-1', value: 'glp' }, { label: 'GLP-1 + GIP', value: 'dual' }],
+      function (v) { reg = v; draw(); });
+    s.ctrl.querySelector('.fig-choices').querySelectorAll('button')[0].setAttribute('aria-pressed', 'false');
+    s.ctrl.querySelector('.fig-choices').querySelectorAll('button')[1].setAttribute('aria-pressed', 'true');
+    slider(s.ctrl, 'Treatment stops at week', 8, 156, 68, 4, function (v, b) { stop = v; b.textContent = v >= 156 ? 'never' : v; draw(); });
+    s.ctrl.querySelector('.fig-slider b').textContent = '68';
+    draw();
   };
 
   /* ---- infectious: two ways resistance travels ---- */
@@ -231,26 +314,71 @@
 
   /* ---- critical care: which machine stands in for which organ ---- */
   FIG.criticalcare = function (host) {
-    var s = shell(host, 'Which machine stands in for which organ');
-    var opts = [
-      { label: 'Lungs', machine: 'Ventilator', txt: 'Moves air in and out when the lungs or the muscles driving them cannot. It does not heal the lung; it holds the job open.' },
-      { label: 'Kidneys', machine: 'Dialysis', txt: 'Filters the blood in place of the kidneys, and can do so for years. The most complete long-term substitution medicine has.' },
-      { label: 'Heart', machine: 'Ventricular assist device', txt: 'Pumps blood when the heart is too weak, sometimes as a bridge to transplant and sometimes indefinitely.' },
-      { label: 'Heart and lungs', machine: 'ECMO', txt: 'Takes blood out, adds oxygen, removes carbon dioxide, returns it. The fullest substitution available, and the shortest bridge.' }
+    var s = shell(host, 'Keep a patient alive long enough for the cause to be treated');
+    var board = el('div', 'fig-organs');
+    s.stage.appendChild(board);
+    var meter = el('div', 'fig-meter', '<span></span>');
+    s.stage.appendChild(meter);
+    var clock = el('p', 'fig-clock');
+    s.stage.appendChild(clock);
+
+    var ORGANS = [
+      { k: 'lungs', name: 'Lungs', machine: 'Ventilator', failsAt: 0 },
+      { k: 'kidneys', name: 'Kidneys', machine: 'Dialysis', failsAt: 12 },
+      { k: 'heart', name: 'Heart', machine: 'ECMO', failsAt: 24 }
     ];
-    var g = svg(s.stage, '0 0 320 200',
-      '<rect x="16" y="26" width="288" height="148" class="track" rx="0"/>' +
-      '<text x="160" y="74" class="big mid" id="mach"></text>' +
-      '<text x="160" y="104" class="cap mid" id="org"></text>' +
-      '<line x1="60" y1="122" x2="260" y2="122" class="scrub"/>' +
-      '<text x="160" y="150" class="cap mid">substituting, not curing</text>');
-    function draw(i) {
-      g.querySelector('#mach').textContent = opts[i].machine;
-      g.querySelector('#org').textContent = 'stands in for: ' + opts[i].label.toLowerCase();
-      s.out.textContent = opts[i].txt;
+    var hours = 0, stability = 100, treated = false, dead = false, sup = {};
+
+    function render() {
+      board.innerHTML = '';
+      ORGANS.forEach(function (o) {
+        var failing = hours >= o.failsAt;
+        var b = el('button', 'organ' + (failing ? ' failing' : '') + (sup[o.k] ? ' supported' : ''));
+        b.type = 'button';
+        b.innerHTML = '<span class="on">' + o.name + '</span>' +
+          '<span class="st">' + (!failing ? 'holding' : sup[o.k] ? 'on ' + o.machine.toLowerCase() : 'failing') + '</span>' +
+          '<span class="act">' + (sup[o.k] ? 'switch off' : 'start ' + o.machine) + '</span>';
+        b.disabled = dead;
+        b.addEventListener('click', function () { sup[o.k] = !sup[o.k]; render(); });
+        board.appendChild(b);
+      });
+      meter.querySelector('span').style.width = Math.max(0, stability) + '%';
+      meter.classList.toggle('low', stability < 40);
+      clock.textContent = 'Hour ' + hours + '  \u00b7  stability ' + Math.max(0, Math.round(stability)) + '%';
     }
-    choices(s.ctrl, opts.map(function (o, i) { return { label: o.label, value: i }; }), draw);
-    draw(0);
+    function advance() {
+      if (dead) return;
+      hours += 6;
+      var unsupported = 0;
+      ORGANS.forEach(function (o) { if (hours >= o.failsAt && !sup[o.k]) unsupported++; });
+      if (treated) stability += 9 - unsupported * 16;
+      else stability += -3 - unsupported * 17;
+      stability = Math.min(100, stability);
+      if (stability <= 0) { stability = 0; dead = true; }
+      render();
+      if (dead) s.out.textContent = 'The patient did not survive. An organ was left unsupported for too long. Support is not optional once an organ has stopped doing its job, and it does not wait for you.';
+      else if (treated && stability > 88 && hours >= 30) s.out.textContent = 'Stable and recovering. The machines did not fix anything. They held the failing organs open while the underlying cause was treated, and that is the whole idea of the bridge.';
+      else if (!treated && hours >= 36) s.out.textContent = 'Everything is supported and the patient is still sliding. This is the hard case: life support with nothing reversible underneath extends a dying process rather than a life.';
+      else if (unsupported) s.out.textContent = 'An organ has failed and nothing is standing in for it. Stability is dropping fast. Start the matching machine.';
+      else s.out.textContent = 'Holding. Each machine substitutes for one organ and buys time, but time is only useful if the thing that caused the failure gets treated.';
+    }
+    var step = el('button', 'fig-step', 'Advance 6 hours');
+    step.type = 'button'; step.addEventListener('click', advance);
+    s.ctrl.appendChild(step);
+    var cure = el('label', 'fig-check');
+    var cb = document.createElement('input'); cb.type = 'checkbox';
+    cb.addEventListener('change', function () { treated = cb.checked; });
+    cure.appendChild(cb); cure.appendChild(document.createTextNode('Treat the underlying cause'));
+    s.ctrl.appendChild(cure);
+    var rst = el('button', 'fig-step', 'Reset');
+    rst.type = 'button';
+    rst.addEventListener('click', function () {
+      hours = 0; stability = 100; dead = false; sup = {}; treated = cb.checked; render();
+      s.out.textContent = 'Hour zero. The lungs have just failed. Start the machine that stands in for them, then keep advancing.';
+    });
+    s.ctrl.appendChild(rst);
+    render();
+    s.out.textContent = 'Hour zero. The lungs have just failed. Start the machine that stands in for them, then keep advancing.';
   };
 
   /* ---- transplant: closing the supply gap ---- */
@@ -288,45 +416,65 @@
 
   /* ---- longevity: two different things people mean ---- */
   FIG.longevity = function (host) {
-    var s = shell(host, 'Two different things people mean by a longer life');
-    var g = svg(s.stage, '0 0 320 200',
-      '<line x1="34" y1="168" x2="310" y2="168" class="axis"/>' +
-      '<line x1="34" y1="16" x2="34" y2="168" class="axis"/>' +
-      '<path id="cur" class="curve"/><path id="ill" class="ill"/>' +
-      '<text x="172" y="192" class="cap mid">age</text>' +
-      '<text x="26" y="14" class="cap" text-anchor="end">alive</text>');
-    function curve(mid, steep) {
+    var s = shell(host, 'Set when illness starts and when life ends, and see which one actually matters');
+    var g = svg(s.stage, '0 0 340 212',
+      '<line x1="36" y1="150" x2="332" y2="150" class="axis"/>' +
+      '<line x1="36" y1="12" x2="36" y2="150" class="axis"/>' +
+      '<path id="lg-band" class="gapfill"/>' +
+      '<path id="lg-ill" class="ill"/><path id="lg-die" class="curve"/>' +
+      '<text x="28" y="20" class="cap" text-anchor="end">alive</text>' +
+      '<g id="lg-ax"></g>' +
+      '<rect x="36" y="168" width="296" height="18" class="track"/>' +
+      '<rect id="lg-well" x="36" y="168" width="0" height="18" class="fill"/>' +
+      '<rect id="lg-sick" x="36" y="168" width="0" height="18" class="sick"/>' +
+      '<text x="36" y="202" class="cap" id="lg-lab"></text>');
+    var ax = g.querySelector('#lg-ax');
+    [40, 60, 80, 100].forEach(function (a) {
+      ax.innerHTML += '<text x="' + (36 + (a - 40) / 65 * 296) + '" y="164" class="cap mid">' + a + '</text>';
+    });
+    var ill = 68, die = 80;
+    function X(a) { return 36 + (a - 40) / 65 * 296; }
+    function curve(mid) {
       var d = '';
-      for (var i = 0; i <= 60; i++) {
-        var age = 40 + i;
-        var v = 1 / (1 + Math.exp((age - mid) / steep));
-        var x = 34 + (age - 40) / 60 * 276, y = 168 - v * 148;
-        d += (i ? 'L' : 'M') + x.toFixed(1) + ',' + y.toFixed(1);
+      for (var i = 0; i <= 65; i++) {
+        var a = 40 + i, v = 1 / (1 + Math.exp((a - mid) / 4.5));
+        d += (i ? 'L' : 'M') + X(a).toFixed(1) + ',' + (150 - v * 134).toFixed(1);
       }
       return d;
     }
-    function draw(mode) {
-      if (mode === 'base') {
-        g.querySelector('#cur').setAttribute('d', curve(80, 6));
-        g.querySelector('#ill').setAttribute('d', curve(68, 7));
-        s.out.textContent = 'Today: the lower line is when chronic illness starts, the upper line is death. The distance between them is roughly a decade spent unwell.';
-      } else if (mode === 'longer') {
-        g.querySelector('#cur').setAttribute('d', curve(90, 6));
-        g.querySelector('#ill').setAttribute('d', curve(68, 7));
-        s.out.textContent = 'More years: the end moves right but illness starts at the same age, so the unwell stretch gets longer. This is the version almost nobody actually wants.';
-      } else {
-        g.querySelector('#cur').setAttribute('d', curve(88, 4));
-        g.querySelector('#ill').setAttribute('d', curve(82, 4));
-        s.out.textContent = 'More healthy years: illness is pushed back to meet the end, so the unwell stretch shrinks. This is what healthspan research is aiming at, and it is a different target.';
-      }
+    function draw() {
+      if (die <= ill + 1) die = ill + 1;
+      g.querySelector('#lg-ill').setAttribute('d', curve(ill));
+      g.querySelector('#lg-die').setAttribute('d', curve(die));
+      g.querySelector('#lg-band').setAttribute('d', curve(die) + ' L' + X(105) + ',150 L' + X(40) + ',150 Z');
+      var well = ill - 40, sick = die - ill, total = die - 40;
+      g.querySelector('#lg-well').setAttribute('width', (296 * well / 65).toFixed(1));
+      g.querySelector('#lg-sick').setAttribute('x', (36 + 296 * well / 65).toFixed(1));
+      g.querySelector('#lg-sick').setAttribute('width', (296 * sick / 65).toFixed(1));
+      g.querySelector('#lg-lab').textContent = well + ' healthy years, then ' + sick + ' unwell';
+      var baseSick = 12;
+      s.out.textContent = sick > baseSick + 1
+        ? 'You have added years to the end without moving when illness starts, so the unwell stretch has grown to ' + sick +
+          ' years. This is the version of a longer life almost nobody actually wants, and it is what naive lifespan extension produces.'
+        : sick < baseSick - 1
+          ? 'The unwell stretch is down to ' + sick + ' years from about twelve today. Illness has been pushed back toward the end rather than the end pushed away from illness. This is what healthspan research is aiming at.'
+          : 'Roughly today\u2019s picture: about ' + sick + ' years of chronic illness before the end. Now try moving each slider on its own and watch which one changes the shaded band.';
     }
-    choices(s.ctrl, [{ label: 'Today', value: 'base' }, { label: 'More years', value: 'longer' }, { label: 'More healthy years', value: 'health' }], draw);
-    draw('base');
+    slider(s.ctrl, 'Chronic illness begins at', 50, 95, 68, 1, function (v, b) { ill = v; b.textContent = v; draw(); refresh(); });
+    slider(s.ctrl, 'Life ends at', 60, 105, 80, 1, function (v, b) { die = v; b.textContent = v; draw(); refresh(); });
+    var bs = s.ctrl.querySelectorAll('.fig-slider b');
+    function refresh() { bs[0].textContent = ill; bs[1].textContent = die; }
+    refresh(); draw();
   };
 
   document.querySelectorAll('.figure-box[data-figure]').forEach(function (host) {
     var fn = FIG[host.getAttribute('data-figure')];
-    if (fn) { try { fn(host); } catch (e) { host.remove(); } }
-    else host.remove();
+    if (!fn) { host.remove(); return; }
+    try { fn(host); } catch (e) { host.remove(); return; }
+    fit(host);
+    // the drawing changes as you use it, so re-check after every interaction
+    ['input', 'click'].forEach(function (ev) {
+      host.addEventListener(ev, function () { requestAnimationFrame(function () { fit(host); }); }, true);
+    });
   });
 })();

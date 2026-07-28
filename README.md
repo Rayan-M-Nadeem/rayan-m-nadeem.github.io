@@ -68,7 +68,7 @@ Plain HTML, CSS, and JavaScript. No frameworks, no build step, no dependencies. 
 - **Glossary definitions** on the first appearance of a technical term, shown on hover, tap or keyboard focus.
 - **Previous and next** links between pieces, and a back-to-top button.
 - **Keyboard support** throughout: a skip link, visible focus rings, and arrow, Home, End and Escape keys inside both menus.
-- **A working model in every article**, not just the three standalone tools: an artery closing over decades, the order Alzheimer's changes appear, the immune off switch a tumor presses, the weight-loss ceiling each added hormone target raises, the two routes a resistance gene travels, which machine substitutes for which organ, the transplant supply gap, and the difference between more years and more healthy years.
+- **A working model in every article**, not just the three standalone tools: an artery closing over decades; the order Alzheimer's changes appear; the same tumour run forward month by month under four different treatments; a weight trajectory you can stop at any week to see the regain; the two routes a resistance gene travels; a life-support simulation where organs fail on a clock and you decide what to support; the transplant supply gap; and two sliders that separate more years from more healthy years.
 - **Remembers your place** in a piece and offers to pick it up, and ticks off what you have read in the contents menu.
 - **Glossary underlines and evidence labels can be switched off** for readers who find them busy.
 - **Print stylesheet** that drops the interface and expands link URLs.

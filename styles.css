@@ -568,13 +568,13 @@ a.cite:hover, a.cite:focus-visible { text-decoration: underline; text-underline-
 }
 
 /* --- previous / next --- */
-.pager { border-top: 2px solid var(--ink); margin-top: 3.5rem; display: grid; grid-template-columns: 1fr 1fr; }
+.pager { margin-top: 3.5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
 .pager a {
   padding: 1.75rem 1.5rem; display: flex; flex-direction: column; gap: 0.4rem;
   transition: background 0.2s;
 }
 .pager a:hover { background: var(--paper-2); }
-.pager a + a { border-left: 2px solid var(--ink); text-align: right; align-items: flex-end; }
+.pager a + a { text-align: right; align-items: flex-end; }
 .pager .dir { font-family: var(--mono); font-size: 0.6rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
 .pager .ttl { font-family: var(--display); font-weight: 900; font-size: clamp(1.05rem,2vw,1.35rem); letter-spacing: -0.02em; line-height: 1.15; }
 .pager .none { opacity: 0.35; pointer-events: none; }
@@ -628,7 +628,7 @@ a.cite:hover, a.cite:focus-visible { text-decoration: underline; text-underline-
 }
 @media (max-width: 760px) {
   .pager { grid-template-columns: 1fr; }
-  .pager a + a { border-left: 0; border-top: 2px solid var(--ink); text-align: left; align-items: flex-start; }
+  .pager a + a { text-align: left; align-items: flex-start; }
   .gloss .def { position: fixed; left: 4vw; right: 4vw; width: auto; top: auto; bottom: 1rem; }
 }
 
@@ -646,11 +646,12 @@ a.cite:hover, a.cite:focus-visible { text-decoration: underline; text-underline-
 /* --- previous / next, wearing the colour of where they go --- */
 .pager a {
   background: var(--to); color: #FFF6E8; padding: 2rem 1.75rem;
-  border-top: 2px solid var(--ink); position: relative; overflow: hidden;
+  border: 2px solid var(--ink); position: relative; overflow: hidden;
   transition: filter 0.2s;
 }
+.pager a:only-child { grid-column: 1 / -1; }
 .pager a:hover { background: var(--to); filter: brightness(1.12); }
-.pager a + a { border-left: 2px solid var(--ink); }
+
 .pager .dir { display: flex; align-items: center; gap: 0.5rem; opacity: 0.85; }
 .pager a + a .dir { flex-direction: row-reverse; }
 .pager .arw { font-size: 1rem; transition: transform 0.25s var(--ease); }
@@ -678,7 +679,7 @@ a.cite:hover, a.cite:focus-visible { text-decoration: underline; text-underline-
   letter-spacing: -0.02em; line-height: 1.12; margin: 0.6rem 0 1.4rem;
 }
 .fig-stage { border: 2px solid var(--ink); background: var(--paper); padding: 1.1rem; }
-.fig-stage svg { width: 100%; height: auto; display: block; overflow: visible; }
+.fig-stage svg { width: 100%; height: auto; display: block; overflow: hidden; }
 .fig-stage svg text { font-family: var(--mono); fill: var(--muted); }
 .fig-stage svg .cap { font-size: 11px; letter-spacing: 0.06em; }
 .fig-stage svg .mid { text-anchor: middle; }
@@ -770,3 +771,26 @@ html[data-evidence="off"] .prose .ev, html[data-evidence="off"] .ev-key { displa
 }
 .dd-item.read .tick { opacity: 1; }
 .dd-item.read .no { display: none; }
+
+/* --- extra pieces used by the rebuilt models --- */
+.fig-stage svg .gapfill { fill: var(--c); opacity: 0.15; }
+.fig-stage svg .sick { fill: var(--muted); opacity: 0.55; }
+.fig-organs { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.6rem; }
+.organ {
+  display: flex; flex-direction: column; gap: 0.28rem; text-align: left; cursor: pointer;
+  border: 2px solid var(--rule-2); background: var(--paper); padding: 0.7rem 0.75rem;
+  font-family: var(--mono); color: var(--ink); transition: border-color 0.2s, background 0.2s;
+}
+.organ .on { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.04em; }
+.organ .st { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); }
+.organ .act { font-size: 0.56rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--c); margin-top: 0.2rem; }
+.organ.failing { border-color: var(--c); background: color-mix(in srgb, var(--c) 10%, var(--paper)); }
+.organ.supported { border-color: var(--ink); }
+.organ.supported .st { color: var(--ink); }
+.organ:disabled { opacity: 0.45; cursor: default; }
+.fig-meter { height: 14px; background: var(--rule); margin-top: 0.9rem; border: 2px solid var(--ink); }
+.fig-meter span { display: block; height: 100%; background: var(--c); transition: width 0.3s var(--ease); }
+.fig-meter.low span { background: var(--muted); }
+.fig-clock { font-family: var(--mono); font-size: 0.66rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); margin-top: 0.6rem; }
+.fig-step:disabled { opacity: 0.4; cursor: default; }
+@media (max-width: 560px) { .fig-organs { grid-template-columns: 1fr; } }
