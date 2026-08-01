@@ -76,7 +76,7 @@ a { color: inherit; text-decoration: none; }
 img, svg { display: block; max-width: 100%; }
 ::selection { background: var(--ink); color: var(--paper); }
 
-.wrap { width: 100%; max-width: 1400px; margin-inline: auto; padding-inline: var(--pad); }
+.wrap { width: 100%; max-width: 1760px; margin-inline: auto; padding-inline: var(--pad); }
 .narrow { max-width: 720px; }
 
 .label {
@@ -268,6 +268,96 @@ img, svg { display: block; max-width: 100%; }
 .reveal.in { opacity: 1; transform: none; }
 
 /* ---------------- responsive ---------------- */
+@media (min-width: 1200px) {
+  :root {
+    --measure: 70ch;
+    --pad: clamp(3.5rem, 5vw, 6.5rem);
+  }
+
+  body { font-size: 1.1rem; }
+
+  .nav-inner { height: 76px; }
+  .wordmark { font-size: 1.42rem; }
+  .nav-links { gap: clamp(2rem, 3vw, 3.5rem); }
+  .nav-links a { font-size: 0.76rem; }
+
+  .masthead {
+    padding-block: clamp(4.5rem, 6vw, 7rem) clamp(4rem, 5.5vw, 6.5rem);
+  }
+  .masthead .wrap {
+    display: grid;
+    grid-template-columns: minmax(0, 1.35fr) minmax(22rem, 0.65fr);
+    column-gap: clamp(4rem, 8vw, 10rem);
+    align-items: end;
+  }
+  .masthead-meta { grid-column: 1 / -1; }
+  .masthead h1 {
+    grid-column: 1;
+    grid-row: 2 / span 3;
+    align-self: center;
+    font-size: clamp(7rem, 9.25vw, 11rem);
+    max-width: 10ch;
+    margin-top: clamp(3rem, 5vw, 5rem);
+  }
+  .masthead .standfirst {
+    grid-column: 2;
+    grid-row: 2;
+    font-size: clamp(1.55rem, 1.65vw, 2rem);
+    max-width: 28ch;
+    margin-top: clamp(3rem, 5vw, 5rem);
+  }
+  .masthead .deck {
+    grid-column: 2;
+    grid-row: 3;
+    max-width: 44ch;
+    font-size: 1.08rem;
+    margin-top: 1.6rem;
+  }
+  .masthead .actions {
+    grid-column: 2;
+    grid-row: 4;
+    margin-top: 2.25rem;
+  }
+
+  .block-inner {
+    grid-template-columns: minmax(0, 1.08fr) minmax(25rem, 0.92fr);
+    gap: clamp(5rem, 8vw, 10rem);
+    min-height: clamp(590px, 67vh, 760px);
+    padding-block: clamp(5rem, 7vw, 8rem);
+  }
+  .block:nth-of-type(even) .block-inner {
+    grid-template-columns: minmax(25rem, 0.92fr) minmax(0, 1.08fr);
+  }
+  .block h2 { font-size: clamp(4.6rem, 5.1vw, 6.6rem); max-width: 12ch; }
+  .block p { font-size: clamp(1.16rem, 1.15vw, 1.35rem); max-width: 42ch; }
+  .block .go { font-size: 0.8rem; margin-top: 2.75rem; }
+  .block-num { font-size: clamp(4.5rem, 5vw, 6.5rem); }
+  .diagram { max-width: clamp(440px, 29vw, 590px); }
+
+  .article-head {
+    padding-block: clamp(5rem, 7vw, 8rem);
+  }
+  .article-head-grid {
+    grid-template-columns: minmax(0, 1.25fr) minmax(20rem, 0.75fr);
+    gap: clamp(5rem, 8vw, 10rem);
+  }
+  .article-head h1 { font-size: clamp(5.5rem, 6.3vw, 7.5rem); }
+  .article-head .summary { font-size: clamp(1.35rem, 1.45vw, 1.7rem); }
+  .article-head .diagram { max-width: clamp(300px, 22vw, 410px); }
+  .article { padding-block: clamp(5rem, 6vw, 7rem); }
+  .article-grid {
+    grid-template-columns: minmax(0, var(--measure)) minmax(17rem, 20rem);
+    justify-content: space-between;
+    gap: clamp(5rem, 8vw, 10rem);
+  }
+  .toc { top: 108px; }
+
+  .about { padding-block: clamp(6rem, 8vw, 9rem); }
+  .about-grid { gap: clamp(5rem, 8vw, 10rem); }
+  .about h2 { font-size: clamp(4rem, 4.2vw, 5.5rem); }
+  .footer { padding-block: clamp(5rem, 6vw, 7rem); }
+}
+
 @media (max-width: 900px) {
   .block-inner, .block:nth-of-type(even) .block-inner { grid-template-columns: 1fr; gap: 2.5rem; }
   .block:nth-of-type(even) .block-text { order: 1; }
