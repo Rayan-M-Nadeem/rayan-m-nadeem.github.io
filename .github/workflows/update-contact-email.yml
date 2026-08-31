@@ -1,0 +1,37 @@
+name: Update contact email
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  update-email:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Replace contact email everywhere
+        shell: bash
+        run: |
+          set -euo pipefail
+          grep -RIl --exclude-dir=.git --exclude='*.png' 'plainlymedicine@gmail.com' . | xargs -r sed -i 's/plainlymedicine@gmail\.com/medicine@plainlylibrary.com/g'
+          if grep -RIl --exclude-dir=.git --exclude='*.png' 'plainlymedicine@gmail.com' .; then
+            echo 'Old email still present' >&2
+            exit 1
+          fi
+          rm -f .github/workflows/update-contact-email.yml
+      - name: Commit replacement
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          if git diff --cached --quiet; then
+            echo 'No changes needed.'
+            exit 0
+          fi
+          git commit -m 'Update Plainly Medicine contact email'
+          git push
