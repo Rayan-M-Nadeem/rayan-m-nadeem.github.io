@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Watch Resistance Happen &middot; Plainly Medicine</title>
+  <meta name="description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
+  <script>
+    (function () {
+      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
+      try {
+        var t = g('theme') || 'system';
+        r.setAttribute('data-theme', t === 'system'
+          ? (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light') : t);
+        var s = g('size'); if (s && s !== 'm') r.setAttribute('data-size', s);
+        var w = g('width'); if (w && w !== 'default') r.setAttribute('data-width', w);
+        var l = g('leading'); if (l && l !== 'default') r.setAttribute('data-leading', l);
+        var f = g('font'); if (f && f !== 'sans') r.setAttribute('data-font', f);
+        if (g('contrast') === 'on') r.setAttribute('data-contrast', 'on');
+        if (g('motion') === 'on') r.setAttribute('data-motion', 'off');
+        if (g('underline') === 'on') r.setAttribute('data-underline', 'on');
+      } catch (e) { r.setAttribute('data-theme', 'light'); }
+    })();
+  </script>
+  <link rel="canonical" href="https://plainlylibrary.com/medicine/resistance.html">
+  <meta name="author" content="Rayan Nadeem">
+  <meta property="og:type" content="article">
+  <meta property="og:site_name" content="Plainly Medicine">
+  <meta property="og:title" content="Watch Resistance Happen">
+  <meta property="og:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
+  <meta property="og:url" content="https://plainlylibrary.com/medicine/resistance.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Watch Resistance Happen">
+  <meta name="twitter:description" content="An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.">
+  <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Watch Resistance Happen",
+  "description": "An interactive simulation of antibiotic resistance: give a bacterial colony repeated courses of antibiotics and watch the resistant fraction take over.",
+  "url": "https://plainlylibrary.com/medicine/resistance.html",
+  "mainEntityOfPage": {"@type": "WebPage", "@id": "https://plainlylibrary.com/medicine/resistance.html"},
+  "articleSection": "Interactive",
+  "inLanguage": "en",
+  "datePublished": "2026-07-24",
+  "dateModified": "2026-07-24",
+  "author": {"@type": "Person", "name": "Rayan Nadeem",
+    "description": "Independent student researcher. Not a licensed medical professional; all clinical claims are cited to primary sources.",
+    "url": "https://plainlylibrary.com/medicine/#about"},
+  "publisher": {"@type": "Person", "name": "Rayan Nadeem"},
+  "image": "https://plainlylibrary.com/medicine/share-card.png",
+  "isAccessibleForFree": true,
+  "isPartOf": {"@type": "WebSite", "name": "Plainly Medicine", "url": "https://plainlylibrary.com/medicine/"}
+}
+  </script>
+  <meta property="og:image" content="https://plainlylibrary.com/medicine/share-card.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Plainly Medicine: eight articles and three interactive tools on modern medicine">
+  <meta name="twitter:image" content="https://plainlylibrary.com/medicine/share-card.png">
+  <meta name="theme-color" content="#F7F3EA" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#14110D" media="(prefers-color-scheme: dark)">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .lab { padding-block: clamp(2rem, 5vw, 3.5rem); }
+    .sim { border: 2px solid var(--ink); background: var(--paper-2); padding: clamp(1.25rem, 3vw, 2rem); }
+    .sim-head { display: flex; gap: 2.5rem; flex-wrap: wrap; padding-bottom: 1.25rem; border-bottom: 2px solid var(--ink); margin-bottom: 1.5rem; }
+    .sim-head .lb { display: block; font-family: var(--mono); font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); }
+    .sim-head strong { font-family: var(--display); font-weight: 900; font-size: clamp(1.6rem, 4vw, 2.4rem); line-height: 1.1; letter-spacing: -0.03em; }
+    .dish {
+      display: grid; grid-template-columns: repeat(20, 1fr); gap: 4px;
+      padding: 1rem; border: 2px solid var(--ink); background: var(--paper); min-height: 220px;
+      align-content: start;
+    }
+    .cell { width: 100%; aspect-ratio: 1; border-radius: 50%; transition: background 0.4s var(--ease), opacity 0.5s var(--ease), transform 0.4s var(--ease); }
+    .cell.s { background: var(--muted); opacity: 0.5; }
+    .cell.r { background: var(--c); opacity: 1; }
+    .cell.dead { opacity: 0; transform: scale(0.2); }
+    .sim-tools { display: flex; gap: 0.8rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .readout { margin-top: 1.5rem; border: 2px solid var(--ink); background: var(--paper); padding: 1.4rem 1.5rem; min-height: 120px; }
+    .readout h4 { font-family: var(--display); font-weight: 900; font-size: 1.35rem; letter-spacing: -0.02em; margin-bottom: 0.5rem; }
+    .readout p { font-size: 0.95rem; }
+    .legend { display: flex; gap: 1.5rem; margin-top: 1.25rem; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); }
+    .legend .sw { display: inline-block; width: 11px; height: 11px; border-radius: 50%; margin-right: 0.45rem; vertical-align: middle; }
+    .legend .susceptible { background: var(--muted); opacity: 0.5; }
+    .legend .resistant { background: var(--c); }
+    @media (max-width: 620px) { .dish { grid-template-columns: repeat(14, 1fr); } .sim-head { gap: 1.5rem; } }
+  </style>
+</head>
+<body data-topic="resistance" style="--c: var(--c-resistance)">
+
+  <a class="skip" href="#main">Skip to content</a>
+  <div class="progress-rail" aria-hidden="true"><span></span></div>
+
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="wordmark" href="index.html">Plainly Medicine</a>
+      <nav class="nav-links" aria-label="Primary">
+        <div class="has-menu">
+          <button class="menu-trigger" data-menu="sections" aria-expanded="false" aria-haspopup="true">
+            All Sections
+            <svg class="chev" width="10" height="7" viewBox="0 0 10 7" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M1 1.5L5 5.5L9 1.5"/></svg>
+          </button>
+          <div class="dropdown" id="menu-sections" data-open="false" role="menu">
+            <div class="dd-head">Interactive</div>
+          <a class="dd-item" href="editing.html" style="--c: var(--c-editing)"><span class="swatch"></span><span class="nm">Three Ways to Change a Gene</span><span class="no">00</span></a>
+          <a class="dd-item" href="exposure.html" style="--c: var(--c-exposure)"><span class="swatch"></span><span class="nm">The Arithmetic of a Lifetime</span><span class="no">01</span></a>
+          <a class="dd-item" href="resistance.html" style="--c: var(--c-resistance)" aria-current="page"><span class="swatch"></span><span class="nm">Watch Resistance Happen</span><span class="no">02</span></a>
+          <div class="dd-head">Topics</div>
+          <a class="dd-item" href="cardiology.html" style="--c: var(--c-cardiology)"><span class="swatch"></span><span class="nm">Cardiology</span><span class="no">03</span></a>
+          <a class="dd-item" href="neurology.html" style="--c: var(--c-neurology)"><span class="swatch"></span><span class="nm">Neurology</span><span class="no">04</span></a>
+          <a class="dd-item" href="oncology.html" style="--c: var(--c-oncology)"><span class="swatch"></span><span class="nm">Oncology</span><span class="no">05</span></a>
+          <a class="dd-item" href="metabolic.html" style="--c: var(--c-metabolic)"><span class="swatch"></span><span class="nm">Metabolic Health</span><span class="no">06</span></a>
+          <a class="dd-item" href="infectious.html" style="--c: var(--c-infectious)"><span class="swatch"></span><span class="nm">Infectious Disease</span><span class="no">07</span></a>
+          <a class="dd-item" href="criticalcare.html" style="--c: var(--c-criticalcare)"><span class="swatch"></span><span class="nm">Critical Care</span><span class="no">08</span></a>
+          <a class="dd-item" href="transplant.html" style="--c: var(--c-transplant)"><span class="swatch"></span><span class="nm">Transplant and Regeneration</span><span class="no">09</span></a>
+          <a class="dd-item" href="longevity.html" style="--c: var(--c-longevity)"><span class="swatch"></span><span class="nm">Longevity and Gene Editing</span><span class="no">10</span></a>
+          </div>
+        </div>
+        <a href="index.html#about">About</a>
+        <a href="/">Plainly Library</a>
+      </nav>
+      <div class="nav-tools">
+        <div class="has-menu">
+          <button class="menu-trigger settings-btn" data-menu="settings" aria-expanded="false" aria-haspopup="true" aria-label="Settings">
+            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <circle cx="12" cy="12" r="3.2"/>
+              <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.6a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+          </button>
+          <div class="dropdown settings-panel" id="menu-settings" data-open="false">
+            <div class="set-group-label">Appearance</div>
+            <div class="set-row">
+              <span class="lb">Theme</span>
+              <div class="seg" data-set="theme">
+                <button data-val="light" aria-pressed="false">Light</button>
+                <button data-val="dark" aria-pressed="false">Dark</button>
+                <button data-val="system" aria-pressed="true">System</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Higher contrast</span>
+                <button class="switch" data-set="contrast" aria-pressed="false" aria-label="Higher contrast"></button>
+              </div>
+              <span class="hint">Darkens muted text and strengthens rules.</span>
+            </div>
+
+            <div class="set-group-label">Reading</div>
+            <div class="set-row">
+              <span class="lb">Text size</span>
+              <div class="seg" data-set="size">
+                <button data-val="s" aria-pressed="false">Small</button>
+                <button data-val="m" aria-pressed="true">Default</button>
+                <button data-val="l" aria-pressed="false">Large</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Reading width</span>
+              <div class="seg" data-set="width">
+                <button data-val="narrow" aria-pressed="false">Narrow</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="wide" aria-pressed="false">Wide</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Line spacing</span>
+              <div class="seg" data-set="leading">
+                <button data-val="tight" aria-pressed="false">Tight</button>
+                <button data-val="default" aria-pressed="true">Default</button>
+                <button data-val="loose" aria-pressed="false">Loose</button>
+              </div>
+            </div>
+            <div class="set-row">
+              <span class="lb">Article typeface</span>
+              <div class="seg" data-set="font">
+                <button data-val="sans" aria-pressed="true">Sans</button>
+                <button data-val="serif" aria-pressed="false">Serif</button>
+                <button data-val="mono" aria-pressed="false">Mono</button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Behaviour</div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Reduce motion</span>
+                <button class="switch" data-set="motion" aria-pressed="false" aria-label="Reduce motion"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Underline links</span>
+                <button class="switch" data-set="underline" aria-pressed="false" aria-label="Always underline links"></button>
+              </div>
+            </div>
+
+            <div class="set-group-label">Article extras</div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Glossary underlines</span>
+                <button class="switch" data-set="gloss" aria-pressed="true" aria-label="Show glossary underlines"></button>
+              </div>
+              <span class="hint">Definitions stay available on tap either way.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Evidence labels</span>
+                <button class="switch" data-set="evidence" aria-pressed="true" aria-label="Show evidence status labels"></button>
+              </div>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Remember my place</span>
+                <button class="switch" data-set="resume" aria-pressed="true" aria-label="Remember reading position"></button>
+              </div>
+              <span class="hint">Offers to pick up where you stopped.</span>
+            </div>
+            <div class="set-row">
+              <div class="set-toggle">
+                <span class="nm">Mark pieces as read</span>
+                <button class="switch" data-set="track" aria-pressed="true" aria-label="Mark pieces as read"></button>
+              </div>
+              <span class="hint">Ticks them off in the contents menu.</span>
+            </div>
+            <button class="set-reset" id="set-reset">Reset all settings</button>
+          </div>
+        </div>
+        <button class="menu-btn" aria-label="Menu" aria-expanded="false">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="backbar">
+    <div class="wrap">
+      <a class="back-btn" href="index.html"><span aria-hidden="true">&larr;</span> All sections</a>
+      <span class="where">Interactive</span>
+    </div>
+  </div>
+
+  <header class="article-head" style="--c: var(--c-resistance)">
+    <div class="wrap article-head-grid">
+      <div>
+        <div class="kicker label"><span>02</span><span>Interactive</span></div>
+        <h1>Watch Resistance Happen</h1>
+        <p class="summary">Give a colony of bacteria one course of antibiotics at a time, and watch a drug stop working.</p>
+        <div class="byline">
+          <span>By Rayan Nadeem</span>
+          <span>Independent research</span>
+          <span>Updated July 2026</span>
+        </div>
+        <div class="share">
+          <button id="copy-link" type="button"><span>Copy link</span></button>
+        </div>
+      </div>
+      <figure class="diagram">
+        <svg viewBox="0 0 200 200" role="img" aria-label="An antibiotic capsule"><g transform="translate(8.00,57.18) scale(0.18418)" fill="currentColor" stroke="none"><g transform="translate(0.000000,465.000000) scale(0.100000,-0.100000)" fill="currentColor" stroke="none"> <path d="M2218 4555 c-3 -3 -57 -10 -119 -15 -101 -9 -310 -43 -328 -55 -4 -2 -18 -6 -32 -8 -30 -6 -144 -44 -184 -61 -16 -8 -52 -22 -80 -32 -137 -50 -406 -208 -538 -316 -102 -84 -241 -225 -328 -333 -129 -160 -110 -132 -235 -350 -48 -85 -111 -231 -150 -348 -20 -62 -39 -119 -42 -127 -3 -8 -7 -24 -9 -35 -2 -11 -8 -31 -13 -45 -21 -52 -60 -386 -62 -520 -1 -65 11 -217 22 -275 5 -27 14 -86 20 -130 6 -44 15 -91 20 -105 6 -14 11 -34 13 -45 2 -11 6 -27 9 -35 3 -8 20 -60 38 -115 33 -104 42 -124 109 -265 147 -309 368 -583 646 -801 219 -173 532 -323 810 -390 248 -60 105 -58 3205 -58 3013 -1 3003 -1 3200 49 68 18 155 43 175 50 11 4 45 15 75 25 166 55 466 218 570 309 14 12 36 29 50 38 40 24 270 250 317 309 83 107 141 185 157 214 9 17 25 44 36 60 92 145 250 511 250 580 0 9 4 23 9 33 5 9 16 51 24 92 8 41 20 102 27 135 24 121 25 504 1 655 -23 146 -41 229 -52 245 -4 6 -10 30 -14 55 -4 25 -12 51 -19 59 -6 8 -10 16 -8 18 4 4 -52 153 -78 208 -10 22 -28 60 -40 85 -157 341 -469 693 -786 890 -145 89 -248 143 -369 190 -33 13 -64 27 -70 32 -5 4 -17 8 -27 8 -10 0 -26 4 -36 9 -63 34 -280 83 -452 103 -108 12 -5700 25 -5712 13z m2676 -311 c15 -6 16 -184 16 -1925 l0 -1919 -1403 0 c-1367 0 -1501 3 -1612 31 -422 110 -704 276 -993 585 -219 234 -403 590 -467 899 -9 44 -20 96 -25 115 -14 54 -25 195 -24 295 3 201 50 473 105 600 4 11 25 62 44 113 146 374 440 724 787 935 85 52 282 145 353 166 22 7 49 16 60 21 70 28 207 55 359 70 55 6 102 12 104 15 8 7 2677 6 2696 -1z m3031 -12 c233 -30 394 -77 614 -179 90 -42 287 -170 356 -232 23 -20 60 -52 83 -71 186 -153 417 -499 515 -772 47 -129 52 -149 76 -268 12 -58 26 -127 32 -155 12 -59 6 -439 -9 -535 -5 -36 -19 -101 -30 -145 -12 -44 -24 -91 -27 -105 -4 -14 -10 -34 -14 -45 -5 -11 -23 -58 -41 -105 -171 -448 -536 -842 -970 -1048 -141 -67 -169 -79 -210 -87 -19 -4 -39 -11 -45 -15 -5 -4 -21 -10 -35 -13 -14 -3 -65 -16 -115 -28 -90 -23 -90 -23 -1492 -26 l-1403 -4 0 1920 c0 1920 0 1920 23 1924 48 10 2614 -1 2692 -11z"/> <path d="M2120 3720 c-41 -4 -95 -13 -120 -20 -25 -6 -63 -16 -85 -22 -22 -6 -49 -14 -60 -19 -11 -5 -49 -19 -85 -32 -171 -63 -330 -166 -465 -302 -55 -55 -107 -109 -115 -120 -97 -131 -151 -221 -195 -327 -105 -256 -152 -517 -106 -591 77 -125 268 -64 270 87 1 27 5 65 10 85 5 20 17 68 27 106 79 325 307 604 614 754 42 21 85 40 96 44 83 25 134 39 164 43 19 3 46 9 60 14 14 4 51 11 84 14 114 10 169 112 116 216 -33 65 -86 82 -210 70z"/> <path d="M7052 3554 c-96 -48 -152 -151 -138 -257 33 -247 378 -293 477 -64 29 68 22 168 -15 232 -61 103 -212 145 -324 89z"/> <path d="M8133 3019 c-53 -16 -139 -102 -152 -153 -45 -178 45 -313 215 -324 95 -6 150 15 208 79 48 53 56 79 56 178 0 162 -159 269 -327 220z"/> <path d="M6144 2549 c-45 -13 -130 -107 -144 -160 -50 -184 96 -339 289 -308 200 31 268 278 116 418 -67 60 -162 79 -261 50z"/> <path d="M7274 2250 c-131 -41 -205 -229 -140 -358 31 -62 43 -71 148 -123 58 -29 193 8 250 68 118 125 87 322 -62 397 -41 21 -151 30 -196 16z"/> <path d="M8460 1895 c-61 -31 -116 -91 -129 -140 -49 -179 56 -325 233 -325 262 0 340 339 105 461 -63 34 -150 35 -209 4z"/> <path d="M6480 1434 c-42 -8 -122 -75 -147 -125 -75 -144 -15 -293 139 -350 64 -23 75 -23 142 -4 157 46 227 226 144 365 -54 90 -163 134 -278 114z"/> <path d="M7607 1353 c-142 -24 -239 -214 -178 -348 40 -90 112 -135 221 -142 70 -4 79 -2 128 27 129 75 166 223 89 350 -49 81 -162 130 -260 113z"/> </g></g></svg>
+        <figcaption>An antibiotic capsule</figcaption>
+      </figure>
+    </div>
+  </header>
+
+
+  <section class="lab wrap narrow">
+    <div class="sim">
+      <div class="sim-head">
+        <div>
+          <span class="lb">Population</span>
+          <strong id="pop">200</strong>
+        </div>
+        <div>
+          <span class="lb">Resistant</span>
+          <strong id="res">2%</strong>
+        </div>
+        <div>
+          <span class="lb">Courses given</span>
+          <strong id="rounds">0</strong>
+        </div>
+      </div>
+
+      <div class="dish" id="dish" role="img" aria-label="A colony of bacteria. Most are susceptible; a small number are resistant."></div>
+
+      <div class="sim-tools">
+        <button class="btn" id="dose">Give a course of antibiotics</button>
+        <button class="btn" id="continue" hidden>Continue &rarr;</button>
+        <button class="btn ghost" id="reset">Reset the colony</button>
+      </div>
+
+      <div class="readout" id="readout">
+        <h4>A normal colony</h4>
+        <p>Almost every bacterium here is killed by the antibiotic. A very small number carry a mutation that lets them survive. Give a course and watch what happens to the ones that are left.</p>
+      </div>
+
+      <div class="legend">
+        <span><i class="sw susceptible"></i> Susceptible</span>
+        <span><i class="sw resistant"></i> Resistant</span>
+      </div>
+    </div>
+  </section>
+
+  <article class="article wrap" id="main">
+    <div class="article-grid">
+    <div class="prose">
+      <div class="ev-key reveal">
+        <span class="lb">Evidence status</span>
+        <span class="ev ev-approved">Approved</span>
+        <span class="ev ev-trials">In trials</span>
+        <span class="ev ev-early">Early research</span>
+      </div>
+      <p class="reveal">The simulation above is the whole problem of antibiotic resistance in miniature. Nothing in it is unusual or malicious. No bacterium is trying to become resistant. All that happens is that a drug kills the organisms it can kill, and whatever survives goes on to reproduce. Run it three or four times and the colony that comes back is one the drug can no longer touch.</p>
+
+      <h2 class="reveal">The drug does not create resistance</h2>
+      <p class="reveal">This is the point people most often get backwards. The antibiotic does not cause the mutation. The resistant bacteria were already there, in tiny numbers, before the first dose. What the drug does is remove their competition.<a class="cite" href="#ref-3" aria-label="Reference 3">3</a> Every susceptible bacterium it kills is one less organism competing for space and nutrients, which leaves the survivors free to multiply into the gap.</p>
+      <p class="reveal">That is why the resistant fraction climbs so steeply in the simulation while the total population barely changes. You are not creating anything new. You are steadily editing out everything else.</p>
+
+      <blockquote class="pullquote reveal">Every dose is a filter, and the things that pass through it are exactly the things you did not want.</blockquote>
+
+      <h2 class="reveal">Why this makes antibiotics unlike other drugs</h2>
+      <p class="reveal">A blood pressure drug works about as well on its ten millionth prescription as its first. Antibiotics are the exception. Every course given anywhere in the world, to anyone, applies a small amount of this pressure to the bacterial population at large. The effectiveness of the drug is a shared resource that each use draws down slightly.<a class="cite" href="#ref-1" aria-label="Reference 1">1</a><a class="cite" href="#ref-2" aria-label="Reference 2">2</a></p>
+      <p class="reveal">This is why prescribing an antibiotic for a viral infection is not merely useless. It is a course of selection applied for no benefit at all. It is also why finishing a prescribed course matters in cases where stopping early would leave a partially selected population behind, and why hospitals hold certain drugs in reserve, using them only when nothing else will work.</p>
+
+      <h2 class="reveal">What actually helps</h2>
+      <p class="reveal">New antibiotics buy time, and several genuinely new classes have reached approval recently <span class="ev ev-approved">Approved</span>. But the simulation shows why new drugs alone cannot solve this: the same process will run again on whatever replaces the current drug. What changes the slope of the curve is using antibiotics less often and more precisely, which means rapid diagnostics that tell you whether an infection is bacterial at all, better infection control so fewer courses are needed, and surveillance that catches resistant strains before they spread.</p>
+
+      <div class="callout reveal">
+        <span class="label">Key Takeaways</span>
+        <ul>
+          <li>Antibiotics do not create resistance. Resistant bacteria already exist in small numbers, and the drug removes their competition.</li>
+          <li>Each course acts as a filter, so the surviving population is steadily enriched for resistance.</li>
+          <li>This makes antibiotic effectiveness a shared resource that every use depletes slightly.</li>
+          <li>New drugs delay the problem, but reducing unnecessary use is what changes its trajectory.</li>
+        </ul>
+      </div>
+
+      <div class="refs reveal">
+        <span class="label">Further Reading &amp; References</span>
+        <ol>
+          <li id="ref-1">Murray CJL, et al. Global burden of bacterial antimicrobial resistance in 2019: a systematic analysis. The Lancet. 2022.</li>
+          <li id="ref-2">World Health Organization. WHO Bacterial Priority Pathogens List. 2024.</li>
+          <li id="ref-3">Baym M, et al. Spatiotemporal microbial evolution on antibiotic landscapes. Science. 2016.</li>
+        </ol>
+      </div>
+
+      <p class="reveal" style="margin-top:2.5rem"><a href="infectious.html">Read the full piece on infectious disease and the antibiotic pipeline</a>.</p>
+    </div>
+    <aside class="toc" aria-label="Contents"></aside>
+    </div>
+    <nav class="pager" aria-label="More pieces">
+      <a href="exposure.html" style="--to: var(--c-exposure)" rel="prev">
+        <span class="dir"><span class="arw" aria-hidden="true">&larr;</span> Previous</span>
+        <span class="ttl">The Arithmetic of a Lifetime</span>
+        <span class="kind">Interactive tool</span>
+      </a>
+      <a href="cardiology.html" style="--to: var(--c-cardiology)" rel="next">
+        <span class="dir"><span class="arw" aria-hidden="true">&rarr;</span> Next</span>
+        <span class="ttl">The Slowest Emergency</span>
+        <span class="kind">Article</span>
+      </a>
+    </nav>
+  </article>
+
+
+  <footer class="footer">
+    <div class="wrap">
+      <h2>The honest word in all of this is "yet."</h2>
+      <p class="sub">Read the topics in any order. Each stands alone, and together they explain why longer, healthier lives are a realistic hope rather than a fantasy.</p>
+      <div class="footer-meta">
+        <span>&copy; 2026 Plainly Medicine</span>
+        <a href="mailto:medicine@plainlylibrary.com">medicine@plainlylibrary.com</a>
+      </div>
+      <p class="disclaimer">This site is for educational purposes only and does not constitute medical advice. Consult a qualified healthcare professional for any medical concerns.</p>
+    </div>
+  </footer>
+
+  <button class="to-top" aria-label="Back to top">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+  </button>
+
+  <script src="glossary.js"></script>
+  <script src="app.js"></script>
+  <script>
+  (function () {
+    var TOTAL = 200;
+    var dish = document.getElementById('dish');
+    var popEl = document.getElementById('pop'), resEl = document.getElementById('res'), roundEl = document.getElementById('rounds');
+    var readout = document.getElementById('readout');
+    var doseBtn = document.getElementById('dose'), contBtn = document.getElementById('continue');
+    var cells = [], rounds = 0;
+
+    function build() {
+      dish.innerHTML = ''; cells = []; rounds = 0;
+      for (var i = 0; i < TOTAL; i++) {
+        var d = document.createElement('div');
+        var resistant = Math.random() < 0.02;
+        d.className = 'cell ' + (resistant ? 'r' : 's');
+        d.dataset.r = resistant ? '1' : '0';
+        dish.appendChild(d); cells.push(d);
+      }
+      sync();
+      doseBtn.hidden = false; contBtn.hidden = true;
+      say('A normal colony',
+        'Almost every bacterium here is killed by the antibiotic. A very small number carry a mutation that lets them survive. Give a course and watch what happens to the ones that are left.');
+    }
+
+    function sync() {
+      var alive = cells.filter(function (c) { return !c.classList.contains('dead'); });
+      var r = alive.filter(function (c) { return c.dataset.r === '1'; }).length;
+      popEl.textContent = alive.length;
+      resEl.textContent = alive.length ? Math.round((r / alive.length) * 100) + '%' : '0%';
+      roundEl.textContent = rounds;
+      return { alive: alive.length, r: r };
+    }
+
+    function say(t, b) { readout.innerHTML = '<h4>' + t + '</h4><p>' + b + '</p>'; }
+
+    // step one: the drug kills what it can. nothing else happens until you continue.
+    function dose() {
+      rounds++;
+      cells.forEach(function (c) {
+        if (c.dataset.r === '0' && !c.classList.contains('dead')) {
+          if (Math.random() < 0.94) c.classList.add('dead');
+        }
+      });
+      sync();
+      doseBtn.hidden = true; contBtn.hidden = false;
+      say('The drug kills what it can',
+        'Susceptible bacteria die. The resistant ones are untouched, so they now make up a far larger share of what is left. Nothing has regrown yet. Press continue when you are ready to let the survivors multiply.');
+      contBtn.focus();
+    }
+
+    // step two: survivors repopulate the space the drug cleared
+    function grow() {
+      var alive = cells.filter(function (c) { return !c.classList.contains('dead'); });
+      var share = alive.length ? alive.filter(function (c) { return c.dataset.r === '1'; }).length / alive.length : 1;
+      cells.forEach(function (c) {
+        if (c.classList.contains('dead')) {
+          var res = Math.random() < share;
+          c.dataset.r = res ? '1' : '0';
+          c.className = 'cell ' + (res ? 'r' : 's');
+        }
+      });
+      var s = sync();
+      var pct = Math.round((s.r / s.alive) * 100);
+      var msg;
+      if (pct >= 95) msg = 'The colony is now almost entirely resistant. This antibiotic no longer works here, and no bacterium ever tried to make that happen.';
+      else if (pct >= 50) msg = 'Resistant bacteria are now the majority. Each further course pushes this further and faster, because there is less and less left for the drug to kill.';
+      else if (pct >= 15) msg = 'The resistant share has grown sharply. Notice the total population came back to roughly where it started, but its composition has changed.';
+      else msg = 'The colony has grown back to full size. It looks the same as before, but a larger share of it now survives the drug.';
+      say('The colony grows back, changed', msg);
+      contBtn.hidden = true; doseBtn.hidden = false;
+      doseBtn.focus();
+    }
+
+    doseBtn.addEventListener('click', dose);
+    contBtn.addEventListener('click', grow);
+    document.getElementById('reset').addEventListener('click', build);
+    build();
+  })();
+  </script>
+</body>
+</html>
