@@ -29,11 +29,11 @@ jobs:
             cp "$f" "medicine/$f"
           done
 
-          # Keep all Medicine canonical/social URLs on the same domain and under /medicine/.
+          # Keep Medicine canonical/social URLs on the same domain under /medicine/.
           find medicine -type f -name '*.html' -print0 | xargs -0 sed -i 's#https://rayan-m-nadeem.github.io/#https://plainlylibrary.com/medicine/#g'
 
-          # Add a path back to the Plainly Library hub in the Medicine navigation.
-          find medicine -type f -name '*.html' -print0 | xargs -0 sed -i 's#<a href="index.html#about">About</a>#<a href="index.html#about">About</a>\n        <a href="/">Plainly Library</a>#g'
+          # Give every Medicine page an obvious path back to the parent Library hub.
+          find medicine -type f -name '*.html' -print0 | xargs -0 sed -i 's|<a href="index.html#about">About</a>|<a href="index.html#about">About</a>\n        <a href="/">Plainly Library</a>|g'
 
           rm -f .github/workflows/move-medicine-under-library.yml
 
