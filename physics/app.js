@@ -4,10 +4,11 @@
   var search = document.getElementById('search');
   var count = document.getElementById('count');
   var empty = document.getElementById('empty');
+  var browser = document.getElementById('explore');
   var buttons = Array.prototype.slice.call(document.querySelectorAll('[data-filter]'));
   var domains = Array.prototype.slice.call(document.querySelectorAll('.domain'));
   var cards = Array.prototype.slice.call(document.querySelectorAll('.concept'));
-  var active = 'all';
+  var active = 'mechanics';
 
   function normalize(value) {
     return value.toLowerCase().trim();
@@ -17,9 +18,11 @@
     var query = normalize(search.value);
     var shown = 0;
 
+    browser.classList.toggle('searching', Boolean(query));
+
     domains.forEach(function (domain) {
       var domainName = domain.getAttribute('data-domain');
-      var inDomain = active === 'all' || active === domainName;
+      var inDomain = query ? true : active === domainName;
       var visibleInDomain = 0;
 
       domain.querySelectorAll('.concept').forEach(function (card) {
@@ -42,6 +45,7 @@
   buttons.forEach(function (button) {
     button.addEventListener('click', function () {
       active = button.getAttribute('data-filter');
+      search.value = '';
       buttons.forEach(function (item) {
         var selected = item === button;
         item.classList.toggle('active', selected);
@@ -52,6 +56,8 @@
   });
 
   search.addEventListener('input', filter);
+
+  filter();
 
   cards.forEach(function (card) {
     card.querySelector('summary').addEventListener('click', function () {
