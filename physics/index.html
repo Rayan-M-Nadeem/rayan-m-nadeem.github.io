@@ -25,22 +25,34 @@
       </a>
       <div class="branch"><span></span> Plainly Physics</div>
       <nav aria-label="Primary navigation">
-        <a href="#ideas">Ideas</a>
-        <a href="#explore">Explore</a>
-        <a href="#frontiers">Frontiers</a>
+        <a href="#ideas">Paths</a>
+        <a href="#explore">Concepts</a>
+        <a href="#explore" data-open="modern">Frontiers</a>
       </nav>
+    </div>
+    <div class="topic-dock" aria-label="Physics chapters">
+      <div class="shell topic-dock-inner">
+        <span class="dock-label">Open chapter</span>
+        <button class="active" data-filter="mechanics" aria-pressed="true"><span>01</span> Mechanics</button>
+        <button data-filter="matter" aria-pressed="false"><span>02</span> Matter &amp; heat</button>
+        <button data-filter="waves" aria-pressed="false"><span>03</span> Waves</button>
+        <button data-filter="fields" aria-pressed="false"><span>04</span> Fields</button>
+        <button data-filter="light" aria-pressed="false"><span>05</span> Light</button>
+        <button data-filter="modern" aria-pressed="false"><span>06</span> Modern</button>
+      </div>
     </div>
   </header>
 
   <main id="main">
     <section class="hero shell">
       <div class="hero-copy">
-        <p class="kicker">Field atlas · Volume 01</p>
-        <h1>A field guide to how the universe behaves.</h1>
-        <p class="lede">Follow motion, energy, matter, and fields across scales—from a falling object to an expanding universe. Start with the physical picture. Open the mathematics only when it sharpens the idea.</p>
+        <p class="breadcrumb"><a href="/">Plainly Library</a> / Physics</p>
+        <p class="kicker">Conceptual physics</p>
+        <h1><span class="gradient-text">The universe does not behave the way intuition expects.</span></h1>
+        <p class="lede">Explore motion, energy, fields, space, time, quantum reality, and the hidden structure of the cosmos. Start with the physical idea. Add the mathematics when it genuinely makes the picture clearer.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#explore">Explore the concepts <span>↓</span></a>
-          <a class="button ghost" href="#how">How to use this guide</a>
+          <a class="button primary" href="#explore" data-open="mechanics">Begin with motion <span>→</span></a>
+          <a class="button ghost" href="#explore" data-open="modern">Explore modern physics</a>
         </div>
         <div class="hero-meta" aria-label="Guide coverage">
           <div><b>40</b><span>core ideas</span></div>
@@ -49,66 +61,45 @@
         </div>
       </div>
 
-      <div class="orbit-stage" aria-label="A conceptual instrument connecting matter, motion, energy, and fields">
-        <div class="grid-plane"></div>
-        <div class="orbit o1"></div><div class="orbit o2"></div><div class="orbit o3"></div>
-        <div class="crosshair h"></div><div class="crosshair v"></div>
-        <div class="core"><span>ONE SYSTEM</span><b>Four ways<br>to read it</b></div>
-        <span class="node motion"><small>01 · state</small>Motion</span>
-        <span class="node matter"><small>02 · substance</small>Matter</span>
-        <span class="node energy"><small>03 · accounting</small>Energy</span>
-        <span class="node fields"><small>04 · influence</small>Fields</span>
-        <span class="figure-note n1">FRAME / 00:00:01.24</span>
-        <span class="figure-note n2">SCALE / VARIABLE</span>
-      </div>
-    </section>
-
-    <section class="strip" aria-label="Scale of the physics guide">
-      <div class="shell scale">
-        <div class="scale-head"><span>Scale of observation</span><b>Zoom changes the useful model</b></div>
-        <div class="scale-line" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-        <div class="scale-points">
-          <div><b>10<sup>−15</sup> m</b><span>Nucleus</span></div>
-          <div><b>10<sup>−10</sup> m</b><span>Atom</span></div>
-          <div><b>10<sup>0</sup> m</b><span>Human scale</span></div>
-          <div><b>10<sup>7</sup> m</b><span>Planet</span></div>
-          <div><b>10<sup>26</sup> m</b><span>Observable cosmos</span></div>
+      <div class="hero-visual" aria-label="Stylized planet surrounded by orbital rings and field lines">
+        <div class="space-card">
+          <div class="stars"></div>
+          <svg class="field-lines" viewBox="0 0 520 480" aria-hidden="true">
+            <defs><linearGradient id="fieldGradient" x1="0" x2="1"><stop offset="0%" stop-color="#67ddff" stop-opacity=".2"/><stop offset="50%" stop-color="#ffffff" stop-opacity=".8"/><stop offset="100%" stop-color="#ad8dff" stop-opacity=".2"/></linearGradient></defs>
+            <path d="M20 115 C150 40,355 40,500 130"/><path d="M5 175 C150 105,370 105,515 190"/><path d="M0 255 C150 190,370 190,520 270"/><path d="M20 335 C150 280,360 285,500 350"/><path d="M70 430 C180 360,330 360,455 425"/>
+          </svg>
+          <div class="planet-main"></div><div class="ring"></div>
+          <div class="data-chip chip-one"><i></i><span><strong>Fields shape motion</strong><small>Influence spread through space</small></span></div>
+          <div class="data-chip chip-two"><i></i><span><strong>Time is not universal</strong><small>Observers divide spacetime differently</small></span></div>
         </div>
       </div>
     </section>
 
-    <section class="section shell" id="how">
-      <div class="section-intro">
-        <p class="kicker">How to read physics</p>
-        <h2>Build the model, then measure it.</h2>
-        <p>Every topic begins with a mental model: the smallest picture that explains the behavior. Equations sit behind a disclosure so they support the explanation instead of interrupting it.</p>
-      </div>
-      <div class="method-grid" id="ideas">
-        <article><span class="method-num">1</span><h3>Choose the system</h3><p>Decide what you are studying and what belongs to its surroundings. A ball, the Earth, or both can be the system; the best boundary depends on the question.</p></article>
-        <article><span class="method-num">2</span><h3>Track causes and transfers</h3><p>Forces change motion. Work and heat transfer energy. Fields store information about how an object would interact at each point in space.</p></article>
-        <article><span class="method-num">3</span><h3>Use conservation</h3><p>Instead of following every microscopic detail, compare what enters, what leaves, and what remains. Conservation laws are nature’s accounting rules.</p></article>
-        <article><span class="method-num">4</span><h3>Check the limits</h3><p>A model is useful inside a range. Air resistance may be negligible for a short fall and decisive for a parachute. Physics improves by knowing when an approximation breaks.</p></article>
+    <section class="section paths" id="ideas">
+      <div class="shell">
+        <div class="section-intro split">
+          <h2>Choose where to begin.</h2>
+          <p>The subjects build outward from familiar motion into matter, fields, light, spacetime, and the quantum universe. The chapter bar remains available while you read, so changing direction takes one tap.</p>
+        </div>
+        <div class="path-grid">
+          <button data-open="mechanics"><span>01 / FOUNDATIONS</span><h3>Motion, forces, energy, and rotation.</h3><p>Begin with objects you can see, then follow the conservation laws connecting every interaction.</p><b>Open mechanics →</b></button>
+          <button data-open="fields"><span>02 / INVISIBLE STRUCTURE</span><h3>Fields, circuits, waves, and light.</h3><p>See how influence travels through space and how those disturbances become electricity, magnetism, and radiation.</p><b>Open fields →</b></button>
+          <button data-open="modern"><span>03 / DEEPER REALITY</span><h3>Relativity, quantum physics, and the cosmos.</h3><p>Move beyond everyday intuition into spacetime, probability, particles, stars, and cosmic expansion.</p><b>Open modern physics →</b></button>
+        </div>
       </div>
     </section>
 
     <section class="section browser" id="explore">
       <div class="shell">
         <div class="section-intro compact">
-          <p class="kicker">The physics atlas</p>
-          <h2>Open one chapter at a time.</h2>
-          <p>Move between six connected domains without scrolling through forty identical boxes. Search reaches across the entire atlas; the chapter selector keeps ordinary browsing focused.</p>
+          <p class="kicker">The complete physics shelf</p>
+          <h2>One idea, properly explained.</h2>
+          <p>Each entry gives the physical picture first, shows where the idea is used, and keeps the mathematical relationship optional. Choose another chapter at any time from the bar above.</p>
         </div>
 
         <div class="controls" role="search">
           <label class="search"><span class="sr-only">Search concepts</span><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"></circle><path d="m15.5 15.5 5 5"></path></svg><input id="search" type="search" placeholder="Search motion, entropy, lenses…" autocomplete="off"></label>
-          <div class="filters" aria-label="Filter by field">
-            <button class="active" data-filter="mechanics" aria-pressed="true"><span>01</span> Mechanics</button>
-            <button data-filter="matter" aria-pressed="false"><span>02</span> Matter</button>
-            <button data-filter="waves" aria-pressed="false"><span>03</span> Waves</button>
-            <button data-filter="fields" aria-pressed="false"><span>04</span> Fields</button>
-            <button data-filter="light" aria-pressed="false"><span>05</span> Light</button>
-            <button data-filter="modern" aria-pressed="false"><span>06</span> Modern</button>
-          </div>
+          <span class="search-note">Search checks all 40 ideas</span>
         </div>
         <p class="results" aria-live="polite"><span id="count">6</span> concepts shown</p>
 
