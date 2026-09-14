@@ -9,7 +9,8 @@
   var links = Array.prototype.slice.call(document.querySelectorAll('[data-open]'));
   var domains = Array.prototype.slice.call(document.querySelectorAll('.domain'));
   var cards = Array.prototype.slice.call(document.querySelectorAll('.concept'));
-  var active = 'mechanics';
+  var requested = new URLSearchParams(window.location.search).get('chapter');
+  var active = requested && document.querySelector('[data-domain="' + requested + '"]') ? requested : 'mechanics';
 
   var explanations = {
     'Motion is always relative': 'Motion is never described without first choosing what counts as still. A passenger may be stationary relative to a train while moving rapidly relative to the ground, and neither description is more “real” until the reference frame is named. Velocity changes between steadily moving observers, while acceleration remains detectable because it changes the motion itself. Thinking in reference frames prevents contradictions and prepares the way for both orbital mechanics and relativity.',
@@ -97,18 +98,41 @@
     'Collective quantum behavior can become visible': 'MRI magnets, fusion reactors, maglev systems, quantum sensors, and next-generation power technology.'
   };
 
+  var topicDetails = window.PHYSICS_TOPICS || {};
+  window.PLAINLY_PHYSICS = {
+    explanations: explanations,
+    applications: applications,
+    topics: topicDetails,
+    chapters: window.PHYSICS_CHAPTERS || {}
+  };
+
+  if (!browser) return;
+
   function normalize(value) {
     return value.toLowerCase().trim();
   }
 
   cards.forEach(function (card) {
     var title = card.querySelector('h4').textContent.trim();
+    var detail = topicDetails[title];
     if (explanations[title]) card.querySelector(':scope > p').textContent = explanations[title];
     if (applications[title]) {
       var use = document.createElement('p');
       use.className = 'applications';
       use.innerHTML = '<strong>Used in</strong>' + applications[title];
       card.querySelector('details').before(use);
+    }
+    if (detail) {
+      var read = document.createElement('a');
+      read.className = 'read-link';
+      read.href = 'topics/' + detail.slug + '/';
+      read.innerHTML = 'Read the full explanation <span aria-hidden="true">→</span>';
+      card.appendChild(read);
+      card.classList.add('linked');
+      card.addEventListener('click', function (event) {
+        if (event.target.closest('a, button, summary, details')) return;
+        window.location.href = read.href;
+      });
     }
   });
 
@@ -159,7 +183,7 @@
   });
 
   search.addEventListener('input', filter);
-  filter();
+  select(active, false);
 
   var topButton = document.getElementById('top');
   window.addEventListener('scroll', function () {
