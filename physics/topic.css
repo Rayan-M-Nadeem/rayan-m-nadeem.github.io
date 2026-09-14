@@ -17,6 +17,7 @@ body.topic-page{background:radial-gradient(circle at 74% -8%,rgba(var(--article-
 /* Keep every symbolic and word-based relationship inside its panel. */
 .idea-callout,.fact-card{min-width:0;overflow:hidden}
 #topic-formula,#topic-formula-copy{display:block;max-width:100%;overflow-wrap:anywhere;word-break:normal}
+#topic-formula::first-letter{float:none;color:inherit;font-family:inherit;font-size:inherit;line-height:inherit;padding:0}
 .idea-callout p{font-size:clamp(1.05rem,2vw,1.35rem)}
 .formula{font-size:clamp(.86rem,1.25vw,1.08rem);overflow-wrap:anywhere;word-break:normal}
 .formula sub,.idea-callout sub{font-size:.7em}
