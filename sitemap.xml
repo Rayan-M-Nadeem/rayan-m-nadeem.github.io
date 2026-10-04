@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://plainlylibrary.com/</loc><lastmod>2026-09-13</lastmod><priority>1.0</priority></url>
+  <url><loc>https://plainlylibrary.com/</loc><lastmod>2026-10-04</lastmod><priority>1.0</priority></url>
   <url><loc>https://plainlylibrary.com/medicine/</loc><lastmod>2026-08-31</lastmod><priority>1.0</priority></url>
   <url><loc>https://plainlylibrary.com/medicine/editing.html</loc><lastmod>2026-07-23</lastmod><priority>0.9</priority></url>
   <url><loc>https://plainlylibrary.com/medicine/exposure.html</loc><lastmod>2026-07-24</lastmod><priority>0.9</priority></url>
@@ -14,4 +14,30 @@
   <url><loc>https://plainlylibrary.com/medicine/criticalcare.html</loc><lastmod>2026-07-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://plainlylibrary.com/medicine/transplant.html</loc><lastmod>2026-07-23</lastmod><priority>0.8</priority></url>
   <url><loc>https://plainlylibrary.com/physics/</loc><lastmod>2026-09-13</lastmod><priority>1.0</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/acids-bases-and-buffers/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/atoms-and-evidence/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/bonds-and-structure/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/dynamic-equilibrium/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/free-energy-and-cells/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/heat-and-enthalpy/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/</loc><lastmod>2026-10-04</lastmod><priority>1.0</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/mixtures-and-forces/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/reaction-rates/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/chemistry/reactions-and-accounting/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/abbasid-baghdad/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/american-revolution/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/caribbean-piracy/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/classical-greece/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/colonial-louisiana/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/french-revolution/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/</loc><lastmod>2026-10-04</lastmod><priority>1.0</priority></url>
+  <url><loc>https://plainlylibrary.com/history/industrial-london/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/ottoman-constantinople/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/ptolemaic-egypt/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/renaissance-italy/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/renaissance-rome/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/sengoku-japan/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/seven-years-war/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/third-crusade/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
+  <url><loc>https://plainlylibrary.com/history/viking-age-england/</loc><lastmod>2026-10-04</lastmod><priority>0.7</priority></url>
 </urlset>

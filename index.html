@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Plainly Library is a growing collection of in-depth resources across medicine, physics, and future fields." />
+  <meta name="description" content="Plainly Library is a growing collection of in-depth resources across medicine, physics, chemistry, and history." />
   <meta name="theme-color" content="#05080d" />
   <link rel="canonical" href="https://plainlylibrary.com/" />
   <title>Plainly Library</title>
@@ -11,7 +11,7 @@
     :root{
       --bg:#05080d;--bg2:#09111b;--panel:#0b121b;--panel2:#0e1823;
       --text:#f4f7fb;--muted:#9aa8b8;--dim:#657384;--line:rgba(255,255,255,.11);
-      --line2:rgba(255,255,255,.2);--medicine:#ff554f;--physics:#5ca9ff;
+      --line2:rgba(255,255,255,.2);--medicine:#ff554f;--physics:#5ca9ff;--chemistry:#78d7c1;--history:#e7b27a;
       --max:1240px;--r:18px;--ease:cubic-bezier(.2,.8,.2,1)
     }
     *{box-sizing:border-box} html{scroll-behavior:smooth;background:var(--bg)}
@@ -51,8 +51,8 @@
     .branchdot::before{content:"";width:8px;height:8px;border-radius:50%;display:inline-block;margin-right:8px}
     .branchdot.med{left:7%;top:23%}.branchdot.med::before{background:var(--medicine);box-shadow:0 0 13px rgba(255,85,79,.55)}
     .branchdot.phy{right:6%;top:27%}.branchdot.phy::before{background:var(--physics);box-shadow:0 0 13px rgba(92,169,255,.55)}
-    .branchdot.f1{left:15%;bottom:15%;color:var(--muted)}.branchdot.f2{right:12%;bottom:12%;color:var(--muted)}
-    .branchdot.f1::before,.branchdot.f2::before{background:#7b8999}
+    .branchdot.f1{left:15%;bottom:15%}.branchdot.f2{right:12%;bottom:12%}
+    .branchdot.f1::before{background:var(--chemistry);box-shadow:0 0 13px rgba(120,215,193,.45)}.branchdot.f2::before{background:var(--history);box-shadow:0 0 13px rgba(231,178,122,.45)}
     .connector{position:absolute;left:50%;top:48%;height:1px;transform-origin:left center;background:linear-gradient(90deg,rgba(255,255,255,.32),rgba(255,255,255,.03))}
     .c1{width:39%;transform:rotate(208deg)}.c2{width:39%;transform:rotate(-24deg)}.c3{width:36%;transform:rotate(142deg)}.c4{width:38%;transform:rotate(35deg)}
     .section{padding:74px 0;border-bottom:1px solid rgba(255,255,255,.075)}.section-head{display:flex;align-items:end;justify-content:space-between;gap:28px;margin:12px 0 28px}
@@ -61,16 +61,17 @@
     .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
     .card{min-height:340px;border:1px solid var(--line);border-radius:var(--r);overflow:hidden;background:linear-gradient(180deg,rgba(255,255,255,.027),rgba(255,255,255,.012));display:flex;flex-direction:column;transition:.22s var(--ease)}
     a.card:hover{transform:translateY(-5px);border-color:var(--line2);background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.018))}
-    .card.med{border-top:2px solid var(--medicine)}.card.phy{border-top:2px solid var(--physics)}.card.future{border-top:2px solid rgba(123,137,153,.45)}
+    .card.med{border-top:2px solid var(--medicine)}.card.phy{border-top:2px solid var(--physics)}.card.chem{border-top:2px solid var(--chemistry)}.card.hist{border-top:2px solid var(--history)}
     .art{height:148px;border-bottom:1px solid var(--line);position:relative;display:grid;place-items:center;overflow:hidden}
     .med .art{background:linear-gradient(rgba(255,85,79,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,85,79,.04) 1px,transparent 1px),rgba(255,85,79,.09);background-size:20px 20px}
     .phy .art{background:radial-gradient(circle at center,rgba(92,169,255,.13),transparent 40%),linear-gradient(rgba(92,169,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(92,169,255,.04) 1px,transparent 1px),rgba(92,169,255,.08);background-size:auto,20px 20px,20px 20px,auto}
+    .chem .art{background:radial-gradient(circle at 50% 50%,rgba(120,215,193,.2),transparent 48%),#10252d}.hist .art{background:repeating-linear-gradient(0deg,transparent,transparent 29px,rgba(231,178,122,.09) 30px),#28251d}
     .future .art{background:linear-gradient(rgba(123,137,153,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(123,137,153,.035) 1px,transparent 1px),rgba(123,137,153,.06);background-size:20px 20px}
     .ecg{width:76%;height:70px}.ecg path{fill:none;stroke:var(--medicine);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(255,85,79,.35))}
     .field{width:112px;height:112px}.body{padding:18px 19px 20px;display:flex;flex-direction:column;flex:1}
     .status{width:max-content;margin-bottom:12px;padding:4px 7px;border:1px solid currentColor;border-radius:6px;font-size:.64rem;line-height:1;font-weight:900;letter-spacing:.09em;text-transform:uppercase}
     .live{color:#66df86}.soon{color:#78bbff}.later{color:#8d9aab}.body h3{margin:0;font-size:1.28rem;letter-spacing:-.025em}.body p{margin:10px 0 17px;color:var(--muted);font-size:.91rem}
-    .go{margin-top:auto;display:inline-flex;gap:8px;align-items:center;font-size:.76rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.med .go{color:var(--medicine)}.phy .go{color:var(--physics)}.future .go{color:var(--dim)}
+    .go{margin-top:auto;display:inline-flex;gap:8px;align-items:center;font-size:.76rem;font-weight:850;letter-spacing:.08em;text-transform:uppercase}.med .go{color:var(--medicine)}.phy .go{color:var(--physics)}.chem .go{color:var(--chemistry)}.hist .go{color:var(--history)}.future .go{color:var(--dim)}
     .future-shelf{display:flex;align-items:flex-end;gap:6px;padding-bottom:10px;border-bottom:2px solid #8390a0;width:92px;justify-content:center}.future-shelf span{width:12px;border:1px solid #8390a0}.future-shelf span:nth-child(1){height:41px}.future-shelf span:nth-child(2){height:57px}.future-shelf span:nth-child(3){height:48px}
     .roadmap-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px}.roadmap p{color:var(--muted);max-width:520px;margin:20px 0 0}
     .timeline{border-top:1px solid var(--line)}.row{display:grid;grid-template-columns:78px 125px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}.when{font-size:.7rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}.name{font-weight:780}.desc{color:var(--muted);font-size:.92rem}
@@ -101,7 +102,7 @@
     <div>
       <div class="eyebrow">A growing library across disciplines</div>
       <h1>Explore.<br>Understand.<br>Go deeper.</h1>
-      <p>Plainly Library brings together in-depth resources across different fields. Medicine and Physics are live now. More branches can be added as the work grows.</p>
+      <p>Plainly Library brings together in-depth resources across different fields. Medicine, Physics, Chemistry, and History each have their own reading space. Choose a field and follow what interests you.</p>
       <div class="actions"><a class="btn primary" href="#library">Explore the library <span>→</span></a><a class="btn secondary" href="#roadmap">See what is next</a></div>
     </div>
 
@@ -111,15 +112,15 @@
           <span class="shelfmark" aria-hidden="true"><span class="book b1"></span><span class="book b2"></span><span class="book b3"></span></span>
           Library map
         </div>
-        <span class="catalog-status">2 live · more to come</span>
+        <span class="catalog-status">4 live · more to come</span>
       </div>
       <div class="map">
         <span class="connector c1"></span><span class="connector c2"></span><span class="connector c3"></span><span class="connector c4"></span>
         <div class="map-center"><span class="shelfmark" aria-hidden="true"><span class="book b1"></span><span class="book b2"></span><span class="book b3"></span></span></div>
         <div class="branchdot med">Medicine · Live</div>
         <div class="branchdot phy">Physics · Live</div>
-        <div class="branchdot f1">Future branch</div>
-        <div class="branchdot f2">Future branch</div>
+        <div class="branchdot f1">Chemistry · Live</div>
+        <div class="branchdot f2">History · Live</div>
       </div>
     </div>
   </section>
@@ -129,7 +130,7 @@
       <div class="section-label">The library</div>
       <div class="section-head">
         <h2>Choose a field.</h2>
-        <p>The homepage reflects what actually exists. Finished branches are live; planned and future branches stay clearly labeled.</p>
+        <p>Four distinct branches are ready to explore. Each has its own voice, structure, and visual identity.</p>
       </div>
       <div class="grid">
         <a class="card med" href="/medicine/">
@@ -152,15 +153,15 @@
           <div class="body"><span class="status live">Live</span><h3>Plainly Physics</h3><p>Concept-first physics from motion, matter, waves, and fields through relativity, quantum theory, and the universe.</p><span class="go">Enter Physics <span>→</span></span></div>
         </a>
 
-        <article class="card future">
-          <div class="art"><div class="future-shelf" aria-hidden="true"><span></span><span></span><span></span></div></div>
-          <div class="body"><span class="status later">Future</span><h3>Future Branch</h3><p>Reserved for another discipline once there is enough material to justify a full section.</p><span class="go">Not announced</span></div>
-        </article>
+        <a class="card chem" href="/chemistry/">
+          <div class="art"><svg width="140" height="130" viewBox="0 0 140 130" fill="none" aria-hidden="true"><circle cx="70" cy="66" r="10" fill="#78d7c1"/><ellipse cx="70" cy="66" rx="57" ry="22" stroke="#78d7c1"/><ellipse cx="70" cy="66" rx="57" ry="22" transform="rotate(60 70 66)" stroke="#78d7c1"/><ellipse cx="70" cy="66" rx="57" ry="22" transform="rotate(120 70 66)" stroke="#78d7c1"/></svg></div>
+          <div class="body"><span class="status live">Live</span><h3>Plainly Chemistry</h3><p>Nine concept-first chapters, from atomic structure and bonding through reactions, equilibrium, acids, and electrochemistry.</p><span class="go">Enter Chemistry <span>→</span></span></div>
+        </a>
 
-        <article class="card future">
-          <div class="art"><div class="future-shelf" aria-hidden="true"><span></span><span></span><span></span></div></div>
-          <div class="body"><span class="status later">Open slot</span><h3>More to Come</h3><p>The structure leaves room for additional branches without rebuilding the entire homepage.</p><span class="go">Room to grow</span></div>
-        </article>
+        <a class="card hist" href="/history/">
+          <div class="art"><div style="color:#e7b27a;font:500 4rem Georgia,serif;letter-spacing:-.08em" aria-hidden="true">431 <span style="font-size:.32em;letter-spacing:.1em">BCE</span></div></div>
+          <div class="body"><span class="status live">Live</span><h3>Plainly History</h3><p>Real history across 15 major periods, following the settings of Assassin’s Creed from ancient Greece to industrial London.</p><span class="go">Enter History <span>→</span></span></div>
+        </a>
       </div>
     </div>
   </section>
@@ -169,13 +170,14 @@
     <div class="shell roadmap-wrap">
       <div class="roadmap">
         <div class="section-label">Roadmap</div>
-        <h2>Two live.<br>Connected.<br>Room to grow.</h2>
-        <p>Medicine and Physics now form the first two branches. New fields will be added only when there is enough real material behind them.</p>
+        <h2>Four fields.<br>Many paths.<br>Room to grow.</h2>
+        <p>Medicine, Physics, Chemistry, and History now have dedicated sections. Plainly History is an opening route, with many more regions, periods, and perspectives to expand on later.</p>
       </div>
       <div class="timeline">
         <div class="row"><div class="when">Live</div><div class="name">Medicine</div><div class="desc">Long-form medical articles, evidence labels, original visuals, and interactive explainers.</div></div>
         <div class="row"><div class="when">Live</div><div class="name">Physics</div><div class="desc">A concept-first guide from motion and energy through fields, quantum theory, and cosmology.</div></div>
-        <div class="row"><div class="when">Later</div><div class="name">Unannounced</div><div class="desc">Future fields will appear when they are substantial enough to stand on their own.</div></div>
+        <div class="row"><div class="when">Live</div><div class="name">Chemistry</div><div class="desc">Nine connected chapters on matter, structure, change, and chemical energy.</div></div>
+        <div class="row"><div class="when">Live</div><div class="name">History</div><div class="desc">Fifteen historical settings in chronological order, with much more to add later.</div></div>
       </div>
     </div>
   </section>
@@ -184,9 +186,9 @@
     <div class="shell focus">
       <div class="focus-copy">
         <div class="section-label">Available now</div>
-        <h2>Two fields. One library.</h2>
-        <p>Explore modern medicine in depth or build a concept-first understanding of physics. Each branch keeps its own visual identity inside Plainly Library.</p>
-        <div class="actions"><a class="btn primary" href="/medicine/">Enter Medicine <span>→</span></a><a class="btn secondary" href="/physics/">Enter Physics <span>→</span></a></div>
+        <h2>Four fields. One library.</h2>
+        <p>Explore medicine and physics, follow chemical ideas from atoms to cells, or read the actual history behind fifteen game settings. Each branch keeps its own visual identity.</p>
+        <div class="actions"><a class="btn primary" href="/medicine/">Enter Medicine <span>→</span></a><a class="btn secondary" href="/physics/">Physics <span>→</span></a><a class="btn secondary" href="/chemistry/">Chemistry <span>→</span></a><a class="btn secondary" href="/history/">History <span>→</span></a></div>
       </div>
       <div class="focus-visual">
         <svg class="ecg" viewBox="0 0 620 170" aria-hidden="true"><path d="M10 90h115l18-18 18 18h55l13-46 21 94 19-48h65l18-18 17 18h251"/></svg>
