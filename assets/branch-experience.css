@@ -5,7 +5,7 @@ body{overflow-x:hidden}
 body.chem{--bg:#07131a;--ink:#e9f8f4;--muted:#aec3c5;--line:#345562;--accent:#81ecd3;--soft:#0c2732;--warm:#b4a1ff;background:radial-gradient(ellipse at 83% 3%,rgba(97,206,212,.11),transparent 35%),radial-gradient(ellipse at 6% 38%,rgba(101,85,183,.08),transparent 30%),var(--bg)}
 body.history{--bg:#121b1c;--ink:#f3e9d7;--muted:#b9bdaf;--line:#48615d;--accent:#f0bb7a;--soft:#192b2c;--warm:#8de1d5;background:radial-gradient(ellipse at 84% 0%,rgba(46,140,128,.13),transparent 33%),radial-gradient(ellipse at 12% 72%,rgba(176,99,49,.07),transparent 37%),var(--bg)}
 .top{border-color:color-mix(in srgb,var(--accent) 27%,transparent)}
-.top-inner::before{content:'';width:7px;height:7px;border:1px solid var(--accent);transform:rotate(45deg);margin-right:-7px}
+.top-inner{position:relative}.top-inner::before{content:'';position:absolute;left:-18px;width:7px;height:7px;border:1px solid var(--accent);transform:rotate(45deg)}
 .brand{font-family:var(--mono);font-size:.76rem}
 .top nav a{font-family:var(--mono);font-size:.75rem;letter-spacing:.03em}
 .top nav a[aria-current]{color:var(--accent)}
@@ -28,11 +28,11 @@ body.history{--bg:#121b1c;--ink:#f3e9d7;--muted:#b9bdaf;--line:#48615d;--accent:
 .stage-head{top:32px}.stage-foot{bottom:29px;color:var(--muted)}
 .stage-head .live-dot{display:inline-block;width:7px;height:7px;margin-right:8px;border-radius:50%;background:var(--accent);box-shadow:0 0 15px var(--accent);animation:blink 2.6s infinite}
 .chem-stage{background:radial-gradient(circle at 52% 52%,rgba(114,228,214,.13),transparent 29%),repeating-linear-gradient(0deg,transparent 0 32px,rgba(129,236,211,.045) 33px),repeating-linear-gradient(90deg,transparent 0 32px,rgba(129,236,211,.045) 33px),#0a222c}
-.chem-stage .spectrum{position:absolute;inset:17% 8% 23%;width:84%;height:60%;overflow:visible;filter:drop-shadow(0 0 11px rgba(129,236,211,.38))}
+.chem-stage .spectrum{position:absolute;left:8%;top:14%;width:84%;height:43%;overflow:visible;filter:drop-shadow(0 0 11px rgba(129,236,211,.38))}
 .chem-stage .spectrum .baseline{fill:none;stroke:rgba(129,236,211,.38);stroke-width:1}
 .chem-stage .spectrum .line{fill:none;stroke:#89f2d8;stroke-width:2.3;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:650;stroke-dashoffset:650;animation:draw 3s ease forwards}
 .chem-stage .spectrum .second{stroke:#aaa2ff;stroke-width:1.5;opacity:.8;animation-delay:.25s}
-.chem-stage .sample-label{position:absolute;left:10%;bottom:23%;font:500 clamp(2.6rem,6vw,5.6rem)/1 'Space Grotesk',sans-serif;color:rgba(233,248,244,.78);letter-spacing:-.08em;z-index:2}
+.chem-stage .sample-label{position:absolute;left:10%;bottom:19%;font:500 clamp(2.4rem,5vw,4.4rem)/1.04 'Space Grotesk',sans-serif;color:rgba(233,248,244,.82);letter-spacing:-.08em;z-index:2}
 .chem-stage .sample-label small{display:block;color:var(--accent);font:500 .65rem var(--mono);letter-spacing:.15em;margin-bottom:9px}
 .chem-stage .marker{position:absolute;left:52%;top:22%;width:1px;height:54%;background:linear-gradient(var(--accent),transparent);opacity:.45;animation:scan-x 7s ease-in-out infinite alternate}
 .history-stage{background:radial-gradient(circle at 45% 47%,rgba(118,182,164,.12),transparent 37%),repeating-linear-gradient(0deg,transparent 0 36px,rgba(151,211,194,.055) 37px),repeating-linear-gradient(90deg,transparent 0 36px,rgba(151,211,194,.055) 37px),#142528}
