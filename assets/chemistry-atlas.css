@@ -1,79 +1,59 @@
-/* Plainly Chemistry: a quiet, photographic mint reading space. */
-body.chem{--bg:#e0ede5;--ink:#193331;--muted:#48635e;--line:#aac5b9;--accent:#1c786b;--soft:#edf5ef;--warm:#26766d;background:#e0ede5;color:var(--ink)}
+/* Plainly Chemistry: dark green photographic topic index and reading pages. */
+body.chem{--bg:#203a33;--ink:#f0f5ef;--muted:#c1d2c7;--line:#526f63;--accent:#a5dfcd;--soft:#29463c;--warm:#b9e0d0;background:radial-gradient(ellipse at 12% 8%,#314b42 0%,transparent 44%),radial-gradient(ellipse at 85% 65%,#2b453b 0%,transparent 45%),#203a33;color:var(--ink)}
 .chem h1,.chem h2,.chem h3{font-family:Fraunces,Georgia,serif;font-weight:500;letter-spacing:-.035em}
-.chem .top{background:rgba(221,237,227,.94);border-color:#aac5b9;box-shadow:0 1px 14px rgba(22,68,61,.06)}
+.chem .top{background:rgba(28,52,44,.95);border-bottom:1px solid rgba(214,237,222,.24);box-shadow:none}
 .chem .top-inner::before{display:none}
-.chem .brand{font-family:Fraunces,Georgia,serif;font-size:1.04rem;font-weight:500;letter-spacing:.25em;color:#183431;white-space:nowrap}
-.chem .brand span{color:inherit}
-.chem .brand-divider{display:inline-block;height:27px;width:1px;margin:0 22px -7px 16px;background:#73998c}
-.chem .top nav{gap:clamp(18px,3.4vw,52px)}
-.chem .top nav a{font-family:Fraunces,Georgia,serif;font-size:1rem;letter-spacing:0;color:#294641}
-.chem .top nav a:hover,.chem .top nav a:focus-visible{color:#067c71;text-decoration:underline;text-underline-offset:7px}
-.chem .eyebrow{font-family:'DM Sans',system-ui,sans-serif;color:#32786a;letter-spacing:.19em;font-weight:700}
-.chem .footer{background:#d6e6dc;border-color:#a8c4b8;color:#4a655d}
+.chem .top-inner{min-height:106px}
+.chem .brand{font:500 1.38rem/1 Fraunces,Georgia,serif;letter-spacing:.28em;color:#eff6ef;text-transform:uppercase;white-space:nowrap}
+.chem .brand span{color:#d8ebe0}
+.chem .brand-divider{display:inline-block;width:1px;height:38px;margin:0 24px -11px 15px;background:rgba(216,235,224,.57)}
+.chem .top nav{gap:clamp(26px,4vw,68px);align-items:center}
+.chem .top nav a{position:relative;color:#e1eee4;font:400 1rem Fraunces,Georgia,serif;letter-spacing:0;text-decoration:none;padding:11px 0}
+.chem .top nav a[aria-current]{color:#f4fbf3}
+.chem .top nav a[aria-current]::before{display:none}
+.chem .top nav a[aria-current]::after{content:'';position:absolute;left:0;right:0;bottom:1px;height:2px;background:#9bd5bf}
+.chem .top nav a:hover,.chem .top nav a:focus-visible{color:#a5dfcd}
+.chem .skip:focus{background:#f0f5ef;color:#17372d}
+.chem-home .wrap{width:min(1440px,calc(100% - 90px))}
+.chem-topics{padding:45px 0 80px}
+.chem-home .chem-topics h1{font:500 clamp(2.1rem,3vw,2.75rem)/1.15 Fraunces,Georgia,serif;margin:0 0 29px;color:#f3f6ef}
+.chem-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:23px}
+.chem-tile{display:block;position:relative;isolation:isolate;aspect-ratio:1.27;min-height:270px;overflow:hidden;background:#344f44;border:1px solid rgba(219,241,227,.34);border-radius:3px;text-decoration:none;color:#f6faf5;box-shadow:0 8px 25px rgba(10,29,22,.13);transition:border-color .2s,transform .25s,box-shadow .25s}
+.chem-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;filter:grayscale(.62) saturate(.62) hue-rotate(55deg) brightness(.71) contrast(1.07);transform:scale(1.01);transition:filter .3s,transform .45s}
+.chem-tile:nth-child(1) img{object-position:center 38%}
+.chem-tile:nth-child(2) img{object-position:60% center}
+.chem-tile:nth-child(4) img{object-position:center 42%}
+.chem-tile:nth-child(9) img{object-position:center 54%}
+.tile-wash{position:absolute;inset:0;background:linear-gradient(180deg,rgba(13,37,30,.61) 0%,rgba(18,46,36,.15) 38%,rgba(12,34,27,.06) 65%,rgba(14,40,32,.22) 100%),linear-gradient(90deg,rgba(13,37,30,.23),transparent 75%)}
+.tile-copy{position:absolute;inset:25px;display:flex;flex-direction:column;align-items:flex-start;z-index:1;pointer-events:none}
+.tile-copy strong{font:500 clamp(1.65rem,2vw,2.1rem)/1.13 Fraunces,Georgia,serif;letter-spacing:-.025em;text-wrap:balance;max-width:90%;text-shadow:0 2px 16px rgba(0,0,0,.3)}
+.tile-copy>span{font:300 2rem/1 Fraunces,Georgia,serif;margin-top:16px;text-shadow:0 2px 16px rgba(0,0,0,.3)}
+.chem-tile:hover,.chem-tile:focus-visible{border-color:#d9f2e3;transform:translateY(-4px);box-shadow:0 17px 35px rgba(6,24,17,.3);outline:none}
+.chem-tile:hover img,.chem-tile:focus-visible img{filter:grayscale(.45) saturate(.72) hue-rotate(55deg) brightness(.84) contrast(1.05);transform:scale(1.055)}
+.chem-tile:focus-visible{outline:2px solid #c7f4df;outline-offset:4px}
+.chem .footer{border-color:rgba(214,237,222,.23);background:rgba(13,38,30,.3);color:#bdcec3}
+.chem .footer a{text-decoration:none;color:#e0f1e5}
 .chem .footer a:hover{text-decoration:underline}
-
-.chem-home .wrap{width:min(1460px,calc(100% - 72px))}
-.chem-home .top-inner{min-height:82px}
-.chem-home .chem-banner{height:clamp(310px,26vw,395px);position:relative;overflow:hidden;isolation:isolate;background:#173c35;color:#f4fbf6}
-.chem-banner>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 52%;filter:grayscale(.62) saturate(.62) contrast(.93)}
-.chem-banner-shade{position:absolute;inset:0;background:linear-gradient(90deg,rgba(10,47,42,.88) 0%,rgba(14,57,52,.72) 34%,rgba(17,70,62,.42) 72%,rgba(11,45,42,.39) 100%),linear-gradient(0deg,rgba(9,41,39,.13),rgba(239,250,240,.09))}
-.chem-banner-content{position:relative;z-index:1;height:100%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-bottom:8px}
-.chem-banner-index{font:600 .65rem/1.5 'DM Sans',system-ui,sans-serif;letter-spacing:.26em;text-transform:uppercase;color:#d3e8dd;margin-bottom:38px}
-.chem-banner-index span{padding:0 12px;color:#b6dccb}
-.chem-home .chem-banner h1{font:500 clamp(3.15rem,5vw,5.5rem)/1.1 Fraunces,Georgia,serif;letter-spacing:-.035em;margin:0 0 11px;max-width:none;color:#f6fbf6;text-shadow:0 2px 20px rgba(0,0,0,.12)}
-.chem-banner p{font:500 clamp(.7rem,.95vw,.91rem)/1.5 'DM Sans',system-ui,sans-serif;letter-spacing:.27em;text-transform:uppercase;margin:0;color:#e5f2e8}
-.chem-rule{width:82px;height:2px;margin-top:25px;background:#d9f4e7}
-.chem-banner-mark{position:absolute;right:clamp(36px,4.5vw,80px);bottom:22px;color:#d7ece3;font:600 .6rem 'DM Sans',sans-serif;letter-spacing:.15em;text-transform:uppercase;z-index:1}
-.chem-shelf{padding:32px 0 75px;background:linear-gradient(110deg,#d7e9dd,#e1eee5 55%,#d2e5dc)}
-.chem-shelf-intro{display:flex;align-items:end;justify-content:space-between;gap:40px;margin:0 0 24px;padding:0 1px}
-.chem-shelf-intro h2{font-size:clamp(1.6rem,2.3vw,2.5rem);margin:3px 0 0}
-.chem-shelf-intro p{max-width:510px;font-size:.9rem;line-height:1.55;color:#4b6760;margin:0 0 2px}
-.chem-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px}
-.chem-tile{height:192px;position:relative;display:block;isolation:isolate;overflow:hidden;text-decoration:none;color:#152d2b;background:#afcbbd;border:1px solid rgba(45,94,78,.26);box-shadow:0 6px 18px rgba(31,66,57,.06);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-.chem-tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:70% 50%;filter:saturate(.55) sepia(.12) hue-rotate(100deg) contrast(.9);transform:scale(1.01);transition:transform .45s ease}
-.tile-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(229,241,229,.98) 0%,rgba(220,237,223,.92) 39%,rgba(204,229,216,.47) 70%,rgba(179,211,198,.13) 100%)}
-.tile-copy{position:absolute;inset:20px 17px 17px 20px;display:flex;flex-direction:column;align-items:flex-start;z-index:1}
-.tile-copy small{font:700 .57rem/1.2 'DM Sans',system-ui,sans-serif;letter-spacing:.14em;text-transform:uppercase;color:#327b6e;margin-bottom:auto}
-.tile-copy strong{font:500 clamp(1.27rem,1.6vw,1.7rem)/1.08 Fraunces,Georgia,serif;letter-spacing:-.03em;max-width:220px;text-wrap:balance}
-.tile-copy>span{display:block;font:.82rem/1.42 'DM Sans',system-ui,sans-serif;max-width:235px;color:#344e48;margin-top:8px;padding-right:16px}
-.tile-copy b{font:400 1.7rem/1 Fraunces,Georgia,serif;margin-top:8px}
-.chem-tile:hover,.chem-tile:focus-visible,.chem-feature:hover,.chem-feature:focus-visible{transform:translateY(-4px);border-color:#257b6f;box-shadow:0 14px 28px rgba(31,66,57,.16);outline:none}
-.chem-tile:hover img,.chem-tile:focus-visible img,.chem-feature:hover img,.chem-feature:focus-visible img{transform:scale(1.07)}
-.chem-tile:focus-visible,.chem-feature:focus-visible{outline:3px solid #1e7d6f;outline-offset:3px}
-.chem-feature{position:relative;isolation:isolate;display:block;min-height:215px;margin-top:18px;overflow:hidden;text-decoration:none;color:#f0f9f1;background:#21463d;border:1px solid rgba(45,94,78,.38);box-shadow:0 6px 18px rgba(31,66,57,.07);transition:transform .25s ease,box-shadow .25s ease,border-color .25s ease}
-.chem-feature img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 48%;filter:grayscale(.38) saturate(.6) contrast(.85);transition:transform .45s ease}
-.feature-wash{position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,59,52,.96),rgba(15,65,57,.82) 40%,rgba(21,65,56,.35) 100%)}
-.feature-copy{position:relative;z-index:1;display:flex;flex-direction:column;align-items:flex-start;justify-content:center;min-height:215px;padding:28px 45px}
-.feature-copy small{font:700 .64rem 'DM Sans',system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#a9deca}
-.feature-copy strong{font:500 clamp(2rem,3vw,3rem)/1.1 Fraunces,Georgia,serif;margin:8px 0}
-.feature-copy>span:not(.feature-link){font-size:.94rem;max-width:470px;line-height:1.55;color:#deece4}
-.feature-link{margin-top:15px;font-size:.78rem;font-weight:700;letter-spacing:.04em;border-bottom:1px solid #bce5d3;padding-bottom:3px}
-.chem-guide{background:#eef5ee;border-top:1px solid #bad0c3;padding:58px 0 66px}
-.chem-guide-inner{display:grid;grid-template-columns:1fr minmax(300px,1.3fr) auto;gap:6%;align-items:center}
-.chem-guide h2{font-size:clamp(2rem,3vw,3.2rem);margin:5px 0 0}
-.chem-guide p{font-size:.99rem;line-height:1.75;color:#48635c;margin:0;max-width:620px}
-.chem-guide a{font-weight:700;font-size:.83rem;text-decoration:none;border-bottom:1px solid #21766b;padding:0 0 5px;white-space:nowrap}
-.chem-guide a:hover{color:#087469}
-.chem-credits{font-size:.75rem;padding:12px 0 22px;color:#526e64}
+.chem-credits{font-size:.74rem;padding:0 0 24px;color:#aebfb3}
 .chem-credits summary{cursor:pointer;width:max-content}
-.chem-credits p{line-height:1.7;max-width:1050px}
+.chem-credits p{max-width:1000px;line-height:1.7}
 .chem-credits a{text-decoration:underline;text-underline-offset:2px}
-
-/* The chapter pages share the landing page's paper, type, and mint accents. */
-.chem:not(.chem-home) .article-head{background:linear-gradient(120deg,rgba(222,239,228,.97),rgba(201,225,211,.65)),repeating-linear-gradient(90deg,transparent 0 59px,rgba(52,119,99,.06) 60px);border-color:#a9c5b6}
-.chem:not(.chem-home) .article-head::after{border-color:rgba(31,116,102,.22);box-shadow:0 0 0 45px rgba(31,116,102,.045),0 0 0 110px rgba(31,116,102,.025)}
-.chem:not(.chem-home) .article-head h1{font:500 clamp(3.2rem,7vw,6.3rem)/1.07 Fraunces,Georgia,serif;letter-spacing:-.045em}
-.chem:not(.chem-home) .article-head .lede{color:#44645c}
+/* Reading pages retain their depth with the same dark green identity. */
+.chem:not(.chem-home) .article-head{background:radial-gradient(circle at 83% 30%,rgba(102,156,128,.2),transparent 30%),linear-gradient(115deg,#203a33,#2a4b3e);border-color:#547467;min-height:390px;padding:64px 0 55px}
+.chem:not(.chem-home) .article-head::after{display:none}
+.chem:not(.chem-home) .article-head h1{font:500 clamp(3.1rem,6.8vw,6.4rem)/1.04 Fraunces,Georgia,serif;letter-spacing:-.045em;color:#f5f8f0}
+.chem:not(.chem-home) .article-head .lede{color:#cfdfd3}
+.chem:not(.chem-home) .article-head .eyebrow{color:#b9e1ce}
 .chem:not(.chem-home) .article-grid{max-width:1200px}
-.chem:not(.chem-home) .prose p{color:#35504a}
-.chem:not(.chem-home) .callout{background:#edf5ef;border-color:#b5cbbf;border-left-color:#247969}
-.chem:not(.chem-home) .callout strong{font-family:Fraunces,Georgia,serif;font-weight:500;font-size:1.28rem}
+.chem:not(.chem-home) .prose p{color:#d5e3d7}
+.chem:not(.chem-home) .prose h2{color:#f1f8ef}
+.chem:not(.chem-home) .callout{background:#2a493d;border-color:#557666;border-left-color:#a5dfcd}
+.chem:not(.chem-home) .callout strong{font-family:Fraunces,Georgia,serif;font-size:1.27rem;color:#f3f8f0}
+.chem:not(.chem-home) .callout p{color:#cfddd1}
 .chem:not(.chem-home) .rail{background:transparent}
-.chem:not(.chem-home) .rail a.active,.chem:not(.chem-home) .rail a[aria-current="location"]{background:#d1e7d7}
-.chem:not(.chem-home) .next{border-color:#aec9bb}
-.chem:not(.chem-home) .reading-progress{background:linear-gradient(90deg,#1d8878 var(--progress,0%),transparent var(--progress,0%))}
-@media(max-width:1050px){.chem-tiles{grid-template-columns:repeat(2,minmax(0,1fr))}.chem-tile{height:205px}.chem-guide-inner{grid-template-columns:1fr 1.5fr}.chem-guide a{grid-column:2;justify-self:start}}
-@media(max-width:760px){.chem-home .wrap{width:min(100% - 30px,1460px)}.chem .brand{font-size:.79rem;letter-spacing:.12em}.chem .brand-divider{height:19px;margin:0 8px -5px 5px}.chem .top nav{gap:12px}.chem .top nav a{font-size:.8rem}.chem-home .top-inner{min-height:63px}.chem-home .chem-banner{height:350px}.chem-banner-index{margin-bottom:30px}.chem-banner-mark{right:15px;bottom:14px}.chem-shelf{padding:32px 0 55px}.chem-shelf-intro{display:block}.chem-shelf-intro p{margin-top:12px}.chem-tiles{gap:12px}.chem-tile{height:205px}.tile-copy{inset:14px 10px 11px 13px}.tile-copy strong{font-size:1.32rem}.tile-copy>span{font-size:.75rem}.feature-copy{padding:23px}.chem-guide-inner{display:block}.chem-guide p{margin:16px 0 21px}.chem:not(.chem-home) .rail{background:#e0ede5}}
-@media(max-width:560px){.chem .top nav a:nth-child(3){display:none}.chem-home .chem-banner h1{font-size:clamp(2.9rem,10vw,4.25rem)}.chem-banner p{font-size:.7rem;line-height:1.7}.chem-tiles{grid-template-columns:1fr}.chem-tile{height:180px}.tile-copy{inset:16px 18px}.tile-copy strong{font-size:1.58rem}.tile-copy>span{font-size:.82rem}.chem-feature{min-height:225px}.feature-copy{min-height:225px}}
-@media(prefers-reduced-motion:reduce){.chem-tile,.chem-feature,.chem-tile img,.chem-feature img{transition:none}}
+.chem:not(.chem-home) .rail a.active,.chem:not(.chem-home) .rail a[aria-current="location"]{background:#315343}
+.chem:not(.chem-home) .reading-progress{background:linear-gradient(90deg,#a5dfcd var(--progress,0%),transparent var(--progress,0%))}
+@media(max-width:1080px){.chem-home .wrap{width:min(100% - 48px,1440px)}.chem-grid{gap:16px}.chem-tile{min-height:240px}.chem .top nav{gap:23px}}
+@media(max-width:850px){.chem-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.chem-tile{aspect-ratio:1.22}.chem .brand{font-size:1rem;letter-spacing:.18em}.chem .brand-divider{height:26px;margin:0 12px -7px 8px}.chem .top-inner{min-height:76px}.chem-topics{padding-top:34px}}
+@media(max-width:580px){.chem-home .wrap{width:min(100% - 30px,1440px)}.chem .top nav{gap:12px}.chem .top nav a{font-size:.85rem}.chem .top nav a:nth-child(2){display:none}.chem .brand{font-size:.82rem;letter-spacing:.1em}.chem .brand-divider{height:19px;margin:0 6px -5px 4px}.chem .top-inner{min-height:64px}.chem-grid{grid-template-columns:1fr;gap:14px}.chem-tile{aspect-ratio:1.3;min-height:250px}.chem-topics{padding:27px 0 52px}.chem-home .chem-topics h1{margin-bottom:19px}.tile-copy{inset:21px}.tile-copy strong{font-size:1.85rem}.chem:not(.chem-home) .article-head{min-height:unset;padding:50px 0 42px}.chem:not(.chem-home) .rail{background:#203a33;top:58px}}
+@media(prefers-reduced-motion:reduce){.chem-tile,.chem-tile img{transition:none}}
