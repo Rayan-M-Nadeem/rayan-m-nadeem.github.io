@@ -66,11 +66,12 @@
     .med .art{background:linear-gradient(rgba(255,85,79,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,85,79,.04) 1px,transparent 1px),rgba(255,85,79,.09);background-size:20px 20px}
     .phy .art{background:radial-gradient(circle at center,rgba(92,169,255,.13),transparent 40%),linear-gradient(rgba(92,169,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(92,169,255,.04) 1px,transparent 1px),rgba(92,169,255,.08);background-size:auto,20px 20px,20px 20px,auto}
     .chem .art{background:radial-gradient(circle at 50% 50%,rgba(120,215,193,.2),transparent 48%),#10252d}.hist .art{background:linear-gradient(120deg,rgba(242,252,254,.8),rgba(199,226,235,.5)),repeating-linear-gradient(90deg,transparent 0 25px,rgba(32,112,136,.12) 26px),#d6e7ec}
-    .history-mark{display:flex;align-items:center;justify-content:center;width:126px;height:102px;position:relative;color:#287b90}
-    .history-mark::before,.history-mark::after{content:"";position:absolute;left:8px;right:8px;height:1px;background:#659aa9}.history-mark::before{top:13px}.history-mark::after{bottom:16px}
-    .history-mark .bar{display:block;width:1px;height:63px;margin:0 10px;background:linear-gradient(transparent,#377d90,transparent);position:relative}
-    .history-mark .bar::before{content:"";position:absolute;top:16px;left:-4px;width:9px;height:9px;border:1px solid #287b90;background:#e4f3f6;transform:rotate(45deg)}
-    .history-mark .bar:nth-child(2){height:84px}.history-mark .bar:nth-child(2)::before{top:26px;background:#1da5b9;border-color:#1da5b9;box-shadow:0 0 0 5px rgba(29,165,185,.14)}
+    .history-column{width:118px;height:116px;position:relative;display:flex;align-items:center;flex-direction:column;justify-content:center;filter:drop-shadow(0 8px 10px rgba(45,92,108,.17))}
+    .history-column .capital{width:78px;height:17px;border-top:3px solid #5f8795;border-bottom:3px solid #5f8795;background:linear-gradient(90deg,transparent,#afcad3 18%,#ecf6f8 50%,#afcad3 82%,transparent);clip-path:polygon(8% 0,92% 0,100% 100%,0 100%)}
+    .history-column .neck{width:58px;height:6px;border-bottom:2px solid #688c99;background:#d9e9ed}
+    .history-column .shaft{width:54px;height:63px;border-left:3px solid #638c9b;border-right:3px solid #638c9b;background:repeating-linear-gradient(90deg,#d5e7ec 0 5px,#97b6c1 6px,#eef7f8 9px);clip-path:polygon(5% 0,95% 0,100% 100%,0 100%)}
+    .history-column .base{width:70px;height:8px;border-top:2px solid #668f9e;border-bottom:2px solid #668f9e;background:#ccdee4}
+    .history-column .step{width:91px;height:5px;background:#7199a7;box-shadow:0 5px 0 #4c7584}
     .future-heading{display:flex;justify-content:space-between;align-items:baseline;gap:22px;margin:48px 0 14px}.future-heading h3{font-size:1.35rem;margin:0}.future-heading p{color:var(--muted);margin:0;font-size:.86rem}
     .future-paths{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
     .future-path{padding:19px 17px 21px;border-right:1px solid var(--line)}.future-path:last-child{border:0}
@@ -173,7 +174,7 @@
         </a>
 
         <a class="card hist" href="/history/">
-          <div class="art"><span class="history-mark" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span></div>
+          <div class="art"><span class="history-column" aria-hidden="true"><span class="capital"></span><span class="neck"></span><span class="shaft"></span><span class="base"></span><span class="step"></span></span></div>
           <div class="body"><span class="status live">Live</span><h3>Plainly History</h3><p>Twenty-one substantial chapters across ancient, medieval, early modern, and modern history, organized in a visual timeline.</p><span class="go">Enter History <span>→</span></span></div>
         </a>
       </div>

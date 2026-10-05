@@ -210,3 +210,43 @@ body.history::before{
   .history .prose p{font-size:1rem;line-height:1.82}
 }
 @media(prefers-reduced-motion:reduce){.era-visual svg,.archive-row{transition:none}}
+
+/* Sourced photographs behind a light archival veil. The drawn scenes remain as fallbacks. */
+.history .top-inner{justify-content:flex-start}
+.history .era-visual img,.history .panel-scene img{
+  position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(1) brightness(1.12) contrast(.82);
+  mix-blend-mode:multiply;opacity:.73;transition:opacity .3s,transform .45s;
+}
+.history .era-visual img{z-index:1}
+.history .era-tab:hover img,.history .era-tab:focus-visible img{opacity:.88;transform:scale(1.06)}
+.history .era-tab[aria-selected="true"] img{opacity:.89}
+.history .panel-scene img{z-index:1;opacity:.73}
+.history .era-visual{background:linear-gradient(#f2f7f8,#dce9ed)}
+.history .panel-scene{background:linear-gradient(135deg,#f5fafb,#d7e6eb)}
+.history .era-visual svg,.history .panel-scene svg{opacity:.16}
+.history #tab-renaissance img,.history #panel-renaissance img{object-position:52% center}
+.history #tab-atlantic img,.history #panel-atlantic img{object-position:50% 39%}
+.history #tab-wars img,.history #panel-wars img{object-position:49% center}
+.history #tab-modern img,.history #panel-modern img{object-position:53% center}
+
+/* Soft vertical and receding beams inspired by the supplied light study. */
+.history-atlas::before{
+  top:0;left:0;right:0;width:auto;height:930px;bottom:auto;z-index:0;opacity:.52;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 54px,rgba(255,255,255,.82) 55px,transparent 57px,transparent 104px,rgba(102,146,159,.12) 106px,transparent 108px),
+    repeating-linear-gradient(112deg,transparent 0 178px,rgba(255,255,255,.72) 179px,transparent 181px,transparent 300px),
+    radial-gradient(ellipse at 50% 15%,rgba(255,255,255,.9),transparent 64%);
+  mask-image:linear-gradient(#000 0%,#000 56%,transparent 100%);
+  animation:archive-glow 11s ease-in-out infinite alternate;
+}
+.history-atlas::after{z-index:0}
+.history .atlas-hero,.history .timeline-zone{position:relative;z-index:1}
+@keyframes archive-glow{from{opacity:.23}to{opacity:.66}}
+.image-credits{margin-top:35px;border-top:1px solid #b9cbd1;padding:16px 4px 0;color:#57717d;font:500 .68rem/1.7 'IBM Plex Mono',monospace}
+.image-credits summary{cursor:pointer;width:max-content;color:#087b90;letter-spacing:.13em;text-transform:uppercase}
+.image-credits p{max-width:720px}
+.image-credits ul{list-style:none;padding:0;margin:15px 0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:5px 26px}
+.image-credits a{color:#156e80;text-underline-offset:3px}
+@media(max-width:760px){.image-credits ul{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){.history-atlas::before{animation:none;opacity:.44}.history .era-visual img{transition:none}}
