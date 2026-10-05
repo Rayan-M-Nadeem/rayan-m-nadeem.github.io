@@ -221,7 +221,17 @@ body.history::before{
 .history .era-visual img{z-index:1}
 .history .era-tab:hover img,.history .era-tab:focus-visible img{opacity:.79;transform:scale(1.06)}
 .history .era-tab[aria-selected="true"] img{opacity:.78}
-.history .panel-scene img{z-index:1;opacity:.88;object-fit:contain;padding:15px;box-sizing:border-box;filter:grayscale(1) brightness(1.12) contrast(.9)}
+.history .panel-scene img{
+  z-index:1;inset:auto;top:50%;left:50%;width:auto;height:auto;
+  max-width:calc(100% - 50px);max-height:calc(100% - 50px);
+  object-fit:contain;padding:0;box-sizing:border-box;
+  transform:translate(-50%,-50%);opacity:.88;
+  filter:grayscale(1) brightness(1.12) contrast(.9);
+  border:1px solid rgba(255,255,255,.88);
+  outline:1px solid rgba(78,125,141,.42);outline-offset:7px;
+  box-shadow:0 14px 36px rgba(51,91,106,.15);
+}
+.history .panel-scene::before{display:none}
 .history .panel-scene::after{display:none}
 .history .era-visual{background:linear-gradient(#f2f7f8,#dce9ed)}
 .history .panel-scene{background:linear-gradient(135deg,#f5fafb,#d7e6eb)}
