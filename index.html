@@ -65,7 +65,17 @@
     .art{height:148px;border-bottom:1px solid var(--line);position:relative;display:grid;place-items:center;overflow:hidden}
     .med .art{background:linear-gradient(rgba(255,85,79,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(255,85,79,.04) 1px,transparent 1px),rgba(255,85,79,.09);background-size:20px 20px}
     .phy .art{background:radial-gradient(circle at center,rgba(92,169,255,.13),transparent 40%),linear-gradient(rgba(92,169,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(92,169,255,.04) 1px,transparent 1px),rgba(92,169,255,.08);background-size:auto,20px 20px,20px 20px,auto}
-    .chem .art{background:radial-gradient(circle at 50% 50%,rgba(120,215,193,.2),transparent 48%),#10252d}.hist .art{background:repeating-linear-gradient(0deg,transparent,transparent 29px,rgba(231,178,122,.09) 30px),#28251d}
+    .chem .art{background:radial-gradient(circle at 50% 50%,rgba(120,215,193,.2),transparent 48%),#10252d}.hist .art{background:linear-gradient(120deg,rgba(242,252,254,.8),rgba(199,226,235,.5)),repeating-linear-gradient(90deg,transparent 0 25px,rgba(32,112,136,.12) 26px),#d6e7ec}
+    .history-mark{display:flex;align-items:center;justify-content:center;width:126px;height:102px;position:relative;color:#287b90}
+    .history-mark::before,.history-mark::after{content:"";position:absolute;left:8px;right:8px;height:1px;background:#659aa9}.history-mark::before{top:13px}.history-mark::after{bottom:16px}
+    .history-mark .bar{display:block;width:1px;height:63px;margin:0 10px;background:linear-gradient(transparent,#377d90,transparent);position:relative}
+    .history-mark .bar::before{content:"";position:absolute;top:16px;left:-4px;width:9px;height:9px;border:1px solid #287b90;background:#e4f3f6;transform:rotate(45deg)}
+    .history-mark .bar:nth-child(2){height:84px}.history-mark .bar:nth-child(2)::before{top:26px;background:#1da5b9;border-color:#1da5b9;box-shadow:0 0 0 5px rgba(29,165,185,.14)}
+    .future-heading{display:flex;justify-content:space-between;align-items:baseline;gap:22px;margin:48px 0 14px}.future-heading h3{font-size:1.35rem;margin:0}.future-heading p{color:var(--muted);margin:0;font-size:.86rem}
+    .future-paths{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+    .future-path{padding:19px 17px 21px;border-right:1px solid var(--line)}.future-path:last-child{border:0}
+    .future-path span{color:#8a9baa;font-size:.63rem;font-weight:850;letter-spacing:.13em;text-transform:uppercase}
+    .future-path h4{margin:8px 0 7px;font-size:1.02rem}.future-path p{color:var(--muted);font-size:.82rem;line-height:1.55;margin:0}
     .future .art{background:linear-gradient(rgba(123,137,153,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(123,137,153,.035) 1px,transparent 1px),rgba(123,137,153,.06);background-size:20px 20px}
     .ecg{width:76%;height:70px}.ecg path{fill:none;stroke:var(--medicine);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(255,85,79,.35))}
     .field{width:112px;height:112px}.body{padding:18px 19px 20px;display:flex;flex-direction:column;flex:1}
@@ -76,10 +86,14 @@
     .roadmap-wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:44px}.roadmap p{color:var(--muted);max-width:520px;margin:20px 0 0}
     .timeline{border-top:1px solid var(--line)}.row{display:grid;grid-template-columns:78px 125px 1fr;gap:18px;padding:18px 0;border-bottom:1px solid var(--line)}.when{font-size:.7rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}.name{font-weight:780}.desc{color:var(--muted);font-size:.92rem}
     .focus{display:grid;grid-template-columns:.9fr 1.1fr;border:1px solid rgba(255,85,79,.25);border-radius:20px;overflow:hidden;background:radial-gradient(circle at 88% 50%,rgba(255,85,79,.08),transparent 30%),rgba(255,255,255,.018)}
-    .focus-copy{padding:clamp(28px,5vw,54px)}.focus p{color:var(--muted);margin:20px 0 26px;max-width:620px}.focus-visual{min-height:330px;border-left:1px solid var(--line);display:grid;place-items:center;background:linear-gradient(rgba(255,85,79,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,85,79,.035) 1px,transparent 1px);background-size:28px 28px}
+    .focus-copy{padding:clamp(28px,5vw,54px)}.focus p{color:var(--muted);margin:20px 0 26px;max-width:620px}.focus-visual{min-height:330px;border-left:1px solid var(--line);display:grid;place-items:center;background:radial-gradient(circle at center,rgba(92,169,255,.09),transparent 48%),linear-gradient(rgba(196,221,239,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(196,221,239,.035) 1px,transparent 1px);background-size:auto,28px 28px,28px 28px}
+    .library-emblem{width:min(72%,350px);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:18px;border:1px solid rgba(216,226,239,.25);border-radius:50%;position:relative;box-shadow:0 0 0 25px rgba(170,197,224,.035),0 0 0 58px rgba(170,197,224,.025)}
+    .library-emblem::before,.library-emblem::after{content:"";position:absolute;width:8px;height:8px;border:1px solid #d7dde6;transform:rotate(45deg);background:#101a27}.library-emblem::before{top:-5px}.library-emblem::after{bottom:-5px}
+    .library-emblem .shelfmark{transform:scale(2.6);margin:35px 0 24px}
+    .library-emblem .emblem-label{font-size:.72rem;letter-spacing:.22em;font-weight:800;text-transform:uppercase;color:#d7e4ee;text-align:center}
     footer{padding:38px 0 48px;color:var(--dim)}.footer{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;align-items:center}.footer-brand{display:flex;gap:11px;align-items:center}.footer-links{display:flex;gap:15px;flex-wrap:wrap}.footer-links a:hover{color:#fff}
-    @media(max-width:1040px){.hero{grid-template-columns:1fr;min-height:unset}.catalog{min-height:480px}.grid{grid-template-columns:repeat(2,1fr)}.roadmap-wrap,.focus{grid-template-columns:1fr}.focus-visual{border-left:0;border-top:1px solid var(--line)}}
-    @media(max-width:720px){.shell{width:min(calc(100% - 26px),var(--max))}.nav{min-height:62px}.navlinks a:not(:last-child){display:none}.hero{padding:50px 0 54px}.hero h1{font-size:clamp(3.2rem,17vw,5.2rem)}.catalog{padding:16px;min-height:400px}.map{height:310px}.branchdot{font-size:.68rem;padding:7px 8px}.branchdot.med{left:2%;top:18%}.branchdot.phy{right:1%;top:26%}.branchdot.f1{left:5%;bottom:10%}.branchdot.f2{right:3%;bottom:8%}.section{padding:58px 0}.section-head{align-items:start;flex-direction:column}.grid{grid-template-columns:1fr}.row{grid-template-columns:64px 1fr}.desc{grid-column:2}}
+    @media(max-width:1040px){.hero{grid-template-columns:1fr;min-height:unset}.catalog{min-height:480px}.grid{grid-template-columns:repeat(2,1fr)}.future-paths{grid-template-columns:repeat(2,1fr)}.future-path:nth-child(2){border-right:0}.future-path:nth-child(-n+2){border-bottom:1px solid var(--line)}.roadmap-wrap,.focus{grid-template-columns:1fr}.focus-visual{border-left:0;border-top:1px solid var(--line)}}
+    @media(max-width:720px){.shell{width:min(calc(100% - 26px),var(--max))}.nav{min-height:62px}.navlinks a:not(:last-child){display:none}.hero{padding:50px 0 54px}.hero h1{font-size:clamp(3.2rem,17vw,5.2rem)}.catalog{padding:16px;min-height:400px}.map{height:310px}.branchdot{font-size:.68rem;padding:7px 8px}.branchdot.med{left:2%;top:18%}.branchdot.phy{right:1%;top:26%}.branchdot.f1{left:5%;bottom:10%}.branchdot.f2{right:3%;bottom:8%}.section{padding:58px 0}.section-head{align-items:start;flex-direction:column}.grid{grid-template-columns:1fr}.future-heading{display:block}.future-heading p{margin-top:7px}.future-paths{grid-template-columns:1fr}.future-path{border-right:0;border-bottom:1px solid var(--line)}.future-path:last-child{border:0}.row{grid-template-columns:64px 1fr}.desc{grid-column:2}.focus-visual{min-height:280px}.library-emblem{width:215px}}
     @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*,*::before,*::after{transition-duration:.01ms!important}}
   </style>
 </head>
@@ -159,9 +173,16 @@
         </a>
 
         <a class="card hist" href="/history/">
-          <div class="art"><div style="color:#e7b27a;font:500 4rem Georgia,serif;letter-spacing:-.08em" aria-hidden="true">431 <span style="font-size:.32em;letter-spacing:.1em">BCE</span></div></div>
-          <div class="body"><span class="status live">Live</span><h3>Plainly History</h3><p>Real history across 15 major periods, following the settings of Assassin’s Creed from ancient Greece to industrial London.</p><span class="go">Enter History <span>→</span></span></div>
+          <div class="art"><span class="history-mark" aria-hidden="true"><span class="bar"></span><span class="bar"></span><span class="bar"></span></span></div>
+          <div class="body"><span class="status live">Live</span><h3>Plainly History</h3><p>Twenty-one substantial chapters across ancient, medieval, early modern, and modern history, organized in a visual timeline.</p><span class="go">Enter History <span>→</span></span></div>
         </a>
+      </div>
+      <div class="future-heading"><h3>More paths to come</h3><p>The library will keep growing beyond its four live branches.</p></div>
+      <div class="future-paths" aria-label="Future areas">
+        <div class="future-path"><span>Future shelf / 01</span><h4>Biology</h4><p>Life from cells and inheritance to ecosystems.</p></div>
+        <div class="future-path"><span>Future shelf / 02</span><h4>Mathematics</h4><p>Patterns, reasoning, and the ideas behind useful tools.</p></div>
+        <div class="future-path"><span>Future shelf / 03</span><h4>Earth &amp; space</h4><p>Our planet, the wider universe, and how we study both.</p></div>
+        <div class="future-path"><span>Future shelf / 04</span><h4>Culture &amp; ideas</h4><p>Literature, philosophy, and the ways people make meaning.</p></div>
       </div>
     </div>
   </section>
@@ -177,7 +198,9 @@
         <div class="row"><div class="when">Live</div><div class="name">Medicine</div><div class="desc">Long-form medical articles, evidence labels, original visuals, and interactive explainers.</div></div>
         <div class="row"><div class="when">Live</div><div class="name">Physics</div><div class="desc">A concept-first guide from motion and energy through fields, quantum theory, and cosmology.</div></div>
         <div class="row"><div class="when">Live</div><div class="name">Chemistry</div><div class="desc">Nine connected chapters on matter, structure, change, and chemical energy.</div></div>
-        <div class="row"><div class="when">Live</div><div class="name">History</div><div class="desc">Fifteen historical settings in chronological order, with much more to add later.</div></div>
+        <div class="row"><div class="when">Live</div><div class="name">History</div><div class="desc">Twenty-one historical chapters in a chronological archive, with more regions and periods to add.</div></div>
+        <div class="row"><div class="when">Next</div><div class="name">More history</div><div class="desc">New records can widen the timeline with other regions, voices, and sources.</div></div>
+        <div class="row"><div class="when">Later</div><div class="name">New fields</div><div class="desc">Biology, mathematics, Earth and space, and cultural ideas have room on the future shelf.</div></div>
       </div>
     </div>
   </section>
@@ -187,11 +210,11 @@
       <div class="focus-copy">
         <div class="section-label">Available now</div>
         <h2>Four fields. One library.</h2>
-        <p>Explore medicine and physics, follow chemical ideas from atoms to cells, or read the actual history behind fifteen game settings. Each branch keeps its own visual identity.</p>
+        <p>Explore medicine and physics, follow chemical ideas from atoms to electrochemistry, or move through twenty-one history chapters. Each branch keeps its own visual identity, with more areas planned.</p>
         <div class="actions"><a class="btn primary" href="/medicine/">Enter Medicine <span>→</span></a><a class="btn secondary" href="/physics/">Physics <span>→</span></a><a class="btn secondary" href="/chemistry/">Chemistry <span>→</span></a><a class="btn secondary" href="/history/">History <span>→</span></a></div>
       </div>
       <div class="focus-visual">
-        <svg class="ecg" viewBox="0 0 620 170" aria-hidden="true"><path d="M10 90h115l18-18 18 18h55l13-46 21 94 19-48h65l18-18 17 18h251"/></svg>
+        <div class="library-emblem" aria-hidden="true"><span class="shelfmark"><span class="book b1"></span><span class="book b2"></span><span class="book b3"></span></span><span class="emblem-label">Plainly Library</span></div>
       </div>
     </div>
   </section>
