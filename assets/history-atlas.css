@@ -225,6 +225,8 @@ body.history::before{
 .history .era-visual{background:linear-gradient(#f2f7f8,#dce9ed)}
 .history .panel-scene{background:linear-gradient(135deg,#f5fafb,#d7e6eb)}
 .history .era-visual svg,.history .panel-scene svg{display:none}
+.history #tab-ancient img{object-position:95% center}
+.history #panel-ancient img{object-position:90% center}
 .history #tab-renaissance img,.history #panel-renaissance img{object-position:52% center}
 .history #tab-atlantic img,.history #panel-atlantic img{object-position:50% 39%}
 .history #tab-wars img,.history #panel-wars img{object-position:49% center}
