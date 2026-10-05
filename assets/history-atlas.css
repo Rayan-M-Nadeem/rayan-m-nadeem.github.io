@@ -222,6 +222,7 @@ body.history::before{
 .history .era-tab:hover img,.history .era-tab:focus-visible img{opacity:.79;transform:scale(1.06)}
 .history .era-tab[aria-selected="true"] img{opacity:.78}
 .history .panel-scene img{z-index:1;opacity:.88;object-fit:contain;padding:15px;box-sizing:border-box;filter:grayscale(1) brightness(1.12) contrast(.9)}
+.history .panel-scene::after{display:none}
 .history .era-visual{background:linear-gradient(#f2f7f8,#dce9ed)}
 .history .panel-scene{background:linear-gradient(135deg,#f5fafb,#d7e6eb)}
 .history .era-visual svg,.history .panel-scene svg{display:none}
