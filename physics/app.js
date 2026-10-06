@@ -1,3 +1,6 @@
+// Shared branch identity and reading controls, including individual topic pages.
+(() => { const script = document.createElement('script'); script.src = '/assets/plainly-controls.js?v=20261006a'; document.head.append(script); })();
+
 (function () {
   'use strict';
 

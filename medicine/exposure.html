@@ -7,7 +7,7 @@
   <meta name="description" content="An interactive illustration of cumulative LDL exposure: see why lowering cholesterol early matters far more than lowering it late.">
   <script>
     (function () {
-      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
+      var r = document.documentElement, g = function (k) { try { return (localStorage.getItem('plainly:reader:' + k) || localStorage.getItem('pm:' + k)); } catch (e) { return null; } };
       try {
         var t = g('theme') || 'system';
         r.setAttribute('data-theme', t === 'system'
@@ -63,7 +63,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261006a">
   <style>
     .lab { padding-block: clamp(2rem, 5vw, 3.5rem); }
     .sim { border: 2px solid var(--ink); background: var(--paper-2); padding: clamp(1.25rem, 3vw, 2rem); }
@@ -402,7 +402,7 @@
   </button>
 
   <script src="glossary.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=20261006a"></script>
   <script>
   (function () {
     var ldl = document.getElementById('ldl'), start = document.getElementById('start');

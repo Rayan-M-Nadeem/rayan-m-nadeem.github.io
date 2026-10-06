@@ -36,3 +36,6 @@
   window.addEventListener('resize', update);
   update();
 })();
+
+// Identity and reader controls are shared by the History and Chemistry branches.
+(() => { const script = document.createElement('script'); script.src = '/assets/plainly-controls.js?v=20261006a'; document.head.append(script); })();

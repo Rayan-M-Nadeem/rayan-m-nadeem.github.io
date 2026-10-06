@@ -1,0 +1,54 @@
+/* Small shared controls; each branch retains its own colors and page design. */
+.pl-controls{position:relative;display:flex;align-items:center;flex:none;z-index:110}
+.pl-gear{width:39px;height:39px;display:grid;place-items:center;padding:0;border:1px solid currentColor;border-radius:5px;background:transparent;color:inherit;cursor:pointer;opacity:.82}
+.pl-gear:hover,.pl-gear:focus-visible,.pl-gear[aria-expanded=true]{opacity:1;outline:2px solid currentColor;outline-offset:2px}
+.pl-panel{--pl-bg:#111c2e;--pl-text:#e9f2ff;--pl-border:#4e6381;--pl-picked:#304e70;position:absolute;right:0;top:calc(100% + 13px);width:min(360px,calc(100vw - 24px));max-height:min(650px,calc(100dvh - 95px));overflow:auto;padding:14px 18px 8px;border:1px solid var(--pl-border);border-radius:8px;background:var(--pl-bg);color:var(--pl-text);box-shadow:0 16px 45px rgba(0,0,0,.28);font:500 13px/1.4 system-ui,sans-serif;letter-spacing:normal;text-transform:none;text-align:left;overscroll-behavior:contain}
+.pl-panel[hidden]{display:none!important}
+.pl-panel-title{margin:0;padding:2px 0 13px;font-weight:700;font-size:1rem;border-bottom:1px solid var(--pl-border)}
+.pl-row{padding:12px 0;border-bottom:1px solid var(--pl-border)}
+.pl-row>span{display:block;margin-bottom:8px;font-size:.79rem;font-weight:650}
+.pl-options{display:flex;min-width:0;border:1px solid var(--pl-border);border-radius:4px;overflow:hidden}
+.pl-options button,.pl-toggle button,.pl-reset{color:inherit;background:transparent;border:0;cursor:pointer;font:inherit}
+.pl-options button{flex:1;min-width:0;padding:8px 4px;font-size:.72rem;border-right:1px solid var(--pl-border)}
+.pl-options button:last-child{border-right:0}
+.pl-options button[aria-pressed=true],.pl-toggle button[aria-pressed=true]{background:var(--pl-picked);font-weight:700}
+.pl-toggle{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.pl-toggle>span{margin:0}
+.pl-toggle button{min-width:54px;padding:6px 8px;border:1px solid var(--pl-border);border-radius:4px;font-size:.72rem}
+.pl-reset{padding:13px 0;text-decoration:underline;text-underline-offset:3px;font-size:.72rem}
+.pl-panel button:focus-visible{outline:2px solid currentColor;outline-offset:-2px}
+body.history .pl-panel{--pl-bg:#f3f8f8;--pl-text:#203d49;--pl-border:#a6c1c9;--pl-picked:#d5e9ed}
+body.chem .pl-panel,body.chem-home .pl-panel{--pl-bg:#15332b;--pl-text:#e4f7eb;--pl-border:#57896c;--pl-picked:#336649}
+body.history .pl-controls{margin-left:16px}
+body.history .pl-library-link{margin-left:auto;color:inherit;font:500 .72rem 'IBM Plex Mono',monospace;letter-spacing:.08em;text-decoration:none;text-transform:uppercase}
+body.history .pl-library-link:hover{text-decoration:underline}
+body.pl-physics-header .topbar .nav{display:flex}
+body.pl-physics-header .topbar .branch{display:none}
+body.pl-physics-header .topbar .nav nav{margin-left:auto;align-items:center}
+body.pl-physics-header .topbar .nav nav .pl-controls{margin-left:8px}
+body.pl-physics-header .topbar .nav nav .pl-panel{display:block}
+.pl-site-meta{display:flex;flex-wrap:wrap;gap:5px 14px;align-items:center;font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;opacity:.72}
+.pl-site-meta span+span::before{content:'·';margin-right:14px;opacity:.6}
+body.chem-home .pl-site-meta{margin:0 2px 17px;color:#b7dfc7}
+body.history .atlas-hero .pl-site-meta{justify-content:center;margin:15px 0 0;color:#416773;letter-spacing:.08em}
+body.pl-physics-header .hero .pl-site-meta{margin:0 0 20px;color:#bcd7f3}
+html[data-size=s]{font-size:93.75%}
+html[data-size=l]{font-size:112.5%}
+html[data-width=narrow] body.history .prose,html[data-width=narrow] body.chem .prose{max-width:58ch}
+html[data-width=wide] body.history .article-grid{grid-template-columns:minmax(190px,260px) minmax(0,920px)}
+html[data-width=wide] body.chem .article-grid{max-width:1320px;grid-template-columns:220px minmax(0,900px)}
+@media(min-width:1121px){html[data-width=narrow] body.topic-page .topic-layout{grid-template-columns:220px minmax(0,620px) minmax(210px,260px)}html[data-width=wide] body.topic-page .topic-layout{grid-template-columns:175px minmax(0,800px) minmax(170px,220px)}}
+html[data-leading=tight] :is(.prose,.topic-article) :is(p,li){line-height:1.5!important}
+html[data-leading=loose] :is(.prose,.topic-article) :is(p,li){line-height:2!important}
+html[data-font=serif] :is(.prose,.topic-article) :is(p,li){font-family:Georgia,serif}
+html[data-font=mono] :is(.prose,.topic-article) :is(p,li){font-family:ui-monospace,SFMono-Regular,monospace}
+html[data-contrast=on] body.history{--muted:#34515e}
+html[data-contrast=on] body.history .prose p{color:#244650}
+html[data-contrast=on] body.chem,html[data-contrast=on] body.chem-home{--muted:#d3e9db}
+html[data-contrast=on] body.topic-page .article-section p{color:#ecf3ff}
+html[data-underline=on] :is(.prose,.topic-article) a{text-decoration:underline;text-underline-offset:3px}
+html[data-motion=off] *,html[data-motion=off] *::before,html[data-motion=off] *::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+@media(max-width:820px){html[data-width] body.topic-page .topic-layout{display:block}html[data-width=wide] body.history .article-grid,html[data-width=wide] body.chem .article-grid{display:block}}
+@media(max-width:700px){.pl-panel{position:fixed;top:72px;left:12px;right:12px;width:auto;max-height:calc(100dvh - 84px)}body.chem-home .pl-panel{top:100px}body.history .pl-library-link{font-size:.64rem}body.history .pl-controls{margin-left:10px}}
+@media(max-width:520px){body.pl-physics-header.topic-page .nav nav{display:flex}body.pl-physics-header .topbar .nav nav>a{display:none}}
+@media print{.pl-controls{display:none}}

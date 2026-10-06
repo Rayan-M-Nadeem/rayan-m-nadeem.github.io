@@ -22,12 +22,13 @@
   // these two read "on" as the normal state, so the attribute marks the off case
   var INVERTED = { gloss: 1, evidence: 1 };
 
+  var SHARED = { size: 1, width: 1, leading: 1, font: 1, contrast: 1, motion: 1, underline: 1 };
   var store = {
-    get: function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } },
-    set: function (k, v) { try { localStorage.setItem('pm:' + k, v); } catch (e) {} },
+    get: function (k) { try { return (SHARED[k] && localStorage.getItem('plainly:reader:' + k)) || localStorage.getItem('pm:' + k); } catch (e) { return null; } },
+    set: function (k, v) { try { localStorage.setItem('pm:' + k, v); if (SHARED[k]) localStorage.setItem('plainly:reader:' + k, v); } catch (e) {} },
     clear: function () {
       try {
-        Object.keys(DEFAULTS).forEach(function (k) { localStorage.removeItem('pm:' + k); });
+        Object.keys(DEFAULTS).forEach(function (k) { localStorage.removeItem('pm:' + k); if (SHARED[k]) localStorage.removeItem('plainly:reader:' + k); });
       } catch (e) {}
     }
   };

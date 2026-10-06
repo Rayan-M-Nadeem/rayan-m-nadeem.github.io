@@ -7,7 +7,7 @@
   <meta name="description" content="The first drugs that target Alzheimer's biology rather than its symptoms, what they actually do, and how faster diagnosis and stroke treatment are widening the window to save the brain.">
   <script>
     (function () {
-      var r = document.documentElement, g = function (k) { try { return localStorage.getItem('pm:' + k); } catch (e) { return null; } };
+      var r = document.documentElement, g = function (k) { try { return (localStorage.getItem('plainly:reader:' + k) || localStorage.getItem('pm:' + k)); } catch (e) { return null; } };
       try {
         var t = g('theme') || 'system';
         r.setAttribute('data-theme', t === 'system'
@@ -77,7 +77,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;900&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261006a">
 </head>
 <body data-topic="neurology" style="--c: var(--c-neurology)">
 
@@ -336,7 +336,7 @@
   </button>
 
   <script src="glossary.js"></script>
-  <script src="app.js"></script>
+  <script src="app.js?v=20261006a"></script>
   <script src="figures.js"></script>
 </body>
 </html>

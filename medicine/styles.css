@@ -555,15 +555,15 @@ html[data-font="serif"] .prose p { font-weight: 400; }
 html[data-font="mono"] .prose { font-family: var(--mono); font-size: 0.94em; }
 
 /* higher contrast */
-html[data-contrast="high"] {
+html[data-contrast="on"] {
   --muted: var(--ink); --faint: var(--ink-2); --rule: var(--ink); --rule-2: var(--ink);
 }
-html[data-contrast="high"] .prose p { opacity: 1; }
-html[data-contrast="high"] .diagram figcaption { opacity: 1; }
-html[data-contrast="high"] .block p,
-html[data-contrast="high"] .article-head .summary { opacity: 1; }
-html[data-contrast="high"] .prose a { text-decoration-thickness: 3px; }
-html[data-contrast="high"] .refs li { color: var(--ink); }
+html[data-contrast="on"] .prose p { opacity: 1; }
+html[data-contrast="on"] .diagram figcaption { opacity: 1; }
+html[data-contrast="on"] .block p,
+html[data-contrast="on"] .article-head .summary { opacity: 1; }
+html[data-contrast="on"] .prose a { text-decoration-thickness: 3px; }
+html[data-contrast="on"] .refs li { color: var(--ink); }
 
 /* --- article layout with a sticky contents rail --- */
 .article-grid { display: grid; grid-template-columns: minmax(0,1fr) 15rem; gap: clamp(2rem,5vw,4.5rem); align-items: start; }
