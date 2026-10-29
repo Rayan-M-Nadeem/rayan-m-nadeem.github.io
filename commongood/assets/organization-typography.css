@@ -1,0 +1,47 @@
+/* Organization-specific type systems. Logo artwork and brand wordmarks are untouched. */
+.eacc-site.eacc-v4{--cg-body:'Source Sans 3',Arial,sans-serif;--cg-head:'Source Sans 3',Arial,sans-serif;--cg-weight:650;--cg-h1:clamp(2.22222rem,4.1vw,3rem);--cg-h2:1.77778rem;--cg-h3:1.27778rem;--cg-title-leading:1.16;--cg-heading-track:-.012em}
+.bgc-site{--cg-body:'Barlow',Arial,sans-serif;--cg-head:'Barlow Condensed','Arial Narrow',Arial,sans-serif;--cg-weight:700;--cg-h1:clamp(2.44444rem,4.7vw,3.33333rem);--cg-h2:2rem;--cg-h3:1.33333rem;--cg-title-leading:1.08;--cg-heading-track:0}
+.hope-site{--cg-body:'Nunito Sans','Trebuchet MS',Arial,sans-serif;--cg-head:'Nunito Sans','Trebuchet MS',Arial,sans-serif;--cg-weight:750;--cg-h1:clamp(2.11111rem,3.9vw,2.77778rem);--cg-h2:1.77778rem;--cg-h3:1.22222rem;--cg-title-leading:1.2;--cg-heading-track:-.012em}
+.p2-cops{--cg-body:'PT Sans',Arial,sans-serif;--cg-head:'Bitter',Georgia,serif;--cg-weight:600;--cg-h1:clamp(2rem,3.7vw,2.66667rem);--cg-h2:1.72222rem;--cg-h3:1.22222rem;--cg-title-leading:1.22;--cg-heading-track:-.008em}
+.p2-bushkill{--cg-body:'Public Sans',Arial,sans-serif;--cg-head:'Public Sans',Arial,sans-serif;--cg-weight:600;--cg-h1:clamp(2rem,3.5vw,2.55556rem);--cg-h2:1.66667rem;--cg-h3:1.16667rem;--cg-title-leading:1.18;--cg-heading-track:-.01em}
+.p2-foundation{--cg-body:'IBM Plex Sans',Arial,sans-serif;--cg-head:'IBM Plex Serif',Georgia,serif;--cg-weight:600;--cg-h1:clamp(2.11111rem,3.8vw,2.77778rem);--cg-h2:1.77778rem;--cg-h3:1.27778rem;--cg-title-leading:1.2;--cg-heading-track:-.012em}
+.p2-furr{--cg-body:'Lato',Arial,sans-serif;--cg-head:'Lato',Arial,sans-serif;--cg-weight:700;--cg-h1:clamp(2.11111rem,3.8vw,2.77778rem);--cg-h2:1.72222rem;--cg-h3:1.27778rem;--cg-title-leading:1.16;--cg-heading-track:-.014em}
+
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface{font-family:var(--cg-body);font-size:1rem;line-height:1.7;letter-spacing:normal;overflow-wrap:break-word}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(h1,h2,h3,h4){font-family:var(--cg-head);font-weight:var(--cg-weight);font-style:normal;letter-spacing:var(--cg-heading-track);text-transform:none;text-wrap:wrap;white-space:normal;word-break:normal;overflow-wrap:normal;max-width:100%;max-inline-size:100%}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface h1{font-size:var(--cg-h1);line-height:var(--cg-title-leading)}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface h2{font-size:var(--cg-h2);line-height:1.25}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface h3{font-size:var(--cg-h3);line-height:1.32}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface h4{font-size:1.11111rem;line-height:1.4}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(p,li,blockquote,address,.body-copy,.p2-rich,.cnk-prose,.hope-article){font-family:var(--cg-body);font-size:1rem;line-height:1.7;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(p,blockquote){max-inline-size:72ch}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.site-intro,.hope-intro,.p2-lead){font-family:var(--cg-body);font-size:1.11111rem;line-height:1.6;max-inline-size:62ch;white-space:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(button,.btn,.p2-button,.hope-text-link,.bgc-text-link,.p2-text-link){font-family:var(--cg-body);font-size:0.88889rem;font-weight:700;line-height:1.45;letter-spacing:normal;text-transform:none;white-space:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(nav a,.cnk-contact-link,.cnk-hours-line a,.cnk-visit-actions a){font-family:var(--cg-body);font-size:0.88889rem;line-height:1.5;letter-spacing:normal;white-space:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(input,select,textarea){font-family:var(--cg-body);font-size:0.94444rem;line-height:1.5;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(label,summary){font-family:var(--cg-body);font-size:0.88889rem;font-weight:600;line-height:1.5;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(figcaption,small:not(.bgc-brand-text small),.hint,.cnk-source,.p2-source,.eacc-feature-caption){font-family:var(--cg-body);font-size:.77778rem;line-height:1.55;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.eyebrow,.hope-kicker,.bgc-kicker,.bgc-eyebrow,.p2-kicker,.cnk-small-label){font-family:var(--cg-body);font-size:.77778rem;font-weight:700;line-height:1.5;letter-spacing:.015em;text-transform:none}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.public-footer,.bgc-footer,.hope-footer,.p2-footer) :is(p,a,li,address){font-family:var(--cg-body);font-size:0.88889rem;line-height:1.6;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.public-footer,.bgc-footer,.hope-footer,.p2-footer) h2{font-family:var(--cg-body);font-size:1rem;font-weight:700;line-height:1.4;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.bgc-utility,.hope-utility,.p2-utility,.eacc-utility) :is(p,a,span){font-family:var(--cg-body);font-size:.77778rem;line-height:1.5;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.bgc-section-nav,.hope-section-nav,.p2-section-nav) h2{font-family:var(--cg-body);font-size:1.11111rem;font-weight:700;line-height:1.4;letter-spacing:normal}
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.eacc-history-year,.eacc-history-summary span,.site-history-timeline strong,.hope-countdown){font-family:var(--cg-head);font-size:1.33333rem;font-weight:var(--cg-weight);line-height:1.35;letter-spacing:normal}
+/* Readable section-level labels, rather than large display titles, in compact notices. */
+:is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.eacc-first-visit,.bgc-date-note,.site-archive,.cnk-visit-actions,.p2-events article) h2{font-size:1.22222rem;line-height:1.35}
+@media(max-width:800px){
+ .eacc-site.eacc-v4{--cg-h1:2.22222rem;--cg-h2:1.66667rem}
+ .bgc-site{--cg-h1:2.55556rem;--cg-h2:1.88889rem}
+ .hope-site{--cg-h1:2.11111rem;--cg-h2:1.66667rem}
+ .p2-cops{--cg-h1:1.88889rem;--cg-h2:1.61111rem}
+ .p2-bushkill{--cg-h1:2rem;--cg-h2:1.55556rem}
+ .p2-foundation{--cg-h1:2rem;--cg-h2:1.61111rem}
+ .p2-furr{--cg-h1:2.11111rem;--cg-h2:1.61111rem}
+ :is(.eacc-site.eacc-v4,.bgc-site,.hope-site,.p2-site).website-surface :is(.site-intro,.hope-intro,.p2-lead){font-size:1rem;line-height:1.65}
+}
+@media(max-width:360px){
+ .eacc-site.eacc-v4{--cg-h1:2rem}.bgc-site{--cg-h1:2.33333rem}.hope-site{--cg-h1:1.88889rem}.p2-cops{--cg-h1:1.77778rem}.p2-bushkill{--cg-h1:1.88889rem}.p2-foundation{--cg-h1:1.88889rem}.p2-furr{--cg-h1:1.88889rem}
+}
+
+/* The Club eyebrow previously used an important 18px rule. */
+.website-surface.bgc-site .bgc-eyebrow{font-size:.77778rem!important;letter-spacing:.015em;text-transform:none}
