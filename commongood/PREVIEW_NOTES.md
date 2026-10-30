@@ -1,11 +1,7 @@
-# CommonGood public review previews
+# CommonGood website links
 
-Generated from the six independent CommonGood Version 48 application renderers and their published content snapshots. No original Plainly Library file or domain configuration is replaced.
+The hub links to six independent dynamic websites. Each website has its own Viewer, Editor and Admin access list and Public/Private setting. Sign in using an email code. Site admins grant access in Website access and share that site's sign-in link; no invitation email is sent.
 
-The six full applications, editors, authentication and database code remain in their separate private repositories. These HTML previews provide no administrative write operations and no simulated form submissions. Existing official external donation/application destinations are preserved.
+The old nested GitHub Pages routes now redirect to the corresponding dynamic route. They do not retain published page snapshots that would bypass Private mode. The hub remains a public directory. Previously downloaded content, repository history, external copies and the separate original CommonGood source are outside these live visibility controls.
 
-Photographs and organization-owned graphical assets continue to load from the original public CommonGood asset URLs; no new third-party photographs are committed in this public directory. These previews are therefore temporarily dependent on that asset host. Permission/source inventories remain with the private applications; no new republication license is represented. Locally served fonts retain bundled notices.
-
-The separate static admin information pages explain the missing backend instead of displaying a mock login or editor. Accessible public slideshow/search/countdown scripts are preserved.
-
-Created October 29, 2026. Website by Rayan Nadeem.
+All six source repositories are private. Deployment uses existing free Cloudflare Workers and D1 resources; R2 and billing remain disabled.
